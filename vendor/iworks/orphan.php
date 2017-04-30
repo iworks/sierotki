@@ -271,7 +271,7 @@ class iworks_orphan
 		if ( ! empty( $exceptions ) ) {
 			foreach ( $exceptions as $key => $one ) {
 				$re = sprintf( '/%s/', $key );
-				$content = preg_replace( $key, $one, $content );
+				$content = preg_replace( $re, $one, $content );
 			}
 		}
 

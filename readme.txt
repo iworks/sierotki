@@ -96,6 +96,10 @@ function my_orphans_capability($capability)
 
 == Changelog ==
 
+= 2.6.6.1 - 2017-04-30 =
+
+* Fixed wrong regexp replacement.
+
 = 2.6.6 - 2017-04-30 =
 
 * Avoid to replace  "script" and "styles" content. Props for @m1nified
