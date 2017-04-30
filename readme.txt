@@ -96,6 +96,12 @@ function my_orphans_capability($capability)
 
 == Changelog ==
 
+= 2.6.6 - 2017-04-30 =
+
+* Avoid to replace  "script" and "styles" content. Props for @m1nified
+* Added a widget title to replacements.
+* Added a widget text to replacements (it work only for the widget text).
+
 = 2.6.5 - 2016-11-01 =
 
 * Rollback to 2.6.3, because 2.6.4 broke images.

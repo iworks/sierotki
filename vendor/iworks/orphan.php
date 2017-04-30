@@ -5,7 +5,6 @@ class iworks_orphan
 	private $admin_page;
 
 	public function __construct() {
-
 		/**
 		 * l10n
 		 */
@@ -48,6 +47,24 @@ class iworks_orphan
 				'label' => __( 'Enabled the substitution of orphans in the content.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
 			),
+			/**
+			 * Since 2.6.6
+			 */
+			'widget_title'  => array(
+				'description' => __( 'Use for widget title:', 'sierotki' ),
+				'type'  => 'checkbox',
+				'label' => __( 'Enabled the substitution of orphans in the widget title.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+			),
+			/**
+			 * Since 2.6.6
+			 */
+			'widget_text'  => array(
+				'description' => __( 'Use for widget text:', 'sierotki' ),
+				'type'  => 'checkbox',
+				'label' => __( 'Enabled the substitution of orphans in the widget text.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+			),
 			'woocommerce_product_title'  => array(
 				'description' => __( 'Use for WooCommerce product title:', 'sierotki' ),
 				'type'  => 'checkbox',
@@ -76,7 +93,6 @@ class iworks_orphan
 	}
 
 	public function replace( $content ) {
-
 		if ( empty( $content ) ) {
 			return;
 		}
@@ -209,6 +225,20 @@ class iworks_orphan
 			'żeby',
 			'żebyś',
 		);
+
+		preg_match_all( '@(<(script|style)[^>]*>.*?(</(script|style)>))@is', $content, $matches );
+		$exceptions = '';
+
+		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
+			$salt = 'kQc6T9fn5GhEzTM3Sxn7b9TWMV4PO0mOCV06Da7AQJzSJqxYR4z3qBlsW9rtFsWK';
+			foreach ( $matches[0] as $one ) {
+		        $key = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
+				$exceptions[ $key ] = $one;
+				$re = sprintf( '@%s@', preg_replace( '/@/', '\@', $one ) );
+				$content = preg_replace( $re, $key, $content );
+			}
+		}
+
 		$own_orphans = trim( get_option( 'iworks_orphan_own_orphans', '' ), ' \t,' );
 		if ( $own_orphans ) {
 			$own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
@@ -236,13 +266,22 @@ class iworks_orphan
 		$content = preg_replace( '/(\d+) (r\.)/', '$1&nbsp;$2', $content );
 
 		/**
+		 * bring back styles & scripts
+		 */
+		if ( ! empty( $exceptions ) ) {
+			foreach ( $exceptions as $key => $one ) {
+				$re = sprintf( '/%s/', $key );
+				$content = preg_replace( $key, $one, $content );
+			}
+		}
+
+		/**
 		 * return
 		 */
 		return $content;
 	}
 
 	public function option_page() {
-
 ?>
 <div class="wrap">
     <h2><?php _e( 'Orphans', 'sierotki' ) ?></h2>
@@ -333,7 +372,6 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function admin_menu() {
-
 		if ( function_exists( 'add_theme_page' ) ) {
 			$this->admin_page = add_theme_page(
 				__( 'Orphans', 'sierotki' ),
@@ -358,7 +396,6 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function add_help_tab() {
-
 		$screen = get_current_screen();
 		if ( $screen->id != $this->admin_page ) {
 			return;
@@ -382,7 +419,6 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function admin_init() {
-
 		foreach ( $this->options as $filter => $option ) {
 			$sanitize_callback = isset( $option['sanitize_callback'] )? $option['sanitize_callback']:null;
 			register_setting( 'sierotki', 'iworks_orphan_'.$filter, $sanitize_callback );
@@ -391,7 +427,6 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function init() {
-
 		if ( 0 == get_option( 'iworks_orphan_initialized', 0 ) ) {
 			foreach ( $this->options as $filter => $option ) {
 				if ( ! isset( $option['type'] ) ) {
@@ -418,7 +453,6 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function links( $links, $file ) {
-
 		if ( $file == plugin_basename( __FILE__ ) ) {
 			if ( ! is_multisite() ) {
 				$dir = explode( '/', dirname( __FILE__ ) );
