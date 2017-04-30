@@ -1,8 +1,8 @@
 {
   "name": "sierotki",
-  "title": "Orphanss",
+  "title": "Orphans",
   "description": "Plugin fix orphans position and replace space after orphan to hard space, to avoid ne break incorrect position.",
-  "version": "3.6.5",
+  "version": "2.6.6",
   "homepage": "https://wordpress.org/plugins/sierotki/",
   "author": [
     { "name": "Marcin Pietrzak" }

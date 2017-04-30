@@ -84,6 +84,7 @@ module.exports = function( grunt ) {
 			pro: [
 				{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
 				{ match: /BUILDTIME/g, replace: buildtime },
+				{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 				{ match: /\/\* start:pro \*\//g, replace: '' },
 				{ match: /\/\* end:pro \*\//g, replace: '' },
 				{ match: /\/\* start:free \*[^]+?\* end:free \*\//mg, replace: '' },
@@ -91,6 +92,7 @@ module.exports = function( grunt ) {
 			free: [
 				{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
 				{ match: /BUILDTIME/g, replace: buildtime },
+				{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 				{ match: /\/\* start:free \*\//g, replace: '' },
 				{ match: /\/\* end:free \*\//g, replace: '' },
 				{ match: /\/\* start:pro \*[^]+?\* end:pro \*\//mg, replace: '' },
