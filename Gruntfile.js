@@ -37,6 +37,7 @@ module.exports = function( grunt ) {
 				'./readme.txt',
 				'./Gruntfile.js',
 				'./package.json',
+				'./vendor/iworks/rate/README.md',
 			],
 			exclude_free: [
 				'./changelog.txt',
@@ -44,6 +45,7 @@ module.exports = function( grunt ) {
 				'./README.md',
 				'./Gruntfile.js',
 				'./package.json',
+				'./vendor/iworks/rate/README.md',
 			],
 			include_files: [
 				'**',
