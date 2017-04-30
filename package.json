@@ -36,7 +36,7 @@
   "keywords": [],
   "repository": {
       "type": "git",
-      "url": "git@bitbucket.org:iworks-pl/sierotki.git",
+      "url": "git@bitbucket.org:iworks-pl/sierotki.git"
   },
   "license": "GPL-2.0"
 }
