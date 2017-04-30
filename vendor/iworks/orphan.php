@@ -446,17 +446,17 @@ foreach ( $this->options as $filter => $option ) {
 			return;
 		}
 		return sprintf( __( 'If you like <strong>Orphans</strong> please leave us a %s&#9733;&#9733;&#9733;&#9733;&#9733;%s rating. A huge thanks in advance!', 'sierotki' ), '<a href="https://wordpress.org/support/plugin/sierotki/reviews/?rate=5#new-post" target="_blank">', '</a>' );
-    }
+	}
 
-    /**
-     * Change logo for "rate" message.
-     *
-     * @since 2.6.6
-     */
-    public function iworks_rate_css() {
-        $logo = plugin_dir_url(dirname(dirname(__FILE__))).'assets/images/logo.png';
-        echo '<style type="text/css">';
-        printf('.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
-        echo '</style>';
-    }
+	/**
+	 * Change logo for "rate" message.
+	 *
+	 * @since 2.6.6
+	 */
+	public function iworks_rate_css() {
+		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ).'assets/images/logo.png';
+		echo '<style type="text/css">';
+		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
+		echo '</style>';
+	}
 }
