@@ -108,11 +108,19 @@ class iworks_orphan
 		}
 
 		/**
-		 * apply other rules only for Polish language
+		 * Allow to ignore language.
+		 *
+		 * @since 2.6.7
 		 */
-		$locale = apply_filters( 'wpml_current_language', get_locale() );
-		if ( ! preg_match( '/^pl/', $locale ) ) {
-			return $content;
+		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', false );
+		if ( ! $apply_to_all_languages ) {
+			/**
+			 * apply other rules only for Polish language
+			 */
+			$locale = apply_filters( 'wpml_current_language', get_locale() );
+			if ( ! preg_match( '/^pl/', $locale ) ) {
+				return $content;
+			}
 		}
 
 		$terms = array(

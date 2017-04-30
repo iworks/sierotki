@@ -96,6 +96,10 @@ function my_orphans_capability($capability)
 
 == Changelog ==
 
+= 2.6.7 - 2017-xx-xx =
+
+* Allow to apply replacement to all languages by using filter `iworks_orphan_apply_to_all_languages' set on true.
+
 = 2.6.6.1 - 2017-04-30 =
 
 * Fixed wrong regexp replacement.
