@@ -4,7 +4,7 @@ Donate link: http://iworks.pl/donate/sierotki.php
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 3.5
 Tested up to: 4.7.4
-Stable tag: 2.6.5
+Stable tag: 2.6.6.1
 
 Plugin supports some of the grammatical rules of the Polish language.
 
