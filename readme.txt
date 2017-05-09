@@ -2,7 +2,7 @@
 Contributors: iworks
 Donate link: http://iworks.pl/donate/sierotki.php
 Tags: sierotka, sierotki, spójniki, twarda spacja
-Requires at least: 3.3
+Requires at least: 3.5
 Tested up to: 4.7.4
 Stable tag: 2.6.5
 
@@ -96,9 +96,10 @@ function my_orphans_capability($capability)
 
 == Changelog ==
 
-= 2.6.7 - 2017-xx-xx =
+= 2.6.7 - 2017-05-09 =
 
 * Allow to apply replacement to all languages by using filter `iworks_orphan_apply_to_all_languages' set on true.
+* Fixed rate module.
 
 = 2.6.6.1 - 2017-04-30 =
 
