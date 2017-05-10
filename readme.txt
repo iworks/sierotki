@@ -88,13 +88,17 @@ function my_orphans_capability($capability)
     return 'unfiltered_html';
 }
 `
-
 == Screenshots ==
 
 1. Orphan Options (Polish).
 1. Orphan Options
 
 == Changelog ==
+
+= 2.6.8 - 2017-05-xx =
+
+* Use [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to handle new options screen.
+* Added a taxonomies title and description to replacements.
 
 = 2.6.7 - 2017-05-09 =
 

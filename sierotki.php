@@ -9,13 +9,40 @@ Version: PLUGIN_VERSION
 Author URI: http://iworks.pl/
 */
 
-require_once( dirname( __FILE__ ) ).'/vendor/iworks/orphan.php';
-include_once( dirname( __FILE__ ) ).'/vendor/iworks/rate/rate.php';
+include_once dirname( __FILE__ ).'/etc/options.php';
+
+
+$vendor = dirname( __FILE__ ).'/vendor';
+
+require_once $vendor . '/iworks/orphan.php';
+if ( ! class_exists( 'iworks_rate' ) ) {
+	include_once $vendor . '/iworks/rate/rate.php';
+}
+/**
+ * since 2.6.8
+ */
+if ( ! class_exists( 'iworks_options' ) ) {
+	include_once $vendor.'/iworks/options/options.php';
+}
 
 new iworks_orphan();
 
 register_activation_hook( __FILE__, 'iworks_orphan_activate' );
 register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
+
+/**
+ * load options
+ *
+ * since 2.6.8
+ *
+ */
+function get_orphan_indicator_options() {
+	$options = new iworks_options();
+	$options->set_option_function_name( 'orphang_indicator_options' );
+	$options->set_option_prefix( 'iworks_orphan_' );
+	$options->init();
+	return $options;
+}
 
 /**
  * Activate plugin function
@@ -24,6 +51,8 @@ register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
  *
  */
 function iworks_orphan_activate() {
+	$options = get_orphang_indicator_options();
+	$options->activate();
 	iworks_orphan_change_options_autoload_status( 'yes' );
 }
 

@@ -3,6 +3,7 @@ class iworks_orphan
 {
 	private $options;
 	private $admin_page;
+	private $settings;
 
 	public function __construct() {
 		/**
@@ -11,97 +12,39 @@ class iworks_orphan
 		load_plugin_textdomain( 'sierotki', false, dirname( plugin_basename( dirname( dirname( __FILE__ ) ) ) ).'/languages' );
 
 		/**
+		 * options
+		 */
+		$this->options = get_orphan_indicator_options();
+
+		/**
 		 * actions
 		 */
 		add_action( 'init',       array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
-		add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1 );
 
-		/**
-		 * options
-		 */
-		$this->options = array(
-			'comment_text' => array(
-				'description' => __( 'Use for comments:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the comments.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'the_title'    => array(
-				'description' => __( 'Use for post title:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the post_title.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'the_excerpt'  => array(
-				'description' => __( 'Use for excerpt:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the excerpt.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'the_content'  => array(
-				'description' => __( 'Use for content:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the content.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			/**
-			 * Since 2.6.6
-			 */
-			'widget_title'  => array(
-				'description' => __( 'Use for widget title:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the widget title.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			/**
-			 * Since 2.6.6
-			 */
-			'widget_text'  => array(
-				'description' => __( 'Use for widget text:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the widget text.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'woocommerce_product_title'  => array(
-				'description' => __( 'Use for WooCommerce product title:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the WooCommerce product title.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'woocommerce_short_description'  => array(
-				'description' => __( 'Use for WooCommerce short description:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Enabled the substitution of orphans in the WooCommerce short description.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'numbers' => array(
-				'description' => __( 'Keep numbers together:', 'sierotki' ),
-				'type'  => 'checkbox',
-				'label' => __( 'Allow to keep together phone number or strings with space between numbers.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-			),
-			'own_orphans'  => array(
-				'description' => __( 'User definied orphans:', 'sierotki' ),
-				'type' => 'text',
-				'label' => __( 'Use a comma to separate orphans.', 'sierotki' ),
-				'sanitize_callback' => 'esc_html',
-			),
-		);
 	}
 
 	public function replace( $content ) {
 		if ( empty( $content ) ) {
-			return;
-		}
-
+			return $content;
+        }
+        /**
+         * check post type
+         */
+        $entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
+        $current_filter = current_filter();
+        if ( in_array( $current_filter, $entry_related_filters ) ) {
+            global $post;
+            if ( ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
+                return $content;
+            }
+        }
 		/**
 		 * Keep numbers together - this is independed of current language
 		 */
-		$numbers = get_option( 'iworks_orphan_numbers' );
-		if ( ! empty( $numbers ) ) {
+        $numbers = $this->is_on( 'numbers' );
+		if ( $numbers ) {
 			while ( preg_match( '/(\d) (\d)/', $content ) ) {
 				$content = preg_replace( '/(\d) (\d)/', '$1&nbsp;$2', $content );
 			}
@@ -111,8 +54,9 @@ class iworks_orphan
 		 * Allow to ignore language.
 		 *
 		 * @since 2.6.7
-		 */
-		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', false );
+         */
+        $all_languages = $this->is_on( 'ignore_language' );
+		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
 		if ( ! $apply_to_all_languages ) {
 			/**
 			 * apply other rules only for Polish language
@@ -289,120 +233,6 @@ class iworks_orphan
 		return $content;
 	}
 
-	public function option_page() {
-?>
-<div class="wrap">
-    <h2><?php _e( 'Orphans', 'sierotki' ) ?></h2>
-    <div class="postbox-container" style="width:75%">
-    <form method="post" action="options.php">
-        <?php settings_fields( 'sierotki' ); ?>
-        <table class="form-table">
-            <tbody>
-<?php
-foreach ( $this->options as $filter => $option ) {
-	/**
-			 * check option type
-			 */
-	if (
-		0
-		|| ! is_array( $option )
-		|| empty( $option )
-		|| ! array_key_exists( 'type', $option )
-	) {
-		continue;
-	}
-	$field = 'iworks_orphan_'.$filter;
-	printf(
-		'<tr valign="top"><th scope="row">%s</th><td>',
-		array_key_exists( 'description', $option )? $option['description']:'&nbsp;'
-	);
-	switch ( $option['type'] ) {
-		case 'checkbox':
-			printf(
-				'<label for="%s"><input type="checkbox" name="%s" value="1"%s id="%s"/> %s</label>',
-				$field,
-				$field,
-				checked( 1, get_option( $field, 1 ), false ),
-				$field,
-				isset( $option['label'] )? $option['label']:'&nbsp;'
-			);
-		break;
-		case 'text':
-		default:
-			printf(
-				'<input type="text" name="%s" value="%s" id="%s" class="regular-text code" />%s',
-				$field,
-				get_option( $field, '' ),
-				$field,
-				isset( $option['label'] )? '<p class="description">'.$option['label'].'</p>':''
-			);
-		break;
-	}
-	print '</td></tr>';
-}
-?>
-            </tbody>
-        </table>
-        <p class="submit"><input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ) ?>" /></p>
-    </form>
-        </div>
-        <div class="postbox-container" style="width:23%;margin-left:2%">
-            <div class="metabox-holder">
-                <div id="links" class="postbox">
-                    <h3 class="hndle"><?php _e( 'Loved this Plugin?', 'sierotki' ); ?></h3>
-                    <div class="inside">
-                        <p><?php _e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
-                        <ul>
-                            <li><a href="http://wordpress.org/extend/plugins/sierotki/"><?php _e( 'Give it a 5 star on Wordpress.org', 'sierotki' ); ?></a></li>
-                            <li><a href="http://wordpress.org/extend/plugins/sierotki/"><?php _e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="help" class="postbox">
-                    <h3 class="hndle"><?php _e( 'Need Assistance?', 'sierotki' ); ?></h3>
-                    <div class="inside">
-                        <p><?php _e( 'Problems? The links bellow can be very helpful to you', 'sierotki' ); ?></p>
-                        <ul>
-                            <li><a href="<?php _e( 'http://wordpress.org/support/plugin/sierotki', 'sierotki' ); ?>"><?php _e( 'Wordpress Help Forum', 'sierotki' ); ?></a></li>
-                            <li><a href="mailto:<?php echo antispambot( 'marcin@iworks.pl' ); ?>"><?php echo antispambot( 'marcin@iworks.pl' ); ?></a></li>
-                        </ul>
-                        <hr />
-                        <p class="description"><?php _e( 'Created by: ', 'sierotki' ); ?> <a href="http://iworks.pl/"><span>iWorks.pl</span></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><?php
-	}
-
-	private function get_capability() {
-				return apply_filters( 'iworks_orphans_capability', 'manage_options' );
-	}
-
-	public function admin_menu() {
-		if ( function_exists( 'add_theme_page' ) ) {
-			$this->admin_page = add_theme_page(
-				__( 'Orphans', 'sierotki' ),
-				__( 'Orphans', 'sierotki' ),
-				/**
-				 * Allow to change capability.
-				 *
-				 * This filter allow to change capability which is needed to
-				 * access to Orphans configuration page.
-				 *
-				 * @since 2.6.0
-				 *
-				 * @param string  $capability current capability
-				 *
-				 */
-				$this->get_capability(),
-				basename( __FILE__ ),
-				array( $this, 'option_page' )
-			);
-			add_action( 'load-'.$this->admin_page, array( $this, 'add_help_tab' ) );
-		}
-	}
-
 	public function add_help_tab() {
 		$screen = get_current_screen();
 		if ( $screen->id != $this->admin_page ) {
@@ -427,38 +257,43 @@ foreach ( $this->options as $filter => $option ) {
 	}
 
 	public function admin_init() {
-		foreach ( $this->options as $filter => $option ) {
-			$sanitize_callback = isset( $option['sanitize_callback'] )? $option['sanitize_callback']:null;
-			register_setting( 'sierotki', 'iworks_orphan_'.$filter, $sanitize_callback );
-		}
+		$this->options->options_init();
 		add_filter( 'plugin_row_meta', array( $this, 'links' ), 10, 2 );
 	}
 
-	public function init() {
-		if ( 0 == get_option( 'iworks_orphan_initialized', 0 ) ) {
-			foreach ( $this->options as $filter => $option ) {
-				if ( ! isset( $option['type'] ) ) {
-					$option['type'] = 'undefinied';
-				}
-				switch ( $option['type'] ) {
-					case 'checkbox':
-						update_option( 'iworks_orphan_'.$filter, 1 );
-					break;
-					case 'text':
-					default:
-						update_option( 'iworks_orphan_'.$filter, '' );
-					break;
-				}
-			}
-			update_option( 'iworks_orphan_initialized', 1 );
-		}
-		foreach ( array_keys( $this->options ) as $filter ) {
-			if ( 1 == get_option( 'iworks_orphan_'.$filter, 1 ) ) {
-				add_filter( $filter, array( $this, 'replace' ) );
-			}
-		}
-		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
-	}
+    public function init() {
+        $this->settings = $this->options->get_all_options();
+        $allowed_filters = array(
+            'the_title',
+            'the_excerpt',
+            'the_content',
+            'comment_text',
+            'widget_title',
+            'widget_text',
+        );
+        foreach ( $this->settings as $filter => $value ) {
+            if ( ! in_array( $filter, $allowed_filters ) ) {
+                continue;
+            }
+            if ( is_integer( $value ) && 1 == $value ) {
+                add_filter( $filter, array( $this, 'replace' ) );
+            }
+        }
+        /**
+         * taxonomies
+         */
+        if ( 1 == $this->settings['taxonomy_title'] ) {
+            add_filter( 'single_term_title', array( $this, 'replace' ) );
+            if ( in_array( 'cat', $this->settings['taxonomies'] ) ) {
+                add_filter( 'single_cat_title', array( $this, 'replace' ) );
+            }
+            if ( in_array( 'post_cat', $this->settings['taxonomies'] ) ) {
+                add_filter( 'single_tag_title', array( $this, 'replace' ) );
+            }
+        }
+
+        add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
+    }
 
 	public function links( $links, $file ) {
 		if ( $file == plugin_basename( __FILE__ ) ) {
@@ -471,25 +306,6 @@ foreach ( $this->options as $filter => $option ) {
 		}
 		return $links;
 	}
-
-	/**
-	 * Change the admin footer text on Orphans admin pages.
-	 *
-	 * @since  2.3
-	 * @param  string $footer_text
-	 * @return string
-	 */
-	public function admin_footer_text( $footer_text ) {
-		if ( ! current_user_can( $this->get_capability() ) ) {
-			return;
-		}
-		$screen = get_current_screen();
-		if ( ! preg_match( '/page_orphan$/', $screen->id ) ) {
-			return;
-		}
-		return sprintf( __( 'If you like <strong>Orphans</strong> please leave us a %s&#9733;&#9733;&#9733;&#9733;&#9733;%s rating. A huge thanks in advance!', 'sierotki' ), '<a href="https://wordpress.org/support/plugin/sierotki/reviews/?rate=5#new-post" target="_blank">', '</a>' );
-	}
-
 	/**
 	 * Change logo for "rate" message.
 	 *
@@ -500,5 +316,11 @@ foreach ( $this->options as $filter => $option ) {
 		echo '<style type="text/css">';
 		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
-	}
+    }
+
+
+    private function is_on( $key ) {
+        return isset( $this->settings[$key] ) && 1 === $this->settings[$key];
+    }
+
 }
