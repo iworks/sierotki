@@ -14,7 +14,7 @@ class iworks_orphan
 		/**
 		 * options
 		 */
-		$this->options = get_orphan_indicator_options();
+		$this->options = get_orphan_options();
 
 		/**
 		 * actions
@@ -28,22 +28,32 @@ class iworks_orphan
 	public function replace( $content ) {
 		if ( empty( $content ) ) {
 			return $content;
-        }
-        /**
-         * check post type
-         */
-        $entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
-        $current_filter = current_filter();
-        if ( in_array( $current_filter, $entry_related_filters ) ) {
-            global $post;
-            if ( ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
-                return $content;
-            }
-        }
+		}
+		/**
+		 * check post type
+		 */
+		$entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
+		$current_filter = current_filter();
+		if ( in_array( $current_filter, $entry_related_filters ) ) {
+			global $post;
+			if ( ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
+				return $content;
+			}
+		}
+		/**
+		 * check taxonomy
+		 */
+		if ( 'term_description' == $current_filter ) {
+			$queried_object = get_queried_object();
+			if ( ! in_array( $queried_object->taxonomy, $this->settings['taxonomies'] ) ) {
+				return $content;
+			}
+		}
+
 		/**
 		 * Keep numbers together - this is independed of current language
 		 */
-        $numbers = $this->is_on( 'numbers' );
+		$numbers = $this->is_on( 'numbers' );
 		if ( $numbers ) {
 			while ( preg_match( '/(\d) (\d)/', $content ) ) {
 				$content = preg_replace( '/(\d) (\d)/', '$1&nbsp;$2', $content );
@@ -54,8 +64,8 @@ class iworks_orphan
 		 * Allow to ignore language.
 		 *
 		 * @since 2.6.7
-         */
-        $all_languages = $this->is_on( 'ignore_language' );
+		 */
+		$all_languages = $this->is_on( 'ignore_language' );
 		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
 		if ( ! $apply_to_all_languages ) {
 			/**
@@ -261,39 +271,44 @@ class iworks_orphan
 		add_filter( 'plugin_row_meta', array( $this, 'links' ), 10, 2 );
 	}
 
-    public function init() {
-        $this->settings = $this->options->get_all_options();
-        $allowed_filters = array(
-            'the_title',
-            'the_excerpt',
-            'the_content',
-            'comment_text',
-            'widget_title',
-            'widget_text',
-        );
-        foreach ( $this->settings as $filter => $value ) {
-            if ( ! in_array( $filter, $allowed_filters ) ) {
-                continue;
-            }
-            if ( is_integer( $value ) && 1 == $value ) {
-                add_filter( $filter, array( $this, 'replace' ) );
-            }
-        }
-        /**
-         * taxonomies
-         */
-        if ( 1 == $this->settings['taxonomy_title'] ) {
-            add_filter( 'single_term_title', array( $this, 'replace' ) );
-            if ( in_array( 'cat', $this->settings['taxonomies'] ) ) {
-                add_filter( 'single_cat_title', array( $this, 'replace' ) );
-            }
-            if ( in_array( 'post_cat', $this->settings['taxonomies'] ) ) {
-                add_filter( 'single_tag_title', array( $this, 'replace' ) );
-            }
-        }
+	public function init() {
+		$this->settings = $this->options->get_all_options();
+		$allowed_filters = array(
+			'the_title',
+			'the_excerpt',
+			'the_content',
+			'comment_text',
+			'widget_title',
+			'widget_text',
+			'term_description',
+			'link_description',
+			'link_notes',
+			'user_description',
+		);
+		foreach ( $this->settings as $filter => $value ) {
+			if ( ! in_array( $filter, $allowed_filters ) ) {
+				continue;
+			}
+			if ( is_integer( $value ) && 1 == $value ) {
+				add_filter( $filter, array( $this, 'replace' ) );
+			}
+		}
+		/**
+		 * taxonomies
+		 */
 
-        add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
-    }
+		if ( 1 == $this->settings['taxonomy_title'] ) {
+			add_filter( 'single_term_title', array( $this, 'replace' ) );
+			if ( in_array( 'category', $this->settings['taxonomies'] ) ) {
+				add_filter( 'single_cat_title', array( $this, 'replace' ) );
+			}
+			if ( in_array( 'post_tag', $this->settings['taxonomies'] ) ) {
+				add_filter( 'single_tag_title', array( $this, 'replace' ) );
+			}
+		}
+
+		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
+	}
 
 	public function links( $links, $file ) {
 		if ( $file == plugin_basename( __FILE__ ) ) {
@@ -316,11 +331,10 @@ class iworks_orphan
 		echo '<style type="text/css">';
 		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
-    }
+	}
 
 
-    private function is_on( $key ) {
-        return isset( $this->settings[$key] ) && 1 === $this->settings[$key];
-    }
-
+	private function is_on( $key ) {
+		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
+	}
 }

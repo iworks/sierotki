@@ -36,7 +36,7 @@ register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
  * since 2.6.8
  *
  */
-function get_orphan_indicator_options() {
+function get_orphan_options() {
 	$options = new iworks_options();
 	$options->set_option_function_name( 'orphang_indicator_options' );
 	$options->set_option_prefix( 'iworks_orphan_' );
@@ -51,7 +51,7 @@ function get_orphan_indicator_options() {
  *
  */
 function iworks_orphan_activate() {
-	$options = get_orphang_indicator_options();
+	$options = get_orphan_options();
 	$options->activate();
 	iworks_orphan_change_options_autoload_status( 'yes' );
 }
