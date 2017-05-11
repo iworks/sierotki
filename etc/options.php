@@ -66,15 +66,6 @@ function orphang_indicator_options() {
 				'classes' => array( 'switch-button' ),
 			),
 			array(
-				'name' => 'user_description',
-				'type'  => 'checkbox',
-				'th' => __( 'Author description', 'sierotki' ),
-				'description' => __( 'Enabled the substitution of orphans in the author description.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'dafault' => 1,
-				'classes' => array( 'switch-button' ),
-			),
-			array(
 				'type'              => 'heading',
 				'label'             => __( 'Widgets', 'sierotki' ),
 			),
@@ -137,7 +128,19 @@ function orphang_indicator_options() {
 			),
 			array(
 				'type'              => 'heading',
-				'label'             => __( 'Other', 'sierotki' ),
+				'label'             => __( 'Miscellaneous', 'sierotki' ),
+			),
+			/**
+			 * Since 2.6.8
+			 */
+			array(
+				'name' => 'get_the_author_description',
+				'type'  => 'checkbox',
+				'th' => __( 'Author description', 'sierotki' ),
+				'description' => __( 'Enabled the substitution of orphans in the author description.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'dafault' => 1,
+				'classes' => array( 'switch-button' ),
 			),
 			array(
 				'name' => 'ignore_language',
@@ -159,10 +162,11 @@ function orphang_indicator_options() {
 			array(
 				'name' => 'own_orphans',
 				'th' => __( 'User definied orphans:', 'sierotki' ),
-				'type' => 'text',
+				'type' => 'textarea',
 				'description' => __( 'Use a comma to separate orphans.', 'sierotki' ),
 				'sanitize_callback' => 'esc_html',
 				'classes' => array( 'large-text' ),
+				'rows' => 10,
 			),
 		),
 		'metaboxes' => array(

@@ -26,7 +26,16 @@ class iworks_orphan
 	}
 
 	public function replace( $content ) {
+		/**
+		 * do not replace empty content
+		 */
 		if ( empty( $content ) ) {
+			return $content;
+		}
+		/**
+		 * we do not need this in admin
+		 */
+		if ( is_admin() ) {
 			return $content;
 		}
 		/**
@@ -34,7 +43,11 @@ class iworks_orphan
 		 */
 		$entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
 		$current_filter = current_filter();
+
 		if ( in_array( $current_filter, $entry_related_filters ) ) {
+			if ( empty( $this->settings['post_type'] ) || ! is_array( $this->settings['post_type'] ) ) {
+				return $content;
+			}
 			global $post;
 			if ( ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
 				return $content;
@@ -44,6 +57,9 @@ class iworks_orphan
 		 * check taxonomy
 		 */
 		if ( 'term_description' == $current_filter ) {
+			if ( empty( $this->settings['taxonomies'] ) || ! is_array( $this->settings['taxonomies'] ) ) {
+				return $content;
+			}
 			$queried_object = get_queried_object();
 			if ( ! in_array( $queried_object->taxonomy, $this->settings['taxonomies'] ) ) {
 				return $content;
@@ -281,9 +297,7 @@ class iworks_orphan
 			'widget_title',
 			'widget_text',
 			'term_description',
-			'link_description',
-			'link_notes',
-			'user_description',
+			'get_the_author_description',
 		);
 		foreach ( $this->settings as $filter => $value ) {
 			if ( ! in_array( $filter, $allowed_filters ) ) {
@@ -293,11 +307,11 @@ class iworks_orphan
 				add_filter( $filter, array( $this, 'replace' ) );
 			}
 		}
+
 		/**
 		 * taxonomies
 		 */
-
-		if ( 1 == $this->settings['taxonomy_title'] ) {
+		if ( 1 == $this->settings['taxonomy_title'] && ! empty( $this->settings['taxonomies'] ) ) {
 			add_filter( 'single_term_title', array( $this, 'replace' ) );
 			if ( in_array( 'category', $this->settings['taxonomies'] ) ) {
 				add_filter( 'single_cat_title', array( $this, 'replace' ) );
@@ -321,6 +335,7 @@ class iworks_orphan
 		}
 		return $links;
 	}
+
 	/**
 	 * Change logo for "rate" message.
 	 *
