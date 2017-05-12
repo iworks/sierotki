@@ -100,6 +100,7 @@ function my_orphans_capability($capability)
 * Use [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to handle new options screen.
 * Added a taxonomies title and description to replacements.
 * Added author description to replacements.
+* Fixed a problem with preg_replace() "Compilation failed: range out of order".
 
 = 2.6.7 - 2017-05-09 =
 

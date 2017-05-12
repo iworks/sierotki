@@ -209,9 +209,9 @@ class iworks_orphan
 		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
 			$salt = 'kQc6T9fn5GhEzTM3Sxn7b9TWMV4PO0mOCV06Da7AQJzSJqxYR4z3qBlsW9rtFsWK';
 			foreach ( $matches[0] as $one ) {
-		        $key = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
+				$key = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
 				$exceptions[ $key ] = $one;
-				$re = sprintf( '@%s@', preg_replace( '/@/', '\@', $one ) );
+				$re = sprintf( '@%s@', preg_replace( '/@/', '\@', preg_quote( $one, '/' ) ) );
 				$content = preg_replace( $re, $key, $content );
 			}
 		}
