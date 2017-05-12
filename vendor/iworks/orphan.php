@@ -22,7 +22,6 @@ class iworks_orphan
 		add_action( 'init',       array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
-
 	}
 
 	public function replace( $content ) {

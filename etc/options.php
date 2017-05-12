@@ -170,6 +170,12 @@ function orphang_indicator_options() {
 			),
 		),
 		'metaboxes' => array(
+			'loved_this_plugin' => array(
+				'title' => __( 'Loved this Plugin?', 'sierotki' ),
+				'callback' => 'iworks_orphan_options_loved_this_plugin',
+				'context' => 'side',
+				'priority' => 'core',
+			),
 			'need_assistance' => array(
 				'title' => __( 'Need Assistance?', 'sierotki' ),
 				'callback' => 'iworks_orphans_options_need_assistance',
@@ -181,6 +187,16 @@ function orphang_indicator_options() {
 	return $options;
 }
 
+function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
+
+?>
+<p><?php _e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
+<ul>
+    <li><a href="https://wordpress.org/support/plugin/sierotki/reviews/#new-post"><?php _e( 'Give it a five stars on WordPress.org', 'sierotki' ); ?></a></li>
+    <li><a href="<?php _ex( 'https://wordpress.org/plugins/sierotki/', 'plugin home page on WordPress.org', 'sierotki' ); ?>"><?php _e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
+</ul>
+<?php
+}
 function iworks_orphan_taxonomies() {
 	$data = array();
 	$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
@@ -207,7 +223,7 @@ function iworks_orphans_options_need_assistance( $iworks_orphans ) {
 ?>
 <p><?php _e( 'Problems? The links bellow can be very helpful to you', 'sierotki' ); ?></p>
 <ul>
-    <li><a href="<?php _e( 'https://wordpress.org/support/plugin/sierotki/', 'sierotki' ); ?>"><?php _e( 'Wordpress Help Forum', 'sierotki' ); ?></a></li>
+    <li><a href="<?php _ex( 'https://wordpress.org/support/plugin/sierotki/', 'link to support forum on WordPress.org', 'sierotki' ); ?>"><?php _e( 'WordPress Help Forum', 'sierotki' ); ?></a></li>
 </ul>
 <?php
 }
