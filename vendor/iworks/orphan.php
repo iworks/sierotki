@@ -4,12 +4,18 @@ class iworks_orphan
 	private $options;
 	private $admin_page;
 	private $settings;
+	private $plugin_file;
 
-	public function __construct() {
+	public function __construct( $file ) {
+		/**
+		 * plugin ID
+		 */
+		$this->plugin_file = plugin_basename( $file );
+
 		/**
 		 * l10n
 		 */
-		load_plugin_textdomain( 'sierotki', false, dirname( plugin_basename( dirname( dirname( __FILE__ ) ) ) ).'/languages' );
+		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ).'/languages' );
 
 		/**
 		 * options
@@ -283,7 +289,8 @@ class iworks_orphan
 
 	public function admin_init() {
 		$this->options->options_init();
-		add_filter( 'plugin_row_meta', array( $this, 'links' ), 10, 2 );
+		add_filter( 'plugin_row_meta', array( $this, 'add_donate_link' ), 10, 2 );
+		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
 	}
 
 	public function init() {
@@ -323,18 +330,6 @@ class iworks_orphan
 		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
 	}
 
-	public function links( $links, $file ) {
-		if ( $file == plugin_basename( __FILE__ ) ) {
-			if ( ! is_multisite() ) {
-				$dir = explode( '/', dirname( __FILE__ ) );
-				$dir = $dir[ count( $dir ) - 1 ];
-				$links[] = '<a href="themes.php?page='.$dir.'.php">' . __( 'Settings' ) . '</a>';
-			}
-			$links[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate' ) . '</a>';
-		}
-		return $links;
-	}
-
 	/**
 	 * Change logo for "rate" message.
 	 *
@@ -350,5 +345,26 @@ class iworks_orphan
 
 	private function is_on( $key ) {
 		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
+	}
+
+	public function add_settings_link( $actions, $plugin_file ) {
+		if ( is_multisite() ) {
+			return $actions;
+		}
+		if ( $plugin_file == $this->plugin_file ) {
+			$page = $this->options->get_pagehook();
+			$url = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
+			$url = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings' ) );
+			$settings = array( $url );
+			$actions = array_merge( $settings, $actions );
+		}
+		return $actions;
+	}
+
+	public function add_donate_link( $links, $plugin_file ) {
+		if ( $plugin_file == $this->plugin_file ) {
+			$links[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate' ) . '</a>';
+		}
+		return $links;
 	}
 }
