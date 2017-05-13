@@ -289,7 +289,9 @@ class iworks_orphan
 
 	public function admin_init() {
 		$this->options->options_init();
+		/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
 		add_filter( 'plugin_row_meta', array( $this, 'add_donate_link' ), 10, 2 );
+		/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
 		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
 	}
 
@@ -347,6 +349,14 @@ class iworks_orphan
 		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
 	}
 
+	/**
+	 * Add settings link to plugin_action_links.
+	 *
+	 * @since 2.6.8
+	 *
+	 * @param array  $actions     An array of plugin action links.
+	 * @param string $plugin_file Path to the plugin file relative to the plugins directory.
+	 */
 	public function add_settings_link( $actions, $plugin_file ) {
 		if ( is_multisite() ) {
 			return $actions;
@@ -361,10 +371,22 @@ class iworks_orphan
 		return $actions;
 	}
 
-	public function add_donate_link( $links, $plugin_file ) {
+	/**
+	 * Add donate link to plugin_row_meta.
+	 *
+	 * @since 2.6.8
+	 *
+	 * @param array  $plugin_meta An array of the plugin's metadata,
+	 *                            including the version, author,
+	 *                            author URI, and plugin URI.
+	 * @param string $plugin_file Path to the plugin file, relative to the plugins directory.
+	 */
+	public function add_donate_link( $plugin_meta, $plugin_file ) {
+		/* start:free */
 		if ( $plugin_file == $this->plugin_file ) {
-			$links[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate' ) . '</a>';
+			$plugin_meta[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate' ) . '</a>';
 		}
-		return $links;
+		/* end:free */
+		return $plugin_meta;
 	}
 }
