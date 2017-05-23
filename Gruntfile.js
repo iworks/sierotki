@@ -38,6 +38,8 @@ module.exports = function( grunt ) {
 				'./Gruntfile.js',
 				'./package.json',
 				'./vendor/iworks/rate/README.md',
+				'./vendor/iworks/options/README.md',
+				'./vendor/iworks/options/LICENSE',
 			],
 			exclude_free: [
 				'./changelog.txt',
@@ -46,6 +48,8 @@ module.exports = function( grunt ) {
 				'./Gruntfile.js',
 				'./package.json',
 				'./vendor/iworks/rate/README.md',
+				'./vendor/iworks/options/README.md',
+				'./vendor/iworks/options/LICENSE',
 			],
 			include_files: [
 				'**',
@@ -132,12 +136,12 @@ module.exports = function( grunt ) {
 				'release/.*',      // Temp release files.
 				'tests/.*',        // Unit testing.
 			],
-			pot_dir: 'lang/', // With trailing slash.
-			textdomain: 'custom-sidebars',
+			pot_dir: 'languages/', // With trailing slash.
+			textdomain: 'sierotki',
 		},
 
 		dev_plugin_file: 'sierotki.php',
-		dev_plugin_dir: 'custom-sidebars/'
+		dev_plugin_dir: 'sierotki/'
 	};
 
 	// Project configuration
