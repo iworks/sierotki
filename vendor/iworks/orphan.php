@@ -1,4 +1,23 @@
 <?php
+/*
+
+Copyright 2011-2017 Marcin Pietrzak (marcin@iworks.pl)
+
+this program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+ */
+
 class iworks_orphan
 {
 	private $options;
@@ -364,7 +383,7 @@ class iworks_orphan
 		if ( $plugin_file == $this->plugin_file ) {
 			$page = $this->options->get_pagehook();
 			$url = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
-			$url = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings' ) );
+			$url = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
 			$settings = array( $url );
 			$actions = array_merge( $settings, $actions );
 		}
@@ -384,7 +403,7 @@ class iworks_orphan
 	public function add_donate_link( $plugin_meta, $plugin_file ) {
 		/* start:free */
 		if ( $plugin_file == $this->plugin_file ) {
-			$plugin_meta[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate' ) . '</a>';
+			$plugin_meta[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate', 'sierotki' ) . '</a>';
 		}
 		/* end:free */
 		return $plugin_meta;
