@@ -31,7 +31,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name' => 'the_title',
-				'th' => __( 'Title:', 'sierotki' ),
+				'th' => __( 'Title', 'sierotki' ),
 				'type'  => 'checkbox',
 				'description' => __( 'Enabled the substitution of orphans in the post_title.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
