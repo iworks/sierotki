@@ -91,6 +91,9 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
+= 2.7.0 - 2017-xx-xx =
+
+
 = 2.6.9 - 2017-05-24 =
 
 * Fixed a problem with class declaration. Props for [gierand](https://wordpress.org/support/users/gierand/)
