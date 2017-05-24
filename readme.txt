@@ -76,15 +76,11 @@ echo $orphan->replace( 'any_string' );
 
 = How to change plugin capability? =
 
-By default to use this plugin you must have `manage_options` capability,
-that usually mean site administrator. If you want to allow manage
-Orphans by "Editors" then you need to use other capability, e.g.
-`unfiltered_html`. You can use `iworks_orphans_capability` filter:
+By default to use this plugin you must have `manage_options` capability, that usually mean site administrator. If you want to allow manage Orphans by "Editors" then you need to use other capability, e.g.  `unfiltered_html`. You can use `iworks_orphans_capability` filter:
 
 `
 add_filter('iworks_orphans_capability', 'my_orphans_capability');
-function my_orphans_capability($capability)
-{
+function my_orphans_capability($capability) {
     return 'unfiltered_html';
 }
 `
