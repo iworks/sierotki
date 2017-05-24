@@ -501,7 +501,7 @@ module.exports = function( grunt ) {
 		grunt.task.run( 'default' );
 
 		// Generate all translation files (same for pro and free).
-		grunt.task.run( 'makepot' );
+		//grunt.task.run( 'makepot' );
 
 		for ( i in build ) {
 			branch = build[i];
