@@ -153,7 +153,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name' => 'numbers',
-				'th' => __( 'Keep numbers together:', 'sierotki' ),
+				'th' => __( 'Keep numbers together', 'sierotki' ),
 				'type'  => 'checkbox',
 				'description' => __( 'Allow to keep together phone number or strings with space between numbers.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -161,7 +161,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name' => 'own_orphans',
-				'th' => __( 'User definied orphans:', 'sierotki' ),
+				'th' => __( 'User definied orphans', 'sierotki' ),
 				'type' => 'textarea',
 				'description' => __( 'Use a comma to separate orphans.', 'sierotki' ),
 				'sanitize_callback' => 'esc_html',
