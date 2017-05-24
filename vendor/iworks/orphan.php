@@ -25,7 +25,8 @@ class iworks_orphan
 	private $settings;
 	private $plugin_file;
 
-	public function __construct( $file ) {
+    public function __construct() {
+        $file = dirname(dirname(dirname(__FILE__))).'/sierotki.php';
 		/**
 		 * plugin ID
 		 */

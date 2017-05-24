@@ -95,6 +95,10 @@ function my_orphans_capability($capability)
 
 == Changelog ==
 
+= 2.6.9 - 2017-05-24 =
+
+* Fixed a problem with class declaration. Props for [gierand](https://wordpress.org/support/users/gierand/)
+
 = 2.6.8 - 2017-05-23 =
 
 * Added author description to replacements.
@@ -113,7 +117,7 @@ function my_orphans_capability($capability)
 
 = 2.6.6 - 2017-04-30 =
 
-* Avoid to replace  "script" and "styles" content. Props for @m1nified
+* Avoid to replace  "script" and "styles" content. Props for [m1nified](https://profiles.wordpress.org/m1nified/)
 * Added a widget title to replacements.
 * Added a widget text to replacements (it work only for the widget text).
 

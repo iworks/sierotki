@@ -25,7 +25,7 @@ if ( ! class_exists( 'iworks_options' ) ) {
 	include_once $vendor.'/iworks/options/options.php';
 }
 
-new iworks_orphan( __FILE__ );
+new iworks_orphan();
 
 register_activation_hook( __FILE__, 'iworks_orphan_activate' );
 register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
