@@ -61,8 +61,10 @@ Plugin works when viewing the content and does not modify your content.
 Use this code:
 
 `
-$orphan = new iworks_orphan();
-echo $orphan->replace( get_post_meta($post_id, 'meta_key', true ) );
+if ( class_exists( 'iworks_orphan' ) {
+    $orphan = new iworks_orphan();
+    echo $orphan->replace( get_post_meta($post_id, 'meta_key', true ) );
+}
 `
 
 = How to use this plugin on any string? =
@@ -70,8 +72,10 @@ echo $orphan->replace( get_post_meta($post_id, 'meta_key', true ) );
 Use this code:
 
 `
-$orphan = new iworks_orphan();
-echo $orphan->replace( 'any_string' );
+if ( class_exists( 'iworks_orphan' ) {
+    $orphan = new iworks_orphan();
+    echo $orphan->replace( 'any_string' );
+}
 `
 
 = How to change plugin capability? =
