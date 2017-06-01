@@ -168,6 +168,15 @@ function orphang_indicator_options() {
 				'classes' => array( 'large-text' ),
 				'rows' => 10,
 			),
+			array(
+				'name' => 'post_meta',
+				'th' => __( 'Entries custom fields', 'sierotki' ),
+				'type' => 'textarea',
+				'description' => __( 'Use a comma to separate custom fields name.', 'sierotki' ),
+				'sanitize_callback' => 'esc_html',
+				'classes' => array( 'large-text' ),
+				'rows' => 10,
+			),
 		),
 		'metaboxes' => array(
 			'loved_this_plugin' => array(

@@ -25,6 +25,13 @@ class iworks_orphan
 	private $settings;
 	private $plugin_file;
 
+	/**
+	 * Filter post meta.
+	 *
+	 * @since 2.7.0
+	 */
+	private $meta_keys = null;
+
 	public function __construct() {
 		$file = dirname( dirname( dirname( __FILE__ ) ) ).'/sierotki.php';
 		/**
@@ -350,6 +357,13 @@ class iworks_orphan
 		}
 
 		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
+
+		/**
+		 * Filter post meta.
+		 *
+		 * @since 2.7.0
+		 */
+		add_filter( 'get_post_metadata', array( $this, 'filter_post_meta' ), 10, 4 );
 	}
 
 	/**
@@ -408,5 +422,49 @@ class iworks_orphan
 		}
 		/* end:free */
 		return $plugin_meta;
+	}
+
+	/**
+	 * Replace orphans in custom fields.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @param null|bool $check      Whether to allow adding metadata for the given type.
+	 * @param int       $object_id  Object ID.
+	 * @param string    $meta_key   Meta key.
+	 * @param mixed     $meta_value Meta value. Must be serializable if non-scalar.
+	 * @param bool      $unique     Whether the specified meta key should be unique
+	 *                              for the object. Optional. Default false.
+	 * @return null|bool|string $value Post meta value with orphans rules.
+	 */
+	public function filter_post_meta( $check, $object_id, $meta_key, $unique ) {
+		if ( ! $unique ) {
+			return $check;
+		}
+		if ( false === $this->meta_keys ) {
+			return $check;
+		}
+		if ( null === $this->meta_keys ) {
+			$value = $this->options->get_option( 'post_meta' );
+			if ( empty( $value ) || ! is_string( $value ) ) {
+				return $check;
+			}
+			$value = explode( ',', trim( $value ) );
+			$this->meta_keys = array_map( 'trim', $value );
+		}
+		if ( empty( $this->meta_keys ) ) {
+			$this->meta_keys = false;
+			return $check;
+		}
+		if ( ! in_array( $meta_key, $this->meta_keys ) ) {
+			return $check;
+		}
+		remove_filter( 'get_post_metadata', array( $this, 'filter_post_meta' ), 10, 4 );
+		$value = get_post_meta( $object_id, $meta_key, true );
+		add_filter( 'get_post_metadata', array( $this, 'filter_post_meta' ), 10, 4 );
+		if ( ! empty( $value ) ) {
+			return $this->replace( $value );
+		}
+		return $check;
 	}
 }
