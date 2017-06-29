@@ -4,7 +4,7 @@ Donate link: http://iworks.pl/donate/sierotki.php
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 3.6
 Tested up to: 4.8.0
-Stable tag: 2.6.9
+Stable tag: 2.7.0
 
 Plugin supports some of the grammatical rules of the Polish language.
 
@@ -97,9 +97,10 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
-= 2.7.0 - 2017-xx-xx =
+= 2.7.0 - 2017-06-29 =
 
 * Added custom fields - now you can easily add custom field name to the configuration.
+* Added words: 'albo', 'bez', 'czy', 'lecz', 'nie', 'niech', 'przez', 'tak', 'tylko', 'więc' base on [Sierotka](https://pl.wikipedia.org/wiki/Sierotka_(typografia))
 
 = 2.6.9 - 2017-05-24 =
 
