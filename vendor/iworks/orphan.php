@@ -247,7 +247,7 @@ class iworks_orphan
 		);
 
 		preg_match_all( '@(<(script|style)[^>]*>.*?(</(script|style)>))@is', $content, $matches );
-		$exceptions = '';
+		$exceptions = array();
 
 		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
 			$salt = 'kQc6T9fn5GhEzTM3Sxn7b9TWMV4PO0mOCV06Da7AQJzSJqxYR4z3qBlsW9rtFsWK';
@@ -288,7 +288,7 @@ class iworks_orphan
 		/**
 		 * bring back styles & scripts
 		 */
-		if ( ! empty( $exceptions ) ) {
+		if ( ! empty( $exceptions ) && is_array( $exceptions ) ) {
 			foreach ( $exceptions as $key => $one ) {
 				$re = sprintf( '/%s/', $key );
 				$content = preg_replace( $re, $one, $content );
