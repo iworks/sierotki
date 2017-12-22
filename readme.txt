@@ -97,6 +97,9 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
+* Release date: 2017-12-22
+* Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.4.
+
 = 2.7.1 - 2017-09-08 =
 
 * Fixed a problem with array handling, when document contains scripts or styles.
