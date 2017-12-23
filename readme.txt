@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: http://iworks.pl/donate/sierotki.php
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 3.6
-Tested up to: 4.8.1
+Tested up to: 4.9.1
 Stable tag: 2.7.0
 
 Plugin supports some of the grammatical rules of the Polish language.
@@ -99,8 +99,11 @@ function my_orphans_capability($capability) {
 
 * Release date: 2017-12-22
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.4.
+* Refactored input data.
+* Fixed problem with orphan directly after orphan.
+* Added html entities handling.
 
-= 2.7.1 - 2017-09-08 =
+= 2.7.1 - 2017-12-22 =
 
 * Fixed a problem with array handling, when document contains scripts or styles.
 
