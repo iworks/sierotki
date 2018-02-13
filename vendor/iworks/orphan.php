@@ -23,12 +23,12 @@ class iworks_orphan
 	private $options;
 	private $admin_page;
 	private $settings;
-    private $plugin_file;
+	private $plugin_file;
 
-    /**
-     * terms cache
-     */
-    private $terms = array();
+	/**
+	 * terms cache
+	 */
+	private $terms = array();
 
 	/**
 	 * Filter post meta.
@@ -128,14 +128,13 @@ class iworks_orphan
 			if ( ! preg_match( '/^pl/', $locale ) ) {
 				return $content;
 			}
-        }
+		}
 
-        $terms = $this->_terms();
+		$terms = $this->_terms();
 
-
-        /**
-         * Avoid to replace inside script or styles tags
-         */
+		/**
+		 * Avoid to replace inside script or styles tags
+		 */
 		preg_match_all( '@(<(script|style)[^>]*>.*?(</(script|style)>))@is', $content, $matches );
 		$exceptions = array();
 		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
@@ -151,16 +150,16 @@ class iworks_orphan
 		/**
 		 * base therms replace
 		 */
-        $re = '/^([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
+		$re = '/^([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
 
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
 		/**
 		 * single letters
 		 */
-        $re = '/([ >\(]+|&nbsp;)([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
-        /**
-         * double call to handle orphan after orphan after orphan
-         */
+		$re = '/([ >\(]+|&nbsp;)([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
+		/**
+		 * double call to handle orphan after orphan after orphan
+		 */
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
 		/**
@@ -238,6 +237,12 @@ class iworks_orphan
 			}
 			if ( is_integer( $value ) && 1 == $value ) {
 				add_filter( $filter, array( $this, 'replace' ) );
+				/**
+				 * WooCommerce exception: short descripton
+				 */
+				if ( 'the_excerpt' === $filter ) {
+					add_filter( 'woocommerce_short_description', array( $this, 'replace' ) );
+				}
 			}
 		}
 
@@ -364,167 +369,166 @@ class iworks_orphan
 			return $this->replace( $value );
 		}
 		return $check;
-    }
+	}
 
-    /**
-     * get terms array
-     *
-     * @since 2.7.1
-     *
-     * @return $terms array Array of terms to replace.
-     */
-    private function _terms() {
-        if ( ! empty( $this->terms ) ) {
-            return $this->terms;
-        }
-        $terms = array(
-            'al.',
-            'albo',
-            'ale',
-            'ależ',
-            'b.',
-            'bez',
-            'bm.',
-            'bp',
-            'br.',
-            'by',
-            'bym',
-            'byś',
-            'bł.',
-            'cyt.',
-            'cz.',
-            'czy',
-            'czyt.',
-            'dn.',
-            'do',
-            'doc.',
-            'dr',
-            'ds.',
-            'dyr.',
-            'dz.',
-            'fot.',
-            'gdy',
-            'gdyby',
-            'gdybym',
-            'gdybyś',
-            'gdyż',
-            'godz.',
-            'im.',
-            'inż.',
-            'jw.',
-            'kol.',
-            'komu',
-            'ks.',
-            'która',
-            'którego',
-            'której',
-            'któremu',
-            'który',
-            'których',
-            'którym',
-            'którzy',
-            'lecz',
-            'lic.',
-            'm.in.',
-            'max',
-            'mgr',
-            'min',
-            'moich',
-            'moje',
-            'mojego',
-            'mojej',
-            'mojemu',
-            'mych',
-            'mój',
-            'na',
-            'nad',
-            'nie',
-            'niech',
-            'np.',
-            'nr',
-            'nr.',
-            'nrach',
-            'nrami',
-            'nrem',
-            'nrom',
-            'nrowi',
-            'nru',
-            'nry',
-            'nrze',
-            'nrze',
-            'nrów',
-            'nt.',
-            'nw.',
-            'od',
-            'oraz',
-            'os.',
-            'p.',
-            'pl.',
-            'pn.',
-            'po',
-            'pod',
-            'pot.',
-            'prof.',
-            'przed',
-            'przez',
-            'pt.',
-            'pw.',
-            'pw.',
-            'tak',
-            'tamtej',
-            'tamto',
-            'tej',
-            'tel.',
-            'tj.',
-            'to',
-            'twoich',
-            'twoje',
-            'twojego',
-            'twojej',
-            'twych',
-            'twój',
-            'tylko',
-            'ul.',
-            'we',
-            'wg',
-            'woj.',
-            'więc',
-            'za',
-            'ze',
-            'śp.',
-            'św.',
-            'że',
-            'żeby',
-            'żebyś',
-            '—',
-        );
-        /**
-         * get own orphans
-         */
-        $own_orphans = trim( get_option( 'iworks_orphan_own_orphans', '' ), ' \t,' );
-        if ( $own_orphans ) {
-            $own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
-            $terms = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
-        }
-        $terms = apply_filters( 'iworks_orphan_therms', $terms );
-        /**
-         * remove duplicates
-         */
-        $terms = array_unique( $terms );
-        /**
-         * decode
-         */
-        $a = array();
-        foreach( $terms as $t ) {
-            $a[] = html_entity_decode( $t );
-        }
-        $terms = $a;
-        /**
-         * remove empty elements
-         */
-        $terms = array_filter( $terms );
-        $this->terms = $terms;
-        return $this->terms;
-    }
-
+	/**
+	 * get terms array
+	 *
+	 * @since 2.7.1
+	 *
+	 * @return $terms array Array of terms to replace.
+	 */
+	private function _terms() {
+		if ( ! empty( $this->terms ) ) {
+			return $this->terms;
+		}
+		$terms = array(
+			'al.',
+			'albo',
+			'ale',
+			'ależ',
+			'b.',
+			'bez',
+			'bm.',
+			'bp',
+			'br.',
+			'by',
+			'bym',
+			'byś',
+			'bł.',
+			'cyt.',
+			'cz.',
+			'czy',
+			'czyt.',
+			'dn.',
+			'do',
+			'doc.',
+			'dr',
+			'ds.',
+			'dyr.',
+			'dz.',
+			'fot.',
+			'gdy',
+			'gdyby',
+			'gdybym',
+			'gdybyś',
+			'gdyż',
+			'godz.',
+			'im.',
+			'inż.',
+			'jw.',
+			'kol.',
+			'komu',
+			'ks.',
+			'która',
+			'którego',
+			'której',
+			'któremu',
+			'który',
+			'których',
+			'którym',
+			'którzy',
+			'lecz',
+			'lic.',
+			'm.in.',
+			'max',
+			'mgr',
+			'min',
+			'moich',
+			'moje',
+			'mojego',
+			'mojej',
+			'mojemu',
+			'mych',
+			'mój',
+			'na',
+			'nad',
+			'nie',
+			'niech',
+			'np.',
+			'nr',
+			'nr.',
+			'nrach',
+			'nrami',
+			'nrem',
+			'nrom',
+			'nrowi',
+			'nru',
+			'nry',
+			'nrze',
+			'nrze',
+			'nrów',
+			'nt.',
+			'nw.',
+			'od',
+			'oraz',
+			'os.',
+			'p.',
+			'pl.',
+			'pn.',
+			'po',
+			'pod',
+			'pot.',
+			'prof.',
+			'przed',
+			'przez',
+			'pt.',
+			'pw.',
+			'pw.',
+			'tak',
+			'tamtej',
+			'tamto',
+			'tej',
+			'tel.',
+			'tj.',
+			'to',
+			'twoich',
+			'twoje',
+			'twojego',
+			'twojej',
+			'twych',
+			'twój',
+			'tylko',
+			'ul.',
+			'we',
+			'wg',
+			'woj.',
+			'więc',
+			'za',
+			'ze',
+			'śp.',
+			'św.',
+			'że',
+			'żeby',
+			'żebyś',
+			'—',
+		);
+		/**
+		 * get own orphans
+		 */
+		$own_orphans = trim( get_option( 'iworks_orphan_own_orphans', '' ), ' \t,' );
+		if ( $own_orphans ) {
+			$own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
+			$terms = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
+		}
+		$terms = apply_filters( 'iworks_orphan_therms', $terms );
+		/**
+		 * remove duplicates
+		 */
+		$terms = array_unique( $terms );
+		/**
+		 * decode
+		 */
+		$a = array();
+		foreach ( $terms as $t ) {
+			$a[] = html_entity_decode( $t );
+		}
+		$terms = $a;
+		/**
+		 * remove empty elements
+		 */
+		$terms = array_filter( $terms );
+		$this->terms = $terms;
+		return $this->terms;
+	}
 }
