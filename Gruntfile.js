@@ -25,10 +25,6 @@ module.exports = function( grunt ) {
 		js_files_concat: {
 		},
 
-		// SASS files to process. Resulting CSS files will be minified as well.
-		css_files_compile: {
-		},
-
 		// BUILD patterns to exclude code for specific builds.
 		replaces: {
 			patterns: [
@@ -144,99 +140,8 @@ module.exports = function( grunt ) {
 			}
 		},
 
-
-		// CSS - Compile a .scss file into a normal .css file.
-		sass:   {
-			all: {
-				options: {
-					'sourcemap=none': true, // 'sourcemap': 'none' does not work...
-					unixNewlines: true,
-					style: 'expanded'
-				},
-				files: conf.css_files_compile
-			}
-		},
-
-
-		// CSS - Automaticaly create prefixed attributes in css file if needed.
-		//       e.g. add `-webkit-border-radius` if `border-radius` is used.
-		autoprefixer: {
-			options: {
-				browsers: ['last 2 version', 'ie 8', 'ie 9'],
-				diff: false
-			},
-			single_file: {
-				files: [{
-					expand: true,
-					src: ['**/*.css', '!**/*.min.css'],
-					cwd: 'assets/css/',
-					dest: 'assets/css/',
-					ext: '.css',
-					extDot: 'last',
-					flatten: false
-				}]
-			}
-		},
-
-		concat_css: {
-			options: {
-				// Task-specific options go here. 
-			},
-			all: {
-				src: [
-					"assets/css/*.css",
-					"!assets/css/style.css"
-				],
-				dest: "assets/css/style.css"
-			},
-		},
-
-		// CSS - Required for CSS-autoprefixer and maybe some SCSS function.
-		compass: {
-			options: {
-			},
-			server: {
-				options: {
-					debugInfo: true
-				}
-			}
-		},
-
-		// CSS - Minify all .css files.
-		cssmin: {
-			options: {
-				banner: '/*!\n'+
-					'Theme Name: <%= pkg.title %>\n' +
-					'Theme URI: http://int505.pl/\n' +
-					'Author: Marcin Pietrzak\n' +
-					'Author URI: http://iworks.pl/\n' +
-					'Description: <%= pkg.description %>\n' +
-					'Version: <%= pkg.version %>\n' +
-					'License: GNU General Public License v2 or later\n' +
-					'Text Domain: <%= pkg.name %>\n' +
-					' */\n'
-			},
-			minify: {
-				expand: true,
-				src: 'style.css',
-				cwd: 'assets/css/',
-				dest: '',
-				ext: '.css',
-				extDot: 'last'
-			}
-		},
-
-
 		// WATCH - Watch filesystem for changes during development.
 		watch:  {
-			sass: {
-				files: ['assets/sass/**/*.scss'],
-				tasks: ['css' ],
-				options: {
-					debounceDelay: 500
-				}
-			},
-
 			scripts: {
 				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
 				//tasks: ['jshint', 'concat', 'uglify' ],
@@ -267,7 +172,7 @@ module.exports = function( grunt ) {
 					cwd: '',
 					domainPath: conf.translation.pot_dir,
 					exclude: conf.translation.ignore_files,
-					mainFile: 'style.css',
+					mainFile: 'sierotki.php',
 					potComments: '',
 					potFilename: conf.translation.textdomain + '.pot',
 					potHeaders: {
@@ -275,18 +180,11 @@ module.exports = function( grunt ) {
 						'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
 					},
 					processPot: null, // A callback function for manipulating the POT file.
-					type: 'wp-theme', // wp-plugin or wp-theme
+					type: 'wp-plugin', // wp-plugin or wp-theme
 					updateTimestamp: true, // Whether the POT-Creation-Date should be updated without other changes.
 					updatePoFiles: true // Whether to update PO files in the same directory as the POT file.
 				}
 			}
-		},
-
-		po2mo: {
-			files: {
-				src: 'languages/sierotki-pl_PL.po',
-				dest: 'languages/sierotki-pl_PL.mo'
-			},
 		},
 
 		// BUILD: Replace conditional tags in code.
@@ -348,9 +246,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'release', 'Generating release copy', function() {
 		grunt.task.run( 'clean');
 		grunt.task.run( 'js');
-		grunt.task.run( 'css');
 		grunt.task.run( 'makepot');
-		grunt.task.run( 'po2mo');
 		grunt.task.run( 'copy' );
 		grunt.task.run( 'replace' );
 		grunt.task.run( 'compress' );
@@ -358,9 +254,8 @@ module.exports = function( grunt ) {
 
 	// Default task.
 
-	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'sass', 'autoprefixer', 'concat_css', 'cssmin'] );
+	grunt.registerTask( 'default', ['clean', 'jshint', 'concat', 'uglify', 'makepot' ] );
 	grunt.registerTask( 'js', [ 'concat', 'uglify'] );
-	grunt.registerTask( 'css', ['sass', 'autoprefixer', 'concat_css', 'cssmin'] );
 	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );
 
 	grunt.task.run( 'clear' );

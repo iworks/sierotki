@@ -1,14 +1,14 @@
-# Copyright (C) 2017 Marcin Pietrzak
+# Copyright (C) 2018 Marcin Pietrzak
 # This file is distributed under the same license as the Orphans package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2017-09-08 21:14:41+00:00\n"
+"POT-Creation-Date: 2018-02-13 10:38:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.3\n"
@@ -180,59 +180,59 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: vendor/iworks/options/options.php:196
+#: vendor/iworks/options/options.php:199
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: vendor/iworks/options/options.php:689
+#: vendor/iworks/options/options.php:692
 msgid "Upload image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:695
+#: vendor/iworks/options/options.php:698
 msgid "Delete image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:763
+#: vendor/iworks/options/options.php:766
 msgid "Save Changes"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1547
+#: vendor/iworks/options/options.php:1603
 msgid "OFF"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1548
+#: vendor/iworks/options/options.php:1604
 msgid "ON"
 msgstr ""
 
-#: vendor/iworks/orphan.php:313
+#: vendor/iworks/orphan.php:200
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: vendor/iworks/orphan.php:319
+#: vendor/iworks/orphan.php:206
 msgid "For more information:"
 msgstr ""
 
-#: vendor/iworks/orphan.php:320
+#: vendor/iworks/orphan.php:207
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:321
+#: vendor/iworks/orphan.php:208
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:322
+#: vendor/iworks/orphan.php:209
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:411
+#: vendor/iworks/orphan.php:304
 msgid "Settings"
 msgstr ""
 
-#: vendor/iworks/orphan.php:431
+#: vendor/iworks/orphan.php:324
 msgid "Donate"
 msgstr ""
 
