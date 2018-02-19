@@ -97,6 +97,10 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
+= 2.7.3 - 2018-xx-xx =
+
+* Fixed problem with $post object. Props for [adpawl](https://wordpress.org/support/users/adpawl/)
+
 = 2.7.2 - 2018-02-13 =
 
 * Added html entities handling.

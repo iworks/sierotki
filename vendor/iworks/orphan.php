@@ -1,7 +1,7 @@
 <?php
 /*
 
-Copyright 2011-2017 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2011-2018 Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -43,17 +43,14 @@ class iworks_orphan
 		 * plugin ID
 		 */
 		$this->plugin_file = plugin_basename( $file );
-
 		/**
 		 * l10n
 		 */
 		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ).'/languages' );
-
 		/**
 		 * options
 		 */
 		$this->options = get_orphan_options();
-
 		/**
 		 * actions
 		 */
@@ -80,13 +77,12 @@ class iworks_orphan
 		 */
 		$entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
 		$current_filter = current_filter();
-
 		if ( in_array( $current_filter, $entry_related_filters ) ) {
 			if ( empty( $this->settings['post_type'] ) || ! is_array( $this->settings['post_type'] ) ) {
 				return $content;
 			}
 			global $post;
-			if ( ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
+			if ( is_a( $post, 'WP_Post' ) && ! in_array( $post->post_type, $this->settings['post_type'] ) ) {
 				return $content;
 			}
 		}
@@ -102,7 +98,6 @@ class iworks_orphan
 				return $content;
 			}
 		}
-
 		/**
 		 * Keep numbers together - this is independed of current language
 		 */
@@ -112,7 +107,6 @@ class iworks_orphan
 				$content = preg_replace( '/(\d) (\d)/', '$1&nbsp;$2', $content );
 			}
 		}
-
 		/**
 		 * Allow to ignore language.
 		 *
@@ -129,9 +123,7 @@ class iworks_orphan
 				return $content;
 			}
 		}
-
 		$terms = $this->_terms();
-
 		/**
 		 * Avoid to replace inside script or styles tags
 		 */
@@ -146,12 +138,10 @@ class iworks_orphan
 				$content = preg_replace( $re, $key, $content );
 			}
 		}
-
 		/**
 		 * base therms replace
 		 */
 		$re = '/^([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
-
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
 		/**
 		 * single letters
@@ -171,7 +161,6 @@ class iworks_orphan
 		 * polish year after number
 		 */
 		$content = preg_replace( '/(\d+) (r\.)/', '$1&nbsp;$2', $content );
-
 		/**
 		 * bring back styles & scripts
 		 */
@@ -181,7 +170,6 @@ class iworks_orphan
 				$content = preg_replace( $re, $one, $content );
 			}
 		}
-
 		/**
 		 * return
 		 */
@@ -208,7 +196,6 @@ class iworks_orphan
 				'<p>' . __( '<a href="http://wordpress.org/support/plugin/sierotki/" target="_blank">Support Forums</a>', 'sierotki' ) . '</p>' .
 				'<p>' . __( '<a href="http://iworks.pl/en/" target="_blank">break the web</a>', 'sierotki' ) . '</p>'
 			);
-
 	}
 
 	public function admin_init() {
@@ -245,7 +232,6 @@ class iworks_orphan
 				}
 			}
 		}
-
 		/**
 		 * taxonomies
 		 */
@@ -258,9 +244,7 @@ class iworks_orphan
 				add_filter( 'single_tag_title', array( $this, 'replace' ) );
 			}
 		}
-
 		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
-
 		/**
 		 * Filter post meta.
 		 *
@@ -280,7 +264,6 @@ class iworks_orphan
 		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
 	}
-
 
 	private function is_on( $key ) {
 		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
