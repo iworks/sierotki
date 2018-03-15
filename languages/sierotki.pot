@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2018-02-13 10:38:50+00:00\n"
+"POT-Creation-Date: 2018-03-15 16:07:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -180,59 +180,59 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: vendor/iworks/options/options.php:199
+#: vendor/iworks/options/options.php:219
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: vendor/iworks/options/options.php:692
+#: vendor/iworks/options/options.php:712
 msgid "Upload image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:698
+#: vendor/iworks/options/options.php:718
 msgid "Delete image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:766
+#: vendor/iworks/options/options.php:786
 msgid "Save Changes"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1603
+#: vendor/iworks/options/options.php:1647
 msgid "OFF"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1604
+#: vendor/iworks/options/options.php:1648
 msgid "ON"
 msgstr ""
 
-#: vendor/iworks/orphan.php:200
+#: vendor/iworks/orphan.php:190
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: vendor/iworks/orphan.php:206
+#: vendor/iworks/orphan.php:196
 msgid "For more information:"
 msgstr ""
 
-#: vendor/iworks/orphan.php:207
+#: vendor/iworks/orphan.php:197
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:208
+#: vendor/iworks/orphan.php:198
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:209
+#: vendor/iworks/orphan.php:199
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:304
+#: vendor/iworks/orphan.php:289
 msgid "Settings"
 msgstr ""
 
-#: vendor/iworks/orphan.php:324
+#: vendor/iworks/orphan.php:309
 msgid "Donate"
 msgstr ""
 

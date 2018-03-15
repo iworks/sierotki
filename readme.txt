@@ -100,9 +100,9 @@ function my_orphans_capability($capability) {
 = 2.7.3 - 2018-03-15 =
 
 * Fixed problem with $post object. Props for [adpawl](https://wordpress.org/support/users/adpawl/)
-* Fixed space after number, but before a word. Props for M. Hawranek.
+* Fixed space after a number, but before a word. Props for M. Hawranek.
+* Fixed too early translation load, it causes sometimes missing translation.
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.5.
-* Fixed too early translation load, it cause soemtimes missing translation.
 
 = 2.7.2 - 2018-02-13 =
 
