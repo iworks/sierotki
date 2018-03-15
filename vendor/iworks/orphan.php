@@ -44,10 +44,6 @@ class iworks_orphan
 		 */
 		$this->plugin_file = plugin_basename( $file );
 		/**
-		 * l10n
-		 */
-		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ).'/languages' );
-		/**
 		 * options
 		 */
 		$this->options = get_orphan_options();
@@ -57,6 +53,16 @@ class iworks_orphan
 		add_action( 'init',       array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
+	}
+
+	/**
+	 * Load Translation
+	 *
+	 * @since 2.7.3
+	 */
+	public function load_translation() {
+		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ).'/languages' );
 	}
 
 	public function replace( $content ) {
