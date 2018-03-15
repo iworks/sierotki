@@ -97,9 +97,11 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
-= 2.7.3 - 2018-xx-xx =
+= 2.7.3 - 2018-03-15 =
 
 * Fixed problem with $post object. Props for [adpawl](https://wordpress.org/support/users/adpawl/)
+* Fixed space after number, but before a word.
+* Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.5.
 
 = 2.7.2 - 2018-02-13 =
 

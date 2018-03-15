@@ -103,8 +103,8 @@ class iworks_orphan
 		 */
 		$numbers = $this->is_on( 'numbers' );
 		if ( $numbers ) {
-			while ( preg_match( '/(\d) (\d)/', $content ) ) {
-				$content = preg_replace( '/(\d) (\d)/', '$1&nbsp;$2', $content );
+			while ( preg_match( '/(\d+) ([\da-z]+)/i', $content, $matches ) ) {
+				$content = preg_replace( '/(\d+) ([\da-z]+)/i', '$1&nbsp;$2', $content );
 			}
 		}
 		/**
@@ -157,10 +157,6 @@ class iworks_orphan
 		 */
 		$re = '/(&nbsp;)([aiouwz]) +/i';
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
-		/**
-		 * polish year after number
-		 */
-		$content = preg_replace( '/(\d+) (r\.)/', '$1&nbsp;$2', $content );
 		/**
 		 * bring back styles & scripts
 		 */
