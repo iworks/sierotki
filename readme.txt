@@ -97,6 +97,10 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
+= 2.7.4 - 2018-03-16 =
+
+* Fixed problem with too greedy number replacement.
+
 = 2.7.3 - 2018-03-15 =
 
 * Fixed problem with $post object. Props for [adpawl](https://wordpress.org/support/users/adpawl/)

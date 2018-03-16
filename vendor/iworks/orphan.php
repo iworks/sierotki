@@ -109,8 +109,18 @@ class iworks_orphan
 		 */
 		$numbers = $this->is_on( 'numbers' );
 		if ( $numbers ) {
-			while ( preg_match( '/(\d+) ([\da-z]+)/i', $content, $matches ) ) {
-				$content = preg_replace( '/(\d+) ([\da-z]+)/i', '$1&nbsp;$2', $content );
+			preg_match_all( '/(>[^<]+<)/', $content, $parts );
+			if ( $parts && is_array( $parts ) && ! empty( $parts ) ) {
+				$parts = array_shift( $parts );
+				foreach ( $parts as $part ) {
+					$to_change = $part;
+					while ( preg_match( '/(\d+) ([\da-z]+)/i', $to_change, $matches ) ) {
+						$to_change = preg_replace( '/(\d+) ([\da-z]+)/i', '$1&nbsp;$2', $to_change );
+					}
+					if ( $part != $to_change ) {
+						$content = str_replace( $part, $to_change, $content );
+					}
+				}
 			}
 		}
 		/**
