@@ -2,10 +2,12 @@
   "name": "sierotki",
   "title": "Orphans",
   "description": "Plugin fix orphans position and replace space after orphan to hard space, to avoid ne break incorrect position.",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "homepage": "https://wordpress.org/plugins/sierotki/",
   "author": [
-    { "name": "Marcin Pietrzak" }
+    {
+      "name": "Marcin Pietrzak"
+    }
   ],
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -35,8 +37,8 @@
   },
   "keywords": [],
   "repository": {
-      "type": "git",
-      "url": "git@bitbucket.org:iworks-pl/sierotki.git"
+    "type": "git",
+    "url": "git@bitbucket.org:iworks-pl/sierotki.git"
   },
   "license": "GPL-2.0"
 }

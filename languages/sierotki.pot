@@ -1,14 +1,14 @@
-# Copyright (C) 2018 Marcin Pietrzak
+# Copyright (C) 2019 Marcin Pietrzak
 # This file is distributed under the same license as the Orphans package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2018-03-15 16:07:50+00:00\n"
+"POT-Creation-Date: 2019-11-08 10:32:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.3\n"
@@ -180,87 +180,103 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: vendor/iworks/options/options.php:219
+#: vendor/iworks/options/options.php:237
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: vendor/iworks/options/options.php:712
+#: vendor/iworks/options/options.php:734
 msgid "Upload image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:718
+#: vendor/iworks/options/options.php:740
 msgid "Delete image"
 msgstr ""
 
-#: vendor/iworks/options/options.php:786
+#: vendor/iworks/options/options.php:808
 msgid "Save Changes"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1647
+#: vendor/iworks/options/options.php:1598
+msgid "Country"
+msgstr ""
+
+#: vendor/iworks/options/options.php:1599
+msgid "City"
+msgstr ""
+
+#: vendor/iworks/options/options.php:1600
+msgid "Street"
+msgstr ""
+
+#: vendor/iworks/options/options.php:1601
+msgid "ZIP code"
+msgstr ""
+
+#: vendor/iworks/options/options.php:1754
 msgid "OFF"
 msgstr ""
 
-#: vendor/iworks/options/options.php:1648
+#: vendor/iworks/options/options.php:1755
 msgid "ON"
 msgstr ""
 
-#: vendor/iworks/orphan.php:190
+#: vendor/iworks/orphan.php:200
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: vendor/iworks/orphan.php:196
+#: vendor/iworks/orphan.php:206
 msgid "For more information:"
 msgstr ""
 
-#: vendor/iworks/orphan.php:197
+#: vendor/iworks/orphan.php:207
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:198
+#: vendor/iworks/orphan.php:208
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:199
+#: vendor/iworks/orphan.php:209
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:289
+#: vendor/iworks/orphan.php:299
 msgid "Settings"
 msgstr ""
 
-#: vendor/iworks/orphan.php:309
+#: vendor/iworks/orphan.php:319
 msgid "Donate"
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:365
+#: vendor/iworks/rate/rate.php:373
 msgid ""
-"Hey %s, you've been using %s for a while now, and we hope you're happy with "
-"it."
+"Hey %1$s, you've been using %2$s for a while now, and we hope you're happy "
+"with it."
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:365
+#: vendor/iworks/rate/rate.php:373
 msgid ""
 "We've spent countless hours developing this free plugin for you, and we "
 "would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:380
+#: vendor/iworks/rate/rate.php:388
 msgid "Thanks :)"
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:383
+#: vendor/iworks/rate/rate.php:391
 msgid "Rate %s"
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:387
+#: vendor/iworks/rate/rate.php:396
 msgid "Saving"
 msgstr ""
 
-#: vendor/iworks/rate/rate.php:388
+#: vendor/iworks/rate/rate.php:397
 msgid "No thanks"
 msgstr ""
 
