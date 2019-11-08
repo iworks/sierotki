@@ -1,6 +1,5 @@
 <?php
 /*
-
 Copyright 2011-2018 Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
@@ -18,8 +17,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  */
 
-class iworks_orphan
-{
+class iworks_orphan {
+
 	private $options;
 	private $admin_page;
 	private $settings;
@@ -38,7 +37,7 @@ class iworks_orphan
 	private $meta_keys = null;
 
 	public function __construct() {
-		$file = dirname( dirname( dirname( __FILE__ ) ) ).'/sierotki.php';
+		$file = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
 		/**
 		 * plugin ID
 		 */
@@ -50,7 +49,7 @@ class iworks_orphan
 		/**
 		 * actions
 		 */
-		add_action( 'init',       array( $this, 'init' ) );
+		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
@@ -62,7 +61,7 @@ class iworks_orphan
 	 * @since 2.7.3
 	 */
 	public function load_translation() {
-		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ).'/languages' );
+		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ) . '/languages' );
 	}
 
 	public function replace( $content ) {
@@ -82,7 +81,7 @@ class iworks_orphan
 		 * check post type
 		 */
 		$entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
-		$current_filter = current_filter();
+		$current_filter        = current_filter();
 		if ( in_array( $current_filter, $entry_related_filters ) ) {
 			if ( empty( $this->settings['post_type'] ) || ! is_array( $this->settings['post_type'] ) ) {
 				return $content;
@@ -128,7 +127,7 @@ class iworks_orphan
 		 *
 		 * @since 2.6.7
 		 */
-		$all_languages = $this->is_on( 'ignore_language' );
+		$all_languages          = $this->is_on( 'ignore_language' );
 		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
 		if ( ! $apply_to_all_languages ) {
 			/**
@@ -148,37 +147,45 @@ class iworks_orphan
 		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
 			$salt = 'kQc6T9fn5GhEzTM3Sxn7b9TWMV4PO0mOCV06Da7AQJzSJqxYR4z3qBlsW9rtFsWK';
 			foreach ( $matches[0] as $one ) {
-				$key = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
+				$key                = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
 				$exceptions[ $key ] = $one;
-				$re = sprintf( '@%s@', preg_replace( '/@/', '\@', preg_quote( $one, '/' ) ) );
-				$content = preg_replace( $re, $key, $content );
+				$re                 = sprintf( '@%s@', preg_replace( '/@/', '\@', preg_quote( $one, '/' ) ) );
+				$content            = preg_replace( $re, $key, $content );
 			}
 		}
 		/**
-		 * base therms replace
+		 * Chunk terms
+		 *
+		 * @since 2.7.6
 		 */
-		$re = '/^([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
-		$content = preg_replace( $re, '$1$2&nbsp;', $content );
-		/**
-		 * single letters
-		 */
-		$re = '/([ >\(]+|&nbsp;)([aiouwz]|'.preg_replace( '/\./', '\.', implode( '|', $terms ) ).') +/i';
-		/**
-		 * double call to handle orphan after orphan after orphan
-		 */
-		$content = preg_replace( $re, '$1$2&nbsp;', $content );
-		$content = preg_replace( $re, '$1$2&nbsp;', $content );
+		$terms_terms = array_chunk( $terms, 10 );
+		foreach ( $terms_terms as $terms ) {
+			/**
+			 * base therms replace
+			 */
+			$re      = '/^([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+			$content = preg_replace( $re, '$1$2&nbsp;', $content );
+			/**
+			 * single letters
+			 */
+			$re = '/([ >\(]+|&nbsp;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+			/**
+			 * double call to handle orphan after orphan after orphan
+			 */
+			$content = preg_replace( $re, '$1$2&nbsp;', $content );
+			$content = preg_replace( $re, '$1$2&nbsp;', $content );
+		}
 		/**
 		 * single letter after previous orphan
 		 */
-		$re = '/(&nbsp;)([aiouwz]) +/i';
+		$re      = '/(&nbsp;)([aiouwz]) +/i';
 		$content = preg_replace( $re, '$1$2&nbsp;', $content );
 		/**
 		 * bring back styles & scripts
 		 */
 		if ( ! empty( $exceptions ) && is_array( $exceptions ) ) {
 			foreach ( $exceptions as $key => $one ) {
-				$re = sprintf( '/%s/', $key );
+				$re      = sprintf( '/%s/', $key );
 				$content = preg_replace( $re, $one, $content );
 			}
 		}
@@ -194,11 +201,13 @@ class iworks_orphan
 			return;
 		}
 		// Add my_help_tab if current screen is My Admin Page
-		$screen->add_help_tab( array(
-			'id'    => 'overview',
-			'title' => __( 'Orphans', 'sierotki' ),
-			'content'   => '<p>' . __( 'Plugin fix some Polish gramary rules with orphans.', 'sierotki' ) . '</p>',
-		) );
+		$screen->add_help_tab(
+			array(
+				'id'      => 'overview',
+				'title'   => __( 'Orphans', 'sierotki' ),
+				'content' => '<p>' . __( 'Plugin fix some Polish gramary rules with orphans.', 'sierotki' ) . '</p>',
+			)
+		);
 			/**
 			 * make sidebar help
 			 */
@@ -219,7 +228,7 @@ class iworks_orphan
 	}
 
 	public function init() {
-		$this->settings = $this->options->get_all_options();
+		$this->settings  = $this->options->get_all_options();
 		$allowed_filters = array(
 			'the_title',
 			'the_excerpt',
@@ -271,7 +280,7 @@ class iworks_orphan
 	 * @since 2.6.6
 	 */
 	public function iworks_rate_css() {
-		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ).'assets/images/logo.png';
+		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . 'assets/images/logo.png';
 		echo '<style type="text/css">';
 		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
@@ -294,11 +303,11 @@ class iworks_orphan
 			return $actions;
 		}
 		if ( $plugin_file == $this->plugin_file ) {
-			$page = $this->options->get_pagehook();
-			$url = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
-			$url = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
+			$page     = $this->options->get_pagehook();
+			$url      = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
+			$url      = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
 			$settings = array( $url );
-			$actions = array_merge( $settings, $actions );
+			$actions  = array_merge( $settings, $actions );
 		}
 		return $actions;
 	}
@@ -347,7 +356,7 @@ class iworks_orphan
 			if ( empty( $value ) || ! is_string( $value ) ) {
 				return $check;
 			}
-			$value = explode( ',', trim( $value ) );
+			$value           = explode( ',', trim( $value ) );
 			$this->meta_keys = array_map( 'trim', $value );
 		}
 		if ( empty( $this->meta_keys ) ) {
@@ -504,7 +513,7 @@ class iworks_orphan
 		$own_orphans = trim( get_option( 'iworks_orphan_own_orphans', '' ), ' \t,' );
 		if ( $own_orphans ) {
 			$own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
-			$terms = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
+			$terms       = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
 		}
 		$terms = apply_filters( 'iworks_orphan_therms', $terms );
 		/**
@@ -522,7 +531,7 @@ class iworks_orphan
 		/**
 		 * remove empty elements
 		 */
-		$terms = array_filter( $terms );
+		$terms       = array_filter( $terms );
 		$this->terms = $terms;
 		return $this->terms;
 	}
