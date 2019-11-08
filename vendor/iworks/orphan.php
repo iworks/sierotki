@@ -168,7 +168,7 @@ class iworks_orphan {
 			/**
 			 * single letters
 			 */
-			$re = '/([ >\(]+|&nbsp;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+			$re = '/([ >\(]+|&nbsp;|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
 			/**
 			 * double call to handle orphan after orphan after orphan
 			 */

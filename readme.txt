@@ -99,9 +99,10 @@ function my_orphans_capability($capability) {
 
 = 2.7.5 - 2019-11-07 =
 
-* Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.8
 * Fixed default values configuration.
 * Fixed problem with "regular expression is too large".
+* Handled quotation mark before orphan.
+* Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.8
 
 = 2.7.4 - 2018-03-16 =
 
