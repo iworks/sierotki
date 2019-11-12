@@ -29,6 +29,7 @@ module.exports = function( grunt ) {
 		replaces: {
 			patterns: [
 				{ match: /BUILDTIME/g, replace: buildtime },
+				{ match: /PLUGIN_TILL_YEAR/g, replace: '<%= grunt.template.today("yyyy") %>' },
 				{ match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 				{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 				{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' }
@@ -218,8 +219,8 @@ module.exports = function( grunt ) {
 					'!.idea', // PHPStorm settings
 					'!.git',
 					'!Gruntfile.js',
-					'!package.json',
-					'!tests/*',
+					'!package.json', '!tests/*',
+					'!package-lock.json', '!tests/*',
 					'!tests/**',
 					'!assets/js/src',
 					'!assets/js/src/*',
@@ -228,6 +229,9 @@ module.exports = function( grunt ) {
 					'!assets/sass/*',
 					'!assets/sass/**',
 					'!phpcs.xml.dist',
+					'!**/README.md',
+					'!**/LICENSE',
+					'!LICENSE',
 					'!README.md'
 				],
 				dest: './release/<%= pkg.version %>/',
