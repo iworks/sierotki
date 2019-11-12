@@ -97,11 +97,12 @@ function my_orphans_capability($capability) {
 
 == Changelog ==
 
-= 2.7.5 - 2019-11-07 =
+= 2.7.5 - 2019-11-12 =
 
 * Fixed default values configuration.
-* Fixed problem with "regular expression is too large".
 * Handled quotation mark before orphan.
+* Moved orphan's filters at the end of run, to try to avoid different plugins replacements.
+* Split replacement rules to avoid problem with `regular expression is too large`.
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.8
 
 = 2.7.4 - 2018-03-16 =

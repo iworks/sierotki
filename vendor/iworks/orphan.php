@@ -219,6 +219,9 @@ class iworks_orphan {
 			);
 	}
 
+	/**
+	 * Inicialize admin area
+	 */
 	public function admin_init() {
 		$this->options->options_init();
 		/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
@@ -227,6 +230,9 @@ class iworks_orphan {
 		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
 	}
 
+	/**
+	 * Inicialize
+	 */
 	public function init() {
 		$this->settings  = $this->options->get_all_options();
 		$allowed_filters = array(
@@ -244,12 +250,12 @@ class iworks_orphan {
 				continue;
 			}
 			if ( is_integer( $value ) && 1 == $value ) {
-				add_filter( $filter, array( $this, 'replace' ) );
+				add_filter( $filter, array( $this, 'replace' ), PHP_INT_MAX );
 				/**
 				 * WooCommerce exception: short descripton
 				 */
 				if ( 'the_excerpt' === $filter ) {
-					add_filter( 'woocommerce_short_description', array( $this, 'replace' ) );
+					add_filter( 'woocommerce_short_description', array( $this, 'replace' ), PHP_INT_MAX );
 				}
 			}
 		}
@@ -286,6 +292,13 @@ class iworks_orphan {
 		echo '</style>';
 	}
 
+	/**
+	 * Is key turned on?
+	 *
+	 * @param string $key Settings key.
+	 *
+	 * @return boolean Is this key setting turned on?
+	 */
 	private function is_on( $key ) {
 		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
 	}
