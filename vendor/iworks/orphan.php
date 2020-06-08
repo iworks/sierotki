@@ -78,6 +78,22 @@ class iworks_orphan {
 			return $content;
 		}
 		/**
+		 * we do not need this in feed
+		 *
+		 * @since 2.7.6
+		 */
+		if ( is_feed() ) {
+			return $content;
+		}
+		/**
+		 * we do not need this in REST API
+		 *
+		 * @since 2.7.6
+		 */
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return $content;
+		}
+		/**
 		 * check post type
 		 */
 		$entry_related_filters = array( 'the_title', 'the_excerpt', 'the_content' );
