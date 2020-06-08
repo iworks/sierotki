@@ -1,14 +1,14 @@
-# Copyright (C) 2019 Marcin Pietrzak
+# Copyright (C) 2020 Marcin Pietrzak
 # This file is distributed under the same license as the Orphans package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2019-11-08 10:32:24+00:00\n"
+"POT-Creation-Date: 2020-06-08 10:36:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.3\n"
@@ -220,35 +220,35 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: vendor/iworks/orphan.php:200
+#: vendor/iworks/orphan.php:224
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: vendor/iworks/orphan.php:206
+#: vendor/iworks/orphan.php:231
 msgid "For more information:"
 msgstr ""
 
-#: vendor/iworks/orphan.php:207
+#: vendor/iworks/orphan.php:232
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:208
+#: vendor/iworks/orphan.php:233
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:209
+#: vendor/iworks/orphan.php:234
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:299
+#: vendor/iworks/orphan.php:337
 msgid "Settings"
 msgstr ""
 
-#: vendor/iworks/orphan.php:319
+#: vendor/iworks/orphan.php:357
 msgid "Donate"
 msgstr ""
 
