@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2020-06-08 10:36:04+00:00\n"
+"POT-Creation-Date: 2020-06-20 13:19:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -220,35 +220,35 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: vendor/iworks/orphan.php:224
+#: vendor/iworks/orphan.php:232
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: vendor/iworks/orphan.php:231
+#: vendor/iworks/orphan.php:239
 msgid "For more information:"
 msgstr ""
 
-#: vendor/iworks/orphan.php:232
+#: vendor/iworks/orphan.php:240
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:233
+#: vendor/iworks/orphan.php:241
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:234
+#: vendor/iworks/orphan.php:242
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: vendor/iworks/orphan.php:337
+#: vendor/iworks/orphan.php:345
 msgid "Settings"
 msgstr ""
 
-#: vendor/iworks/orphan.php:357
+#: vendor/iworks/orphan.php:365
 msgid "Donate"
 msgstr ""
 
