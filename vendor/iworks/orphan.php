@@ -66,6 +66,14 @@ class iworks_orphan {
 
 	public function replace( $content ) {
 		/**
+		 * Filter to allow skip replacement.
+		 *
+		 * @since 2.7.7
+		 */
+		if ( apply_filters( 'orphan_skip_replacement', false ) ) {
+			return $content;
+		}
+		/**
 		 * do not replace empty content
 		 */
 		if ( empty( $content ) ) {

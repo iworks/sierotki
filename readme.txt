@@ -88,6 +88,18 @@ function my_orphans_capability($capability) {
     return 'unfiltered_html';
 }
 `
+
+= How to turn of replacement in my piece of code? =
+
+At the beginning of your block just add:
+`
+add_filter( 'orphan_skip_replacement', '__return_true' );
+`
+and at the end, to again turn on replacements:
+`
+remove_filter( 'orphan_skip_replacement', '__return_true' );
+`
+
 == Screenshots ==
 
 1. Options for entries.
@@ -96,6 +108,9 @@ function my_orphans_capability($capability) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 2.7.7 - 2020-06-20 =
+* Added `orphan_skip_replacement` filter to force skip replacements.  Check FAQ to know how to use it.
 
 = 2.7.6 - 2020-06-08 =
 
