@@ -109,6 +109,9 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 == Changelog ==
 
+= 2.7.8 - 2021-01-xx =
+* Added `orphan_replace` filter to add ability to force replacements on any string.
+
 = 2.7.7 - 2020-06-20 =
 * Added `orphan_skip_replacement` filter to force skip replacements.  Check FAQ to know how to use it.
 

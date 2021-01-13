@@ -53,6 +53,10 @@ class iworks_orphan {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
+		/**
+		 * filters
+		 */
+		add_filter( 'orphan_replace', array( $this, 'orphan_replace_filter' ) );
 	}
 
 	/**
@@ -64,6 +68,9 @@ class iworks_orphan {
 		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ) . '/languages' );
 	}
 
+	/**
+	 * base replacement function
+	 */
 	public function replace( $content ) {
 		/**
 		 * Filter to allow skip replacement.
@@ -128,6 +135,45 @@ class iworks_orphan {
 			}
 		}
 		/**
+		 * Allow to ignore language.
+		 *
+		 * @since 2.6.7
+		 */
+		$all_languages          = $this->is_on( 'ignore_language' );
+		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
+		if ( ! $apply_to_all_languages ) {
+			/**
+			 * apply other rules only for Polish language
+			 */
+			$locale = apply_filters( 'wpml_current_language', get_locale() );
+			if ( ! preg_match( '/^pl/', $locale ) ) {
+				return $content;
+			}
+		}
+		/**
+		 * finally just replace!
+		 */
+		return $this->unconditional_replacement( $content );
+	}
+
+	/**
+	 * Unconditional replacement with super-base check is replacement even
+	 * possible.
+	 *
+	 * @since 2.7.8
+	 *
+	 * @param string $content String to replace
+	 *
+	 * @return string $content
+	 */
+	private function unconditional_replacement( $content ) {
+		/**
+		 * only super-base check
+		 */
+		if ( ! is_string( $content ) || empty( $content ) ) {
+			return $content;
+		}
+		/**
 		 * Keep numbers together - this is independed of current language
 		 */
 		$numbers = $this->is_on( 'numbers' );
@@ -144,22 +190,6 @@ class iworks_orphan {
 						$content = str_replace( $part, $to_change, $content );
 					}
 				}
-			}
-		}
-		/**
-		 * Allow to ignore language.
-		 *
-		 * @since 2.6.7
-		 */
-		$all_languages          = $this->is_on( 'ignore_language' );
-		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
-		if ( ! $apply_to_all_languages ) {
-			/**
-			 * apply other rules only for Polish language
-			 */
-			$locale = apply_filters( 'wpml_current_language', get_locale() );
-			if ( ! preg_match( '/^pl/', $locale ) ) {
-				return $content;
 			}
 		}
 		$terms = $this->_terms();
@@ -219,6 +249,9 @@ class iworks_orphan {
 		return $content;
 	}
 
+	/**
+	 * Add Hlp tab on option page
+	 */
 	public function add_help_tab() {
 		$screen = get_current_screen();
 		if ( $screen->id != $this->admin_page ) {
@@ -232,15 +265,15 @@ class iworks_orphan {
 				'content' => '<p>' . __( 'Plugin fix some Polish gramary rules with orphans.', 'sierotki' ) . '</p>',
 			)
 		);
-			/**
-			 * make sidebar help
-			 */
-			$screen->set_help_sidebar(
-				'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-				'<p>' . __( '<a href="http://wordpress.org/extend/plugins/sierotki/" target="_blank">Plugin Homepage</a>', 'sierotki' ) . '</p>' .
-				'<p>' . __( '<a href="http://wordpress.org/support/plugin/sierotki/" target="_blank">Support Forums</a>', 'sierotki' ) . '</p>' .
-				'<p>' . __( '<a href="http://iworks.pl/en/" target="_blank">break the web</a>', 'sierotki' ) . '</p>'
-			);
+		/**
+		 * make sidebar help
+		 */
+		$screen->set_help_sidebar(
+			'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
+			'<p>' . __( '<a href="http://wordpress.org/extend/plugins/sierotki/" target="_blank">Plugin Homepage</a>', 'sierotki' ) . '</p>' .
+			'<p>' . __( '<a href="http://wordpress.org/support/plugin/sierotki/" target="_blank">Support Forums</a>', 'sierotki' ) . '</p>' .
+			'<p>' . __( '<a href="http://iworks.pl/en/" target="_blank">break the web</a>', 'sierotki' ) . '</p>'
+		);
 	}
 
 	/**
@@ -572,4 +605,21 @@ class iworks_orphan {
 		$this->terms = $terms;
 		return $this->terms;
 	}
+
+	/**
+	 * Filter to use Orphans on any string
+	 *
+	 * @since 2.7.8
+	 *
+	 * @param string $content String to replace
+	 *
+	 * @return string $content
+	 */
+	public function orphan_replace_filter( $content ) {
+		if ( ! is_string( $content ) ) {
+			return;
+		}
+		return $this->unconditional_replacement( $content );
+	}
+
 }
