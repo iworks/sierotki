@@ -37,15 +37,18 @@ class iworks_orphan {
 	private $meta_keys = null;
 
 	public function __construct() {
-		$file = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
 		/**
-		 * plugin ID
+		 * basic settings
 		 */
-		$this->plugin_file = plugin_basename( $file );
+		$file = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
 		/**
 		 * options
 		 */
 		$this->options = get_orphan_options();
+		/**
+		 * plugin ID
+		 */
+		$this->plugin_file = plugin_basename( $file );
 		/**
 		 * actions
 		 */
@@ -288,9 +291,15 @@ class iworks_orphan {
 	}
 
 	/**
-	 * Inicialize
+	 * Initialize, but not for admin
 	 */
 	public function init() {
+		/**
+		 * Turn off all replacements for admin area - we do not need it!
+		 */
+		if ( is_admin() ) {
+			return;
+		}
 		$this->settings  = $this->options->get_all_options();
 		$allowed_filters = array(
 			'the_title',
@@ -617,7 +626,10 @@ class iworks_orphan {
 	 */
 	public function orphan_replace_filter( $content ) {
 		if ( ! is_string( $content ) ) {
-			return;
+			return $content;
+		}
+		if ( empty( $content ) ) {
+			return $content;
 		}
 		return $this->unconditional_replacement( $content );
 	}

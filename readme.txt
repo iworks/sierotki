@@ -2,8 +2,8 @@
 Contributors: iworks
 Donate link: http://iworks.pl/donate/sierotki.php
 Tags: sierotka, sierotki, spójniki, twarda spacja
-Requires at least: 3.6
-Tested up to: 5.4
+Requires at least: 4.6
+Tested up to: 5.6
 Stable tag: PLUGIN_VERSION
 
 Plugin supports some of the grammatical rules of the Polish language.
@@ -109,8 +109,9 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 == Changelog ==
 
-= 2.7.8 - 2021-01-xx =
+= 2.7.8 - 2021-01-13 =
 * Added `orphan_replace` filter to add ability to force replacements on any string.
+* Turned off content filters for admin area - it could mess with another plugins. Props for Zbyszek Zalewski.
 
 = 2.7.7 - 2020-06-20 =
 * Added `orphan_skip_replacement` filter to force skip replacements.  Check FAQ to know how to use it.
