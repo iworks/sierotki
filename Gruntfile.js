@@ -258,6 +258,7 @@ module.exports = function( grunt ) {
 
 	// Default task.
 
+	grunt.registerTask( 'build', [ 'release' ] );
 	grunt.registerTask( 'default', ['clean', 'jshint', 'concat', 'uglify', 'makepot' ] );
 	grunt.registerTask( 'js', [ 'concat', 'uglify'] );
 	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );
