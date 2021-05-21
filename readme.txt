@@ -111,6 +111,7 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 = 2.7.9 - 2021-xx-xx =
 * Renamed directory `vendor` into `includes`.
+* Updated iWorks Rate to 1.0.3.
 
 = 2.7.8 - 2021-01-13 =
 * Added `orphan_replace` filter to add ability to force replacements on any string.
