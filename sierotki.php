@@ -9,20 +9,20 @@ Version: PLUGIN_VERSION
 Author URI: http://iworks.pl/
 */
 
-include_once dirname( __FILE__ ).'/etc/options.php';
+include_once dirname( __FILE__ ) . '/etc/options.php';
 
 
-$vendor = dirname( __FILE__ ).'/vendor';
+$includes = dirname( __FILE__ ) . '/includes';
 
-require_once $vendor . '/iworks/orphan.php';
+require_once $includes . '/iworks/orphan.php';
 if ( ! class_exists( 'iworks_rate' ) ) {
-	include_once $vendor . '/iworks/rate/rate.php';
+	include_once $includes . '/iworks/rate/rate.php';
 }
 /**
  * since 2.6.8
  */
 if ( ! class_exists( 'iworks_options' ) ) {
-	include_once $vendor.'/iworks/options/options.php';
+	include_once $includes . '/iworks/options/options.php';
 }
 
 new iworks_orphan();
