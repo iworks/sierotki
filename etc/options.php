@@ -179,15 +179,15 @@ function orphang_indicator_options() {
 			),
 		),
 		'metaboxes'       => array(
-			'loved_this_plugin' => array(
-				'title'    => __( 'Loved this Plugin?', 'sierotki' ),
-				'callback' => 'iworks_orphan_options_loved_this_plugin',
+			'assistance' => array(
+				'title'    => __( 'We are waiting for your message', 'sierotki' ),
+				'callback' => 'iworks_orphans_options_need_assistance',
 				'context'  => 'side',
 				'priority' => 'core',
 			),
-			'need_assistance'   => array(
-				'title'    => __( 'Need Assistance?', 'sierotki' ),
-				'callback' => 'iworks_orphans_options_need_assistance',
+			'love'       => array(
+				'title'    => __( 'I love what I do!', 'sierotki' ),
+				'callback' => 'iworks_orphan_options_loved_this_plugin',
 				'context'  => 'side',
 				'priority' => 'core',
 			),
@@ -197,7 +197,11 @@ function orphang_indicator_options() {
 }
 
 function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
-
+	$content = apply_filters( 'iworks_rate_love', '', 'sierotki' );
+	if ( ! empty( $content ) ) {
+		echo $content;
+		return;
+	}
 	?>
 <p><?php _e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
 <ul>
@@ -228,9 +232,14 @@ function iworks_orphan_post_types() {
 }
 
 function iworks_orphans_options_need_assistance( $iworks_orphans ) {
+	$content = apply_filters( 'iworks_rate_assistance', '', 'sierotki' );
+	if ( ! empty( $content ) ) {
+		echo $content;
+		return;
+	}
 
 	?>
-<p><?php _e( 'Problems? The links bellow can be very helpful to you', 'sierotki' ); ?></p>
+<p><?php _e( 'We are waiting for your message', 'sierotki' ); ?></p>
 <ul>
 	<li><a href="<?php _ex( 'https://wordpress.org/support/plugin/sierotki/', 'link to support forum on WordPress.org', 'sierotki' ); ?>"><?php _e( 'WordPress Help Forum', 'sierotki' ); ?></a></li>
 </ul>

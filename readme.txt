@@ -1,6 +1,6 @@
 === Orphans ===
 Contributors: iworks
-Donate link: http://iworks.pl/donate/sierotki.php
+Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
 Tested up to: 5.6
@@ -109,9 +109,9 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 == Changelog ==
 
-= 2.7.9 - 2021-xx-xx =
+= 2.7.9 - 2021-06-23 =
 * Renamed directory `vendor` into `includes`.
-* Updated iWorks Rate to 1.0.3.
+* Updated iWorks Rate to 2.0.1.
 
 = 2.7.8 - 2021-01-13 =
 * Added `orphan_replace` filter to add ability to force replacements on any string.

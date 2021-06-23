@@ -60,6 +60,10 @@ class iworks_orphan {
 		 * filters
 		 */
 		add_filter( 'orphan_replace', array( $this, 'orphan_replace_filter' ) );
+		/**
+		 * iWorks Rate Class
+		 */
+		add_filter( 'iworks_rate_notice_logo_style', array( $this, 'filter_plugin_logo' ), 10, 2 );
 	}
 
 	/**
@@ -284,10 +288,8 @@ class iworks_orphan {
 	 */
 	public function admin_init() {
 		$this->options->options_init();
-		/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
-		add_filter( 'plugin_row_meta', array( $this, 'add_donate_link' ), 10, 2 );
-		/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
-		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
+		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_settings_link' ) );
+		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_donate_link' ) );
 	}
 
 	/**
@@ -375,19 +377,11 @@ class iworks_orphan {
 	 * @since 2.6.8
 	 *
 	 * @param array  $actions     An array of plugin action links.
-	 * @param string $plugin_file Path to the plugin file relative to the plugins directory.
 	 */
-	public function add_settings_link( $actions, $plugin_file ) {
-		if ( is_multisite() ) {
-			return $actions;
-		}
-		if ( $plugin_file == $this->plugin_file ) {
-			$page     = $this->options->get_pagehook();
-			$url      = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
-			$url      = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
-			$settings = array( $url );
-			$actions  = array_merge( $settings, $actions );
-		}
+	public function add_settings_link( $actions ) {
+		$page      = $this->options->get_pagehook();
+		$url       = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
+		$actions[] = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
 		return $actions;
 	}
 
@@ -396,18 +390,11 @@ class iworks_orphan {
 	 *
 	 * @since 2.6.8
 	 *
-	 * @param array  $plugin_meta An array of the plugin's metadata,
-	 *                            including the version, author,
-	 *                            author URI, and plugin URI.
-	 * @param string $plugin_file Path to the plugin file, relative to the plugins directory.
+	 * @param array  $actions An array of the plugin's metadata, including the version, author, author URI, and plugin URI.
 	 */
-	public function add_donate_link( $plugin_meta, $plugin_file ) {
-		/* start:free */
-		if ( $plugin_file == $this->plugin_file ) {
-			$plugin_meta[] = '<a href="http://iworks.pl/donate/sierotki.php">' . __( 'Donate', 'sierotki' ) . '</a>';
-		}
-		/* end:free */
-		return $plugin_meta;
+	public function add_donate_link( $actions ) {
+		$actions[] = '<a href="https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=plugin-links">' . __( 'Donate', 'sierotki' ) . '</a>';
+		return $actions;
 	}
 
 	/**
@@ -632,6 +619,24 @@ class iworks_orphan {
 			return $content;
 		}
 		return $this->unconditional_replacement( $content );
+	}
+
+	/**
+	 * Plugin logo for rate messages
+	 *
+	 * @since 2.7.9
+	 *
+	 * @param string $logo Logo, can be empty.
+	 * @param object $plugin Plugin basic data.
+	 */
+	public function filter_plugin_logo( $logo, $plugin ) {
+		if ( is_object( $plugin ) ) {
+			$plugin = (array) $plugin;
+		}
+		if ( 'sierotki' === $plugin['slug'] ) {
+			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.png';
+		}
+		return $logo;
 	}
 
 }
