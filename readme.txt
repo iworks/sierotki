@@ -109,6 +109,8 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 == Changelog ==
 
+= 2.8.0 - 2021-xx-xx =
+
 = 2.7.9 - 2021-06-23 =
 * Renamed directory `vendor` into `includes`.
 * Updated iWorks Rate to 2.0.1.
