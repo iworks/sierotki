@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
-Tested up to: 5.6
+Tested up to: 5.8
 Stable tag: PLUGIN_VERSION
 
 Plugin supports some of the grammatical rules of the Polish language.
