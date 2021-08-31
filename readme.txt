@@ -109,7 +109,10 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 
 == Changelog ==
 
-= 2.8.0 - 2021-xx-xx =
+= 2.8.0 - 2021-08-31 =
+* Fixed conflict with some plugins. Props for Adam Gruntkowski.
+* Updated iWorks Rate to 2.0.4.
+* Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.7.1.
 
 = 2.7.9 - 2021-06-23 =
 * Renamed directory `vendor` into `includes`.
@@ -123,13 +126,11 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 * Added `orphan_skip_replacement` filter to force skip replacements.  Check FAQ to know how to use it.
 
 = 2.7.6 - 2020-06-08 =
-
 * Turned off replacements in feeds.
 * Turned off replacements in REST API.
 
 
 = 2.7.5 - 2019-11-12 =
-
 * Fixed default values configuration.
 * Handled quotation mark before orphan.
 * Moved orphan's filters at the end of run, to try to avoid different plugins replacements.
@@ -137,18 +138,15 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.8
 
 = 2.7.4 - 2018-03-16 =
-
 * Fixed problem with too greedy number replacement.
 
 = 2.7.3 - 2018-03-15 =
-
 * Fixed problem with $post object. Props for [adpawl](https://wordpress.org/support/users/adpawl/)
 * Fixed space after a number, but before a word. Props for M. Hawranek.
 * Fixed too early translation load, it causes sometimes missing translation.
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.5.
 
 = 2.7.2 - 2018-02-13 =
-
 * Added html entities handling.
 * Added WooCommerce short description, which use they own filter.
 * Fixed problem with orphan directly after orphan.
@@ -156,16 +154,13 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 * Updated [WordPress Options Class](https://github.com/iworks/wordpress-options-class) to version 2.6.4.
 
 = 2.7.1 - 2017-12-22 =
-
 * Fixed a problem with array handling, when document contains scripts or styles.
 
 = 2.7.0 - 2017-06-29 =
-
 * Added custom fields - now you can easily add custom field name to the configuration.
 * Added words: 'albo', 'bez', 'czy', 'lecz', 'nie', 'niech', 'przez', 'tak', 'tylko', 'więc' base on [Sierotka](https://pl.wikipedia.org/wiki/Sierotka_(typografia))
 
 = 2.6.9 - 2017-05-24 =
-
 * Fixed a problem with class declaration. Props for [gierand](https://wordpress.org/support/users/gierand/)
 
 = 2.6.8 - 2017-05-23 =
