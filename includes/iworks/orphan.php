@@ -450,7 +450,10 @@ class iworks_orphan {
 	 */
 	private function _terms() {
 		if ( ! empty( $this->terms ) ) {
-			return $this->terms;
+			$terms = $this->terms;
+			$terms = apply_filters( 'iworks_orphan_therms', $terms );
+			$terms = apply_filters( 'iworks_orphan_terms', $terms );
+			return $terms;
 		}
 		$terms = array(
 			'al.',
@@ -581,7 +584,6 @@ class iworks_orphan {
 			$own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
 			$terms       = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
 		}
-		$terms = apply_filters( 'iworks_orphan_therms', $terms );
 		/**
 		 * remove duplicates
 		 */
@@ -599,7 +601,12 @@ class iworks_orphan {
 		 */
 		$terms       = array_filter( $terms );
 		$this->terms = $terms;
-		return $this->terms;
+		/**
+		 * filter it
+		 */
+		$terms = apply_filters( 'iworks_orphan_therms', $terms );
+		$terms = apply_filters( 'iworks_orphan_terms', $terms );
+		return $terms;
 	}
 
 	/**

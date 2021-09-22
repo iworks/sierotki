@@ -100,6 +100,23 @@ and at the end, to again turn on replacements:
 remove_filter( 'orphan_skip_replacement', '__return_true' );
 `
 
+= How can I change default orphans? =
+
+Please use `iworks_orphan_terms` filter. It is array of default orphans. You can remove, add or even replace whole array. For example, to remove words "oraz", "na" and ""nie", use code bellow:
+
+`
+add_filter( 'iworks_orphan_terms', 'remove_iworks_orphan_terms' );
+function remove_iworks_orphan_terms( $terms ) {
+    $default_orphans_to_remove = array( 'oraz', 'na', 'nie', );
+    foreach( $default_orphans_to_remove as $value ) {
+        if ( $key = array_search( $value, $terms ) ) {
+            unset( $terms[ $key ] );
+        }
+    }
+    return $terms;
+}
+`
+
 == Screenshots ==
 
 1. Options for entries.
@@ -108,6 +125,10 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 2.8.1 - 2021-09-22 =
+* Added filter `iworks_orphan_terms` (old one has a typo `iworks_orphan_therms` - but old one stays too).
+* Improved filtering defaults orphans - now it is filtered when we get it, not only on init.
 
 = 2.8.0 - 2021-08-31 =
 * Fixed conflict with some plugins. Props for Adam Gruntkowski.
@@ -212,14 +233,14 @@ remove_filter( 'orphan_skip_replacement', '__return_true' );
 * Change language domain from `iworks_orphan` to plugin name `sierotki' to be compatible with i18n WordPress rules.
 * Added activate plugin hook to change options autoload status.
 * Added deactivate plugin hook to change options autoload status.
-* Added filter `iworks_orphans_capability`, Props for Cezary Buliszak. 
+* Added filter `iworks_orphans_capability`, Props for Cezary Buliszak.
 * Added non-breakable space after numbers.
 * Added uninstall plugin hook.
 * Update screenshots.
 
 = 2.5 - 2015-11-06 =
 
-* IMPROVEMENT: added filter `iworks_orphan_replace` 
+* IMPROVEMENT: added filter `iworks_orphan_replace`
 
 = 2.4 - 2015-02-12 =
 
