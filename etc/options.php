@@ -94,6 +94,18 @@ function orphang_indicator_options() {
 				'default'           => 1,
 			),
 			/**
+			 * Since 2.8.2
+			 */
+			array(
+				'name'              => 'widget_block_content',
+				'th'                => __( 'Widget block content', 'sierotki' ),
+				'type'              => 'checkbox',
+				'description'       => __( 'Enabled the substitution of orphans in the widget blocks.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'default'           => 1,
+			),
+			/**
 			 * Since 2.6.6
 			 */
 			array(

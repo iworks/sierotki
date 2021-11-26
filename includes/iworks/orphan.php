@@ -312,6 +312,7 @@ class iworks_orphan {
 			'widget_text',
 			'term_description',
 			'get_the_author_description',
+			'widget_block_content',
 		);
 		foreach ( $this->settings as $filter => $value ) {
 			if ( ! in_array( $filter, $allowed_filters ) ) {
