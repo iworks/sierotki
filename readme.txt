@@ -126,10 +126,8 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
-= 2.8.2 - 2021-11-26 =
+= 2.8.1 - 2021-11-26 =
 * Added a widget blocks content to replacements.
-
-= 2.8.1 - 2021-09-22 =
 * Added filter `iworks_orphan_terms` (old one has a typo `iworks_orphan_therms` - but old one stays too).
 * Improved filtering defaults orphans - now it is filtered when we get it, not only on init.
 

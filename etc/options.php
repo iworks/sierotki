@@ -94,7 +94,7 @@ function orphang_indicator_options() {
 				'default'           => 1,
 			),
 			/**
-			 * Since 2.8.2
+			 * Since 2.8.1
 			 */
 			array(
 				'name'              => 'widget_block_content',
