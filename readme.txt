@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: PLUGIN_VERSION
 
 Plugin supports some of the grammatical rules of the Polish language.
@@ -125,6 +125,9 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 2.8.2 - 2021-12-03 =
+* Fixed problem with option "Keep numbers together" - it changed inline CSS too. Props for [gierand](https://wordpress.org/support/users/gierand/).
 
 = 2.8.1 - 2021-11-26 =
 * Added a widget blocks content to replacements.
