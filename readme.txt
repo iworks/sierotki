@@ -126,9 +126,11 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
-= 2.9.0 - 2021-12-xx =
-* Moved terms into `etc/terms.txt`.
+= 2.9.0 - 2021-12-09 =
 * Added filter `iworks_orphan_own_terms_file` to add ability to change whole terms definition file.
+* Moved terms into `etc/terms.txt`.
+* Renamed file `includes/iworks/orphan.php` into `includes/iworks/class-iworks-orphan.php`.
+* Updated orphans list, based on [Sierotka (typografia)](https://pl.wikipedia.org/wiki/Sierotka_(typografia))
 
 = 2.8.2 - 2021-12-03 =
 * Fixed problem with option "Keep numbers together" - it changed inline CSS too. Props for [gierand](https://wordpress.org/support/users/gierand/).

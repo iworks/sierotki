@@ -14,7 +14,7 @@ include_once dirname( __FILE__ ) . '/etc/options.php';
 
 $includes = dirname( __FILE__ ) . '/includes';
 
-require_once $includes . '/iworks/orphan.php';
+require_once $includes . '/iworks/class-iworks-orphan.php';
 if ( ! class_exists( 'iworks_rate' ) ) {
 	include_once $includes . '/iworks/rate/rate.php';
 }

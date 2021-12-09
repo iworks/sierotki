@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2021-12-03 17:00:52+00:00\n"
+"POT-Creation-Date: 2021-12-09 07:59:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -184,6 +184,39 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
+#: includes/iworks/class-iworks-orphan.php:280
+msgid "Plugin fix some Polish gramary rules with orphans."
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:287
+msgid "For more information:"
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:288
+msgid ""
+"<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
+"target=\"_blank\">Plugin Homepage</a>"
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:289
+msgid ""
+"<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
+"target=\"_blank\">Support Forums</a>"
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:290
+msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:393
+#: includes/iworks/rate/rate.php:111
+msgid "Settings"
+msgstr ""
+
+#: includes/iworks/class-iworks-orphan.php:405
+msgid "Donate"
+msgstr ""
+
 #: includes/iworks/options/options.php:237
 msgid "An error occurred while getting the configuration."
 msgstr ""
@@ -222,38 +255,6 @@ msgstr ""
 
 #: includes/iworks/options/options.php:1786
 msgid "ON"
-msgstr ""
-
-#: includes/iworks/orphan.php:272
-msgid "Plugin fix some Polish gramary rules with orphans."
-msgstr ""
-
-#: includes/iworks/orphan.php:279
-msgid "For more information:"
-msgstr ""
-
-#: includes/iworks/orphan.php:280
-msgid ""
-"<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
-"target=\"_blank\">Plugin Homepage</a>"
-msgstr ""
-
-#: includes/iworks/orphan.php:281
-msgid ""
-"<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
-"target=\"_blank\">Support Forums</a>"
-msgstr ""
-
-#: includes/iworks/orphan.php:282
-msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
-msgstr ""
-
-#: includes/iworks/orphan.php:385 includes/iworks/rate/rate.php:111
-msgid "Settings"
-msgstr ""
-
-#: includes/iworks/orphan.php:397
-msgid "Donate"
 msgstr ""
 
 #: includes/iworks/rate/rate.php:117
