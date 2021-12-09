@@ -126,6 +126,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 2.9.0 - 2021-12-xx =
+* Moved terms into `etc/terms.txt`.
+* Added filter `iworks_orphan_own_terms_file` to add ability to change whole terms definition file.
+
 = 2.8.2 - 2021-12-03 =
 * Fixed problem with option "Keep numbers together" - it changed inline CSS too. Props for [gierand](https://wordpress.org/support/users/gierand/).
 

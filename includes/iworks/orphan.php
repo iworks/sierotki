@@ -25,6 +25,13 @@ class iworks_orphan {
 	private $plugin_file;
 
 	/**
+	 * plugin root
+	 *
+	 * @since 2.9.0
+	 */
+	private $root;
+
+	/**
 	 * terms cache
 	 */
 	private $terms = array();
@@ -40,7 +47,8 @@ class iworks_orphan {
 		/**
 		 * basic settings
 		 */
-		$file = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
+		$file       = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
+		$this->root = dirname( $file );
 		/**
 		 * options
 		 */
@@ -218,7 +226,7 @@ class iworks_orphan {
 		 *
 		 * @since 2.7.6
 		 */
-		$terms = $this->_terms();
+		$terms       = $this->_terms();
 		$terms_terms = array_chunk( $terms, 10 );
 		foreach ( $terms_terms as $terms ) {
 			/**
@@ -456,127 +464,23 @@ class iworks_orphan {
 			$terms = apply_filters( 'iworks_orphan_terms', $terms );
 			return $terms;
 		}
-		$terms = array(
-			'al.',
-			'albo',
-			'ale',
-			'ależ',
-			'b.',
-			'bez',
-			'bm.',
-			'bp',
-			'br.',
-			'by',
-			'bym',
-			'byś',
-			'bł.',
-			'cyt.',
-			'cz.',
-			'czy',
-			'czyt.',
-			'dn.',
-			'do',
-			'doc.',
-			'dr',
-			'ds.',
-			'dyr.',
-			'dz.',
-			'fot.',
-			'gdy',
-			'gdyby',
-			'gdybym',
-			'gdybyś',
-			'gdyż',
-			'godz.',
-			'im.',
-			'inż.',
-			'jw.',
-			'kol.',
-			'komu',
-			'ks.',
-			'która',
-			'którego',
-			'której',
-			'któremu',
-			'który',
-			'których',
-			'którym',
-			'którzy',
-			'lecz',
-			'lic.',
-			'm.in.',
-			'max',
-			'mgr',
-			'min',
-			'moich',
-			'moje',
-			'mojego',
-			'mojej',
-			'mojemu',
-			'mych',
-			'mój',
-			'na',
-			'nad',
-			'nie',
-			'niech',
-			'np.',
-			'nr',
-			'nr.',
-			'nrach',
-			'nrami',
-			'nrem',
-			'nrom',
-			'nrowi',
-			'nru',
-			'nry',
-			'nrze',
-			'nrze',
-			'nrów',
-			'nt.',
-			'nw.',
-			'od',
-			'oraz',
-			'os.',
-			'p.',
-			'pl.',
-			'pn.',
-			'po',
-			'pod',
-			'pot.',
-			'prof.',
-			'przed',
-			'przez',
-			'pt.',
-			'pw.',
-			'pw.',
-			'tak',
-			'tamtej',
-			'tamto',
-			'tej',
-			'tel.',
-			'tj.',
-			'to',
-			'twoich',
-			'twoje',
-			'twojego',
-			'twojej',
-			'twych',
-			'twój',
-			'tylko',
-			'ul.',
-			'we',
-			'wg',
-			'woj.',
-			'więc',
-			'za',
-			'ze',
-			'śp.',
-			'św.',
-			'że',
-			'żeby',
-			'żebyś',
-			'—',
-		);
+		/**
+		 * read terms from file
+		 *
+		 * @since 2.9.0
+		 */
+		$file = apply_filters( 'iworks_orphan_own_terms_file', $this->root . '/etc/terms.txt' );
+		$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
+		foreach ( $data as $term ) {
+			if ( preg_match( '/^#/', $term ) ) {
+				continue;
+			}
+			$term = trim( $term );
+			if ( empty( $term ) ) {
+				continue;
+			}
+			$terms[] = $term;
+		}
 		/**
 		 * get own orphans
 		 */
