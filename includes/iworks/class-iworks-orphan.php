@@ -68,6 +68,7 @@ class iworks_orphan {
 		 * filters
 		 */
 		add_filter( 'orphan_replace', array( $this, 'orphan_replace_filter' ) );
+		add_filter( 'orphang_indicator_options', array( $this, 'add_integrations' ) );
 		/**
 		 * iWorks Rate Class
 		 */
@@ -355,6 +356,16 @@ class iworks_orphan {
 		 * @since 2.7.0
 		 */
 		add_filter( 'get_post_metadata', array( $this, 'filter_post_meta' ), 10, 4 );
+		/**
+		 * Integrations: Advanced Custom Fields
+		 *
+		 * @since 2.9.1
+		 */
+		foreach ( array( 'text', 'textarea', 'wysiwyg' ) as $type ) {
+			if ( $this->is_on( 'acf_' . $type] ) ) {
+				add_filter( 'acf/format_value/type=' . $type, array( $this, 'replace' ) );
+			}
+		}
 	}
 
 	/**
@@ -549,6 +560,58 @@ class iworks_orphan {
 			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.png';
 		}
 		return $logo;
+	}
+
+	private function add_integration_header( $options ) {
+		$label                         = __( 'Integrations', 'sierotki' );
+		$options['index']['options'][] = array(
+			'type'  => 'heading',
+			'label' => $label,
+		);
+		return $options;
+	}
+
+	public function add_integrations( $options ) {
+		$added = false;
+		if ( class_exists( 'ACF' ) ) {
+			if ( ! $added ) {
+				$options                       = $this->add_integration_header( $options );
+				$added                         = true;
+				$options['index']['options'][] = array(
+					'type'  => 'subheading',
+					'label' => __( 'Advanced Custom Fields', 'sierotki' ),
+				);
+				$options['index']['options'][] = array(
+					'name'              => 'acf_text',
+					'type'              => 'checkbox',
+					'th'                => __( 'Text', 'sierotki' ),
+					'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
+					'sanitize_callback' => 'absint',
+					'default'           => 0,
+					'classes'           => array( 'switch-button' ),
+				);
+				$options['index']['options'][] = array(
+					'name'              => 'acf_textarea',
+					'type'              => 'checkbox',
+					'th'                => __( 'Textarea', 'sierotki' ),
+					'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
+					'sanitize_callback' => 'absint',
+					'default'           => 0,
+					'classes'           => array( 'switch-button' ),
+				);
+				$options['index']['options'][] = array(
+					'name'              => 'acf_wysiwyg',
+					'type'              => 'checkbox',
+					'th'                => __( 'WYSIWYG', 'sierotki' ),
+					'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
+					'sanitize_callback' => 'absint',
+					'default'           => 0,
+					'classes'           => array( 'switch-button' ),
+				);
+			}
+		}
+
+		return $options;
 	}
 
 }
