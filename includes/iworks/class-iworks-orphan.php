@@ -362,7 +362,7 @@ class iworks_orphan {
 		 * @since 2.9.1
 		 */
 		foreach ( array( 'text', 'textarea', 'wysiwyg' ) as $type ) {
-			if ( $this->is_on( 'acf_' . $type] ) ) {
+			if ( $this->is_on( 'acf_' . $type ) ) {
 				add_filter( 'acf/format_value/type=' . $type, array( $this, 'replace' ) );
 			}
 		}
