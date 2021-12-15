@@ -127,7 +127,7 @@ function remove_iworks_orphan_terms( $terms ) {
 == Changelog ==
 
 = 2.9.1 - 2021-12-09 =
-* Added integration with "Advanced Custom Fields" for fields types: "text", "textarea", "WYSIWYG".
+* Added integration with "Advanced Custom Fields" for fields types: "text", "textarea", "WYSIWYG". Props for [Kamil Lipiński](https://profiles.wordpress.org/create24/) for the tests.
 
 = 2.9.0 - 2021-12-09 =
 * Added filter `iworks_orphan_own_terms_file` to add ability to change whole terms definition file.
