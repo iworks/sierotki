@@ -37,11 +37,14 @@ register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
  *
  */
 function get_orphan_options() {
-	$options = new iworks_options();
-	$options->set_option_function_name( 'orphang_indicator_options' );
-	$options->set_option_prefix( 'iworks_orphan_' );
-	$options->init();
-	return $options;
+	$iworks_orphan_options = new iworks_options();
+	$iworks_orphan_options->set_option_function_name( 'orphang_indicator_options' );
+	$iworks_orphan_options->set_option_prefix( 'iworks_orphan_' );
+	if ( method_exists( $iworks_orphan_options, 'set_plugin' ) ) {
+		$iworks_orphan_options->set_plugin( basename( __FILE__ ) );
+	}
+	$iworks_orphan_options->init();
+	return $iworks_orphan_options;
 }
 
 /**
@@ -51,8 +54,8 @@ function get_orphan_options() {
  *
  */
 function iworks_orphan_activate() {
-	$options = get_orphan_options();
-	$options->activate();
+	$iworks_orphan_options = get_orphan_options();
+	$iworks_orphan_options->activate();
 	iworks_orphan_change_options_autoload_status( 'yes' );
 }
 
@@ -79,7 +82,7 @@ function iworks_orphan_change_options_autoload_status( $status ) {
 	if ( ! preg_match( '/^(yes|no)$/', $status ) ) {
 		return;
 	}
-	$options_keys = array(
+	$iworks_orphan_options_keys = array(
 		'comment_text',
 		'initialized',
 		'numbers',
@@ -91,7 +94,7 @@ function iworks_orphan_change_options_autoload_status( $status ) {
 		'woocommerce_short_description',
 	);
 	global $wpdb;
-	foreach ( $options_keys as $key ) {
+	foreach ( $iworks_orphan_options_keys as $key ) {
 		$wpdb->update(
 			$wpdb->options,
 			array(

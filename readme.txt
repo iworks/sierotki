@@ -126,6 +126,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 2.9.2 - 2022-01-20 =
+* Updated iWorks Options to 2.7.3.
+* Updated iWorks Rate to 2.0.6.
+
 = 2.9.1 - 2021-12-09 =
 * Added integration with "Advanced Custom Fields" for fields types: "text", "textarea", "WYSIWYG". Props for [Kamil Lipiński](https://profiles.wordpress.org/create24/) for the tests.
 

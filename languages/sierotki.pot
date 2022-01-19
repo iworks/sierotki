@@ -1,14 +1,14 @@
-# Copyright (C) 2021 Marcin Pietrzak
+# Copyright (C) 2022 Marcin Pietrzak
 # This file is distributed under the same license as the Orphans package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki\n"
-"POT-Creation-Date: 2021-12-15 10:26:41+00:00\n"
+"POT-Creation-Date: 2022-01-19 16:12:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.3\n"
@@ -209,7 +209,7 @@ msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
 #: includes/iworks/class-iworks-orphan.php:404
-#: includes/iworks/rate/rate.php:111
+#: includes/iworks/rate/rate.php:118
 msgid "Settings"
 msgstr ""
 
@@ -249,47 +249,47 @@ msgstr ""
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
-#: includes/iworks/options/options.php:237
+#: includes/iworks/options/options.php:251
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:734
+#: includes/iworks/options/options.php:749
 msgid "Upload image"
 msgstr ""
 
-#: includes/iworks/options/options.php:740
+#: includes/iworks/options/options.php:755
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:826
+#: includes/iworks/options/options.php:841
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1631
+#: includes/iworks/options/options.php:1645
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:1632
+#: includes/iworks/options/options.php:1646
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1633
+#: includes/iworks/options/options.php:1647
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1634
+#: includes/iworks/options/options.php:1648
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1785
+#: includes/iworks/options/options.php:1799
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1786
+#: includes/iworks/options/options.php:1800
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:117
+#: includes/iworks/rate/rate.php:124
 #: includes/iworks/rate/templates/thanks.php:28
 msgid "Provide us a coffee"
 msgstr ""
@@ -387,12 +387,12 @@ msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:365
+#: includes/iworks/rate/rate.php:399
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:371
+#: includes/iworks/rate/rate.php:405
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""
