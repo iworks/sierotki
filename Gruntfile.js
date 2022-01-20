@@ -29,9 +29,10 @@ module.exports = function( grunt ) {
 		replaces: {
 			patterns: [
 				{ match: /BUILDTIME/g, replace: buildtime },
-				{ match: /PLUGIN_TILL_YEAR/g, replace: '<%= grunt.template.today("yyyy") %>' },
 				{ match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 				{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
+				{ match: /PLUGIN_TAGLINE/g, replace: '<%= pkg.tagline %>' },
+				{ match: /PLUGIN_TILL_YEAR/g, replace: '<%= grunt.template.today("yyyy") %>' },
 				{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' }
 			],
 			// Files to apply above patterns to (not only php files).

@@ -2,7 +2,8 @@
   "name": "sierotki",
   "title": "Orphans",
   "description": "Plugin fix orphans position and replace space after orphan to hard space, to avoid ne break incorrect position.",
-  "version": "2.9.2",
+  "tagline": "Plugin supports some of the grammatical rules of the Polish language.",
+  "version": "2.9.3",
   "homepage": "https://wordpress.org/plugins/sierotki/",
   "author": [
     {

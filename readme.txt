@@ -6,7 +6,7 @@ Requires at least: 4.6
 Tested up to: 5.9
 Stable tag: PLUGIN_VERSION
 
-Plugin supports some of the grammatical rules of the Polish language.
+PLUGIN_TAGLINE
 
 == Description ==
 
@@ -126,7 +126,11 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
-= 2.9.2 - 2022-01-20 =
+= 2.9.3 - 2022-01-20 =
+* Removed doubled "Donate" link on plugin page.
+* Updated iWorks Options to 2.8.0.
+
+= 2.9.2 - 2022-01-19 =
 * Updated iWorks Options to 2.7.3.
 * Updated iWorks Rate to 2.0.6.
 

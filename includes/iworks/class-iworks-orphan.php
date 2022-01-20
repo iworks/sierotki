@@ -298,7 +298,6 @@ class iworks_orphan {
 	public function admin_init() {
 		$this->options->options_init();
 		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_settings_link' ) );
-		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_donate_link' ) );
 	}
 
 	/**
@@ -402,18 +401,6 @@ class iworks_orphan {
 		$page      = $this->options->get_pagehook();
 		$url       = add_query_arg( 'page', $page, admin_url( 'themes.php' ) );
 		$actions[] = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html__( 'Settings', 'sierotki' ) );
-		return $actions;
-	}
-
-	/**
-	 * Add donate link to plugin_row_meta.
-	 *
-	 * @since 2.6.8
-	 *
-	 * @param array  $actions An array of the plugin's metadata, including the version, author, author URI, and plugin URI.
-	 */
-	public function add_donate_link( $actions ) {
-		$actions[] = '<a href="https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=plugin-links">' . __( 'Donate', 'sierotki' ) . '</a>';
 		return $actions;
 	}
 
