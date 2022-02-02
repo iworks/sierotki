@@ -12,6 +12,8 @@ PLUGIN_TAGLINE
 
 Plugin fix orphans position and replace space after orphan to hard space, to avoid line break incorrect position.
 
+**Orphan** - a text composition error, which consists in leaving a lonely short word at the end or at the beginning of a verse, especially a single-character one. The word "lonely" here means separation from a closely related word by line breaks.
+
 = Asset image =
 
 [Manuscript by Muffet, on Flickr](http://www.flickr.com/photos/calliope/306564541/)
@@ -125,6 +127,9 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 2.9.5 - 2022-02-02 =
+* Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
 
 = 2.9.4 - 2022-02-02 =
 * Added ability to turn off replacements on menu title elements. New option is in "Miscellaneous" tab.

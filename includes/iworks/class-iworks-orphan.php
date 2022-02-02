@@ -251,15 +251,14 @@ class iworks_orphan {
 		 */
 		$terms       = $this->_terms();
 		$terms_terms = array_chunk( $terms, 10 );
-
 		/**
 		 * avoid to replace tags contnt
 		 *
 		 * @since 2.9.4
 		 */
 		$content_array = array( $content );
-		if ( preg_match( '/</', $content ) && preg_match_all( '/>([^<]+)</', $content, $matches ) ) {
-			$content_array = $matches[1];
+		if ( preg_match( '/</', $content ) ) {
+			$content_array = preg_split( '/<[^>]+>/', $content );
 		}
 		foreach ( $content_array as $part_source ) {
 			$part_to_change = $part_source;
