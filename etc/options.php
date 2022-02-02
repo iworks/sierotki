@@ -164,6 +164,15 @@ function orphang_indicator_options() {
 				'default'           => 0,
 			),
 			array(
+				'name'              => 'menu_title',
+				'th'                => __( 'Menu Title', 'sierotki' ),
+				'type'              => 'checkbox',
+				'description'       => __( 'Enabled the substitution of orphans in the menu title.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'default'           => 1,
+			),
+			array(
 				'name'              => 'numbers',
 				'th'                => __( 'Keep numbers together', 'sierotki' ),
 				'type'              => 'checkbox',

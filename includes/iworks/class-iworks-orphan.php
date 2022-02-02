@@ -173,6 +173,28 @@ class iworks_orphan {
 	}
 
 	/**
+	 * Replacement wrapper function for two params filters
+	 *
+	 * Replacement wrapper function for two params filters allow to check menu
+	 * the_tilte settings.
+	 *
+	 * @since 2.9.4
+	 */
+	public function replace_two( $content, $object_id ) {
+		/**
+		 * Check for menu title
+		 *
+		 * @since 2.9.4
+		 */
+		if ( 'nav_menu_item' === get_post_type( $object_id ) ) {
+			if ( isset( $this->settings['menu_title'] ) && 0 === $this->settings['menu_title'] ) {
+				return $content;
+			}
+		}
+		return $this->replace( $content );
+	}
+
+	/**
 	 * Unconditional replacement with super-base check is replacement even
 	 * possible.
 	 *
@@ -229,21 +251,37 @@ class iworks_orphan {
 		 */
 		$terms       = $this->_terms();
 		$terms_terms = array_chunk( $terms, 10 );
-		foreach ( $terms_terms as $terms ) {
-			/**
-			 * base therms replace
-			 */
-			$re      = '/^([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
-			$content = preg_replace( $re, '$1$2&nbsp;', $content );
-			/**
-			 * single letters
-			 */
-			$re = '/([ >\(]+|&nbsp;|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
-			/**
-			 * double call to handle orphan after orphan after orphan
-			 */
-			$content = preg_replace( $re, '$1$2&nbsp;', $content );
-			$content = preg_replace( $re, '$1$2&nbsp;', $content );
+
+		/**
+		 * avoid to replace tags contnt
+		 *
+		 * @since 2.9.4
+		 */
+		$content_array = array( $content );
+		if ( preg_match( '/</', $content ) && preg_match_all( '/>([^<]+)</', $content, $matches ) ) {
+			$content_array = $matches[1];
+		}
+		foreach ( $content_array as $part_source ) {
+			$part_to_change = $part_source;
+			foreach ( $terms_terms as $terms ) {
+				/**
+				 * base therms replace
+				 */
+				$re             = '/^([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
+				/**
+				 * single letters
+				 */
+				$re = '/([ >\(]+|&nbsp;|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+				/**
+				 * double call to handle orphan after orphan after orphan
+				 */
+				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
+				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
+			}
+			if ( $part_source !== $part_to_change ) {
+				$content = str_replace( $part_source, $part_to_change, $content );
+			}
 		}
 		/**
 		 * single letter after previous orphan
@@ -310,24 +348,69 @@ class iworks_orphan {
 		if ( is_admin() ) {
 			return;
 		}
-		$this->settings  = $this->options->get_all_options();
-		$allowed_filters = array(
-			'the_title',
-			'the_excerpt',
-			'the_content',
-			'comment_text',
-			'widget_title',
-			'widget_text',
-			'term_description',
-			'get_the_author_description',
-			'widget_block_content',
+		$this->settings = $this->options->get_all_options();
+		/**
+		 * Filter allowed filters.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @param array $args {
+		 *      Array of filters, array key as filter.
+		 *
+		 *      @type integer priority Filter priority.
+		 *      @type integer accepted_args Filter number of accepted args.
+		 */
+		$allowed_filters = apply_filters(
+			'orphan_allowed_filters',
+			array(
+				'the_title'                  => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 2,
+				),
+				'the_excerpt'                => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'the_content'                => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'comment_text'               => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'widget_title'               => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'widget_text'                => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'term_description'           => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'get_the_author_description' => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+				'widget_block_content'       => array(
+					'priority'      => PHP_INT_MAX,
+					'accepted_args' => 1,
+				),
+			)
 		);
 		foreach ( $this->settings as $filter => $value ) {
-			if ( ! in_array( $filter, $allowed_filters ) ) {
+			if ( ! array_key_exists( $filter, $allowed_filters ) ) {
 				continue;
 			}
 			if ( is_integer( $value ) && 1 == $value ) {
-				add_filter( $filter, array( $this, 'replace' ), PHP_INT_MAX );
+				if ( 2 === $allowed_filters[ $filter ]['accepted_args'] ) {
+					add_filter( $filter, array( $this, 'replace_two' ), PHP_INT_MAX, 2 );
+				} else {
+					add_filter( $filter, array( $this, 'replace' ), PHP_INT_MAX );
+				}
 				/**
 				 * WooCommerce exception: short descripton
 				 */

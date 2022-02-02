@@ -126,6 +126,12 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 2.9.4 - 2022-02-02 =
+* Added ability to turn off replacements on menu title elements. New option is in "Miscellaneous" tab.
+* Added `orphan_allowed_filters` to add ability to change allowed filters.
+* Fixed issue with Font Awesome replacements. Props for [lewleo999](https://wordpress.org/support/users/lewleo999/)
+* Improved replacement process to avoid change HTML tags params.
+
 = 2.9.3 - 2022-01-20 =
 * Removed doubled "Donate" link on plugin page.
 * Updated iWorks Options to 2.8.0.
