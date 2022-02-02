@@ -10,260 +10,265 @@
  *   $ grunt hello
  */
 
-module.exports = function( grunt ) {
-	// Show elapsed time at the end.
-	require( 'time-grunt' )(grunt);
+module.exports = function(grunt) {
+    // Show elapsed time at the end.
+    require('time-grunt')(grunt);
 
-	// Load all grunt tasks.
-	require( 'load-grunt-tasks' )(grunt);
+    // Load all grunt tasks.
+    require('load-grunt-tasks')(grunt);
 
-	var buildtime = new Date().toISOString();
+    var buildtime = new Date().toISOString();
+    var buildyear = 1900 + new Date().getYear();
 
-	var conf = {
+    var conf = {
 
-		// Concatenate those JS files into a single file (target: [source, source, ...]).
-		js_files_concat: {
-		},
+        // Concatenate those JS files into a single file (target: [source, source, ...]).
+        js_files_concat: {},
 
-		// BUILD patterns to exclude code for specific builds.
-		replaces: {
-			patterns: [
-				{ match: /BUILDTIME/g, replace: buildtime },
-				{ match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
-				{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
-				{ match: /PLUGIN_TAGLINE/g, replace: '<%= pkg.tagline %>' },
-				{ match: /PLUGIN_TILL_YEAR/g, replace: '<%= grunt.template.today("yyyy") %>' },
-				{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' }
-			],
-			// Files to apply above patterns to (not only php files).
-			files: {
-				expand: true,
-				src: [
-					'**/*.php',
-					'**/*.css',
-					'**/*.js',
-					'**/*.html',
-					'**/*.txt',
-					'!node_modules/**',
-					'!lib/**',
-					'!docs/**',
-					'!release/**',
-					'!Gruntfile.js',
-					'!build/**',
-					'!tests/**',
-					'!.git/**'
-				],
-				dest: './release/<%= pkg.version %>/'
-			}
-		},
+        // BUILD patterns to exclude code for specific builds.
+        replaces: {
+            patterns: [
+                { match: /BUILDTIME/g, replace: buildtime },
+                { match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
+                { match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
+                { match: /PLUGIN_TAGLINE/g, replace: '<%= pkg.tagline %>' },
+                { match: /PLUGIN_TILL_YEAR/g, replace: buildyear },
+                { match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
+            ],
+            // Files to apply above patterns to (not only php files).
+            files: {
+                expand: true,
+                src: [
+                    '**/*.php',
+                    '**/*.css',
+                    '**/*.js',
+                    '**/*.html',
+                    '**/*.txt',
+                    '!node_modules/**',
+                    '!lib/**',
+                    '!docs/**',
+                    '!release/**',
+                    '!Gruntfile.js',
+                    '!package-lock.json',
+                    '!build/**',
+                    '!tests/**',
+                    '!.git/**',
+                    '!stylelint.config.js',
+                ],
+                dest: './release/<%= pkg.name %>/'
+            }
+        },
 
-		// Regex patterns to exclude from transation.
-		translation: {
-			ignore_files: [
-				'node_modules/.*',
-				'(^.php)',         // Ignore non-php files.
-				'inc/external/.*', // External libraries.
-				'release/.*',      // Temp release files.
-				'tests/.*',        // Unit testing.
-			],
-			pot_dir: 'languages/', // With trailing slash.
-			textdomain: 'sierotki',
-		},
+        // Regex patterns to exclude from transation.
+        translation: {
+            ignore_files: [
+                'node_modules/.*',
+                '(^.php)', // Ignore non-php files.
+                'inc/external/.*', // External libraries.
+                'release/.*', // Temp release files.
+                'tests/.*', // Unit testing.
+            ],
+            pot_dir: 'languages/', // With trailing slash.
+            textdomain: 'sierotki',
+        },
 
-		dir: 'sierotki/'
-	};
+        dir: 'sierotki/'
+    };
 
-	// Project configuration
-	grunt.initConfig( {
-		pkg: grunt.file.readJSON( 'package.json' ),
+    // Project configuration
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-		// JS - Concat .js source files into a single .js file.
-		concat: {
-			options: {
-				stripBanners: true,
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
-					' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-					' * Licensed GPLv2+' +
-					' */\n'
-			},
-			scripts: {
-				files: conf.js_files_concat
-			}
-		},
-
-
-		// JS - Validate .js source code.
-		jshint: {
-			all: [
-				'Gruntfile.js',
-				'assets/js/src/**/*.js',
-			],
-			options: {
-				curly:   true,
-				eqeqeq:  true,
-				immed:   true,
-				latedef: true,
-				newcap:  true,
-				noarg:   true,
-				sub:     true,
-				undef:   true,
-				boss:    true,
-				eqnull:  true,
-				globals: {
-					exports: true,
-					module:  false
-				}
-			}
-		},
+        // JS - Concat .js source files into a single .js file.
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+                    ' * <%= pkg.homepage %>\n' +
+                    ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
+                    ' * Licensed GPLv2+\n' +
+                    ' */\n'
+            },
+            scripts: {
+                files: conf.js_files_concat
+            }
+        },
 
 
-		// JS - Uglyfies the source code of .js files (to make files smaller).
-		uglify: {
-			all: {
-				files: [{
-					expand: true,
-					src: ['*.js', '!*.min.js'],
-					cwd: 'assets/js/',
-					dest: 'assets/js/',
-					ext: '.js',
-					extDot: 'last'
-				}],
-				options: {
-					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-						' * <%= pkg.homepage %>\n' +
-						' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-						' * Licensed GPLv2+' +
-						' */\n',
-					mangle: {
-						except: ['jQuery']
-					}
-				}
-			}
-		},
+        // JS - Validate .js source code.
+        jshint: {
+            all: [
+                'Gruntfile.js',
+                'assets/js/src/**/*.js',
+            ],
+            options: {
+                curly: true,
+                eqeqeq: true,
+                immed: true,
+                latedef: true,
+                newcap: true,
+                noarg: true,
+                sub: true,
+                undef: true,
+                boss: true,
+                eqnull: true,
+                globals: {
+                    exports: true,
+                    module: false
+                }
+            }
+        },
 
-		// WATCH - Watch filesystem for changes during development.
-		watch:  {
-			scripts: {
-				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
-				//tasks: ['jshint', 'concat', 'uglify' ],
-				tasks: [ 'concat', 'uglify' ],
-				options: {
-					debounceDelay: 500
-				}
-			}
-		},
 
-		// BUILD - Create a zip-version of the plugin.
-		compress: {
-			target: {
-				options: {
-					mode: 'zip',
-					archive: './release/<%= pkg.name %>-<%= pkg.version %>.zip'
-				},
-				expand: true,
-				cwd: './release/<%= pkg.version %>/',
-				src: [ '**/*' ]
-			}
-		},
+        // JS - Uglyfies the source code of .js files (to make files smaller).
+        uglify: {
+            all: {
+                files: [{
+                    expand: true,
+                    src: ['*.js', '!*.min.js'],
+                    cwd: 'assets/js/',
+                    dest: 'assets/js/',
+                    ext: '.js',
+                    extDot: 'last'
+                }],
+                options: {
+                    banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+                        ' * <%= pkg.homepage %>\n' +
+                        ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
+                        ' * Licensed GPLv2+' +
+                        ' */\n',
+                    mangle: {
+                        except: ['jQuery']
+                    }
+                }
+            }
+        },
 
-		// BUILD - update the translation index .po file.
-		makepot: {
-			target: {
-				options: {
-					cwd: '',
-					domainPath: conf.translation.pot_dir,
-					exclude: conf.translation.ignore_files,
-					mainFile: 'sierotki.php',
-					potComments: '',
-					potFilename: conf.translation.textdomain + '.pot',
-					potHeaders: {
-						poedit: true, // Includes common Poedit headers.
-						'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
-					},
-					processPot: null, // A callback function for manipulating the POT file.
-					type: 'wp-plugin', // wp-plugin or wp-theme
-					updateTimestamp: true, // Whether the POT-Creation-Date should be updated without other changes.
-					updatePoFiles: true // Whether to update PO files in the same directory as the POT file.
-				}
-			}
-		},
+        // WATCH - Watch filesystem for changes during development.
+        watch: {
+            scripts: {
+                files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
+                //tasks: ['jshint', 'concat', 'uglify' ],
+                tasks: ['concat', 'uglify'],
+                options: {
+                    debounceDelay: 500
+                }
+            }
+        },
 
-		// BUILD: Replace conditional tags in code.
-		replace: {
-			target: {
-				options: {
-					patterns: conf.replaces.patterns
-				},
-				files: [conf.replaces.files]
-			}
-		},
+        // BUILD - Create a zip-version of the plugin.
+        compress: {
+            target: {
+                options: {
+                    mode: 'zip',
+                    archive: './release/<%= pkg.name %>-<%= pkg.version %>.zip'
+                },
+                expand: true,
+                cwd: './release/<%= pkg.name %>/',
+                src: ['**/*']
+            }
+        },
 
-		clean: {
-			options: { force: true },
-			release: {
-				options: { force: true },
-				src: ['./release', './release/*', './release/**']
-			}
-		},
+        // BUILD - update the translation index .po file.
+        makepot: {
+            target: {
+                options: {
+                    cwd: '',
+                    domainPath: conf.translation.pot_dir,
+                    exclude: conf.translation.ignore_files,
+                    mainFile: 'sierotki.php',
+                    potFilename: conf.translation.textdomain + '.pot',
+                    potHeaders: {
+                        poedit: true, // Includes common Poedit headers.
+                        'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
+                    },
+                    processPot: null, // A callback function for manipulating the POT file.
+                    type: 'wp-plugin', // wp-plugin or wp-theme
+                    updateTimestamp: true, // Whether the POT-Creation-Date should be updated without other changes.
+                    updatePoFiles: true // Whether to update PO files in the same directory as the POT file.
+                }
+            }
+        },
 
-		copy: {
-			release: {
-				expand: true,
-				src: [
-					'*',
-					'**',
-					'!node_modules',
-					'!node_modules/*',
-					'!node_modules/**',
-					'!bitbucket-pipelines.yml',
-					'!.idea', // PHPStorm settings
-					'!.git',
-					'!Gruntfile.js',
-					'!package.json', '!tests/*',
-					'!package-lock.json', '!tests/*',
-					'!tests/**',
-					'!assets/js/src',
-					'!assets/js/src/*',
-					'!assets/js/src/**',
-					'!assets/sass',
-					'!assets/sass/*',
-					'!assets/sass/**',
-					'!phpcs.xml.dist',
-					'!**/README.md',
-					'!**/LICENSE',
-					'!LICENSE',
-					'!README.md'
-				],
-				dest: './release/<%= pkg.version %>/',
-				noEmpty: true
-			},
-		}
+        // BUILD: Replace conditional tags in code.
+        replace: {
+            target: {
+                options: {
+                    patterns: conf.replaces.patterns
+                },
+                files: [conf.replaces.files]
+            }
+        },
 
-	} );
+        clean: {
+            options: {
+                force: true
+            },
+            release: {
+                options: {
+                    force: true
+                },
+                src: ['./release', './release/*', './release/**']
+            }
+        },
 
-	// Test task.
-	grunt.registerTask( 'hello', 'Test if grunt is working', function() {
-		grunt.log.subhead( 'Hi there :)' );
-		grunt.log.writeln( 'Looks like grunt is installed!' );
-	});
+        copy: {
+            release: {
+                expand: true,
+                src: [
+                    '*',
+                    '**',
+                    '!node_modules',
+                    '!node_modules/*',
+                    '!node_modules/**',
+                    '!bitbucket-pipelines.yml',
+                    '!.idea', // PHPStorm settings
+                    '!.git',
+                    '!Gruntfile.js',
+                    '!package.json', '!tests/*',
+                    '!package-lock.json', '!tests/*',
+                    '!tests/**',
+                    '!assets/js/src',
+                    '!assets/js/src/*',
+                    '!assets/js/src/**',
+                    '!assets/sass',
+                    '!assets/sass/*',
+                    '!assets/sass/**',
+                    '!phpcs.xml.dist',
+                    '!**/README.md',
+                    '!**/LICENSE',
+                    '!LICENSE',
+                    '!README.md'
+                ],
+                dest: './release/<%= pkg.version %>/',
+                noEmpty: true
+            },
+        }
 
-	grunt.registerTask( 'release', 'Generating release copy', function() {
-		grunt.task.run( 'clean');
-		grunt.task.run( 'js');
-		grunt.task.run( 'makepot');
-		grunt.task.run( 'copy' );
-		grunt.task.run( 'replace' );
-		grunt.task.run( 'compress' );
-	});
+    });
 
-	// Default task.
+    // Test task.
+    grunt.registerTask('hello', 'Test if grunt is working', function() {
+        grunt.log.subhead('Hi there :)');
+        grunt.log.writeln('Looks like grunt is installed!');
+    });
 
-	grunt.registerTask( 'build', [ 'release' ] );
-	grunt.registerTask( 'default', ['clean', 'jshint', 'concat', 'uglify', 'makepot' ] );
-	grunt.registerTask( 'js', [ 'concat', 'uglify'] );
-	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );
+    grunt.registerTask('release', 'Generating release copy', function() {
+        grunt.task.run('clean');
+        grunt.task.run('js');
+        grunt.task.run('makepot');
+        grunt.task.run('copy');
+        grunt.task.run('replace');
+        grunt.task.run('compress');
+    });
 
-	grunt.task.run( 'clear' );
-	grunt.util.linefeed = '\n';
+    // Default task.
+
+    grunt.registerTask('build', ['release']);
+    grunt.registerTask('default', ['clean', 'jshint', 'concat', 'uglify', 'makepot']);
+    grunt.registerTask('js', ['concat', 'uglify']);
+    //grunt.registerTask( 'test', ['phpunit', 'jshint'] );
+
+    grunt.task.run('clear');
+    grunt.util.linefeed = '\n';
 };
