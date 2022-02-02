@@ -55,7 +55,7 @@ module.exports = function(grunt) {
                     '!.git/**',
                     '!stylelint.config.js',
                 ],
-                dest: './release/<%= pkg.name %>/'
+                dest: './release/<%= pkg.version %>/'
             }
         },
 
@@ -164,7 +164,7 @@ module.exports = function(grunt) {
                     archive: './release/<%= pkg.name %>-<%= pkg.version %>.zip'
                 },
                 expand: true,
-                cwd: './release/<%= pkg.name %>/',
+                cwd: './release/<%= pkg.version %>/',
                 src: ['**/*']
             }
         },
