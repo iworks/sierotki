@@ -180,7 +180,10 @@ class iworks_orphan {
 	 *
 	 * @since 2.9.4
 	 */
-	public function replace_two( $content, $object_id ) {
+	public function replace_two( $content, $object_id = null ) {
+		if ( empty( $object_id ) ) {
+			return $content;
+		}
 		/**
 		 * Check for menu title
 		 *

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki-dev\n"
-"POT-Creation-Date: 2022-02-02 16:54:03+00:00\n"
+"POT-Creation-Date: 2022-02-03 11:17:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -192,64 +192,64 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:318
+#: includes/iworks/class-iworks-orphan.php:321
 msgid "Plugin fix some Polish gramary rules with orphans."
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:325
+#: includes/iworks/class-iworks-orphan.php:328
 msgid "For more information:"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:326
+#: includes/iworks/class-iworks-orphan.php:329
 msgid ""
 "<a href=\"http://wordpress.org/extend/plugins/sierotki/\" "
 "target=\"_blank\">Plugin Homepage</a>"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:327
+#: includes/iworks/class-iworks-orphan.php:330
 msgid ""
 "<a href=\"http://wordpress.org/support/plugin/sierotki/\" "
 "target=\"_blank\">Support Forums</a>"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:328
+#: includes/iworks/class-iworks-orphan.php:331
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:485
+#: includes/iworks/class-iworks-orphan.php:488
 #: includes/iworks/rate/rate.php:118
 msgid "Settings"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:635
+#: includes/iworks/class-iworks-orphan.php:638
 msgid "Integrations"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:651
+#: includes/iworks/class-iworks-orphan.php:654
 msgid "Advanced Custom Fields"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:656
+#: includes/iworks/class-iworks-orphan.php:659
 msgid "Text"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:657
+#: includes/iworks/class-iworks-orphan.php:660
 msgid "Enabled the substitution of orphans in text fields."
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:665
+#: includes/iworks/class-iworks-orphan.php:668
 msgid "Textarea"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:666
+#: includes/iworks/class-iworks-orphan.php:669
 msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:674
+#: includes/iworks/class-iworks-orphan.php:677
 msgid "WYSIWYG"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:675
+#: includes/iworks/class-iworks-orphan.php:678
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
