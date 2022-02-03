@@ -129,7 +129,7 @@ function remove_iworks_orphan_terms( $terms ) {
 == Changelog ==
 
 = 2.9.6 - 2022-02-03 =
-* Added check for missing second param in `the_title` filter. Props for [Zbyszek Zalewski(https://www.facebook.com/zbyszek.zalewski)
+* Added check for missing second param in `the_title` filter. Props for [Zbyszek Zalewski](https://www.facebook.com/zbyszek.zalewski)
 
 = 2.9.5 - 2022-02-02 =
 * Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
