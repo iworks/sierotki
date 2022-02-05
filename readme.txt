@@ -128,6 +128,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 2.9.8 - 2022-02-05 =
+* Improved checking is plugin "Advanced Custom Fields" - removed usage of `class_exists` function.
+* Moved `load_plugin_textdomain()` function to allow load i18n even plugin is not active.
+
 = 2.9.7 - 2022-02-05 =
 * Improved checking is plugin "Advanced Custom Fields" to avoid multiple calling function `class_exists`. Props for [Piotr](https://wordpress.org/support/users/leardre/).
 * Remove duplicates from "terms to replace" list and sort this list.

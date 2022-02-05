@@ -43,13 +43,6 @@ class iworks_orphan {
 	 */
 	private $meta_keys = null;
 
-	/**
-	 * check ACF plugin
-	 *
-	 * @since 2.9.7
-	 */
-	private $is_acf_installed = false;
-
 	public function __construct() {
 		/**
 		 * basic settings
@@ -65,36 +58,18 @@ class iworks_orphan {
 		 */
 		$this->plugin_file = plugin_basename( $file );
 		/**
-		 * check ACF plugin
-		 *
-		 * @since 2.9.7
-		 */
-		$this->is_acf_installed = class_exists( 'ACF' );
-		/**
 		 * actions
 		 */
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 		/**
 		 * filters
 		 */
 		add_filter( 'orphan_replace', array( $this, 'orphan_replace_filter' ) );
-		add_filter( 'orphang_indicator_options', array( $this, 'add_integrations' ) );
 		/**
 		 * iWorks Rate Class
 		 */
 		add_filter( 'iworks_rate_notice_logo_style', array( $this, 'filter_plugin_logo' ), 10, 2 );
-	}
-
-	/**
-	 * Load Translation
-	 *
-	 * @since 2.7.3
-	 */
-	public function load_translation() {
-		load_plugin_textdomain( 'sierotki', false, dirname( $this->plugin_file ) . '/languages' );
 	}
 
 	/**
@@ -363,7 +338,9 @@ class iworks_orphan {
 		if ( is_admin() ) {
 			return;
 		}
-		$this->settings = $this->options->get_all_options();
+		if ( empty( $this->settings ) ) {
+			$this->settings = $this->options->get_all_options();
+		}
 		/**
 		 * Filter allowed filters.
 		 *
@@ -463,18 +440,6 @@ class iworks_orphan {
 				add_filter( 'acf/format_value/type=' . $type, array( $this, 'replace' ) );
 			}
 		}
-	}
-
-	/**
-	 * Change logo for "rate" message.
-	 *
-	 * @since 2.6.6
-	 */
-	public function iworks_rate_css() {
-		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . 'assets/images/logo.png';
-		echo '<style type="text/css">';
-		printf( '.iworks-notice-sierotki .iworks-notice-logo{background-color:#fed696;background-image:url(%s);}', esc_url( $logo ) );
-		echo '</style>';
 	}
 
 	/**
@@ -657,52 +622,5 @@ class iworks_orphan {
 		return $logo;
 	}
 
-	private function add_integration_header( $options ) {
-		$label                         = __( 'Integrations', 'sierotki' );
-		$options['index']['options'][] = array(
-			'type'  => 'heading',
-			'label' => $label,
-		);
-		return $options;
-	}
-
-	public function add_integrations( $options ) {
-		if ( $this->is_acf_installed ) {
-			$options                       = $this->add_integration_header( $options );
-			$added                         = true;
-			$options['index']['options'][] = array(
-				'type'  => 'subheading',
-				'label' => __( 'Advanced Custom Fields', 'sierotki' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_text',
-				'type'              => 'checkbox',
-				'th'                => __( 'Text', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_textarea',
-				'type'              => 'checkbox',
-				'th'                => __( 'Textarea', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_wysiwyg',
-				'type'              => 'checkbox',
-				'th'                => __( 'WYSIWYG', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-		}
-		return $options;
-	}
-
 }
+

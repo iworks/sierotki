@@ -214,7 +214,72 @@ function orphang_indicator_options() {
 			),
 		),
 	);
+	$integrations = iworks_orphan_options_check_available_integrations();
+	if ( empty( $integrations ) ) {
+		return $options;
+	}
+	$options['index']['options'][] = array(
+		'type'  => 'heading',
+		'label' => __( 'Integrations', 'sierotki' ),
+	);
+	if ( in_array( 'acf.php', $integrations ) ) {
+		$options['index']['options'][] = array(
+			'type'  => 'subheading',
+			'label' => __( 'Advanced Custom Fields', 'sierotki' ),
+		);
+		$options['index']['options'][] = array(
+			'name'              => 'acf_text',
+			'type'              => 'checkbox',
+			'th'                => __( 'Text', 'sierotki' ),
+			'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
+			'sanitize_callback' => 'absint',
+			'default'           => 0,
+			'classes'           => array( 'switch-button' ),
+		);
+		$options['index']['options'][] = array(
+			'name'              => 'acf_textarea',
+			'type'              => 'checkbox',
+			'th'                => __( 'Textarea', 'sierotki' ),
+			'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
+			'sanitize_callback' => 'absint',
+			'default'           => 0,
+			'classes'           => array( 'switch-button' ),
+		);
+		$options['index']['options'][] = array(
+			'name'              => 'acf_wysiwyg',
+			'type'              => 'checkbox',
+			'th'                => __( 'WYSIWYG', 'sierotki' ),
+			'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
+			'sanitize_callback' => 'absint',
+			'default'           => 0,
+			'classes'           => array( 'switch-button' ),
+		);
+	}
 	return $options;
+}
+
+/**
+ * check available integrations
+ *
+ * @since 2.9.8
+ */
+function iworks_orphan_options_check_available_integrations() {
+	$integrations = array();
+	$plugins      = get_option( 'active_plugins' );
+	if ( empty( $plugins ) ) {
+		return $integrations;
+	}
+	/**
+	 * check ACF plugin
+	 *
+	 * @since 2.9.7
+	 */
+	foreach ( $plugins as $plugin ) {
+		if ( preg_match( '/acf\.php$/', $plugin ) ) {
+			$integrations[] = basename( $plugin );
+		}
+	}
+	return $integrations;
 }
 
 function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
