@@ -43,6 +43,13 @@ class iworks_orphan {
 	 */
 	private $meta_keys = null;
 
+	/**
+	 * check ACF plugin
+	 *
+	 * @since 2.9.7
+	 */
+	private $is_acf_installed = false;
+
 	public function __construct() {
 		/**
 		 * basic settings
@@ -57,6 +64,12 @@ class iworks_orphan {
 		 * plugin ID
 		 */
 		$this->plugin_file = plugin_basename( $file );
+		/**
+		 * check ACF plugin
+		 *
+		 * @since 2.9.7
+		 */
+		$this->is_acf_installed = class_exists( 'ACF' );
 		/**
 		 * actions
 		 */
@@ -255,7 +268,7 @@ class iworks_orphan {
 		$terms       = $this->_terms();
 		$terms_terms = array_chunk( $terms, 10 );
 		/**
-		 * avoid to replace tags contnt
+		 * avoid to replace tags content
 		 *
 		 * @since 2.9.4
 		 */
@@ -581,13 +594,23 @@ class iworks_orphan {
 		 */
 		$a = array();
 		foreach ( $terms as $t ) {
-			$a[] = html_entity_decode( $t );
+			$a[] = strtolower( html_entity_decode( $t ) );
 		}
 		$terms = $a;
 		/**
 		 * remove empty elements
 		 */
-		$terms       = array_filter( $terms );
+		$terms = array_filter( $terms );
+		/**
+		 * remove duplicates & sort
+		 *
+		 * @since 2.9.7
+		 */
+		$terms = array_unique( $terms );
+		sort( $terms );
+		/**
+		 * assign to class property
+		 */
 		$this->terms = $terms;
 		/**
 		 * filter it
@@ -644,45 +667,41 @@ class iworks_orphan {
 	}
 
 	public function add_integrations( $options ) {
-		$added = false;
-		if ( class_exists( 'ACF' ) ) {
-			if ( ! $added ) {
-				$options                       = $this->add_integration_header( $options );
-				$added                         = true;
-				$options['index']['options'][] = array(
-					'type'  => 'subheading',
-					'label' => __( 'Advanced Custom Fields', 'sierotki' ),
-				);
-				$options['index']['options'][] = array(
-					'name'              => 'acf_text',
-					'type'              => 'checkbox',
-					'th'                => __( 'Text', 'sierotki' ),
-					'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
-					'sanitize_callback' => 'absint',
-					'default'           => 0,
-					'classes'           => array( 'switch-button' ),
-				);
-				$options['index']['options'][] = array(
-					'name'              => 'acf_textarea',
-					'type'              => 'checkbox',
-					'th'                => __( 'Textarea', 'sierotki' ),
-					'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
-					'sanitize_callback' => 'absint',
-					'default'           => 0,
-					'classes'           => array( 'switch-button' ),
-				);
-				$options['index']['options'][] = array(
-					'name'              => 'acf_wysiwyg',
-					'type'              => 'checkbox',
-					'th'                => __( 'WYSIWYG', 'sierotki' ),
-					'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
-					'sanitize_callback' => 'absint',
-					'default'           => 0,
-					'classes'           => array( 'switch-button' ),
-				);
-			}
+		if ( $this->is_acf_installed ) {
+			$options                       = $this->add_integration_header( $options );
+			$added                         = true;
+			$options['index']['options'][] = array(
+				'type'  => 'subheading',
+				'label' => __( 'Advanced Custom Fields', 'sierotki' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_text',
+				'type'              => 'checkbox',
+				'th'                => __( 'Text', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_textarea',
+				'type'              => 'checkbox',
+				'th'                => __( 'Textarea', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_wysiwyg',
+				'type'              => 'checkbox',
+				'th'                => __( 'WYSIWYG', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
 		}
-
 		return $options;
 	}
 

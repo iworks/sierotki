@@ -128,6 +128,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 2.9.7 - 2022-02-05 =
+* Improved checking is plugin "Advanced Custom Fields" to avoid multiple calling function `class_exists`. Props for [Piotr](https://wordpress.org/support/users/leardre/).
+* Remove duplicates from "terms to replace" list and sort this list.
+
 = 2.9.6 - 2022-02-03 =
 * Added check for missing second param in `the_title` filter. Props for [Zbyszek Zalewski](https://www.facebook.com/zbyszek.zalewski)
 
@@ -184,7 +188,6 @@ function remove_iworks_orphan_terms( $terms ) {
 = 2.7.6 - 2020-06-08 =
 * Turned off replacements in feeds.
 * Turned off replacements in REST API.
-
 
 = 2.7.5 - 2019-11-12 =
 * Fixed default values configuration.
