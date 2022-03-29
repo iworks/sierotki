@@ -397,17 +397,18 @@ class iworks_orphan {
 			if ( ! array_key_exists( $filter, $allowed_filters ) ) {
 				continue;
 			}
+			$priority = isset( $allowed_filters[ $filter ]['priority'] ) ? $allowed_filters[ $filter ]['priority'] : PHP_INT_MAX;
 			if ( is_integer( $value ) && 1 == $value ) {
 				if ( 2 === $allowed_filters[ $filter ]['accepted_args'] ) {
-					add_filter( $filter, array( $this, 'replace_two' ), PHP_INT_MAX, 2 );
+					add_filter( $filter, array( $this, 'replace_two' ), $priority, 2 );
 				} else {
-					add_filter( $filter, array( $this, 'replace' ), PHP_INT_MAX );
+					add_filter( $filter, array( $this, 'replace' ), $priority );
 				}
 				/**
 				 * WooCommerce exception: short descripton
 				 */
 				if ( 'the_excerpt' === $filter ) {
-					add_filter( 'woocommerce_short_description', array( $this, 'replace' ), PHP_INT_MAX );
+					add_filter( 'woocommerce_short_description', array( $this, 'replace' ), $priority );
 				}
 			}
 		}
