@@ -129,7 +129,7 @@ function remove_iworks_orphan_terms( $terms ) {
 == Changelog ==
 
 = 2.9.11 - 2022-04-05 =
-* Updated iWorks Options to 2.8.3. Fixed compatible with php 7.x.
+* Updated iWorks Options to 2.8.3. (Fixed PHP 7.x compatibility).
 
 = 2.9.10 - 2022-04-05 =
 * Updated iWorks Options to 2.8.3.
