@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
-Tested up to: 5.9
+Tested up to: 6.0
 Stable tag: PLUGIN_VERSION
 
 PLUGIN_TAGLINE
@@ -37,19 +37,19 @@ There are 3 ways to install this plugin:
 
 = The easy way =
 
-1. Download the plugin (.zip file) on the right column of this page
-1. In your Admin, go to menu Plugins > Add
-1. Select button `Upload Plugin`
-1. Upload the .zip file you just downloaded
-1. Activate the plugin
+1. Download the plugin (.zip file) on the right column of this page.
+1. In your Admin, go to menu Plugins > Add.
+1. Select button `Upload Plugin`.
+1. Upload the .zip file you just downloaded.
+1. Activate the plugin.
 1. A new menu `Orphans` in `Appearance` will appear in your Admin Menu.
 
 ***
 
 = The old and reliable way (FTP) =
 
-1. Upload `sierotki` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Upload `sierotki` folder to the `/wp-content/plugins/` directory.
+1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. A new menu `Orphans` in `Appearance` will appear in your Admin Menu.
 
 == Frequently Asked Questions ==
@@ -127,6 +127,13 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 2.9.11 - 2022-04-05 =
+* Updated iWorks Options to 2.8.3. Fixed compatible with php 7.x.
+
+= 2.9.10 - 2022-04-05 =
+* Updated iWorks Options to 2.8.3.
+* Updated iWorks Rate to 2.1.0.
 
 = 2.9.9 - 2022-03-29 =
 * Fixed missing filter usage for priority. Props for [Adam Romanowski](https://wordpress.org/support/users/adamromanowski/).

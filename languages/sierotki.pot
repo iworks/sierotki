@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki-dev\n"
-"POT-Creation-Date: 2022-02-05 10:43:05+00:00\n"
+"POT-Creation-Date: 2022-04-05 04:26:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -248,8 +248,8 @@ msgstr ""
 msgid "<a href=\"http://iworks.pl/en/\" target=\"_blank\">break the web</a>"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:466
-#: includes/iworks/rate/rate.php:118
+#: includes/iworks/class-iworks-orphan.php:467
+#: includes/iworks/rate/rate.php:124
 msgid "Settings"
 msgstr ""
 
@@ -257,46 +257,70 @@ msgstr ""
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:752
-#: includes/iworks/options/options.php:1753
+#: includes/iworks/options/options.php:754
+#: includes/iworks/options/options.php:1751
 msgid "Select Image"
 msgstr ""
 
-#: includes/iworks/options/options.php:757
+#: includes/iworks/options/options.php:759
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:843
+#: includes/iworks/options/options.php:845
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1647
+#: includes/iworks/options/options.php:1645
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:1648
+#: includes/iworks/options/options.php:1646
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1649
+#: includes/iworks/options/options.php:1647
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1650
+#: includes/iworks/options/options.php:1648
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1806
+#: includes/iworks/options/options.php:1804
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1807
+#: includes/iworks/options/options.php:1805
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:124
+#: includes/iworks/rate/rate.php:130
 #: includes/iworks/rate/templates/thanks.php:28
 msgid "Provide us a coffee"
+msgstr ""
+
+#: includes/iworks/rate/rate.php:474
+msgid "OpenGraph"
+msgstr ""
+
+#: includes/iworks/rate/rate.php:490
+msgid "OG — Better Share on Social Media"
+msgstr ""
+
+#: includes/iworks/rate/rate.php:491
+msgid "https://wordpress.org/plugins/og/"
+msgstr ""
+
+#: includes/iworks/rate/templates/plugins/og.php:2
+msgid "Would you like to boost your website sharing abilities?"
+msgstr ""
+
+#: includes/iworks/rate/templates/plugins/og.php:7
+msgid "Don't wait, install plugin %s!"
+msgstr ""
+
+#: includes/iworks/rate/templates/plugins/og.php:17
+msgid "Install"
 msgstr ""
 
 #: includes/iworks/rate/templates/thanks.php:17
@@ -392,12 +416,12 @@ msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:399
+#: includes/iworks/rate/rate.php:405
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:405
+#: includes/iworks/rate/rate.php:411
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""
