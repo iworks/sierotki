@@ -128,6 +128,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.0.0 - 2022-04-21 =
+* Added Transients API to avoid multiple read from `terms.txt` file.
+* Removed unused method `add_help_tab()`.
+
 = 2.9.11 - 2022-04-05 =
 * Updated iWorks Options to 2.8.3. (Fixed PHP 7.x compatibility).
 

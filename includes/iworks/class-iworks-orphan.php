@@ -43,6 +43,13 @@ class iworks_orphan {
 	 */
 	private $meta_keys = null;
 
+	/**
+	 * Filter post meta.
+	 *
+	 * @since 3.0.0
+	 */
+	private $version = 'PLUGIN_VERSION';
+
 	public function __construct() {
 		/**
 		 * basic settings
@@ -294,33 +301,6 @@ class iworks_orphan {
 	}
 
 	/**
-	 * Add Hlp tab on option page
-	 */
-	public function add_help_tab() {
-		$screen = get_current_screen();
-		if ( $screen->id != $this->admin_page ) {
-			return;
-		}
-		// Add my_help_tab if current screen is My Admin Page
-		$screen->add_help_tab(
-			array(
-				'id'      => 'overview',
-				'title'   => __( 'Orphans', 'sierotki' ),
-				'content' => '<p>' . __( 'Plugin fix some Polish gramary rules with orphans.', 'sierotki' ) . '</p>',
-			)
-		);
-		/**
-		 * make sidebar help
-		 */
-		$screen->set_help_sidebar(
-			'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-			'<p>' . __( '<a href="http://wordpress.org/extend/plugins/sierotki/" target="_blank">Plugin Homepage</a>', 'sierotki' ) . '</p>' .
-			'<p>' . __( '<a href="http://wordpress.org/support/plugin/sierotki/" target="_blank">Support Forums</a>', 'sierotki' ) . '</p>' .
-			'<p>' . __( '<a href="http://iworks.pl/en/" target="_blank">break the web</a>', 'sierotki' ) . '</p>'
-		);
-	}
-
-	/**
 	 * Inicialize admin area
 	 */
 	public function admin_init() {
@@ -520,6 +500,19 @@ class iworks_orphan {
 	 * @return $terms array Array of terms to replace.
 	 */
 	private function _terms() {
+		/**
+		 * Transients
+		 *
+		 * @since 3.0.0
+		 */
+		$cache_name = 'orphan_terms' . $this->version;
+		$terms      = get_transient( $cache_name );
+		if ( ! empty( $terms ) ) {
+			$this->terms = $terms;
+		}
+		/**
+		 * if already set
+		 */
 		if ( ! empty( $this->terms ) ) {
 			$terms = $this->terms;
 			$terms = apply_filters( 'iworks_orphan_therms', $terms );
@@ -583,6 +576,16 @@ class iworks_orphan {
 		 */
 		$terms = apply_filters( 'iworks_orphan_therms', $terms );
 		$terms = apply_filters( 'iworks_orphan_terms', $terms );
+		/**
+		 * Transients
+		 *
+		 * @since 3.0.0
+		 */
+		set_transient( $cache_name, $terms, DAY_IN_SECONDS );
+		/**
+		 * set
+		 */
+		$this->terms = $terms;
 		return $terms;
 	}
 
