@@ -210,6 +210,29 @@ class iworks_orphan {
 			return $content;
 		}
 		/**
+		 * Avoid to replace attributes
+		 */
+		$attributes = array();
+		if ( $this->options->get_option( 'attributes' ) ) {
+			preg_match_all( '/(style|class|data-[a-z\-]+)="[^"]+"/', $content, $matches );
+			if ( ! empty( $matches ) ) {
+				$salt = 'Sae9ieCheyieph3ug7si4yeiBoog0fae4yae6biexaimie0ied7quienae3yeepo';
+				foreach ( $matches[0] as $value ) {
+					if ( empty( $value ) ) {
+						continue;
+					}
+					if ( preg_match( '/ /', $value ) ) {
+						$attributes[ $value ] = md5( $salt . $value );
+					}
+				}
+				if ( ! empty( $attributes ) ) {
+					foreach ( $attributes as $part => $to_change ) {
+						$content = str_replace( $part, $to_change, $content );
+					}
+				}
+			}
+		}
+		/**
 		 * Avoid to replace inside script or styles tags
 		 */
 		preg_match_all( '@(<(script|style)[^>]*>.*?(</(script|style)>))@is', $content, $matches );
@@ -292,6 +315,14 @@ class iworks_orphan {
 			foreach ( $exceptions as $key => $one ) {
 				$re      = sprintf( '/%s/', $key );
 				$content = preg_replace( $re, $one, $content );
+			}
+		}
+		/**
+		 * revert replaced attributes
+		 */
+		if ( ! empty( $attributes ) ) {
+			foreach ( $attributes as $to_change => $part ) {
+				$content = str_replace( $part, $to_change, $content );
 			}
 		}
 		/**

@@ -128,6 +128,9 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.0.1 - 2022-07-18 =
+* Added tag attributes replacement protection. Props for [krzyc](https://wordpress.org/support/users/krzyc/).
+
 = 3.0.0 - 2022-04-21 =
 * Added Transients API to avoid multiple read from `terms.txt` file.
 * Removed unused method `add_help_tab()`.

@@ -181,6 +181,19 @@ function orphang_indicator_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
+				'name'              => 'attributes',
+				'th'                => __( 'Protect tag attributes', 'sierotki' ),
+				'type'              => 'checkbox',
+				'description'       => __(
+					'Allow to ignore spaces in "class", "style" and "data-*
+ attributes.',
+					'sierotki'
+				),
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'default'           => 1,
+			),
+			array(
 				'name'              => 'own_orphans',
 				'th'                => __( 'User definied orphans', 'sierotki' ),
 				'type'              => 'textarea',
