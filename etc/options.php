@@ -184,11 +184,7 @@ function orphang_indicator_options() {
 				'name'              => 'attributes',
 				'th'                => __( 'Protect tag attributes', 'sierotki' ),
 				'type'              => 'checkbox',
-				'description'       => __(
-					'Allow to ignore spaces in "class", "style" and "data-*
- attributes.',
-					'sierotki'
-				),
+				'description'       => __( 'Allow to ignore spaces in "class", "style" and "data-*" attributes.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 				'default'           => 1,
