@@ -128,6 +128,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.0.3 - 2022-xx-xx =
+* Changed iWorks Rate Module repository to github.
+* Updated iWorks Rate to 2.1.1.
+
 = 3.0.2 - 2022-08-06 =
 * Added integration with "WPBakery Page Builder" on `vc_shortcode_output` filter.
 
