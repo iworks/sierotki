@@ -242,6 +242,9 @@ module.exports = function(grunt) {
                     '!bitbucket-pipelines.yml',
                     '!.idea', // PHPStorm settings
                     '!.git',
+                    '!.github',
+                    '!.github/*',
+                    '!.github/**',
                     '!Gruntfile.js',
                     '!package.json', '!tests/*',
                     '!package-lock.json', '!tests/*',
