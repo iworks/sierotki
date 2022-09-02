@@ -128,8 +128,9 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
-= 3.0.3 - 2022-xx-xx =
-* Changed iWorks Rate Module repository to github.
+= 3.0.3 - 2022-09-02 =
+* Handle ACF integration if it is network activated plugin. Props for [maczek6000](https://profiles.wordpress.org/maczek6000/).
+* Changed iWorks Rate Module repository to GitHub.
 * Updated iWorks Rate to 2.1.1.
 
 = 3.0.2 - 2022-08-06 =

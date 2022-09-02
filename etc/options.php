@@ -275,6 +275,19 @@ function orphang_indicator_options() {
 function iworks_orphan_options_check_available_integrations() {
 	$integrations = array();
 	$plugins      = get_option( 'active_plugins' );
+	/**
+	 * check multisite network wide plugins.
+	 *
+	 * @since 3.0.3
+	 */
+	if ( is_multisite() ) {
+		$network_plugins = array_flip( get_site_option( 'active_sitewide_plugins' ) );
+		$plugins         = array_merge( $plugins, $network_plugins );
+		$plugins         = array_unique( $plugins );
+	}
+	/**
+	 * no plugins
+	 */
 	if ( empty( $plugins ) ) {
 		return $integrations;
 	}
