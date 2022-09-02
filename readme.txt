@@ -128,6 +128,9 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.0.2 - 2022-08-06 =
+* Added integration with "WPBakery Page Builder" on `vc_shortcode_output` filter.
+
 = 3.0.1 - 2022-07-18 =
 * Added tag attributes replacement protection. Props for [krzyc](https://wordpress.org/support/users/krzyc/).
 

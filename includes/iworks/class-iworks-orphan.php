@@ -452,6 +452,12 @@ class iworks_orphan {
 				add_filter( 'acf/format_value/type=' . $type, array( $this, 'replace' ) );
 			}
 		}
+		/**
+		 * Integrations: WP Bakery
+		 *
+		 * @since 3.0.2
+		 */
+		add_filter( 'vc_shortcode_output', array( $this, 'replace' ) );
 	}
 
 	/**
