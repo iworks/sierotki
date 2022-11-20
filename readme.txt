@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: PLUGIN_VERSION
 
 PLUGIN_TAGLINE
