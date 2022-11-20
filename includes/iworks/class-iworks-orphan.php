@@ -326,6 +326,12 @@ class iworks_orphan {
 			}
 		}
 		/**
+		 * year short version
+		 *
+		 * @since 3.0.4
+		 */
+		$content = preg_replace( '/(\d) r\./', '$1&nbsp;r.', $content );
+		/**
 		 * return
 		 */
 		return $content;
@@ -458,6 +464,13 @@ class iworks_orphan {
 		 * @since 3.0.2
 		 */
 		add_filter( 'vc_shortcode_output', array( $this, 'replace' ) );
+
+		/**
+		 * Integrations: Goodlayers Core
+		 *
+		 * @since 3.0.4
+		 */
+		add_filter( 'gdlr_core_escape_content', array( $this, 'replace' ) );
 	}
 
 	/**
