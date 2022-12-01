@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
 Tags: sierotka, sierotki, spójniki, twarda spacja
 Requires at least: 4.6
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: PLUGIN_VERSION
 
 PLUGIN_TAGLINE
@@ -127,6 +127,13 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 3.1.0 - 2022-11-30=
+
+* Changed simple replacement by DOMDocument parsing & replacing only on string.
+
+= 3.0.4 - 2022-10-25 =
+* Handle space after year for short year format "r.". Props for [Mastafu Design](https://wordpress.org/support/users/mastafu/)
 
 = 3.0.3 - 2022-09-02 =
 * Handle ACF integration if it is network activated plugin. Props for [maczek6000](https://profiles.wordpress.org/maczek6000/).

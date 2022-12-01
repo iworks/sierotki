@@ -50,6 +50,23 @@ class iworks_orphan {
 	 */
 	private $version = 'PLUGIN_VERSION';
 
+	/**
+	 * tags to avoid replacement
+	 *
+	 * @since 3.1.0
+	 */
+	private $protected_tags = array(
+		'script',
+		'style',
+	);
+
+	/**
+	 * nbsp placehlder
+	 *
+	 * @since 3.1.0
+	 */
+	private $nbsp_placeholder = '&nbsp;';
+
 	public function __construct() {
 		/**
 		 * basic settings
@@ -193,58 +210,67 @@ class iworks_orphan {
 	}
 
 	/**
-	 * Unconditional replacement with super-base check is replacement even
+	 * Parse DOMElement Object
+	 *
+	 * @since 3.1.0
+	 */
+	private function parse_item( $item ) {
+		/**
+		 * no tags, replace
+		 */
+		if ( ! preg_match( '/</', $item->innertext ) ) {
+			$item->innertext = $this->string_replacement( $item->innertext );
+			return;
+		}
+		/**
+		 * not so long, try to replace
+		 */
+		if ( 999999 > strlen( $item->innertext ) ) {
+			$re = sprintf( '/(%s)/', implode( '|', $this->protected_tags ) );
+			if ( ! preg_match( $re, $item->innertext ) ) {
+				preg_match_all( '/<[^>]+>/', $item->innertext, $matches );
+				$text_array = preg_split( '/<[^>]+>/', $item->innertext );
+				$text       = '';
+				$max        = sizeof( $text_array );
+				for ( $i = 0;$i < $max;$i++ ) {
+					$text .= $this->string_replacement( $text_array[ $i ] );
+					if ( isset( $matches[0][ $i ] ) ) {
+						$text .= $matches[0][ $i ];
+					}
+				}
+				$item->innertext = $text;
+				return;
+			}
+		}
+		if ( $item->has_child() ) {
+			foreach ( $item->find( '*' ) as &$el ) {
+				$this->parse_item( $el );
+			}
+			return;
+		}
+		if ( in_array( $item->nodeName(), $this->protected_tags ) ) {
+			return;
+		}
+		$item->innertext = $this->string_replacement( $item->innertext );
+		return;
+	}
+
+	/**
+	 * String replacement with super-base check is replacement even
 	 * possible.
 	 *
-	 * @since 2.7.8
+	 * @since 3.1.0
 	 *
 	 * @param string $content String to replace
 	 *
 	 * @return string $content
 	 */
-	private function unconditional_replacement( $content ) {
+	private function string_replacement( $content ) {
 		/**
 		 * only super-base check
 		 */
 		if ( ! is_string( $content ) || empty( $content ) ) {
 			return $content;
-		}
-		/**
-		 * Avoid to replace attributes
-		 */
-		$attributes = array();
-		if ( $this->options->get_option( 'attributes' ) ) {
-			preg_match_all( '/(style|class|data-[a-z\-]+)="[^"]+"/', $content, $matches );
-			if ( ! empty( $matches ) ) {
-				$salt = 'Sae9ieCheyieph3ug7si4yeiBoog0fae4yae6biexaimie0ied7quienae3yeepo';
-				foreach ( $matches[0] as $value ) {
-					if ( empty( $value ) ) {
-						continue;
-					}
-					if ( preg_match( '/ /', $value ) ) {
-						$attributes[ $value ] = md5( $salt . $value );
-					}
-				}
-				if ( ! empty( $attributes ) ) {
-					foreach ( $attributes as $part => $to_change ) {
-						$content = str_replace( $part, $to_change, $content );
-					}
-				}
-			}
-		}
-		/**
-		 * Avoid to replace inside script or styles tags
-		 */
-		preg_match_all( '@(<(script|style)[^>]*>.*?(</(script|style)>))@is', $content, $matches );
-		$exceptions = array();
-		if ( ! empty( $matches ) && ! empty( $matches[0] ) ) {
-			$salt = 'kQc6T9fn5GhEzTM3Sxn7b9TWMV4PO0mOCV06Da7AQJzSJqxYR4z3qBlsW9rtFsWK';
-			foreach ( $matches[0] as $one ) {
-				$key                = sprintf( '<!-- %s %s -->', $salt, md5( $one ) );
-				$exceptions[ $key ] = $one;
-				$re                 = sprintf( '@%s@', preg_replace( '/@/', '\@', preg_quote( $one, '/' ) ) );
-				$content            = preg_replace( $re, $key, $content );
-			}
 		}
 		/**
 		 * Keep numbers together - this is independed of current language
@@ -257,7 +283,7 @@ class iworks_orphan {
 				foreach ( $parts as $part ) {
 					$to_change = $part;
 					while ( preg_match( '/(\d+) ([\da-z]+)/i', $to_change, $matches ) ) {
-						$to_change = preg_replace( '/(\d+) ([\da-z]+)/i', '$1&nbsp;$2', $to_change );
+						$to_change = preg_replace( '/(\d+) ([\da-z]+)/i', '$1' . $this->nbsp_placeholder . '$2', $to_change );
 					}
 					if ( $part != $to_change ) {
 						$content = str_replace( $part, $to_change, $content );
@@ -288,16 +314,16 @@ class iworks_orphan {
 				 * base therms replace
 				 */
 				$re             = '/^([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
-				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
+				$part_to_change = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $part_to_change );
 				/**
 				 * single letters
 				 */
-				$re = '/([ >\(]+|&nbsp;|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+				$re = '/([ >\(]+|' . $this->nbsp_placeholder . '|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
 				/**
 				 * double call to handle orphan after orphan after orphan
 				 */
-				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
-				$part_to_change = preg_replace( $re, '$1$2&nbsp;', $part_to_change );
+				$part_to_change = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $part_to_change );
+				$part_to_change = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $part_to_change );
 			}
 			if ( $part_source !== $part_to_change ) {
 				$content = str_replace( $part_source, $part_to_change, $content );
@@ -306,8 +332,8 @@ class iworks_orphan {
 		/**
 		 * single letter after previous orphan
 		 */
-		$re      = '/(&nbsp;)([aiouwz]) +/i';
-		$content = preg_replace( $re, '$1$2&nbsp;', $content );
+		$re      = '/(' . $this->nbsp_placeholder . ')([aiouwz]) +/i';
+		$content = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $content );
 		/**
 		 * bring back styles & scripts
 		 */
@@ -326,9 +352,47 @@ class iworks_orphan {
 			}
 		}
 		/**
+		 * year short version
+		 *
+		 * @since 3.0.4
+		 */
+		$content = preg_replace( '/(\d) r\./', '$1' . $this->nbsp_placeholder . 'r.', $content );
+		/**
 		 * return
 		 */
 		return $content;
+	}
+
+	/**
+	 * Unconditional replacement with super-base check is replacement even
+	 * possible.
+	 *
+	 * @since 2.7.8
+	 * @since 3.1.0 - changed into DOM parsing
+	 *
+	 *
+	 * @param string $content String to replace
+	 *
+	 * @return string $content
+	 */
+	private function unconditional_replacement( $content ) {
+		if ( ! is_string( $content ) || empty( $content ) ) {
+			return $content;
+		}
+		/**
+		 * string, no tags
+		 */
+		if ( strip_tags( $content ) === $content ) {
+			return $this->string_replacement( $content );
+		}
+		/**
+		 * parse
+		 */
+		$doc = str_get_html( $content );
+		foreach ( $doc->find( '*' ) as &$item ) {
+			$this->parse_item( $item );
+		}
+		return $doc->save();
 	}
 
 	/**
@@ -458,6 +522,21 @@ class iworks_orphan {
 		 * @since 3.0.2
 		 */
 		add_filter( 'vc_shortcode_output', array( $this, 'replace' ) );
+		/**
+		 * Filter allowed change protected tags.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param array $args {
+		 *      Array of protected tags - all content of this tags will be not
+		 *      replaced
+		 *
+		 *      @type string HTML tag name.
+		 */
+		$this->protected_tags = apply_filters(
+			'iworks_orphan_protected_tags',
+			$this->protected_tags
+		);
 	}
 
 	/**
