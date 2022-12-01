@@ -223,35 +223,19 @@ class iworks_orphan {
 			return;
 		}
 		/**
-		 * not so long, try to replace
+		 * split to slices & replace!
 		 */
-		if ( 999999 > strlen( $item->innertext ) ) {
-			$re = sprintf( '/(%s)/', implode( '|', $this->protected_tags ) );
-			if ( ! preg_match( $re, $item->innertext ) ) {
-				preg_match_all( '/<[^>]+>/', $item->innertext, $matches );
-				$text_array = preg_split( '/<[^>]+>/', $item->innertext );
-				$text       = '';
-				$max        = sizeof( $text_array );
-				for ( $i = 0;$i < $max;$i++ ) {
-					$text .= $this->string_replacement( $text_array[ $i ] );
-					if ( isset( $matches[0][ $i ] ) ) {
-						$text .= $matches[0][ $i ];
-					}
-				}
-				$item->innertext = $text;
-				return;
+		preg_match_all( '/<[^>]+>/', $item->innertext, $matches );
+		$text_array = preg_split( '/<[^>]+>/', $item->innertext );
+		$text       = '';
+		$max        = sizeof( $text_array );
+		for ( $i = 0;$i < $max;$i++ ) {
+			$text .= $this->string_replacement( $text_array[ $i ] );
+			if ( isset( $matches[0][ $i ] ) ) {
+				$text .= $matches[0][ $i ];
 			}
 		}
-		if ( $item->has_child() ) {
-			foreach ( $item->find( '*' ) as &$el ) {
-				$this->parse_item( $el );
-			}
-			return;
-		}
-		if ( in_array( $item->nodeName(), $this->protected_tags ) ) {
-			return;
-		}
-		$item->innertext = $this->string_replacement( $item->innertext );
+		$item->innertext = $text;
 		return;
 	}
 
@@ -389,10 +373,45 @@ class iworks_orphan {
 		 * parse
 		 */
 		$doc = str_get_html( $content );
+		/**
+		 * remove protected tags
+		 */
+		$protected = array();
+		foreach ( $this->protected_tags as $tag ) {
+			foreach ( $doc->find( $tag ) as $item ) {
+				$innertext         = $item->innertext;
+				$attributes        = $item->getAllAttributes();
+				$key               = md5( $tag . $innertext . implode( $attributes ) );
+				$protected[ $key ] = array(
+					'attributes' => $attributes,
+					'innertext'  => $innertext,
+				);
+				foreach ( $attributes as $name => $value ) {
+					$item->removeAttribute( $name );
+				}
+				$item->innertext = '';
+				$item->setAttribute( 'id', 'orphans-' . $key );
+			}
+		}
+		/**
+		 * replace
+		 */
 		foreach ( $doc->find( '*' ) as &$item ) {
 			$this->parse_item( $item );
 		}
-		return $doc->save();
+		/**
+		 * revert protected tags
+		 */
+		foreach ( $protected as $key => $data ) {
+			foreach ( $doc->find( '#orphans-' . $key ) as $item ) {
+				$item->innertext = $data['innertext'];
+				$item->removeAttribute( 'id' );
+				foreach ( $data['attributes'] as $name => $value ) {
+					$item->setAttribute( $name, $value );
+				}
+			}
+		}
+		return $output = $doc->save();
 	}
 
 	/**
