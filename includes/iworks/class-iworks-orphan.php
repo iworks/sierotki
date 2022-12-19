@@ -58,6 +58,8 @@ class iworks_orphan {
 	private $protected_tags = array(
 		'script',
 		'style',
+		'iframe',
+		'svg',
 	);
 
 	/**
@@ -174,6 +176,14 @@ class iworks_orphan {
 			 * apply other rules only for Polish language
 			 */
 			$locale = apply_filters( 'wpml_current_language', get_locale() );
+			/**
+			 * polylang integration
+			 *
+			 * @since 3.1.0
+			 */
+			if ( function_exists( 'pll_current_language' ) ) {
+				$locale = pll_current_language( 'slug' );
+			}
 			if ( ! preg_match( '/^pl/', $locale ) ) {
 				return $content;
 			}
@@ -383,6 +393,7 @@ class iworks_orphan {
 				$attributes        = $item->getAllAttributes();
 				$key               = md5( $tag . $innertext . implode( $attributes ) );
 				$protected[ $key ] = array(
+					'tag'        => $tag,
 					'attributes' => $attributes,
 					'innertext'  => $innertext,
 				);
@@ -402,16 +413,23 @@ class iworks_orphan {
 		/**
 		 * revert protected tags
 		 */
-		foreach ( $protected as $key => $data ) {
-			foreach ( $doc->find( '#orphans-' . $key ) as $item ) {
-				$item->innertext = $data['innertext'];
-				$item->removeAttribute( 'id' );
-				foreach ( $data['attributes'] as $name => $value ) {
-					$item->setAttribute( $name, $value );
-				}
+		foreach ( $protected as $p_key => $p_data ) {
+
+			$p_item = $doc->find( $p_data['tag'] . '#orphans-' . $p_key, 0 );
+
+			if ( 'style' !== $p_data['tag'] ) {
+				d( $p_item->dump_node( false ) );
+			}
+
+			$p_item->addClass( 'foo' );
+
+			$p_item->__set( 'innertext', $p_data['innertext'] );
+			$p_item->removeAttribute( 'id' );
+			foreach ( $p_data['attributes'] as $p_name => $p_value ) {
+				$p_item->setAttribute( $p_name, $p_value );
 			}
 		}
-		return $output = $doc->save();
+		return $doc->save();
 	}
 
 	/**

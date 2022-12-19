@@ -131,6 +131,7 @@ function remove_iworks_orphan_terms( $terms ) {
 = 3.1.0 - 2022-11-30=
 
 * Changed simple replacement by DOMDocument parsing & replacing only on string.
+* Added integration with Polylang plugin.
 
 = 3.0.4 - 2022-10-25 =
 * Handle space after year for short year format "r.". Props for [Mastafu Design](https://wordpress.org/support/users/mastafu/)
