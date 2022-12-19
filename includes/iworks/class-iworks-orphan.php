@@ -389,19 +389,9 @@ class iworks_orphan {
 		$protected = array();
 		foreach ( $this->protected_tags as $tag ) {
 			foreach ( $doc->find( $tag ) as $item ) {
-				$innertext         = $item->innertext;
-				$attributes        = $item->getAllAttributes();
-				$key               = md5( $tag . $innertext . implode( $attributes ) );
-				$protected[ $key ] = array(
-					'tag'        => $tag,
-					'attributes' => $attributes,
-					'innertext'  => $innertext,
-				);
-				foreach ( $attributes as $name => $value ) {
-					$item->removeAttribute( $name );
-				}
-				$item->innertext = '';
-				$item->setAttribute( 'id', 'orphans-' . $key );
+				$key               = md5( $item->outertext );
+				$protected[ $key ] = $item->outertext;
+				$item->outertext   = $key;
 			}
 		}
 		/**
@@ -413,23 +403,12 @@ class iworks_orphan {
 		/**
 		 * revert protected tags
 		 */
-		foreach ( $protected as $p_key => $p_data ) {
+		$out = $doc->save();
+		foreach ( $protected as $key => $outertext ) {
+			$out = str_replace( $key, $outertext, $out );
 
-			$p_item = $doc->find( $p_data['tag'] . '#orphans-' . $p_key, 0 );
-
-			if ( 'style' !== $p_data['tag'] ) {
-				d( $p_item->dump_node( false ) );
-			}
-
-			$p_item->addClass( 'foo' );
-
-			$p_item->__set( 'innertext', $p_data['innertext'] );
-			$p_item->removeAttribute( 'id' );
-			foreach ( $p_data['attributes'] as $p_name => $p_value ) {
-				$p_item->setAttribute( $p_name, $p_value );
-			}
 		}
-		return $doc->save();
+		return $out;
 	}
 
 	/**
