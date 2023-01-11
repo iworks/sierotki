@@ -133,8 +133,12 @@ function remove_iworks_orphan_terms( $terms ) {
 * Changed simple replacement by DOMDocument parsing & replacing only on string.
 * Added integration with Polylang plugin.
 
-= 3.0.4 - 2022-10-25 =
+= 3.0.5 - 2023-01-11 =
+* The translation function now includes the ability to replace text. The default setting is off.
+
+= 3.0.4 - 2022-11-20 =
 * Handle space after year for short year format "r.". Props for [Mastafu Design](https://wordpress.org/support/users/mastafu/)
+* Added integration with "Goodlayers Core" on `gdlr_core_escape_content` filter.
 
 = 3.0.3 - 2022-09-02 =
 * Handle ACF integration if it is network activated plugin. Props for [maczek6000](https://profiles.wordpress.org/maczek6000/).

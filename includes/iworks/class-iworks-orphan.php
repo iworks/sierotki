@@ -96,6 +96,14 @@ class iworks_orphan {
 		 * iWorks Rate Class
 		 */
 		add_filter( 'iworks_rate_notice_logo_style', array( $this, 'filter_plugin_logo' ), 10, 2 );
+		/**
+		 * Replace in Translations functions.
+		 *
+		 * Since 3.0.5
+		 */
+		if ( $this->options->get_option( 'gettext' ) ) {
+			add_filter( 'gettext', array( $this, 'filter_gettext' ), 10, 3 );
+		}
 	}
 
 	/**
@@ -758,5 +766,13 @@ class iworks_orphan {
 		return $logo;
 	}
 
+	/**
+	 * Replace in Translations functions.
+	 *
+	 * Since 3.0.5
+	 */
+	public function filter_gettext( $translation, $text, $domain ) {
+		return $this->unconditional_replacement( $translation );
+	}
 }
 
