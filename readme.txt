@@ -130,10 +130,8 @@ function remove_iworks_orphan_terms( $terms ) {
 
 = 3.1.0 - 2022-11-30=
 
-* Changed simple replacement by DOMDocument parsing & replacing only on string.
 * Added integration with Polylang plugin.
-
-= 3.0.5 - 2023-01-11 =
+* Changed simple replacement by DOMDocument parsing & replacing only on string.
 * The translation function now includes the ability to replace text. The default setting is off.
 
 = 3.0.4 - 2022-11-20 =

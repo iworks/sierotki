@@ -145,7 +145,7 @@ function orphang_indicator_options() {
 			/**
 			 * Replace in Translations functions.
 			 *
-			 * Since 3.0.5
+			 * Since 3.1.0
 			 */
 			array(
 				'name'              => 'gettext',

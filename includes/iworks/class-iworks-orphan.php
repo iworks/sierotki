@@ -99,7 +99,7 @@ class iworks_orphan {
 		/**
 		 * Replace in Translations functions.
 		 *
-		 * Since 3.0.5
+		 * Since 3.1.0
 		 */
 		if ( $this->options->get_option( 'gettext' ) ) {
 			add_filter( 'gettext', array( $this, 'filter_gettext' ), 10, 3 );
@@ -769,7 +769,7 @@ class iworks_orphan {
 	/**
 	 * Replace in Translations functions.
 	 *
-	 * Since 3.0.5
+	 * Since 3.1.0
 	 */
 	public function filter_gettext( $translation, $text, $domain ) {
 		return $this->unconditional_replacement( $translation );
