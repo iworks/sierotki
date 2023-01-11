@@ -143,20 +143,6 @@ function orphang_indicator_options() {
 				'label' => __( 'Miscellaneous', 'sierotki' ),
 			),
 			/**
-			 * Replace in Translations functions.
-			 *
-			 * Since 3.0.5
-			 */
-			array(
-				'name'              => 'gettext',
-				'type'              => 'checkbox',
-				'th'                => __( 'Translation functions', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in Translations functions. <a href="https://developer.wordpress.org/themes/functionality/internationalization/" target="_blank">Read more.</a>', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 1,
-				'classes'           => array( 'switch-button' ),
-			),
-			/**
 			 * Since 2.6.8
 			 */
 			array(
