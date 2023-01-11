@@ -128,6 +128,9 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.0.5 - 2023-01-11 =
+* The translation function now includes the ability to replace text. The default setting is off.
+
 = 3.0.4 - 2022-11-20 =
 * Handle space after year for short year format "r.". Props for [Mastafu Design](https://wordpress.org/support/users/mastafu/)
 * Added integration with "Goodlayers Core" on `gdlr_core_escape_content` filter.
