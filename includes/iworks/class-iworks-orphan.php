@@ -537,7 +537,7 @@ class iworks_orphan {
 		 */
 		foreach ( array( 'text', 'textarea', 'wysiwyg' ) as $type ) {
 			if ( $this->is_on( 'acf_' . $type ) ) {
-				add_filter( 'acf/format_value/type=' . $type, array( $this, 'replace' ) );
+				add_filter( 'acf/format_value/type=' . $type, array( $this, 'filter_acf' ), 10, 3 );
 			}
 		}
 		/**
@@ -772,7 +772,50 @@ class iworks_orphan {
 	 * Since 3.1.0
 	 */
 	public function filter_gettext( $translation, $text, $domain ) {
-		return $this->unconditional_replacement( $translation );
+		/**
+		 * Replace in gettext?
+		 *
+		 * Fillter allow to turn off replacement depend on params.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param boolean
+		 * @param string $translation
+		 * @param string $text
+		 * @param string $domain Translation domain.
+		 */
+		if ( apply_filters( 'orphan_replace_gettext', true, $translation, $text, $domain ) ) {
+			return $this->unconditional_replacement( $translation );
+		}
+		return $translation;
+	}
+
+	/**
+	 * Replace in ACF field
+	 *
+	 * Since 3.1.0
+	 *
+	 * @param $value (mixed) The field value.
+	 * @param $post_id (int|string) The post ID where the value is saved.
+	 * @param $field (array) The field array containing all settings.
+	 */
+	public function filter_acf( $value, $post_id, $field ) {
+		/**
+		 * Replace in gettext?
+		 *
+		 * Fillter allow to turn off replacement depend on params.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param boolean
+		 * @param $value (mixed) The field value.
+		 * @param $post_id (int|string) The post ID where the value is saved.
+		 * @param $field (array) The field array containing all settings.
+		 */
+		if ( apply_filters( 'orphan_replace_acf', true, $value, $post_id, $field ) ) {
+			return $this->unconditional_replacement( $value );
+		}
+		return $value;
 	}
 }
 
