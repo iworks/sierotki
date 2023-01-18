@@ -801,7 +801,7 @@ class iworks_orphan {
 	 */
 	public function filter_acf( $value, $post_id, $field ) {
 		/**
-		 * Replace in gettext?
+		 * Replace in ACF field?
 		 *
 		 * Fillter allow to turn off replacement depend on params.
 		 *
