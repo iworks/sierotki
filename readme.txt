@@ -135,6 +135,7 @@ function remove_iworks_orphan_terms( $terms ) {
 * The translation function now includes the ability to replace text. The default setting is off.
 * The `orphan_replace_gettext` filter has been added. It allows to turn off selected values in gettext related functions.
 * The `orphan_replace_acf` filter has been added. It allows to turn off selected values in ACF fields.
+* The deprecated data conversion usage has been fixed.
 
 = 3.0.4 - 2022-11-20 =
 * Handle space after year for short year format "r.". Props for [Mastafu Design](https://wordpress.org/support/users/mastafu/)

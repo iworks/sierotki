@@ -647,7 +647,9 @@ class iworks_orphan {
 		 */
 		$cache_name = 'orphan_terms' . $this->version;
 		$terms      = get_transient( $cache_name );
-		if ( ! empty( $terms ) ) {
+		if ( empty( $terms ) ) {
+			$terms = array();
+		} else {
 			$this->terms = $terms;
 		}
 		/**
