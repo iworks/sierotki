@@ -104,6 +104,12 @@ class iworks_orphan {
 		if ( $this->options->get_option( 'gettext' ) ) {
 			add_filter( 'gettext', array( $this, 'filter_gettext' ), 10, 3 );
 		}
+		/**
+		 * flush cache when saving some options
+		 *
+		 * @since 3.1.0
+		 */
+		add_action( 'update_option_' . $this->options->get_option_name( 'own_orphans' ), array( $this, 'clear_terms_cache' ) );
 	}
 
 	/**
@@ -681,7 +687,7 @@ class iworks_orphan {
 		/**
 		 * get own orphans
 		 */
-		$own_orphans = trim( get_option( 'iworks_orphan_own_orphans', '' ), ' \t,' );
+		$own_orphans = get_option( 'iworks_orphan_own_orphans', '' );
 		if ( $own_orphans ) {
 			$own_orphans = preg_replace( '/\,\+/', ',', $own_orphans );
 			$terms       = array_merge( $terms, preg_split( '/,[ \t]*/', strtolower( $own_orphans ) ) );
@@ -818,6 +824,16 @@ class iworks_orphan {
 			return $this->unconditional_replacement( $value );
 		}
 		return $value;
+	}
+
+	/**
+	 * Clear terms cache
+	 *
+	 * @since 3.1.0
+	 */
+	public function clear_terms_cache() {
+		$cache_name = 'orphan_terms' . $this->version;
+		delete_transient( $cache_name );
 	}
 }
 
