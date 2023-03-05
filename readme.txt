@@ -132,8 +132,9 @@ function remove_iworks_orphan_terms( $terms ) {
 
 * Integration with the Polylang plugin has been added.
 * Switched from simple replacement to DOMDocument parsing and string replacement.
-* The ability to clear the terms cache when saving our own orphans has been added.
+* The ability to clear the terms cache when you enter Orphans Settings Page has been added.
 * The deprecated data conversion method has been corrected.
+* The `orphan_get_terms` filter has been added. It allows to get current terms.
 * The `orphan_replace_acf` filter has been added. It allows you to turn off selected values in ACF fields.
 * The `orphan_replace_gettext` filter has been added. It allows you to turn off selected values in gettext related functions.
 * The translation function now includes the ability to replace text. The default setting is off.

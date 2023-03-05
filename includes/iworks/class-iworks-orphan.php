@@ -88,6 +88,7 @@ class iworks_orphan {
 		 */
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
 		/**
 		 * filters
 		 */
@@ -105,11 +106,11 @@ class iworks_orphan {
 			add_filter( 'gettext', array( $this, 'filter_gettext' ), 10, 3 );
 		}
 		/**
-		 * flush cache when saving some options
+		 * get terms filter
 		 *
 		 * @since 3.1.0
 		 */
-		add_action( 'update_option_' . $this->options->get_option_name( 'own_orphans' ), array( $this, 'clear_terms_cache' ) );
+		add_filter( 'orphan_get_terms', array( $this, 'get_terms' ) );
 	}
 
 	/**
@@ -835,5 +836,15 @@ class iworks_orphan {
 		$cache_name = 'orphan_terms' . $this->version;
 		delete_transient( $cache_name );
 	}
+
+	/**
+	 * get terms
+	 *
+	 * @since 3.1.0
+	 */
+	public function get_terms() {
+		return $this->_terms();
+	}
+
 }
 
