@@ -10,7 +10,7 @@ PLUGIN_TAGLINE
 
 == Description ==
 
-Plugin fix orphans position and replace space after orphan to hard space, to avoid line break incorrect position.
+To avoid line breaks in the incorrect position, the plugin fixes orphans' positions and replaces space after orphan with a hard space. 
 
 **Orphan** - a text composition error, which consists in leaving a lonely short word at the end or at the beginning of a verse, especially a single-character one. The word "lonely" here means separation from a closely related word by line breaks.
 
@@ -38,8 +38,8 @@ There are 3 ways to install this plugin:
 = The easy way =
 
 1. Download the plugin (.zip file) on the right column of this page.
-1. In your Admin, go to menu Plugins > Add.
-1. Select button `Upload Plugin`.
+1. In your Admin, go to the menu Plugins > Add.
+1. Select the button `Upload Plugin`.
 1. Upload the .zip file you just downloaded.
 1. Activate the plugin.
 1. A new menu `Orphans` in `Appearance` will appear in your Admin Menu.
@@ -54,11 +54,11 @@ There are 3 ways to install this plugin:
 
 == Frequently Asked Questions ==
 
-= When this plugin replace spaces? =
+= When does this plugin replace spaces? =
 
 Plugin works when viewing the content and does not modify your content.
 
-= How to use this plugin on custom field? =
+= How to use this plugin on the custom field? =
 
 Use this code:
 
@@ -82,7 +82,7 @@ if ( class_exists( 'iworks_orphan' ) ) {
 
 = How to change plugin capability? =
 
-By default to use this plugin you must have `manage_options` capability, that usually mean site administrator. If you want to allow manage Orphans by "Editors" then you need to use other capability, e.g.  `unfiltered_html`. You can use `iworks_orphans_capability` filter:
+By default to using this plugin you must have `manage_options` capability, which usually means site administrator. If you want to allow manage Orphans by "Editors" then you need to use other capabilities, e.g.  `unfiltered_html`. You can use `iworks_orphans_capability` filter:
 
 `
 add_filter('iworks_orphans_capability', 'my_orphans_capability');
@@ -127,6 +127,18 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 3.1.0 - 2023-03-06 =
+
+* Integration with the Polylang plugin has been added.
+* Switched from simple replacement to DOMDocument parsing and string replacement.
+* The ability to clear the terms cache when you enter the Orphans Settings Page has been added.
+* The deprecated data conversion method has been corrected.
+* The incorrect trim for the first letter "t" in own orphans has been corrected. Props for [Michał Ruszczyk](https://profiles.wordpress.org/mruszczyk/).
+* The `orphan_get_terms` filter has been added. It allows you to get current terms.
+* The `orphan_replace_acf` filter has been added. It allows you to turn off selected values in ACF fields.
+* The `orphan_replace_gettext` filter has been added. It allows you to turn off selected values in gettext related functions.
+* The translation function now includes the ability to replace text. The default setting is off.
 
 = 3.0.5 - 2023-01-11 =
 * The translation function now includes the ability to replace text. The default setting is off.
@@ -402,3 +414,10 @@ function remove_iworks_orphan_terms( $terms ) {
 = 1.0 - 2011-02-16 =
 
 * INIT
+
+== Upgrade Notice ==
+
+= 3.1.0 - 2023-03-06 =
+
+Switching from simple replacement to DOMDocument parsing and string replacement could cause problems for your sites if there are missing required PHP modules.
+
