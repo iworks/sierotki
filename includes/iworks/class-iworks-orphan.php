@@ -53,13 +53,16 @@ class iworks_orphan {
 	/**
 	 * tags to avoid replacement
 	 *
+	 * bevare - order is important, if you move script or style before iframe
+	 * or svg and thos tags have script or style - it will be broken
+	 *
 	 * @since 3.1.0
 	 */
 	private $protected_tags = array(
-		'script',
-		'style',
 		'iframe',
 		'svg',
+		'script',
+		'style',
 	);
 
 	/**
@@ -421,7 +424,6 @@ class iworks_orphan {
 		$out = $doc->save();
 		foreach ( $protected as $key => $outertext ) {
 			$out = str_replace( $key, $outertext, $out );
-
 		}
 		return $out;
 	}

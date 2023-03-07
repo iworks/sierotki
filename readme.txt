@@ -128,6 +128,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.1.1 - 2023-03-07 =
+
+* The order of protected tags has been changed to avoid a replacement issue. Props for [Against The Odds](https://wordpress.org/support/users/againsttheodds/).
+
 = 3.1.0 - 2023-03-06 =
 
 * Integration with the Polylang plugin has been added.
