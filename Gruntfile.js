@@ -179,7 +179,7 @@ module.exports = function(grunt) {
             target: {
                 options: {
                     mode: 'zip',
-                    archive: './release/<%= pkg.name %>-<%= pkg.version %>.zip'
+                    archive: './release/<%= pkg.name %>.zip'
                 },
                 expand: true,
                 cwd: './release/<%= pkg.version %>/',
