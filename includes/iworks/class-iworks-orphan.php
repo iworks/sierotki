@@ -59,6 +59,8 @@ class iworks_orphan {
 	 * @since 3.1.0
 	 */
 	private $protected_tags = array(
+		'pre',
+		'code',
 		'iframe',
 		'svg',
 		'script',
@@ -400,7 +402,7 @@ class iworks_orphan {
 		/**
 		 * parse
 		 */
-		$doc = str_get_html( $content );
+		$doc = str_get_html( $content, false, false, DEFAULT_TARGET_CHARSET, false );
 		/**
 		 * remove protected tags
 		 */

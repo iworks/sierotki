@@ -128,6 +128,11 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.1.2 - 2023-03-10 =
+
+* Tags `pre` and `code` have been added to protected tags.
+* The issue with removing line ends has been fixed. Props for [joannapl](https://wordpress.org/support/users/joannapl/).
+
 = 3.1.1 - 2023-03-07 =
 
 * The order of protected tags has been changed to avoid a replacement issue. Props for [Against The Odds](https://wordpress.org/support/users/againsttheodds/).
@@ -138,7 +143,7 @@ function remove_iworks_orphan_terms( $terms ) {
 * Switched from simple replacement to DOMDocument parsing and string replacement.
 * The ability to clear the terms cache when you enter the Orphans Settings Page has been added.
 * The deprecated data conversion method has been corrected.
-* The incorrect trim for the first letter "t" in own orphans has been corrected. Props for [Michał Ruszczyk](https://profiles.wordpress.org/mruszczyk/).
+* The incorrect trim for the first letter "t" in own orphans has been corrected. Props for [Michał Ruszczyk](https://profiles.wordpress:.org/mruszczyk/).
 * The `orphan_get_terms` filter has been added. It allows you to get current terms.
 * The `orphan_replace_acf` filter has been added. It allows you to turn off selected values in ACF fields.
 * The `orphan_replace_gettext` filter has been added. It allows you to turn off selected values in gettext related functions.
