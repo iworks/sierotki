@@ -18,6 +18,11 @@ To avoid line breaks in the incorrect position, the plugin fixes orphans' positi
 
 [Manuscript by Muffet, on Flickr](http://www.flickr.com/photos/calliope/306564541/)
 
+= GitHub =
+
+The Orphans plugin is available also on [GitHub - Orphans](https://github.com/iworks/sierotki).
+
+
 == Installation ==
 
 There are 3 ways to install this plugin:
@@ -57,6 +62,10 @@ There are 3 ways to install this plugin:
 = When does this plugin replace spaces? =
 
 Plugin works when viewing the content and does not modify your content.
+
+= I have a problem with the plugin, or I want to suggest a feature. Where can I do this? =
+
+You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki/#new-topic-0), but please add your ticket to [Github Issues](https://github.com/iworks/sierotki/issues).
 
 = How to use this plugin on the custom field? =
 
@@ -143,7 +152,7 @@ function remove_iworks_orphan_terms( $terms ) {
 * Switched from simple replacement to DOMDocument parsing and string replacement.
 * The ability to clear the terms cache when you enter the Orphans Settings Page has been added.
 * The deprecated data conversion method has been corrected.
-* The incorrect trim for the first letter "t" in own orphans has been corrected. Props for [Michał Ruszczyk](https://profiles.wordpress:.org/mruszczyk/).
+* The incorrect trim for the first letter "t" in own orphans has been corrected. Props for [Michał Ruszczyk](https://profiles.wordpress.org/mruszczyk/).
 * The `orphan_get_terms` filter has been added. It allows you to get current terms.
 * The `orphan_replace_acf` filter has been added. It allows you to turn off selected values in ACF fields.
 * The `orphan_replace_gettext` filter has been added. It allows you to turn off selected values in gettext related functions.
