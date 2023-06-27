@@ -578,6 +578,12 @@ class iworks_orphan {
 			'iworks_orphan_protected_tags',
 			$this->protected_tags
 		);
+		/**
+		 * Integrations: Muffin builder
+		 *
+		 * @since 3.1.3
+		 */
+		add_filter( 'mfn_builder_items_show', array( $this, 'integration_filter_mfn_builder_items_show' ) );
 	}
 
 	/**
@@ -854,6 +860,36 @@ class iworks_orphan {
 	 */
 	public function get_terms() {
 		return $this->_terms();
+	}
+
+	/**
+	 * Integrations: Muffin builder (beTheme) recurence helper
+	 *
+	 * @since 3.1.3
+	 */
+	private function mnf_builder_herlper( $items ) {
+		if ( is_array( $items ) ) {
+			foreach ( $items as $key => &$item ) {
+				if ( is_array( $item ) ) {
+					$item = $this->mnf_builder_herlper( $item );
+				} elseif (
+					'content' === $key
+					&& is_string( $item )
+				) {
+					$item = $this->unconditional_replacement( $item );
+				}
+			}
+		}
+		return $items;
+	}
+
+	/**
+	 * Integrations: Muffin builder (beTheme)
+	 *
+	 * @since 3.1.3
+	 */
+	public function integration_filter_mfn_builder_items_show( $mfn_items ) {
+		return $this->mnf_builder_herlper( $mfn_items );
 	}
 
 }
