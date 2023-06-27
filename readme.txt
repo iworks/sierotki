@@ -143,8 +143,8 @@ function remove_iworks_orphan_terms( $terms ) {
 = 3.1.3 - 2023-06-27 =
 
 * Integration with the Muffin builder (part of the beTheme) has been added. Props for [waveman777](https://wordpress.org/support/users/waveman777/).
-* The iWorks Options module has been updated to version 2.8.5.
-* The iWorks Rate module has been updated to version 2.1.2.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.5.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.2.
 
 = 3.1.2 - 2023-03-10 =
 
