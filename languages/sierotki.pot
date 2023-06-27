@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki-dev\n"
-"POT-Creation-Date: 2023-03-10 07:31:27+00:00\n"
+"POT-Creation-Date: 2023-06-27 06:53:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -244,49 +244,49 @@ msgstr ""
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:604
+#: includes/iworks/class-iworks-orphan.php:610
 #: includes/iworks/rate/rate.php:124
 msgid "Settings"
 msgstr ""
 
-#: includes/iworks/options/options.php:251
+#: includes/iworks/options/options.php:258
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:754
-#: includes/iworks/options/options.php:1751
+#: includes/iworks/options/options.php:761
+#: includes/iworks/options/options.php:1758
 msgid "Select Image"
 msgstr ""
 
-#: includes/iworks/options/options.php:759
+#: includes/iworks/options/options.php:766
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:845
+#: includes/iworks/options/options.php:852
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1645
+#: includes/iworks/options/options.php:1652
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:1646
+#: includes/iworks/options/options.php:1653
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1647
+#: includes/iworks/options/options.php:1654
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1648
+#: includes/iworks/options/options.php:1655
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1804
+#: includes/iworks/options/options.php:1811
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1805
+#: includes/iworks/options/options.php:1812
 msgid "ON"
 msgstr ""
 
