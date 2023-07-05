@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki-dev\n"
-"POT-Creation-Date: 2023-06-27 08:35:34+00:00\n"
+"POT-Creation-Date: 2023-07-05 10:10:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: etc/options.php:11
-msgid "Orphans configuration"
+msgid "Orphans Configuration"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -33,98 +33,148 @@ msgid "Orphans"
 msgstr ""
 
 #: etc/options.php:19
+msgid "Terms"
+msgstr ""
+
+#: etc/options.php:25
+msgid "Language File"
+msgstr ""
+
+#: etc/options.php:29
+msgid "Try to use the site locale to determine the file name"
+msgstr ""
+
+#: etc/options.php:30
+msgid ""
+"Select if you want the plugin to determine which file to load based on the "
+"site's language settings."
+msgstr ""
+
+#: etc/options.php:33
+msgid "Polish"
+msgstr ""
+
+#: etc/options.php:34
+msgid "Select if you want to force the loading of Polish language rules."
+msgstr ""
+
+#: etc/options.php:37
+msgid "Czech"
+msgstr ""
+
+#: etc/options.php:38
+msgid "Select if you want to force the loading of Czech language rules."
+msgstr ""
+
+#: etc/options.php:41
+msgid "Do not load any files"
+msgstr ""
+
+#: etc/options.php:42
+msgid "Select if you want to rely only on your terms."
+msgstr ""
+
+#: etc/options.php:51
+msgid "User Definied Orphans"
+msgstr ""
+
+#: etc/options.php:53
+msgid "Use a comma to separate orphans."
+msgstr ""
+
+#: etc/options.php:60
 msgid "Entries"
 msgstr ""
 
-#: etc/options.php:27
-msgid "Post types"
+#: etc/options.php:68
+msgid "Post Types"
 msgstr ""
 
-#: etc/options.php:34 etc/options.php:125
+#: etc/options.php:75 etc/options.php:166
 msgid "Title"
 msgstr ""
 
-#: etc/options.php:36
+#: etc/options.php:77
 msgid "Enabled the substitution of orphans in the post_title."
 msgstr ""
 
-#: etc/options.php:43
+#: etc/options.php:84
 msgid "Excerpt"
 msgstr ""
 
-#: etc/options.php:45
+#: etc/options.php:86
 msgid "Enabled the substitution of orphans in the excerpt."
 msgstr ""
 
-#: etc/options.php:52
+#: etc/options.php:93
 msgid "Content"
 msgstr ""
 
-#: etc/options.php:54
+#: etc/options.php:95
 msgid "Enabled the substitution of orphans in the content."
 msgstr ""
 
-#: etc/options.php:62
+#: etc/options.php:103
 msgid "Comments"
 msgstr ""
 
-#: etc/options.php:63
+#: etc/options.php:104
 msgid "Enabled the substitution of orphans in the comments."
 msgstr ""
 
-#: etc/options.php:70
+#: etc/options.php:111
 msgid "Widgets"
 msgstr ""
 
-#: etc/options.php:77
-msgid "Widget title"
+#: etc/options.php:118
+msgid "Widget Title"
 msgstr ""
 
-#: etc/options.php:79
+#: etc/options.php:120
 msgid "Enabled the substitution of orphans in the widget title."
 msgstr ""
 
-#: etc/options.php:89
-msgid "Widget text"
+#: etc/options.php:130
+msgid "Widget Text"
 msgstr ""
 
-#: etc/options.php:91
+#: etc/options.php:132
 msgid "Enabled the substitution of orphans in the widget text."
 msgstr ""
 
-#: etc/options.php:101
-msgid "Widget block content"
+#: etc/options.php:142
+msgid "Widget Block Content"
 msgstr ""
 
-#: etc/options.php:103
+#: etc/options.php:144
 msgid "Enabled the substitution of orphans in the widget blocks."
 msgstr ""
 
-#: etc/options.php:113 etc/options.php:118
+#: etc/options.php:154 etc/options.php:159
 msgid "Taxonomies"
 msgstr ""
 
-#: etc/options.php:127
+#: etc/options.php:168
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr ""
 
-#: etc/options.php:134
+#: etc/options.php:175
 msgid "Description"
 msgstr ""
 
-#: etc/options.php:136
+#: etc/options.php:177
 msgid "Enabled the substitution of orphans in the taxonomy description."
 msgstr ""
 
-#: etc/options.php:143
+#: etc/options.php:184
 msgid "Miscellaneous"
 msgstr ""
 
-#: etc/options.php:153
-msgid "Translation functions"
+#: etc/options.php:194
+msgid "Translation Functions"
 msgstr ""
 
-#: etc/options.php:154
+#: etc/options.php:195
 msgid ""
 "Enabled the substitution of orphans in Translations functions. <a "
 "href=\"https://developer.wordpress.org/themes/functionality/"
@@ -132,119 +182,111 @@ msgid ""
 "can slow your site!</b>"
 msgstr ""
 
-#: etc/options.php:165
-msgid "Author description"
+#: etc/options.php:206
+msgid "Author Description"
 msgstr ""
 
-#: etc/options.php:166
+#: etc/options.php:207
 msgid "Enabled the substitution of orphans in the author description."
 msgstr ""
 
-#: etc/options.php:173
-msgid "Ignore language"
+#: etc/options.php:214
+msgid "Ignore Language"
 msgstr ""
 
-#: etc/options.php:175
+#: etc/options.php:216
 msgid "Allow to use plugin with another languages then Polish."
 msgstr ""
 
-#: etc/options.php:182
+#: etc/options.php:223
 msgid "Menu Title"
 msgstr ""
 
-#: etc/options.php:184
+#: etc/options.php:225
 msgid "Enabled the substitution of orphans in the menu title."
 msgstr ""
 
-#: etc/options.php:191
-msgid "Keep numbers together"
+#: etc/options.php:232
+msgid "Keep Numbers Together"
 msgstr ""
 
-#: etc/options.php:193
+#: etc/options.php:234
 msgid "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
 
-#: etc/options.php:199
-msgid "Protect tag attributes"
+#: etc/options.php:240
+msgid "Protect Tag Attributes"
 msgstr ""
 
-#: etc/options.php:201
+#: etc/options.php:242
 msgid "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr ""
 
-#: etc/options.php:208
-msgid "User definied orphans"
-msgstr ""
-
-#: etc/options.php:210
-msgid "Use a comma to separate orphans."
-msgstr ""
-
-#: etc/options.php:217
-msgid "Entries custom fields"
-msgstr ""
-
-#: etc/options.php:219
-msgid "Use a comma to separate custom fields name."
-msgstr ""
-
-#: etc/options.php:227 etc/options.php:364
-msgid "We are waiting for your message"
-msgstr ""
-
-#: etc/options.php:233
-msgid "I love what I do!"
-msgstr ""
-
-#: etc/options.php:246
-msgid "Integrations"
+#: etc/options.php:249
+msgid "Entries Custom Fields"
 msgstr ""
 
 #: etc/options.php:251
-msgid "Advanced Custom Fields"
+msgid "Use a comma to separate custom fields name (meta fields)."
 msgstr ""
 
-#: etc/options.php:256
-msgid "Text"
-msgstr ""
-
-#: etc/options.php:257
-msgid "Enabled the substitution of orphans in text fields."
+#: etc/options.php:259 etc/options.php:396
+msgid "We are waiting for your message"
 msgstr ""
 
 #: etc/options.php:265
+msgid "I love what I do!"
+msgstr ""
+
+#: etc/options.php:278
+msgid "Integrations"
+msgstr ""
+
+#: etc/options.php:283
+msgid "Advanced Custom Fields"
+msgstr ""
+
+#: etc/options.php:288
+msgid "Text"
+msgstr ""
+
+#: etc/options.php:289
+msgid "Enabled the substitution of orphans in text fields."
+msgstr ""
+
+#: etc/options.php:297
 msgid "Textarea"
 msgstr ""
 
-#: etc/options.php:266
+#: etc/options.php:298
 msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr ""
 
-#: etc/options.php:274
+#: etc/options.php:306
 msgid "WYSIWYG"
 msgstr ""
 
-#: etc/options.php:275
+#: etc/options.php:307
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
-#: etc/options.php:328
+#: etc/options.php:360
 msgid "Below are some links to help spread this plugin to other users"
 msgstr ""
 
-#: etc/options.php:330
+#: etc/options.php:362
 msgid "Give it a five stars on WordPress.org"
 msgstr ""
 
-#: etc/options.php:331
+#: etc/options.php:363
 msgid "Link to it so others can easily find it"
 msgstr ""
 
-#: etc/options.php:366
+#: etc/options.php:398
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:610
+#: includes/iworks/class-iworks-orphan.php:619
 #: includes/iworks/rate/rate.php:124
 msgid "Settings"
 msgstr ""
@@ -402,12 +444,12 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr ""
 
-#: etc/options.php:331
+#: etc/options.php:363
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr ""
 
-#: etc/options.php:366
+#: etc/options.php:398
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""

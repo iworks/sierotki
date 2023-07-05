@@ -255,7 +255,7 @@ module.exports = function(grunt) {
                     '!phpcs.xml.dist',
                     '!**/README.md',
                     '!README.md',
-                    '!stylelint.config.js'
+                    '!stylelint.config.js',
                     '!tests/*',
                     '!tests/**',
                 ],
