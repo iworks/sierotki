@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                 'tests/.*', // Unit testing.
             ],
             pot_dir: 'languages/', // With trailing slash.
-            textdomain: 'sierotki',
+            textdomain: "<%= pkg.name %>",
         },
 
         dir: 'sierotki/'
@@ -229,30 +229,35 @@ module.exports = function(grunt) {
                 src: [
                     '*',
                     '**',
-                    '!node_modules',
-                    '!node_modules/*',
-                    '!node_modules/**',
-                    '!bitbucket-pipelines.yml',
-                    '!.idea', // PHPStorm settings
-                    '!.git',
-                    '!.github',
-                    '!.github/*',
-                    '!.github/**',
-                    '!Gruntfile.js',
-                    '!package.json', '!tests/*',
-                    '!package-lock.json', '!tests/*',
-                    '!tests/**',
                     '!assets/js/src',
                     '!assets/js/src/*',
                     '!assets/js/src/**',
                     '!assets/sass',
                     '!assets/sass/*',
                     '!assets/sass/**',
-                    '!phpcs.xml.dist',
-                    '!**/README.md',
+                    '!bitbucket-pipelines.yml',
+                    '!composer.json',
+                    '!composer.lock',
+                    '!.git',
+                    '!.github',
+                    '!.github/*',
+                    '!.github/**',
+                    '!Gruntfile.js',
+                    '!.idea', // PHPStorm settings
+                    '!languages/*~',
                     '!**/LICENSE',
                     '!LICENSE',
-                    '!README.md'
+                    '!node_modules',
+                    '!node_modules/*',
+                    '!node_modules/**',
+                    '!package.json',
+                    '!package-lock.json',
+                    '!phpcs.xml.dist',
+                    '!**/README.md',
+                    '!README.md',
+                    '!stylelint.config.js'
+                    '!tests/*',
+                    '!tests/**',
                 ],
                 dest: './release/<%= pkg.version %>/',
                 noEmpty: true

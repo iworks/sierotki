@@ -204,7 +204,12 @@ class iworks_orphan {
 			if ( function_exists( 'pll_current_language' ) ) {
 				$locale = pll_current_language( 'slug' );
 			}
-			if ( ! preg_match( '/^pl/', $locale ) ) {
+			/**
+			 * allowed langages: pl_PL & cs_CZ
+			 *
+			 * @since 3.2.0 The cs_CZ has been added.
+			 */
+			if ( ! preg_match( '/^(pl|cs)/', $locale ) ) {
 				return $content;
 			}
 		}
@@ -390,6 +395,7 @@ class iworks_orphan {
 	 * @return string $content
 	 */
 	private function unconditional_replacement( $content ) {
+
 		if ( ! is_string( $content ) || empty( $content ) ) {
 			return $content;
 		}
@@ -417,15 +423,18 @@ class iworks_orphan {
 		/**
 		 * replace
 		 */
-		foreach ( $doc->find( '*' ) as &$item ) {
-			$this->parse_item( $item );
-		}
+		$this->parse_item( $doc->root );
+		/**
+		 * save replaced doc
+		 */
+		$out = $doc->save();
 		/**
 		 * revert protected tags
 		 */
-		$out = $doc->save();
-		foreach ( $protected as $key => $outertext ) {
-			$out = str_replace( $key, $outertext, $out );
+		if ( ! empty( $protected ) ) {
+			foreach ( $protected as $key => $outertext ) {
+				$out = str_replace( $key, $outertext, $out );
+			}
 		}
 		return $out;
 	}
@@ -682,24 +691,45 @@ class iworks_orphan {
 			$terms = $this->terms;
 			$terms = apply_filters( 'iworks_orphan_therms', $terms );
 			$terms = apply_filters( 'iworks_orphan_terms', $terms );
-			return $terms;
+			// return $terms;
 		}
+		$terms = array();
 		/**
-		 * read terms from file
+		 * set file name
 		 *
-		 * @since 2.9.0
+		 * @since 3.2.0
 		 */
-		$file = apply_filters( 'iworks_orphan_own_terms_file', $this->root . '/etc/terms.txt' );
-		$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
-		foreach ( $data as $term ) {
-			if ( preg_match( '/^#/', $term ) ) {
-				continue;
+		$locale = $this->options->get_option( 'language' );
+		if ( 'function_get_locale' === $locale ) {
+			$locale = get_locale();
+		}
+		if ( ! empty( $locale ) ) {
+			$filename = apply_filters(
+				'iworks_orphan_own_terms_filename',
+				sprintf( 'terms-%s.txt', $locale )
+			);
+			/**
+			 * read terms from file
+			 *
+			 * @since 2.9.0
+			 */
+			$file = apply_filters(
+				'iworks_orphan_own_terms_file',
+				sprintf( '%s/etc/%s', $this->root, $filename )
+			);
+			if ( is_file( $file ) && is_readable( $file ) ) {
+				$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
+				foreach ( $data as $term ) {
+					if ( preg_match( '/^#/', $term ) ) {
+						continue;
+					}
+					$term = trim( $term );
+					if ( empty( $term ) ) {
+						continue;
+					}
+					$terms[] = $term;
+				}
 			}
-			$term = trim( $term );
-			if ( empty( $term ) ) {
-				continue;
-			}
-			$terms[] = $term;
 		}
 		/**
 		 * get own orphans

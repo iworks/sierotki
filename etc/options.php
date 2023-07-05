@@ -8,12 +8,53 @@ function orphang_indicator_options() {
 	$options['index'] = array(
 		'use_tabs'        => true,
 		'version'         => '0.0',
-		'page_title'      => __( 'Orphans configuration', 'sierotki' ),
+		'page_title'      => __( 'Orphans Configuration', 'sierotki' ),
 		'menu_title'      => __( 'Orphans', 'sierotki' ),
 		'menu'            => 'theme',
 		'enqueue_scripts' => array(),
 		'enqueue_styles'  => array(),
 		'options'         => array(
+			array(
+				'type'  => 'heading',
+				'label' => __( 'Terms', 'sierotki' ),
+				'since' => '3.1.4',
+			),
+			array(
+				'name'     => 'language',
+				'type'     => 'radio',
+				'th'       => __( 'Language File', 'sierotki' ),
+				'default'  => 'function_get_locale',
+				'options'  => array(
+					'function_get_locale' => array(
+						'label'       => __( 'Try to use the site locale to determine the file name', 'sierotki' ),
+						'description' => __( 'Select if you want the plugin to determine which file to load based on the site\'s language settings.', 'sierotki' ),
+					),
+					'pl_PL'               => array(
+						'label'       => __( 'Polish', 'sierotki' ),
+						'description' => __( 'Select if you want to force the loading of Polish language rules.', 'sierotki' ),
+					),
+					'cs_CZ'               => array(
+						'label'       => __( 'Czech', 'sierotki' ),
+						'description' => __( 'Select if you want to force the loading of Czech language rules.', 'sierotki' ),
+					),
+					array(
+						'label'       => __( 'Do not load any files', 'sierotki' ),
+						'description' => __( 'Select if you want to rely only on your terms.', 'sierotki' ),
+					),
+				),
+				'multiple' => true,
+				'default'  => 'pl_PL',
+				'since'    => '3.1.4',
+			),
+			array(
+				'name'              => 'own_orphans',
+				'th'                => __( 'User Definied Orphans', 'sierotki' ),
+				'type'              => 'textarea',
+				'description'       => __( 'Use a comma to separate orphans.', 'sierotki' ),
+				'sanitize_callback' => 'esc_html',
+				'classes'           => array( 'large-text' ),
+				'rows'              => 10,
+			),
 			array(
 				'type'  => 'heading',
 				'label' => __( 'Entries', 'sierotki' ),
@@ -24,7 +65,7 @@ function orphang_indicator_options() {
 			array(
 				'name'     => 'post_type',
 				'type'     => 'select2',
-				'th'       => __( 'Post types', 'sierotki' ),
+				'th'       => __( 'Post Types', 'sierotki' ),
 				'default'  => array( 'post', 'page' ),
 				'options'  => iworks_orphan_post_types(),
 				'multiple' => true,
@@ -74,7 +115,7 @@ function orphang_indicator_options() {
 			 */
 			array(
 				'name'              => 'widget_title',
-				'th'                => __( 'Widget title', 'sierotki' ),
+				'th'                => __( 'Widget Title', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Enabled the substitution of orphans in the widget title.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -86,7 +127,7 @@ function orphang_indicator_options() {
 			 */
 			array(
 				'name'              => 'widget_text',
-				'th'                => __( 'Widget text', 'sierotki' ),
+				'th'                => __( 'Widget Text', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Enabled the substitution of orphans in the widget text.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -98,7 +139,7 @@ function orphang_indicator_options() {
 			 */
 			array(
 				'name'              => 'widget_block_content',
-				'th'                => __( 'Widget block content', 'sierotki' ),
+				'th'                => __( 'Widget Block Content', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Enabled the substitution of orphans in the widget blocks.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -150,7 +191,7 @@ function orphang_indicator_options() {
 			array(
 				'name'              => 'gettext',
 				'type'              => 'checkbox',
-				'th'                => __( 'Translation functions', 'sierotki' ),
+				'th'                => __( 'Translation Functions', 'sierotki' ),
 				'description'       => __( 'Enabled the substitution of orphans in Translations functions. <a href="https://developer.wordpress.org/themes/functionality/internationalization/" target="_blank">Read more.</a> <b>WARNING: this can slow your site!</b>', 'sierotki' ),
 				'sanitize_callback' => 'absint',
 				'default'           => 0,
@@ -162,7 +203,7 @@ function orphang_indicator_options() {
 			array(
 				'name'              => 'get_the_author_description',
 				'type'              => 'checkbox',
-				'th'                => __( 'Author description', 'sierotki' ),
+				'th'                => __( 'Author Description', 'sierotki' ),
 				'description'       => __( 'Enabled the substitution of orphans in the author description.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
 				'default'           => 1,
@@ -170,7 +211,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name'              => 'ignore_language',
-				'th'                => __( 'Ignore language', 'sierotki' ),
+				'th'                => __( 'Ignore Language', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Allow to use plugin with another languages then Polish.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -188,7 +229,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name'              => 'numbers',
-				'th'                => __( 'Keep numbers together', 'sierotki' ),
+				'th'                => __( 'Keep Numbers Together', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Allow to keep together phone number or strings with space between numbers.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -196,7 +237,7 @@ function orphang_indicator_options() {
 			),
 			array(
 				'name'              => 'attributes',
-				'th'                => __( 'Protect tag attributes', 'sierotki' ),
+				'th'                => __( 'Protect Tag Attributes', 'sierotki' ),
 				'type'              => 'checkbox',
 				'description'       => __( 'Allow to ignore spaces in "class", "style" and "data-*" attributes.', 'sierotki' ),
 				'sanitize_callback' => 'absint',
@@ -204,19 +245,10 @@ function orphang_indicator_options() {
 				'default'           => 1,
 			),
 			array(
-				'name'              => 'own_orphans',
-				'th'                => __( 'User definied orphans', 'sierotki' ),
-				'type'              => 'textarea',
-				'description'       => __( 'Use a comma to separate orphans.', 'sierotki' ),
-				'sanitize_callback' => 'esc_html',
-				'classes'           => array( 'large-text' ),
-				'rows'              => 10,
-			),
-			array(
 				'name'              => 'post_meta',
-				'th'                => __( 'Entries custom fields', 'sierotki' ),
+				'th'                => __( 'Entries Custom Fields', 'sierotki' ),
 				'type'              => 'textarea',
-				'description'       => __( 'Use a comma to separate custom fields name.', 'sierotki' ),
+				'description'       => __( 'Use a comma to separate custom fields name (meta fields).', 'sierotki' ),
 				'sanitize_callback' => 'esc_html',
 				'classes'           => array( 'large-text' ),
 				'rows'              => 10,

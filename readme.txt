@@ -1,7 +1,7 @@
 === PLUGIN_TITLE ===
 Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
-Tags: orphan, nbsp, grammar, conjunction, polish, typography, line-break
+Tags: orphan, nbsp, grammar, conjunction, polish, typography, czech
 Requires at least: PLUGIN_REQUIRES_WORDPRESS
 Tested up to: PLUGIN_TESTED_WORDPRESS
 Stable tag: PLUGIN_VERSION
@@ -139,6 +139,13 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 3.2.0 - 2023-07-05 =
+
+* Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
+* The ability to choose a preset language file has been added.
+* The ability to use only your own defined terms has been added.
+* The Czech rules have been added.
 
 = 3.1.3 - 2023-06-27 =
 
