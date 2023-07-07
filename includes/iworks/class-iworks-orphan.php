@@ -592,7 +592,13 @@ class iworks_orphan {
 		 *
 		 * @since 3.1.3
 		 */
-		add_filter( 'mfn_builder_items_show', array( $this, 'integration_filter_mfn_builder_items_show' ) );
+		add_filter( 'mfn_builder_items_show', array( $this, 'integration_filter_mfn_builder_items_show' ), 200 );
+		/**
+		 * Integrations: Divi
+		 *
+		 * @since 3.2.1
+		 */
+		add_filter( 'et_pb_module_content', array( $this, 'integration_filter_et_pb_module_content' ), 200, 6 );
 	}
 
 	/**
@@ -922,5 +928,13 @@ class iworks_orphan {
 		return $this->mnf_builder_herlper( $mfn_items );
 	}
 
+	/**
+	 * Integrations: Divi
+	 *
+	 * @since 3.2.1
+	 */
+	public function integration_filter_et_pb_module_content( $content, $props, $attrs, $render_slug, $_address, $global_content ) {
+		return $this->unconditional_replacement( $content );
+	}
 }
 

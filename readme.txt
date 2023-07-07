@@ -140,6 +140,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.2.1 - 2023-07-07 =
+
+* Integration with the Divi builder (part of the Divi Theme) has been added.
+
 = 3.2.0 - 2023-07-05 =
 
 * Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
