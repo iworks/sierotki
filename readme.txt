@@ -140,6 +140,10 @@ function remove_iworks_orphan_terms( $terms ) {
 
 == Changelog ==
 
+= 3.2.2 - 2023-07-12 =
+
+* Data type check has been added. Props for [LeoBullero](https://wordpress.org/support/users/leobullero/).
+
 = 3.2.1 - 2023-07-07 =
 
 * Integration with the Divi builder (part of the Divi Theme) has been added.

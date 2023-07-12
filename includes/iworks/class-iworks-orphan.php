@@ -395,7 +395,6 @@ class iworks_orphan {
 	 * @return string $content
 	 */
 	private function unconditional_replacement( $content ) {
-
 		if ( ! is_string( $content ) || empty( $content ) ) {
 			return $content;
 		}
@@ -409,6 +408,12 @@ class iworks_orphan {
 		 * parse
 		 */
 		$doc = str_get_html( $content, false, false, DEFAULT_TARGET_CHARSET, false );
+		/**
+		 * check
+		 */
+		if ( false === $doc ) {
+			return $content;
+		}
 		/**
 		 * remove protected tags
 		 */
