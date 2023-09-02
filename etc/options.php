@@ -1,10 +1,10 @@
 <?php
 
 function orphang_indicator_options() {
-    $cached = wp_cache_get( 'orphang_indicator_options', 'iworks_orphans' );
-    if ($cached !== false) {
-        return $cached;
-    }
+	$cached = wp_cache_get( 'orphang_indicator_options', 'iworks_orphans' );
+	if ($cached !== false) {
+		return $cached;
+	}
 
 	$options = array();
 	/**
