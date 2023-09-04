@@ -1,6 +1,11 @@
 <?php
 
 function orphang_indicator_options() {
+	$cached = wp_cache_get( 'orphang_indicator_options', 'iworks_orphans' );
+	if ($cached !== false) {
+		return $cached;
+	}
+
 	$options = array();
 	/**
 	 * main settings
@@ -271,6 +276,8 @@ function orphang_indicator_options() {
 	);
 	$integrations = iworks_orphan_options_check_available_integrations();
 	if ( empty( $integrations ) ) {
+		wp_cache_set( 'orphang_indicator_options', $options, 'iworks_orphans' );
+
 		return $options;
 	}
 	$options['index']['options'][] = array(
@@ -310,6 +317,9 @@ function orphang_indicator_options() {
 			'classes'           => array( 'switch-button' ),
 		);
 	}
+
+	wp_cache_set( 'orphang_indicator_options', $options, 'iworks_orphans' );
+
 	return $options;
 }
 
