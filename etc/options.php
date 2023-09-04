@@ -1,11 +1,19 @@
 <?php
 
-function orphang_indicator_options() {
-	$cached = wp_cache_get( 'orphang_indicator_options', 'iworks_orphans' );
-	if ($cached !== false) {
-		return $cached;
+function orphans_indicator_options() {
+	/**
+	 * cache
+	 */
+	if ( apply_filters( 'orphans_indicator_options_use_cache', true ) ) {
+		$cached = wp_cache_get( 'orphans_indicator_options', 'iworks_orphans' );
+		if ( ! empty( $cached ) ) {
+			return $cached;
+		}
 	}
-
+	/**
+	 * Query Monitor profiling
+	 */
+	do_action( 'qm/start', 'orphans_indicator_options' );
 	$options = array();
 	/**
 	 * main settings
@@ -274,52 +282,59 @@ function orphang_indicator_options() {
 			),
 		),
 	);
+	/**
+	 * integrations
+	 */
 	$integrations = iworks_orphan_options_check_available_integrations();
-	if ( empty( $integrations ) ) {
-		wp_cache_set( 'orphang_indicator_options', $options, 'iworks_orphans' );
-
-		return $options;
+	if ( ! empty( $integrations ) ) {
+		$options['index']['options'][] = array(
+			'type'  => 'heading',
+			'label' => __( 'Integrations', 'sierotki' ),
+		);
+		if ( in_array( 'acf.php', $integrations ) ) {
+			$options['index']['options'][] = array(
+				'type'  => 'subheading',
+				'label' => __( 'Advanced Custom Fields', 'sierotki' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_text',
+				'type'              => 'checkbox',
+				'th'                => __( 'Text', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_textarea',
+				'type'              => 'checkbox',
+				'th'                => __( 'Textarea', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'acf_wysiwyg',
+				'type'              => 'checkbox',
+				'th'                => __( 'WYSIWYG', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+		}
 	}
-	$options['index']['options'][] = array(
-		'type'  => 'heading',
-		'label' => __( 'Integrations', 'sierotki' ),
-	);
-	if ( in_array( 'acf.php', $integrations ) ) {
-		$options['index']['options'][] = array(
-			'type'  => 'subheading',
-			'label' => __( 'Advanced Custom Fields', 'sierotki' ),
-		);
-		$options['index']['options'][] = array(
-			'name'              => 'acf_text',
-			'type'              => 'checkbox',
-			'th'                => __( 'Text', 'sierotki' ),
-			'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
-			'sanitize_callback' => 'absint',
-			'default'           => 0,
-			'classes'           => array( 'switch-button' ),
-		);
-		$options['index']['options'][] = array(
-			'name'              => 'acf_textarea',
-			'type'              => 'checkbox',
-			'th'                => __( 'Textarea', 'sierotki' ),
-			'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
-			'sanitize_callback' => 'absint',
-			'default'           => 0,
-			'classes'           => array( 'switch-button' ),
-		);
-		$options['index']['options'][] = array(
-			'name'              => 'acf_wysiwyg',
-			'type'              => 'checkbox',
-			'th'                => __( 'WYSIWYG', 'sierotki' ),
-			'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
-			'sanitize_callback' => 'absint',
-			'default'           => 0,
-			'classes'           => array( 'switch-button' ),
-		);
+	/**
+	 * cache it
+	 */
+	if ( apply_filters( 'orphans_indicator_options_use_cache', true ) ) {
+		wp_cache_set( 'orphans_indicator_options', $options, 'iworks_orphans' );
 	}
-
-	wp_cache_set( 'orphang_indicator_options', $options, 'iworks_orphans' );
-
+	/**
+	 * Query Monitor profiling
+	 */
+	do_action( 'qm/stop', 'orphans_indicator_options' );
 	return $options;
 }
 

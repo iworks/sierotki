@@ -890,8 +890,19 @@ class iworks_orphan {
 	 * @since 3.1.0
 	 */
 	public function clear_terms_cache() {
+
 		$cache_name = 'orphan_terms' . $this->version;
 		delete_transient( $cache_name );
+		add_action( 'shutdown', array( $this, 'action_shutdown_orphans_indicator_options' ) );
+	}
+
+	/**
+	 * Delete `orphans_indicator_options` cache.
+	 *
+	 * @since 3.2.3
+	 */
+	public function action_shutdown_orphans_indicator_options() {
+		wp_cache_delete( 'orphans_indicator_options' );
 	}
 
 	/**

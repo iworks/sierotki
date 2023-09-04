@@ -72,24 +72,21 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 
 = How to use this plugin on the custom field? =
 
-Use this code:
+Use `orphan_replace` filter. Example code:
 
 `
-if ( class_exists( 'iworks_orphan' ) ) {
-    $orphan = new iworks_orphan();
-    echo $orphan->replace( get_post_meta($post_id, 'meta_key', true ) );
-}
+$value = apply_filters(
+    'orphan_replace',
+    get_post_meta($post_id, 'meta_key', true )
+);
 `
 
 = How to use this plugin on any string? =
 
-Use this code:
+Use `orphan_replace` filter. Example code:
 
 `
-if ( class_exists( 'iworks_orphan' ) ) {
-    $orphan = new iworks_orphan();
-    echo $orphan->replace( 'any_string' );
-}
+$value = apply_filters( 'orphan_replace', 'any string' );
 `
 
 = How to change plugin capability? =
@@ -131,6 +128,21 @@ function remove_iworks_orphan_terms( $terms ) {
 }
 `
 
+= How can I change the default orphan file? =
+
+The default file with definitions is located in the `etc/` directory.
+
+You can change it using the filter `iworks_orphan_own_terms_file`:
+
+`
+add_filter(
+    'iworks_orphan_own_terms_file',
+    function( $file ) {
+        return '<own path to file';
+    }
+);
+'
+
 == Screenshots ==
 
 1. Options for entries.
@@ -139,6 +151,11 @@ function remove_iworks_orphan_terms( $terms ) {
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 3.2.3 - 2023-09-04 =
+
+* The cache for `orphans_indicator_options` has been added. Props for [Krystian Marcisz](https://github.com/simivar).
+* The filter `orphans_indicator_options_use_cache` has been added to allow cache turn-off.
 
 = 3.2.2 - 2023-07-12 =
 

@@ -43,7 +43,7 @@ register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
  */
 function get_orphan_options() {
 	$iworks_orphan_options = new iworks_options();
-	$iworks_orphan_options->set_option_function_name( 'orphang_indicator_options' );
+	$iworks_orphan_options->set_option_function_name( 'orphans_indicator_options' );
 	$iworks_orphan_options->set_option_prefix( 'iworks_orphan_' );
 	if ( method_exists( $iworks_orphan_options, 'set_plugin' ) ) {
 		$iworks_orphan_options->set_plugin( basename( __FILE__ ) );
