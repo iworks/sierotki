@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Orphans PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sierotki-dev\n"
-"POT-Creation-Date: 2023-09-04 06:49:50+00:00\n"
+"POT-Creation-Date: 2023-10-26 08:39:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,114 +67,122 @@ msgid "Select if you want to force the loading of Czech language rules."
 msgstr ""
 
 #: etc/options.php:54
-msgid "Do not load any files"
+msgid "English"
 msgstr ""
 
 #: etc/options.php:55
+msgid "Select if you want to force the loading of English short words."
+msgstr ""
+
+#: etc/options.php:58
+msgid "Do not load any files"
+msgstr ""
+
+#: etc/options.php:59
 msgid "Select if you want to rely only on your terms."
 msgstr ""
 
-#: etc/options.php:64
+#: etc/options.php:68
 msgid "User Definied Orphans"
 msgstr ""
 
-#: etc/options.php:66
+#: etc/options.php:70
 msgid "Use a comma to separate orphans."
 msgstr ""
 
-#: etc/options.php:73
+#: etc/options.php:77
 msgid "Entries"
 msgstr ""
 
-#: etc/options.php:81
+#: etc/options.php:85
 msgid "Post Types"
 msgstr ""
 
-#: etc/options.php:88 etc/options.php:179
+#: etc/options.php:92 etc/options.php:183
 msgid "Title"
 msgstr ""
 
-#: etc/options.php:90
+#: etc/options.php:94
 msgid "Enabled the substitution of orphans in the post_title."
 msgstr ""
 
-#: etc/options.php:97
+#: etc/options.php:101
 msgid "Excerpt"
 msgstr ""
 
-#: etc/options.php:99
+#: etc/options.php:103
 msgid "Enabled the substitution of orphans in the excerpt."
 msgstr ""
 
-#: etc/options.php:106
+#: etc/options.php:110
 msgid "Content"
 msgstr ""
 
-#: etc/options.php:108
+#: etc/options.php:112
 msgid "Enabled the substitution of orphans in the content."
 msgstr ""
 
-#: etc/options.php:116
+#: etc/options.php:120
 msgid "Comments"
 msgstr ""
 
-#: etc/options.php:117
+#: etc/options.php:121
 msgid "Enabled the substitution of orphans in the comments."
 msgstr ""
 
-#: etc/options.php:124
+#: etc/options.php:128
 msgid "Widgets"
 msgstr ""
 
-#: etc/options.php:131
+#: etc/options.php:135
 msgid "Widget Title"
 msgstr ""
 
-#: etc/options.php:133
+#: etc/options.php:137
 msgid "Enabled the substitution of orphans in the widget title."
 msgstr ""
 
-#: etc/options.php:143
+#: etc/options.php:147
 msgid "Widget Text"
 msgstr ""
 
-#: etc/options.php:145
+#: etc/options.php:149
 msgid "Enabled the substitution of orphans in the widget text."
 msgstr ""
 
-#: etc/options.php:155
+#: etc/options.php:159
 msgid "Widget Block Content"
 msgstr ""
 
-#: etc/options.php:157
+#: etc/options.php:161
 msgid "Enabled the substitution of orphans in the widget blocks."
 msgstr ""
 
-#: etc/options.php:167 etc/options.php:172
+#: etc/options.php:171 etc/options.php:176
 msgid "Taxonomies"
 msgstr ""
 
-#: etc/options.php:181
+#: etc/options.php:185
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr ""
 
-#: etc/options.php:188
+#: etc/options.php:192
 msgid "Description"
 msgstr ""
 
-#: etc/options.php:190
+#: etc/options.php:194
 msgid "Enabled the substitution of orphans in the taxonomy description."
 msgstr ""
 
-#: etc/options.php:197
+#: etc/options.php:201
 msgid "Miscellaneous"
 msgstr ""
 
-#: etc/options.php:207
+#: etc/options.php:211
 msgid "Translation Functions"
 msgstr ""
 
-#: etc/options.php:208
+#: etc/options.php:212
 msgid ""
 "Enabled the substitution of orphans in Translations functions. <a "
 "href=\"https://developer.wordpress.org/themes/functionality/"
@@ -182,190 +190,194 @@ msgid ""
 "can slow your site!</b>"
 msgstr ""
 
-#: etc/options.php:219
+#: etc/options.php:223
 msgid "Author Description"
 msgstr ""
 
-#: etc/options.php:220
+#: etc/options.php:224
 msgid "Enabled the substitution of orphans in the author description."
 msgstr ""
 
-#: etc/options.php:227
+#: etc/options.php:231
 msgid "Ignore Language"
 msgstr ""
 
-#: etc/options.php:229
+#: etc/options.php:233
 msgid "Allow to use plugin with another languages then Polish."
 msgstr ""
 
-#: etc/options.php:236
+#: etc/options.php:240
 msgid "Menu Title"
 msgstr ""
 
-#: etc/options.php:238
+#: etc/options.php:242
 msgid "Enabled the substitution of orphans in the menu title."
 msgstr ""
 
-#: etc/options.php:245
+#: etc/options.php:249
 msgid "Keep Numbers Together"
 msgstr ""
 
-#: etc/options.php:247
+#: etc/options.php:251
 msgid "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
 
-#: etc/options.php:253
+#: etc/options.php:257
 msgid "Protect Tag Attributes"
 msgstr ""
 
-#: etc/options.php:255
+#: etc/options.php:259
 msgid "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr ""
 
-#: etc/options.php:262
+#: etc/options.php:266
 msgid "Entries Custom Fields"
 msgstr ""
 
-#: etc/options.php:264
+#: etc/options.php:268
 msgid "Use a comma to separate custom fields name (meta fields)."
 msgstr ""
 
-#: etc/options.php:272 etc/options.php:421
+#: etc/options.php:276 etc/options.php:425
 msgid "We are waiting for your message"
 msgstr ""
 
-#: etc/options.php:278
+#: etc/options.php:282
 msgid "I love what I do!"
 msgstr ""
 
-#: etc/options.php:292
+#: etc/options.php:296
 msgid "Integrations"
 msgstr ""
 
-#: etc/options.php:297
+#: etc/options.php:301
 msgid "Advanced Custom Fields"
 msgstr ""
 
-#: etc/options.php:302
+#: etc/options.php:306
 msgid "Text"
 msgstr ""
 
-#: etc/options.php:303
+#: etc/options.php:307
 msgid "Enabled the substitution of orphans in text fields."
 msgstr ""
 
-#: etc/options.php:311
+#: etc/options.php:315
 msgid "Textarea"
 msgstr ""
 
-#: etc/options.php:312
+#: etc/options.php:316
 msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr ""
 
-#: etc/options.php:320
+#: etc/options.php:324
 msgid "WYSIWYG"
 msgstr ""
 
-#: etc/options.php:321
+#: etc/options.php:325
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
-#: etc/options.php:385
+#: etc/options.php:389
 msgid "Below are some links to help spread this plugin to other users"
 msgstr ""
 
-#: etc/options.php:387
+#: etc/options.php:391
 msgid "Give it a five stars on WordPress.org"
 msgstr ""
 
-#: etc/options.php:388
+#: etc/options.php:392
 msgid "Link to it so others can easily find it"
 msgstr ""
 
-#: etc/options.php:423
+#: etc/options.php:427
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:630
-#: includes/iworks/rate/rate.php:124
+#: includes/iworks/class-iworks-orphan.php:643
+#: includes/iworks/rate/rate.php:125
 msgid "Settings"
 msgstr ""
 
-#: includes/iworks/options/options.php:258
+#: includes/iworks/options/options.php:257
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:761
-#: includes/iworks/options/options.php:1758
+#: includes/iworks/options/options.php:764
+#: includes/iworks/options/options.php:1780
 msgid "Select Image"
 msgstr ""
 
-#: includes/iworks/options/options.php:766
+#: includes/iworks/options/options.php:769
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:852
+#: includes/iworks/options/options.php:860
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1652
+#: includes/iworks/options/options.php:1674
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:1653
+#: includes/iworks/options/options.php:1675
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1654
+#: includes/iworks/options/options.php:1676
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1655
+#: includes/iworks/options/options.php:1677
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1811
+#: includes/iworks/options/options.php:1833
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1812
+#: includes/iworks/options/options.php:1834
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:130
-#: includes/iworks/rate/templates/thanks.php:28
+#: includes/iworks/options/options.php:1899
+msgid "Failed Security Check"
+msgstr ""
+
+#: includes/iworks/rate/rate.php:139
+#: includes/iworks/rate/templates/thanks.php:29
 msgid "Provide us a coffee"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:474
+#: includes/iworks/rate/rate.php:498
 msgid "OpenGraph"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:490
+#: includes/iworks/rate/rate.php:514
 msgid "OG — Better Share on Social Media"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:491
+#: includes/iworks/rate/rate.php:515
 msgid "https://wordpress.org/plugins/og/"
 msgstr ""
 
-#: includes/iworks/rate/templates/plugins/og.php:2
+#: includes/iworks/rate/templates/plugins/og.php:6
 msgid "Would you like to boost your website sharing abilities?"
 msgstr ""
 
-#: includes/iworks/rate/templates/plugins/og.php:7
+#: includes/iworks/rate/templates/plugins/og.php:12
 msgid "Don't wait, install plugin %s!"
 msgstr ""
 
-#: includes/iworks/rate/templates/plugins/og.php:17
+#: includes/iworks/rate/templates/plugins/og.php:22
 msgid "Install"
 msgstr ""
 
-#: includes/iworks/rate/templates/thanks.php:17
+#: includes/iworks/rate/templates/thanks.php:18
 msgid "Thank you for using our plugin %s!"
 msgstr ""
 
-#: includes/iworks/rate/templates/thanks.php:20
+#: includes/iworks/rate/templates/thanks.php:21
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag
 msgid ""
 "Please let us know what you think about our plugin. It is important that we "
@@ -375,44 +387,44 @@ msgid ""
 "help you!"
 msgstr ""
 
-#: includes/iworks/rate/templates/thanks.php:24
-#: includes/iworks/rate/templates/widgets/support.php:23
+#: includes/iworks/rate/templates/thanks.php:25
+#: includes/iworks/rate/templates/widgets/support.php:24
 msgid "Get help"
 msgstr ""
 
-#: includes/iworks/rate/templates/thanks.php:26
-#: includes/iworks/rate/templates/widgets/support.php:33
+#: includes/iworks/rate/templates/thanks.php:27
+#: includes/iworks/rate/templates/widgets/support.php:34
 msgid "Add review"
 msgstr ""
 
-#: includes/iworks/rate/templates/thanks.php:30
+#: includes/iworks/rate/templates/thanks.php:31
 msgid "I added review, do not show again"
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/donate.php:1
+#: includes/iworks/rate/templates/widgets/donate.php:2
 msgid ""
 "However, working on plugins and technical support requires many hours of "
 "work. If you want to appreciate it, you can provide me a coffee."
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/donate.php:2
+#: includes/iworks/rate/templates/widgets/donate.php:3
 msgid ""
 "If every plugin user did it, I could devote myself fully to working on this "
 "plugin. Thanks everyone!"
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/donate.php:3
+#: includes/iworks/rate/templates/widgets/donate.php:4
 msgid "Provide me a coffee"
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/support.php:4
+#: includes/iworks/rate/templates/widgets/support.php:5
 msgid ""
 "Do you have a technical problem? Please contact us. We will be happy to "
 "help you. Or maybe you have an idea for a new feature? Please let us know "
 "about it by filling the support form. We will try to add it!"
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/support.php:13
+#: includes/iworks/rate/templates/widgets/support.php:14
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
 #. anchor tag, %4$s: close anchor tag
 msgid ""
@@ -421,7 +433,7 @@ msgid ""
 "problems."
 msgstr ""
 
-#: includes/iworks/rate/templates/widgets/support.php:28
+#: includes/iworks/rate/templates/widgets/support.php:29
 msgid ""
 "Do you like our plugin? Could you rate him? Please let us know what you "
 "think about our plugin. It is important that we can develop this tool. "
@@ -444,22 +456,22 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr ""
 
-#: etc/options.php:388
+#: etc/options.php:392
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr ""
 
-#: etc/options.php:423
+#: etc/options.php:427
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:405
+#: includes/iworks/rate/rate.php:429
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:411
+#: includes/iworks/rate/rate.php:435
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""
