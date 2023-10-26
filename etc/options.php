@@ -50,6 +50,10 @@ function orphans_indicator_options() {
 						'label'       => __( 'Czech', 'sierotki' ),
 						'description' => __( 'Select if you want to force the loading of Czech language rules.', 'sierotki' ),
 					),
+					'en'                  => array(
+						'label'       => __( 'English', 'sierotki' ),
+						'description' => __( 'Select if you want to force the loading of English short words.', 'sierotki' ),
+					),
 					array(
 						'label'       => __( 'Do not load any files', 'sierotki' ),
 						'description' => __( 'Select if you want to rely only on your terms.', 'sierotki' ),

@@ -152,6 +152,17 @@ add_filter(
 
 == Changelog ==
 
+= 3.2.4 - 2023-10-26 =
+* Handling of multiple term files has been added.
+* Handling short language codes has been added.
+* The EN terms file has been added—only one-letter and some two-letter words from Wiktionary.
+* Checking whether a data file has already been loaded to avoid multiple attempts to load it has been added.
+* The term cache will be cleared after updating the WPLANG option.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.7.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.3.
+* The file `terms-cs_CZ.txt` has been renamed to `terms-cs.txt`.
+* The file `terms-pl_PL.txt` has been renamed to `terms-pl.txt`.
+
 = 3.2.3 - 2023-09-04 =
 
 * The cache for `orphans_indicator_options` has been added. Props for [Krystian Marcisz](https://github.com/simivar).

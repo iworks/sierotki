@@ -74,6 +74,13 @@ class iworks_orphan {
 	 */
 	private $nbsp_placeholder = '&nbsp;';
 
+	/**
+	 * semaphore - already attempt to create orphans table
+	 *
+	 * @since 3.2.4
+	 */
+	private $orphans_where_loaded = false;
+
 	public function __construct() {
 		/**
 		 * basic settings
@@ -94,6 +101,12 @@ class iworks_orphan {
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
+		/**
+		 * clear cache terms after site langage was changed
+		 *
+		 * @since 3.2.4
+		 */
+		add_action( 'update_option_WPLANG', array( $this, 'clear_terms_cache' ) );
 		/**
 		 * filters
 		 */
@@ -702,9 +715,18 @@ class iworks_orphan {
 			$terms = $this->terms;
 			$terms = apply_filters( 'iworks_orphan_therms', $terms );
 			$terms = apply_filters( 'iworks_orphan_terms', $terms );
-			// return $terms;
+			return $terms;
 		}
 		$terms = array();
+		/**
+		 * semaphore - already attempt to create orphans table
+		 *
+		 * @since 3.2.4
+		 */
+		if ( $this->orphans_where_loaded ) {
+			return $terms;
+		}
+		$this->orphans_where_loaded = true;
 		/**
 		 * set file name
 		 *
@@ -715,30 +737,55 @@ class iworks_orphan {
 			$locale = get_locale();
 		}
 		if ( ! empty( $locale ) ) {
-			$filename = apply_filters(
-				'iworks_orphan_own_terms_filename',
-				sprintf( 'terms-%s.txt', $locale )
+			/**
+			 * multiple files
+			 *
+			 * @since 3.2.4
+			 */
+			$files = array(
+				sprintf( 'terms-%s.txt', $locale ),
+				sprintf( 'terms-%s.txt', preg_replace( '/_[A-Z]+$/', '', $locale ) ),
+				apply_filters(
+					'iworks_orphan_own_terms_filename',
+					sprintf( 'terms-%s.txt', $locale )
+				),
 			);
 			/**
 			 * read terms from file
 			 *
 			 * @since 2.9.0
 			 */
-			$file = apply_filters(
-				'iworks_orphan_own_terms_file',
-				sprintf( '%s/etc/%s', $this->root, $filename )
-			);
-			if ( is_file( $file ) && is_readable( $file ) ) {
-				$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
-				foreach ( $data as $term ) {
-					if ( preg_match( '/^#/', $term ) ) {
-						continue;
+			$files           = array_unique( $files );
+			$files_with_path = array();
+			foreach ( $files as $file ) {
+				$files_with_path[] = apply_filters(
+					'iworks_orphan_own_terms_file',
+					sprintf( '%s/etc/%s', $this->root, $file ),
+					$file
+				);
+			}
+			/**
+			 * Filter allow to change files array.
+			 *
+			 * @since 2.9.0
+			 */
+			$files_with_path = apply_filters( 'iworks_orphan_terms_files_array', $files_with_path );
+			/**
+			 * handle multiple files
+			 */
+			foreach ( $files_with_path as $file ) {
+				if ( is_file( $file ) && is_readable( $file ) ) {
+					$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
+					foreach ( $data as $term ) {
+						if ( preg_match( '/^#/', $term ) ) {
+							continue;
+						}
+						$term = trim( $term );
+						if ( empty( $term ) ) {
+							continue;
+						}
+						$terms[] = $term;
 					}
-					$term = trim( $term );
-					if ( empty( $term ) ) {
-						continue;
-					}
-					$terms[] = $term;
 				}
 			}
 		}
@@ -890,7 +937,6 @@ class iworks_orphan {
 	 * @since 3.1.0
 	 */
 	public function clear_terms_cache() {
-
 		$cache_name = 'orphan_terms' . $this->version;
 		delete_transient( $cache_name );
 		add_action( 'shutdown', array( $this, 'action_shutdown_orphans_indicator_options' ) );
