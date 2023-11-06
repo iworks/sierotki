@@ -152,6 +152,9 @@ add_filter(
 
 == Changelog ==
 
+= 3.2.5 - 2023-11-06 =
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.7.
+
 = 3.2.4 - 2023-10-26 =
 * Handling of multiple term files has been added.
 * Handling short language codes has been added.
