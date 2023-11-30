@@ -19,12 +19,12 @@
     ],
     "requires": {
         "WordPress": "5.0",
-        "PHP": "7.4"
+        "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "6.3"
+        "WordPress": "6.4"
     },
-    "license": "GPL-2.0",
+    "license": "GPL-3.0",
     "devDependencies": {
         "grunt": ">1.0.0",
         "grunt-autoprefixer": ">3.0.0",

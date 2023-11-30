@@ -152,8 +152,15 @@ add_filter(
 
 == Changelog ==
 
+= 3.2.6 - 2023-11-30 =
+* The post types selector has been refactored. Props for [gierand](https://wordpress.org/support/users/gierand/).
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.9.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.4.
+* The `strip_tags()` function has been replaced by the `wp_strip_all_tags()` function.
+* The `wp_remote_get()` function has been replaced by the `WP_Filesystem_Direct` class object.
+
 = 3.2.5 - 2023-11-06 =
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.7.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.8.
 
 = 3.2.4 - 2023-10-26 =
 * Handling of multiple term files has been added.

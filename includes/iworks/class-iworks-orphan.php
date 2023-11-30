@@ -129,6 +129,12 @@ class iworks_orphan {
 		 * @since 3.1.0
 		 */
 		add_filter( 'orphan_get_terms', array( $this, 'get_terms' ) );
+		/**
+		 * get post types filter
+		 *
+		 * @since 3.2.5
+		 */
+		add_filter( 'index_iworks_orphan_post_type_data', array( $this, 'filter_index_iworks_orphan_post_type_data' ), 10, 3 );
 	}
 
 	/**
@@ -414,7 +420,7 @@ class iworks_orphan {
 		/**
 		 * string, no tags
 		 */
-		if ( strip_tags( $content ) === $content ) {
+		if ( wp_strip_all_tags( $content ) === $content ) {
 			return $this->string_replacement( $content );
 		}
 		/**
@@ -773,9 +779,14 @@ class iworks_orphan {
 			/**
 			 * handle multiple files
 			 */
+			if ( ! class_exists( 'WP_Filesystem_Direct' ) ) {
+				include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+				include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+			}
+			$filesystem = new WP_Filesystem_Direct( true );
 			foreach ( $files_with_path as $file ) {
 				if ( is_file( $file ) && is_readable( $file ) ) {
-					$data = preg_split( '/[\r\n]/', file_get_contents( $file ) );
+					$data = preg_split( '/[\r\n]/', $filesystem->get_contents( $file ) );
 					foreach ( $data as $term ) {
 						if ( preg_match( '/^#/', $term ) ) {
 							continue;
@@ -998,5 +1009,27 @@ class iworks_orphan {
 	public function integration_filter_et_pb_module_content( $content, $props, $attrs, $render_slug, $_address, $global_content ) {
 		return $this->unconditional_replacement( $content );
 	}
+
+		/**
+		 * get post types
+		 *
+		 * @since 3.2.5
+		 */
+	public function filter_index_iworks_orphan_post_type_data( $options, $option_name, $option_value ) {
+		$args       = apply_filters(
+			'iworks_orphan_get_post_types_args',
+			array(
+				'public' => true,
+			)
+		);
+		$post_types = get_post_types( $args, 'names' );
+		foreach ( $post_types as $post_type ) {
+			$a               = get_post_type_object( $post_type );
+			$p[ $post_type ] = $a->labels->name;
+		}
+		asort( $p );
+		return $p;
+	}
+
 }
 

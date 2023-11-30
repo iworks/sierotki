@@ -7,7 +7,10 @@ function orphans_indicator_options() {
 	if ( apply_filters( 'orphans_indicator_options_use_cache', true ) ) {
 		$cached = wp_cache_get( 'orphans_indicator_options', 'iworks_orphans' );
 		if ( ! empty( $cached ) ) {
-			return $cached;
+			return apply_filters(
+				'orphans_indicator_options_cached',
+				$cached
+			);
 		}
 	}
 	/**
@@ -79,12 +82,18 @@ function orphans_indicator_options() {
 			/**
 			 * Since 2.6.8
 			 */
-			array(
+			'post_type' => array(
 				'name'     => 'post_type',
 				'type'     => 'select2',
 				'th'       => __( 'Post Types', 'sierotki' ),
 				'default'  => array( 'post', 'page' ),
-				'options'  => iworks_orphan_post_types(),
+				'options'  => apply_filters(
+					'orphan_get_post_types',
+					array(
+						'post' => __( 'Posts', 'sierotki' ),
+						'page' => __( 'Pages', 'sierotki' ),
+					)
+				),
 				'multiple' => true,
 			),
 			array(
@@ -401,19 +410,6 @@ function iworks_orphan_taxonomies() {
 	}
 	return $data;
 }
-function iworks_orphan_post_types() {
-	$args       = array(
-		'public' => true,
-	);
-	$p          = array();
-	$post_types = get_post_types( $args, 'names' );
-	foreach ( $post_types as $post_type ) {
-		$a               = get_post_type_object( $post_type );
-		$p[ $post_type ] = $a->labels->name;
-	}
-	return $p;
-}
-
 function iworks_orphans_options_need_assistance( $iworks_orphans ) {
 	$content = apply_filters( 'iworks_rate_assistance', '', 'sierotki' );
 	if ( ! empty( $content ) ) {
