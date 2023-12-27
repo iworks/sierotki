@@ -152,8 +152,12 @@ add_filter(
 
 == Changelog ==
 
+= 3.2.6 - 2023-12-27 =
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.0.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.6.
+
 = 3.2.5 - 2023-11-30 =
-* The post types selector has been refactored. Props for [gierand](https://wordpress.org/support/users/gierand/).
+* [The post types selector has been refactored.](https://github.com/iworks/sierotki/issues/5) Props for [gierand](https://wordpress.org/support/users/gierand/).
 * The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.9.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.4.
 * The `strip_tags()` function has been replaced by the `wp_strip_all_tags()` function.
