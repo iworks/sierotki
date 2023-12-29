@@ -81,6 +81,13 @@ class iworks_orphan {
 	 */
 	private $orphans_where_loaded = false;
 
+	/**
+	 * Loaded integrations objects
+	 *
+	 * @since 3.2.7
+	 */
+	private $loaded_integrations = array();
+
 	public function __construct() {
 		/**
 		 * basic settings
@@ -623,6 +630,15 @@ class iworks_orphan {
 		 * @since 3.2.1
 		 */
 		add_filter( 'et_pb_module_content', array( $this, 'integration_filter_et_pb_module_content' ), 200, 6 );
+		/**
+		 * Integrations: Bricks - Visual Site Builder for WordPress
+		 *
+		 * @since 3.2.7
+		 */
+		if ( defined( 'BRICKS_VERSION' ) && BRICKS_VERSION ) {
+			include_once dirname( __FILE__ ) . '/integrations/class-iworks-orphans-integration-bricks.php';
+			$this->loaded_integrations['class-iworks-orphans-integration-bricks'] = new iWorks_Orphans_Integration_Bricks( $this );
+		}
 	}
 
 	/**
