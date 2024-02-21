@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Orphans
-Plugin URI: http://iworks.pl/2011/02/16/sierotki/
+Plugin URI: PLUGIN_URI
 Text Domain: sierotki
 Description: Implement Polish grammar rules with orphans.
 Author: Marcin Pietrzak
