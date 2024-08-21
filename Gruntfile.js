@@ -27,24 +27,55 @@ module.exports = function(grunt) {
 
         // BUILD patterns to exclude code for specific builds.
         replaces: {
-            patterns: [
-                { match: /AUTHOR_NAME/g, replace: '<%= pkg.author[0].name %>' },
-                { match: /AUTHOR_URI/g, replace: '<%= pkg.author[0].uri %>' },
-                { match: /BUILDTIME/g, replace: buildtime },
-                { match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
-                { match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
-                { match: /PLUGIN_DESCRIPTION/g, replace: '<%= pkg.description %>' },
-                { match: /PLUGIN_NAME/g, replace: '<%= pkg.name %>' },
-                { match: /PLUGIN_REQUIRES_PHP/g, replace: '<%= pkg.requires.PHP %>' },
-                { match: /PLUGIN_REQUIRES_WORDPRESS/g, replace: '<%= pkg.requires.WordPress %>' },
-                { match: /PLUGIN_TESTED_WORDPRESS/g, replace: '<%= pkg.tested.WordPress %>' },
-                { match: /PLUGIN_TAGLINE/g, replace: '<%= pkg.tagline %>' },
-                { match: /PLUGIN_TITLE/g, replace: '<%= pkg.title %>' },
-                { match: /PLUGIN_TILL_YEAR/g, replace: buildyear },
-                { match: /PLUGIN_URI/g, replace: '<%= pkg.homepage %>' },
-                { match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
-                { match: /^Version: .+$/g, replace: 'Version: <%= pkg.version %>' },
-            ],
+            patterns: [{
+                match: /AUTHOR_NAME/g,
+                replace: '<%= pkg.author[0].name %>'
+            }, {
+                match: /AUTHOR_URI/g,
+                replace: '<%= pkg.author[0].uri %>'
+            }, {
+                match: /BUILDTIME/g,
+                replace: buildtime
+            }, {
+                match: /IWORKS_RATE_TEXTDOMAIN/g,
+                replace: '<%= pkg.name %>'
+            }, {
+                match: /IWORKS_OPTIONS_TEXTDOMAIN/g,
+                replace: '<%= pkg.name %>'
+            }, {
+                match: /PLUGIN_DESCRIPTION/g,
+                replace: '<%= pkg.description %>'
+            }, {
+                match: /PLUGIN_NAME/g,
+                replace: '<%= pkg.name %>'
+            }, {
+                match: /PLUGIN_REQUIRES_PHP/g,
+                replace: '<%= pkg.requires.PHP %>'
+            }, {
+                match: /PLUGIN_REQUIRES_WORDPRESS/g,
+                replace: '<%= pkg.requires.WordPress %>'
+            }, {
+                match: /PLUGIN_TESTED_WORDPRESS/g,
+                replace: '<%= pkg.tested.WordPress %>'
+            }, {
+                match: /PLUGIN_TAGLINE/g,
+                replace: '<%= pkg.tagline %>'
+            }, {
+                match: /PLUGIN_TITLE/g,
+                replace: '<%= pkg.title %>'
+            }, {
+                match: /PLUGIN_TILL_YEAR/g,
+                replace: buildyear
+            }, {
+                match: /PLUGIN_URI/g,
+                replace: '<%= pkg.homepage %>'
+            }, {
+                match: /PLUGIN_VERSION/g,
+                replace: '<%= pkg.version %>'
+            }, {
+                match: /^Version: .+$/g,
+                replace: 'Version: <%= pkg.version %>'
+            }, ],
             // Files to apply above patterns to (not only php files).
             files: {
                 expand: true,
@@ -73,17 +104,19 @@ module.exports = function(grunt) {
         translation: {
             ignore_files: [
                 'README.md',
+                '.git*',
                 'node_modules/.*',
                 '(^.php)', // Ignore non-php files.
                 'inc/external/.*', // External libraries.
                 'release/.*', // Temp release files.
+                '.sass-cache/.*',
                 'tests/.*', // Unit testing.
             ],
             pot_dir: 'languages/', // With trailing slash.
             textdomain: "<%= pkg.name %>",
         },
-
-        dir: 'sierotki/'
+        dir: "<%= pkg.name %>/",
+        plugin_file: 'sierotki.php'
     };
 
     // Project configuration
@@ -104,7 +137,6 @@ module.exports = function(grunt) {
                 files: conf.js_files_concat
             }
         },
-
 
         // JS - Validate .js source code.
         jshint: {
@@ -129,7 +161,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-
 
         // JS - Uglyfies the source code of .js files (to make files smaller).
         uglify: {
@@ -187,7 +218,7 @@ module.exports = function(grunt) {
                     cwd: '',
                     domainPath: conf.translation.pot_dir,
                     exclude: conf.translation.ignore_files,
-                    mainFile: 'sierotki.php',
+                    mainFile: conf.plugin_file,
                     potFilename: conf.translation.textdomain + '.pot',
                     potHeaders: {
                         poedit: true, // Includes common Poedit headers.
@@ -258,6 +289,7 @@ module.exports = function(grunt) {
                     '!stylelint.config.js',
                     '!tests/*',
                     '!tests/**',
+                    '!.editorconfig',
                 ],
                 dest: './release/<%= pkg.version %>/',
                 noEmpty: true
