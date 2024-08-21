@@ -153,11 +153,12 @@ add_filter(
 == Changelog ==
 
 = 3.2.8 - 2024-08-21 =
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.2.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.0.
 
 = 3.2.7 - 2024-02-21 =
 * Integration with the Bricks builder (part of the Bricks Theme) has been added.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.2.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.1.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.7.
 
 = 3.2.6 - 2023-12-27 =
