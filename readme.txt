@@ -152,6 +152,9 @@ add_filter(
 
 == Changelog ==
 
+= 3.2.9 - 2024-11-17 =
+* [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
+
 = 3.2.8 - 2024-08-21 =
 * The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.2.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.0.

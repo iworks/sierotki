@@ -11,8 +11,6 @@ Author URI: http://iworks.pl/
 
 include_once dirname( __FILE__ ) . '/etc/options.php';
 
-load_plugin_textdomain( 'sierotki', false, dirname( __FILE__ ) . '/languages' );
-
 if ( ! defined( 'HDOM_TYPE_ELEMENT' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/simple_html_dom.php';
 }

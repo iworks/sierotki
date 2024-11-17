@@ -106,6 +106,7 @@ class iworks_orphan {
 		 * actions
 		 */
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', array( $this, 'action_load_plugin_textdomain' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
 		/**
@@ -1045,6 +1046,19 @@ class iworks_orphan {
 		}
 		asort( $p );
 		return $p;
+	}
+
+	/**
+	 * i18n
+	 *
+	 * @since 3.2.9
+	 */
+	public function action_load_plugin_textdomain() {
+		load_plugin_textdomain(
+			'sierotki',
+			false,
+			plugin_basename( $this->root ) . '/languages'
+		);
 	}
 
 }
