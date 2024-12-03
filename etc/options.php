@@ -279,6 +279,42 @@ function orphans_indicator_options() {
 				'classes'           => array( 'large-text' ),
 				'rows'              => 10,
 			),
+			array(
+				'type'  => 'heading',
+				'label' => __( 'Export/Import', 'sierotki' ),
+				'since' => '3.3.0',
+			),
+			array(
+				'type'  => 'subheading',
+				'label' => __( 'Export', 'sierotki' ),
+				'since' => '3.3.0',
+			),
+			array(
+				'name'              => 'export_extra',
+				'th'                => __( 'Add extra information', 'sierotki' ),
+				'type'              => 'checkbox',
+				'description'       => __( 'Add site configuration data like language, url. Nothing sensitive.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'default'           => 1,
+			),
+			array(
+				'name'  => 'export',
+				'value' => __( 'Export JSON', 'sierotki' ),
+				'type'  => 'button',
+				'since' => '3.3.0',
+			),
+			array(
+				'type'  => 'subheading',
+				'label' => __( 'Import', 'sierotki' ),
+				'since' => '3.3.0',
+			),
+			array(
+				'name'  => 'import',
+				'th'    => __( 'Import JSON', 'sierotki' ),
+				'type'  => 'file',
+				'since' => '3.3.0',
+			),
 		),
 		'metaboxes'       => array(
 			'assistance' => array(
