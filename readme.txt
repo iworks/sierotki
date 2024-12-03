@@ -154,7 +154,7 @@ add_filter(
 
 = 3.3.0 - 2024-12-02 =
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.1.
-* The configuration export ability has been added. [#10](https://github.com/iworks/sierotki/issues/10)
+* The configuration import ability has been added. [#10](https://github.com/iworks/sierotki/issues/10)
 * The configuration export ability has been added. [#9](https://github.com/iworks/sierotki/issues/9)
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
 
