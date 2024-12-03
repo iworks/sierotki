@@ -112,8 +112,9 @@ class iworks_orphan {
 		add_action( 'init', array( $this, 'action_load_plugin_textdomain' ), 0 );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
-		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'add_admin_scripts' ) );
+		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'load_classes' ) );
 		add_action( 'plugins_loaded', array( $this, 'send_json' ) );
+		add_action( 'plugins_loaded', array( $this, 'import_json' ) );
 		/**
 		 * clear cache terms after site langage was changed
 		 *
@@ -1072,35 +1073,10 @@ class iworks_orphan {
 	}
 
 	/**
-	 * add admin scripts
+	 * Send JSON File
 	 *
 	 * @since 3.3.0
 	 */
-	public function add_admin_scripts() {
-		add_action( 'admin_print_scripts', array( $this, 'action_admin_print_scripts' ), PHP_INT_MAX );
-	}
-
-	/**
-	 * add admin scripts
-	 *
-	 * @since 3.3.0
-	 */
-	public function action_admin_print_scripts() {
-		?>
-<script id="sierotki">
-jQuery(document).ready(function($) {
-	$('input[name=iworks_orphan_export]').on( 'click', function(e) {
-		$form = $('<form method="post"></form>');
-		$form.append('<input type="hidden" name="nonce" value="'+$(this).data('nonce') +'">');
-		$form.append('<input type="hidden" name="extra" value="'+$('input[name=iworks_orphan_export_extra]').is(':checked') +'">');
-		$('body').append($form);
-		$form.submit();
-	});
-});
-</script>
-		<?php
-	}
-
 	public function send_json() {
 		$nonce_value = filter_input( INPUT_POST, 'nonce' );
 		if ( empty( $nonce_value ) ) {
@@ -1109,10 +1085,33 @@ jQuery(document).ready(function($) {
 		if ( ! wp_verify_nonce( $nonce_value, 'iworks_orphan_export' ) ) {
 			return;
 		}
-		include_once __DIR__ . '/orphans/class-iworks-orphans-export.php';
-		$export = new iWorks_Orphans_Export;
-		$export->send_json();
+		$this->load_classes();
+		$this->loaded_integrations['export']->send_json();
 		wp_send_json_error();
+	}
+
+	/**
+	 * Upload JSON File
+	 *
+	 * @since 3.3.0
+	 */
+	public function import_json() {
+		$nonce_value = filter_input( INPUT_POST, 'nonce' );
+		if ( empty( $nonce_value ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $nonce_value, 'iworks_orphan_import' ) ) {
+			return;
+		}
+		$this->load_classes();
+		$this->loaded_integrations['import']->import_json();
+	}
+
+	public function load_classes() {
+		include_once __DIR__ . '/orphans/class-iworks-orphans-export.php';
+		$this->loaded_integrations['export'] = new iWorks_Orphans_Export;
+		include_once __DIR__ . '/orphans/class-iworks-orphans-import.php';
+		$this->loaded_integrations['import'] = new iWorks_Orphans_Import;
 	}
 }
 
