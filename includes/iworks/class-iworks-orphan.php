@@ -110,6 +110,7 @@ class iworks_orphan {
 		 */
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'init', array( $this, 'action_load_plugin_textdomain' ), 0 );
+		add_action( 'init', array( $this, 'action_init_register_iworks_rate' ), PHP_INT_MAX );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'load_classes' ) );
@@ -1064,7 +1065,6 @@ class iworks_orphan {
 	 * @since 3.2.9
 	 */
 	public function action_load_plugin_textdomain() {
-		return;
 		load_plugin_textdomain(
 			'sierotki',
 			false,
@@ -1112,6 +1112,23 @@ class iworks_orphan {
 		$this->loaded_integrations['export'] = new iWorks_Orphans_Export;
 		include_once __DIR__ . '/orphans/class-iworks-orphans-import.php';
 		$this->loaded_integrations['import'] = new iWorks_Orphans_Import;
+	}
+
+	/**
+	 * register plugin to iWorks Rate Helper
+	 *
+	 * @since 3.3.1
+	 */
+	public function action_init_register_iworks_rate() {
+		if ( ! class_exists( 'iworks_rate' ) ) {
+			include_once dirname( __FILE__ ) . '/rate/rate.php';
+		}
+		do_action(
+			'iworks-register-plugin',
+			plugin_basename( $this->plugin_file ),
+			__( 'Orphans', 'sierotki' ),
+			'sierotki'
+		);
 	}
 }
 

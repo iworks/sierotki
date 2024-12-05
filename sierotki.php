@@ -110,15 +110,3 @@ function iworks_orphan_change_options_autoload_status( $status ) {
 	}
 }
 
-add_action(
-	'plugins_loaded',
-	function() {
-		do_action(
-			'iworks-register-plugin',
-			plugin_basename( __FILE__ ),
-			__( 'Orphans', 'sierotki' ),
-			'sierotki'
-		);
-	}
-);
-
