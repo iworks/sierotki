@@ -152,6 +152,9 @@ add_filter(
 
 == Changelog ==
 
+= 3.3.2 - 2025-01-03 =
+* Check for `iworks_options` object has been added. [#12](https://github.com/iworks/sierotki/issues/12). Props for [maciejsb](https://wordpress.org/support/users/maciejsb/).
+
 = 3.3.1 - 2024-12-05 =
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
 
