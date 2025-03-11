@@ -152,6 +152,10 @@ add_filter(
 
 == Changelog ==
 
+= 3.3.3 - 2025-03-11 =
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.3.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.8.
+
 = 3.3.2 - 2025-01-03 =
 * Check for `iworks_options` object has been added. [#12](https://github.com/iworks/sierotki/issues/12). Props for [maciejsb](https://wordpress.org/support/users/maciejsb/).
 
