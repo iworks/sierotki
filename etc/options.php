@@ -427,14 +427,14 @@ function iworks_orphan_options_check_available_integrations() {
 function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
 	$content = apply_filters( 'iworks_rate_love', '', 'sierotki' );
 	if ( ! empty( $content ) ) {
-		echo $content;
+		echo wp_kses_post( $content );
 		return;
 	}
 	?>
-<p><?php _e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
+<p><?php esc_html_e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
 <ul>
 	<li><a href="https://wordpress.org/support/plugin/sierotki/reviews/#new-post"><?php _e( 'Give it a five stars on WordPress.org', 'sierotki' ); ?></a></li>
-	<li><a href="<?php _ex( 'https://wordpress.org/plugins/sierotki/', 'plugin home page on WordPress.org', 'sierotki' ); ?>"><?php _e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
+	<li><a href="<?php echo esc_html( _x( 'https://wordpress.org/plugins/sierotki/', 'plugin home page on WordPress.org', 'sierotki' ) ); ?>"><?php _e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
 </ul>
 	<?php
 }

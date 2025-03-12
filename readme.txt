@@ -1,7 +1,7 @@
 === PLUGIN_TITLE ===
 Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=sierotki&utm_medium=readme-donate
-Tags: czech, grammar, orphan, polish, typography
+Tags: PLUGIN_TAGS
 Requires at least: PLUGIN_REQUIRES_WORDPRESS
 Tested up to: PLUGIN_TESTED_WORDPRESS
 Stable tag: PLUGIN_VERSION
@@ -153,8 +153,12 @@ add_filter(
 == Changelog ==
 
 = 3.3.3 - 2025-03-11 =
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.3.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.8.
+* Added translation support to [GitHub releases](https://github.com/iworks/sierotki/releases).
+* Improved build process for better performance and efficiency.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.8.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.3.
+* Enhanced plugin update mechanism for smoother updates from GitHub releases.
+* Added escaping functions in multiple areas for improved security.
 
 = 3.3.2 - 2025-01-03 =
 * Check for `iworks_options` object has been added. [#12](https://github.com/iworks/sierotki/issues/12). Props for [maciejsb](https://wordpress.org/support/users/maciejsb/).
@@ -163,7 +167,7 @@ add_filter(
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
 
 = 3.3.0 - 2024-12-02 =
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.1.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.1.
 * The configuration import ability has been added. [#10](https://github.com/iworks/sierotki/issues/10)
 * The configuration export ability has been added. [#9](https://github.com/iworks/sierotki/issues/9)
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
@@ -172,13 +176,13 @@ add_filter(
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
 
 = 3.2.8 - 2024-08-21 =
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.2.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.2.0.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.2.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.0.
 
 = 3.2.7 - 2024-02-21 =
 * Integration with the Bricks builder (part of the Bricks Theme) has been added.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.1.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.7.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.1.
+* Update the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.7.
 
 = 3.2.6 - 2023-12-27 =
 * The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.0.

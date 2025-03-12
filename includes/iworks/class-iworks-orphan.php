@@ -109,7 +109,6 @@ class iworks_orphan {
 		 * actions
 		 */
 		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'init', array( $this, 'action_load_plugin_textdomain' ), 0 );
 		add_action( 'init', array( $this, 'action_init_register_iworks_rate' ), PHP_INT_MAX );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'load-appearance_page_iworks_orphan_index', array( $this, 'clear_terms_cache' ) );
@@ -142,6 +141,16 @@ class iworks_orphan {
 		 * @since 3.2.5
 		 */
 		add_filter( 'index_iworks_orphan_post_type_data', array( $this, 'filter_index_iworks_orphan_post_type_data' ), 10, 3 );
+		/**
+		 * load github class
+		 *
+		 * @since 3.3.3
+		 */
+		$filename = __DIR__ . '/orphans/class-iworks-orphans-github.php';
+		if ( is_file( $filename ) ) {
+			include_once $filename;
+			new iworks_orphans_github();
+		}
 	}
 
 	/**
@@ -474,8 +483,6 @@ class iworks_orphan {
 	 * Inicialize admin area
 	 */
 	public function admin_init() {
-		$this->check_option_object();
-		$this->options->options_init();
 		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_settings_link' ) );
 	}
 
@@ -1066,19 +1073,6 @@ class iworks_orphan {
 		}
 		asort( $p );
 		return $p;
-	}
-
-	/**
-	 * i18n
-	 *
-	 * @since 3.2.9
-	 */
-	public function action_load_plugin_textdomain() {
-		load_plugin_textdomain(
-			'sierotki',
-			false,
-			plugin_basename( $this->root ) . '/languages'
-		);
 	}
 
 	/**
