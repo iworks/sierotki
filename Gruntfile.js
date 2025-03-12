@@ -11,315 +11,335 @@
  */
 
 module.exports = function(grunt) {
-    // Show elapsed time at the end.
-    require('time-grunt')(grunt);
 
-    // Load all grunt tasks.
-    require('load-grunt-tasks')(grunt);
+	// Load all grunt tasks.
+	require('load-grunt-tasks')(grunt);
 
-    var buildtime = new Date().toISOString();
-    var buildyear = 1900 + new Date().getYear();
+	var buildtime = new Date().toISOString();
+	var buildyear = 1900 + new Date().getYear();
 
-    var conf = {
+	/**
+	 * excludes
+	 */
+	var excludeCopyFiles = [
+		'**',
+		'!**/bitbucket-pipelines.yml',
+		'!contributing.md',
+		'!**/css/less/**',
+		'!**/css/sass/**',
+		'!**/css/src/**',
+		'!.editorconfig',
+		'!.git*',
+		'!.git/**',
+		'!**/Gruntfile.js',
+		'!**/img/src/**',
+		'!**/js/src/**',
+		'!**/LICENSE',
+		'!LICENSE',
+		'!**/*.map',
+		'!node_modules/**',
+		'!**/package.json',
+		'!package-lock.json',
+		'!postcss.config.js',
+		'!**/README.md',
+		'!README.md',
+		'!release/**',
+		'!.sass-cache/**',
+		'!**/tests/**',
+		'!webpack.config.js',
+	];
 
-        // Concatenate those JS files into a single file (target: [source, source, ...]).
-        js_files_concat: {},
+	var excludeCopyFilesGIT = excludeCopyFiles.slice(0).concat(
+		[
+			'!includes/pro/**',
+			'!readme.txt',
+		]
+	);
 
-        // BUILD patterns to exclude code for specific builds.
-        replaces: {
-            patterns: [{
-                match: /AUTHOR_NAME/g,
-                replace: '<%= pkg.author[0].name %>'
-            }, {
-                match: /AUTHOR_URI/g,
-                replace: '<%= pkg.author[0].uri %>'
-            }, {
-                match: /BUILDTIME/g,
-                replace: buildtime
-            }, {
-                match: /IWORKS_RATE_TEXTDOMAIN/g,
-                replace: '<%= pkg.name %>'
-            }, {
-                match: /IWORKS_OPTIONS_TEXTDOMAIN/g,
-                replace: '<%= pkg.name %>'
-            }, {
-                match: /PLUGIN_DESCRIPTION/g,
-                replace: '<%= pkg.description %>'
-            }, {
-                match: /PLUGIN_NAME/g,
-                replace: '<%= pkg.name %>'
-            }, {
-                match: /PLUGIN_REQUIRES_PHP/g,
-                replace: '<%= pkg.requires.PHP %>'
-            }, {
-                match: /PLUGIN_REQUIRES_WORDPRESS/g,
-                replace: '<%= pkg.requires.WordPress %>'
-            }, {
-                match: /PLUGIN_TESTED_WORDPRESS/g,
-                replace: '<%= pkg.tested.WordPress %>'
-            }, {
-                match: /PLUGIN_TAGLINE/g,
-                replace: '<%= pkg.tagline %>'
-            }, {
-                match: /PLUGIN_TITLE/g,
-                replace: '<%= pkg.title %>'
-            }, {
-                match: /PLUGIN_TILL_YEAR/g,
-                replace: buildyear
-            }, {
-                match: /PLUGIN_URI/g,
-                replace: '<%= pkg.homepage %>'
-            }, {
-                match: /PLUGIN_VERSION/g,
-                replace: '<%= pkg.version %>'
-            }, {
-                match: /^Version: .+$/g,
-                replace: 'Version: <%= pkg.version %>'
-            }, ],
-            // Files to apply above patterns to (not only php files).
-            files: {
-                expand: true,
-                src: [
-                    '**/*.php',
-                    '**/*.css',
-                    '**/*.js',
-                    '**/*.html',
-                    '**/*.txt',
-                    '!node_modules/**',
-                    '!lib/**',
-                    '!docs/**',
-                    '!release/**',
-                    '!Gruntfile.js',
-                    '!package-lock.json',
-                    '!build/**',
-                    '!tests/**',
-                    '!.git/**',
-                    '!stylelint.config.js',
-                ],
-                dest: './release/<%= pkg.version %>/'
-            }
-        },
+	var excludeCopyFilesWPorg = excludeCopyFiles.slice(0).concat(
+		[
+			'!assets/sass/**',
+			'!assets/scripts/src/**',
+			'!assets/scss/**',
+			'!assets/styles/frontend/**',
+			'!includes/iworks/orphans/class-iworks-orphans-github.php',
+			'!includes/pro/**',
+			'!languages/*.mo',
+			'!languages/*.po',
+		]
+	);
 
-        // Regex patterns to exclude from transation.
-        translation: {
-            ignore_files: [
-                'README.md',
-                '.git*',
-                'node_modules/.*',
-                '(^.php)', // Ignore non-php files.
-                'inc/external/.*', // External libraries.
-                'release/.*', // Temp release files.
-                '.sass-cache/.*',
-                'tests/.*', // Unit testing.
-            ],
-            pot_dir: 'languages/', // With trailing slash.
-            textdomain: "<%= pkg.name %>",
-        },
-        dir: "<%= pkg.name %>/",
-        plugin_file: 'sierotki.php'
-    };
+	var conf = {
+		// Concatenate those JS files into a single file (target: [source, source, ...]).
 
-    // Project configuration
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+		replace_patterns: [{
+			match: /AUTHOR_NAME/g,
+			replace: '<%= pkg.author[0].name %>'
+		}, {
+			match: /AUTHOR_URI/g,
+			replace: '<%= pkg.author[0].uri %>'
+		}, {
+			match: /BUILDTIME/g,
+			replace: buildtime
+		}, {
+			match: /IWORKS_RATE_TEXTDOMAIN/g,
+			replace: '<%= pkg.name %>'
+		}, {
+			match: /IWORKS_OPTIONS_TEXTDOMAIN/g,
+			replace: '<%= pkg.name %>'
+		}, {
+			match: /PLUGIN_DESCRIPTION/g,
+			replace: '<%= pkg.description %>'
+		}, {
+			match: /PLUGIN_GITHUB_WEBSITE/g,
+			replace: '<%= pkg.repository.website %>'
+		}, {
+			match: /PLUGIN_NAME/g,
+			replace: '<%= pkg.name %>'
+		}, {
+			match: /PLUGIN_REQUIRES_PHP/g,
+			replace: '<%= pkg.requires.PHP %>'
+		}, {
+			match: /PLUGIN_REQUIRES_WORDPRESS/g,
+			replace: '<%= pkg.requires.WordPress %>'
+		}, {
+			match: /PLUGIN_TESTED_WORDPRESS/g,
+			replace: '<%= pkg.tested.WordPress %>'
+		}, {
+			match: /PLUGIN_TAGLINE/g,
+			replace: '<%= pkg.tagline %>'
+		}, {
+			match: /PLUGIN_TAGS/g,
+			replace: '<%= pkg.tags.join(", ") %>'
+		}, {
+			match: /PLUGIN_TILL_YEAR/g,
+			replace: buildyear
+		}, {
+			match: /PLUGIN_TITLE/g,
+			replace: '<%= pkg.title %>'
+		}, {
+			match: /PLUGIN_URI/g,
+			replace: '<%= pkg.homepage %>'
+		}, {
+			match: /PLUGIN_VERSION/g,
+			replace: '<%= pkg.version %>'
+		}, {
+			match: /^Version: .+$/g,
+			replace: 'Version: <%= pkg.version %>'
+		}],
 
-        // JS - Concat .js source files into a single .js file.
-        concat: {
-            options: {
-                stripBanners: true,
-                banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-                    ' * <%= pkg.homepage %>\n' +
-                    ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-                    ' * Licensed <%= pkg.license %>\n' +
-                    ' */\n'
-            },
-            scripts: {
-                files: conf.js_files_concat
-            }
-        },
+		plugin_dir: '',
+		plugin_file: '<%= pkg.name %>.php',
 
-        // JS - Validate .js source code.
-        jshint: {
-            all: [
-                'Gruntfile.js',
-                'assets/js/src/**/*.js',
-            ],
-            options: {
-                curly: true,
-                eqeqeq: true,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                boss: true,
-                eqnull: true,
-                globals: {
-                    exports: true,
-                    module: false
-                }
-            }
-        },
+		// Regex patterns to exclude from transation.
+		translation: {
+			ignore_files: [
+				'README.md',
+				'.git*',
+				'vendor/.*', // External libraries.
+				'includes/external/.*', // External libraries.
+				'node_modules/.*',
+				'(^.php)', // Ignore non-php files.
+				'release/.*', // Temp release files.
+				'.sass-cache/.*',
+				'tests/.*', // Unit testing.
+				'.editorconfig', // editor configuration
+			],
+			pot_dir: 'languages/', // With trailing slash.
+			textdomain: '<%= pkg.name %>',
+		},
+	};
 
-        // JS - Uglyfies the source code of .js files (to make files smaller).
-        uglify: {
-            all: {
-                files: [{
-                    expand: true,
-                    src: ['*.js', '!*.min.js'],
-                    cwd: 'assets/js/',
-                    dest: 'assets/js/',
-                    ext: '.js',
-                    extDot: 'last'
-                }],
-                options: {
-                    banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-                        ' * <%= pkg.homepage %>\n' +
-                        ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-                        ' * Licensed <%= pkg.license %>' +
-                        ' */\n',
-                    mangle: {
-                        except: ['jQuery']
-                    }
-                }
-            }
-        },
+	// Project configuration
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 
-        // WATCH - Watch filesystem for changes during development.
-        watch: {
-            scripts: {
-                files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
-                //tasks: ['jshint', 'concat', 'uglify' ],
-                tasks: ['concat', 'uglify'],
-                options: {
-                    debounceDelay: 500
-                }
-            }
-        },
+		// BUILD - Remove previous build version and temp files.
+		clean: {
+			wporg: {
+				src: [
+					'release/wporg/<%= pkg.version %>',
+					'release/wporg/<%= pkg.name %>.zip'
+				]
+			},
+			github: {
+				src: [
+					'release/github/<%= pkg.version %>',
+					'release/github/<%= pkg.name %>.zip'
+				]
+			},
+			temp: {
+				src: ['**/*.tmp', '**/.afpDeleted*', '**/.DS_Store'],
+				dot: true,
+				filter: 'isFile'
+			}
+		},
 
-        // BUILD - Create a zip-version of the plugin.
-        compress: {
-            target: {
-                options: {
-                    mode: 'zip',
-                    archive: './release/<%= pkg.name %>.zip'
-                },
-                expand: true,
-                cwd: './release/<%= pkg.version %>/',
-                src: ['**/*']
-            }
-        },
+		// BUILD - update the translation index .po file.
+		makepot: {
+			target: {
+				options: {
+					domainPath: conf.translation.pot_dir,
+					exclude: conf.translation.ignore_files,
+					mainFile: conf.plugin_file,
+					potFilename: conf.translation.textdomain + '.pot',
+					potHeaders: {
+						poedit: true, // Includes common Poedit headers.
+						'project-id-version': '<%= pkg.version %>',
+						'language-team': 'iWorks <support@iworks.pl>',
+						'last-translator': '<%= pkg.translator.name %> <<%= pkg.translator.email %>>',
+						'report-msgid-bugs-to': 'http://iworks.pl',
+						'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
+					},
+					exclude: ['node_modules', '.git', '.sass-cache', 'release'],
+					type: 'wp-plugin',
+					updateTimestamp: true,
+					updatePoFiles: true
+				}
+			}
+		},
 
-        // BUILD - update the translation index .po file.
-        makepot: {
-            target: {
-                options: {
-                    cwd: '',
-                    domainPath: conf.translation.pot_dir,
-                    exclude: conf.translation.ignore_files,
-                    mainFile: conf.plugin_file,
-                    potFilename: conf.translation.textdomain + '.pot',
-                    potHeaders: {
-                        poedit: true, // Includes common Poedit headers.
-                        'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
-                    },
-                    processPot: null, // A callback function for manipulating the POT file.
-                    type: 'wp-plugin', // wp-plugin or wp-theme
-                    updateTimestamp: true, // Whether the POT-Creation-Date should be updated without other changes.
-                    updatePoFiles: true // Whether to update PO files in the same directory as the POT file.
-                }
-            }
-        },
+		potomo: {
+			dist: {
+				options: {
+					poDel: false
+				},
+				files: [{
+					expand: true,
+					cwd: conf.translation.pot_dir,
+					src: ['*.po'],
+					dest: conf.translation.pot_dir,
+					ext: '.mo',
+					nonull: true
+				}]
+			}
+		},
 
-        // BUILD: Replace conditional tags in code.
-        replace: {
-            target: {
-                options: {
-                    patterns: conf.replaces.patterns
-                },
-                files: [conf.replaces.files]
-            }
-        },
+		copy: {
+			// Copy the plugin to a versioned release directory
+			wporg: {
+				src: excludeCopyFilesWPorg,
+				dest: 'release/wporg/<%= pkg.version %>/<%= pkg.name %>/'
+			},
+			github: {
+				src: excludeCopyFilesGIT,
+				dest: 'release/github/<%= pkg.version %>/<%= pkg.name %>/'
+			}
+		},
 
-        clean: {
-            options: {
-                force: true
-            },
-            release: {
-                options: {
-                    force: true
-                },
-                src: ['./release', './release/*', './release/**']
-            }
-        },
+		// BUILD: Replace conditional tags in code.
+		replace: {
+			options: {
+				patterns: conf.replace_patterns
+			},
+			files: {
+				expand: true,
+				src: [
+					'release/*/<%= pkg.version %>/<%= pkg.name %>/**',
+					'!release/*/**/*.gif',
+					'!release/*/**/images/**',
+					'!release/*/**/*.jpg',
+					'!release/*/**/languages/*.mo',
+					'!release/*/**/*.png',
+					'!release/*/**/*.webp',
+				],
+				dest: '.'
+			}
+		},
 
-        copy: {
-            release: {
-                expand: true,
-                src: [
-                    '*',
-                    '**',
-                    '!assets/js/src',
-                    '!assets/js/src/*',
-                    '!assets/js/src/**',
-                    '!assets/sass',
-                    '!assets/sass/*',
-                    '!assets/sass/**',
-                    '!bitbucket-pipelines.yml',
-                    '!composer.json',
-                    '!composer.lock',
-                    '!.git',
-                    '!.github',
-                    '!.github/*',
-                    '!.github/**',
-                    '!Gruntfile.js',
-                    '!.idea', // PHPStorm settings
-                    '!languages/*~',
-                    '!**/LICENSE',
-                    '!LICENSE',
-                    '!node_modules',
-                    '!node_modules/*',
-                    '!node_modules/**',
-                    '!package.json',
-                    '!package-lock.json',
-                    '!phpcs.xml.dist',
-                    '!**/README.md',
-                    '!README.md',
-                    '!stylelint.config.js',
-                    '!tests/*',
-                    '!tests/**',
-                    '!.editorconfig',
-                ],
-                dest: './release/<%= pkg.version %>/',
-                noEmpty: true
-            },
-        }
+		compress: {
+			wporg: {
+				options: {
+					mode: 'zip',
+					archive: './release/wporg/<%= pkg.name %>.zip'
+				},
+				expand: true,
+				cwd: 'release/wporg/<%= pkg.version %>/',
+				src: ['**/*'],
+				dest: '.'
+			},
+			github: {
+				options: {
+					mode: 'zip',
+					archive: './release/github/<%= pkg.name %>.zip'
+				},
+				expand: true,
+				cwd: 'release/github/<%= pkg.version %>/',
+				src: ['**/*'],
+				dest: '.'
+			}
+		},
 
-    });
+		checktextdomain: {
+			options: {
+				text_domain: ['<%= pkg.name %>', 'IWORKS_RATE_TEXTDOMAIN', 'IWORKS_OPTIONS_TEXTDOMAIN'],
+				keywords: [ //List keyword specifications
+					'__:1,2d',
+					'_e:1,2d',
+					'_x:1,2c,3d',
+					'esc_html__:1,2d',
+					'esc_html_e:1,2d',
+					'esc_html_x:1,2c,3d',
+					'esc_attr__:1,2d',
+					'esc_attr_e:1,2d',
+					'esc_attr_x:1,2c,3d',
+					'_ex:1,2c,3d',
+					'_n:1,2,4d',
+					'_nx:1,2,4c,5d',
+					'_n_noop:1,2,3d',
+					'_nx_noop:1,2,3c,4d'
+				]
+			},
+			files: {
+				src: ['<%= pkg.name %>.php', 'includes/**/*.php'],
+				expand: true,
+			},
+		},
+	});
 
-    // Test task.
-    grunt.registerTask('hello', 'Test if grunt is working', function() {
-        grunt.log.subhead('Hi there :)');
-        grunt.log.writeln('Looks like grunt is installed!');
-    });
+	grunt.registerTask('notes', 'Show release notes', function() {
+		grunt.log.subhead('Release notes');
+		grunt.log.writeln('  1. Check FORUM for open threads');
+		grunt.log.writeln('  2. REPLY to forum threads + unsubscribe');
+		grunt.log.writeln('  3. Update the TRANSLATION files');
+		grunt.log.writeln('  4. Generate ARCHIVE');
+		grunt.log.writeln('  5. Check ARCHIVE structure - it should be a folder with plugin name');
+		grunt.log.writeln('  6. INSTALL on a clean WordPress installation');
+		grunt.log.writeln('  7. RELEASE the plugin on WordPress.org!');
+		grunt.log.writeln('  8. Add git tag!');
+		grunt.log.writeln('  9. RELEASE the plugin on GitHub!');
+		grunt.log.writeln(' 10. RELEASE the plugin!');
+	});
 
-    grunt.registerTask('release', 'Generating release copy', function() {
-        grunt.task.run('clean');
-        grunt.task.run('js');
-        grunt.task.run('makepot');
-        grunt.task.run('copy');
-        grunt.task.run('replace');
-        grunt.task.run('compress');
-    });
+	// Default task.
 
-    // Default task.
+	grunt.registerTask('default', ['clean:temp']);
+	grunt.registerTask('i18n', ['checktextdomain', 'makepot']);
 
-    grunt.registerTask('build', ['release']);
-    grunt.registerTask('default', ['clean', 'jshint', 'concat', 'uglify', 'makepot']);
-    grunt.registerTask('js', ['concat', 'uglify']);
-    //grunt.registerTask( 'test', ['phpunit', 'jshint'] );
-
-    grunt.task.run('clear');
-    grunt.util.linefeed = '\n';
+	grunt.registerTask(
+		'build',
+		[
+			'default',
+			'i18n',
+			'clean:wporg',
+			'copy:wporg',
+			'replace',
+			'compress:wporg'
+		],
+	);
+	grunt.registerTask(
+		'build:github',
+		[
+			'default',
+			'i18n',
+			'potomo',
+			'clean:github',
+			'copy:github',
+			'replace',
+			'compress:github'
+		]
+	);
+	grunt.registerTask('release', ['build:wporg', 'build:github', 'notes' ]);
+	grunt.registerTask('test', ['phpunit', 'jshint', 'notes']);
+	grunt.util.linefeed = '\n';
 };
