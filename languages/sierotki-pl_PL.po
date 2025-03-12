@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-12 08:22:47+00:00\n"
+"POT-Creation-Date: 2025-03-12 14:17:29+00:00\n"
 "PO-Revision-Date: 2024-12-03 20:20:22+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -520,8 +520,8 @@ msgid "PLUGIN_URI"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Implement Polish grammar rules with orphans."
-msgstr "Pilnuje zasady niezostawiania sierotek na końcu linii."
+msgid "PLUGIN_TAGLINE"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "Marcin Pietrzak"
@@ -552,6 +552,9 @@ msgstr "https://pl.wordpress.org/plugins/%s"
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
+
+#~ msgid "Implement Polish grammar rules with orphans."
+#~ msgstr "Pilnuje zasady niezostawiania sierotek na końcu linii."
 
 #~ msgid "https://github.com/iworks/sierotki"
 #~ msgstr "https://github.com/iworks/sierotki"
