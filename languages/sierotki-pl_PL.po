@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-24 07:26:47+00:00\n"
+"POT-Creation-Date: 2025-03-24 08:53:00+00:00\n"
 "PO-Revision-Date: 2025-03-12 17:02:19+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -74,115 +74,115 @@ msgstr "Nie ładuj żadnych plików"
 msgid "Select if you want to rely only on your terms."
 msgstr "Wybierz, czy chcesz używać tylko własnych wartości."
 
-#: etc/options.php:71
+#: etc/options.php:78
 msgid "User Definied Orphans"
 msgstr "Własna definicja sierotek"
 
-#: etc/options.php:73
+#: etc/options.php:80
 msgid "Use a comma to separate orphans."
 msgstr "Użyj przecinka do oddzielenia sierot."
 
-#: etc/options.php:80
+#: etc/options.php:87
 msgid "Entries"
 msgstr "Treści"
 
-#: etc/options.php:88
+#: etc/options.php:95
 msgid "Post Types"
 msgstr "Typy treści"
 
-#: etc/options.php:93
+#: etc/options.php:100
 msgid "Posts"
 msgstr "Wpisy"
 
-#: etc/options.php:94
+#: etc/options.php:101
 msgid "Pages"
 msgstr "Strony"
 
-#: etc/options.php:101 etc/options.php:192
+#: etc/options.php:115 etc/options.php:213
 msgid "Title"
 msgstr "Tytuł"
 
-#: etc/options.php:103
+#: etc/options.php:117
 msgid "Enabled the substitution of orphans in the post_title."
 msgstr "Włącz obsługę sierotek dla tytułów."
 
-#: etc/options.php:110
+#: etc/options.php:124
 msgid "Excerpt"
 msgstr "Zajawka"
 
-#: etc/options.php:112
+#: etc/options.php:126
 msgid "Enabled the substitution of orphans in the excerpt."
 msgstr "Włącz obsługę sierotek w zajawce."
 
-#: etc/options.php:119
+#: etc/options.php:133
 msgid "Content"
 msgstr "Treść"
 
-#: etc/options.php:121
+#: etc/options.php:135
 msgid "Enabled the substitution of orphans in the content."
 msgstr "Włącz obsługę sierotek w treści."
 
-#: etc/options.php:129
+#: etc/options.php:143
 msgid "Comments"
 msgstr "Komentarze"
 
-#: etc/options.php:130
+#: etc/options.php:144
 msgid "Enabled the substitution of orphans in the comments."
 msgstr "Włącz obsługę sierotek w komentarzach."
 
-#: etc/options.php:137
+#: etc/options.php:151
 msgid "Widgets"
 msgstr "Widżety"
 
-#: etc/options.php:144
+#: etc/options.php:158
 msgid "Widget Title"
 msgstr "Tytuł widżetu"
 
-#: etc/options.php:146
+#: etc/options.php:160
 msgid "Enabled the substitution of orphans in the widget title."
 msgstr "Włącz obsługę sierotek w tytule widżetu."
 
-#: etc/options.php:156
+#: etc/options.php:170
 msgid "Widget Text"
 msgstr "Tekst widżetu"
 
-#: etc/options.php:158
+#: etc/options.php:172
 msgid "Enabled the substitution of orphans in the widget text."
 msgstr "Włącz obsługę sierotek w treści widżetu tekstowego."
 
-#: etc/options.php:168
+#: etc/options.php:182
 msgid "Widget Block Content"
 msgstr "Treść bloku widżetów"
 
-#: etc/options.php:170
+#: etc/options.php:184
 msgid "Enabled the substitution of orphans in the widget blocks."
 msgstr "Włącz obsługę sierotek w blokach widżetów."
 
-#: etc/options.php:180 etc/options.php:185
+#: etc/options.php:194 etc/options.php:199
 msgid "Taxonomies"
 msgstr "Taksonomie"
 
-#: etc/options.php:194
+#: etc/options.php:215
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr "Włącz obsługę sierotek w tytułach taksonomii."
 
-#: etc/options.php:201
+#: etc/options.php:222
 msgid "Description"
 msgstr "Opis"
 
-#: etc/options.php:203
+#: etc/options.php:224
 msgid "Enabled the substitution of orphans in the taxonomy description."
 msgstr "Włącz obsługę sierotek w opisach taksonomii."
 
-#: etc/options.php:210
+#: etc/options.php:231
 msgid "Miscellaneous"
 msgstr "Różne"
 
-#: etc/options.php:220
+#: etc/options.php:241
 msgid "Translation Functions"
 msgstr "Funkcje obsługi tłumaczeń"
 
-#: etc/options.php:221
+#: etc/options.php:242
 msgid ""
 "Enabled the substitution of orphans in Translations functions. <a "
 "href=\"https://developer.wordpress.org/themes/functionality/"
@@ -194,143 +194,143 @@ msgstr ""
 "internationalization/\" target=\"_blank\">Dowiedz się więcej.</a> "
 "<b>OSTRZEŻENIE: może to spowolnić witrynę!</b>"
 
-#: etc/options.php:232
+#: etc/options.php:253
 msgid "Author Description"
 msgstr "Opis autora"
 
-#: etc/options.php:233
+#: etc/options.php:254
 msgid "Enabled the substitution of orphans in the author description."
 msgstr "Włącz obsługę sierotek w opisie autora."
 
-#: etc/options.php:240
+#: etc/options.php:261
 msgid "Ignore Language"
 msgstr "Ignoruj język"
 
-#: etc/options.php:242
+#: etc/options.php:263
 msgid "Allow to use plugin with another languages then Polish."
 msgstr "Pozwala na włączenie wtyczki dla innych języków niż język polski."
 
-#: etc/options.php:249
+#: etc/options.php:270
 msgid "Menu Title"
 msgstr "Tytuły w menu"
 
-#: etc/options.php:251
+#: etc/options.php:272
 msgid "Enabled the substitution of orphans in the menu title."
 msgstr "Włącz obsługę sierotek w tytułach elementów menu."
 
-#: etc/options.php:258
+#: etc/options.php:279
 msgid "Keep Numbers Together"
 msgstr "Trzymaj liczby razem"
 
-#: etc/options.php:260
+#: etc/options.php:281
 msgid ""
 "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
 "Pozwala na nierozdzielanie numeru telefonu oraz liczb między którymi jest "
 "spacja."
 
-#: etc/options.php:266
+#: etc/options.php:287
 msgid "Protect Tag Attributes"
 msgstr "Ochrona atrybutów tagu"
 
-#: etc/options.php:268
+#: etc/options.php:289
 msgid ""
 "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr ""
 "Dodano ignorowanie spacji w atrybutach: \"class\", \"style\" and \"data-*\"."
 
-#: etc/options.php:275
+#: etc/options.php:296
 msgid "Entries Custom Fields"
 msgstr "Własne pola we wpisach"
 
-#: etc/options.php:277
+#: etc/options.php:298
 msgid "Use a comma to separate custom fields name (meta fields)."
 msgstr "Użyj przecinka, aby oddzielić nazwy własnych pól (meta)."
 
-#: etc/options.php:284
+#: etc/options.php:305
 msgid "Export/Import"
 msgstr "Eksport/Import"
 
-#: etc/options.php:289
+#: etc/options.php:310
 msgid "Export"
 msgstr "Eksport"
 
-#: etc/options.php:294
+#: etc/options.php:315
 msgid "Add extra information"
 msgstr "Dodaj dodatkowe informacje"
 
-#: etc/options.php:296
+#: etc/options.php:317
 msgid "Add site configuration data like language, url. Nothing sensitive."
 msgstr ""
 "Dodaj dane konfiguracyjne witryny, takie jak język, adres URL. Nic "
 "wrażliwego."
 
-#: etc/options.php:303
+#: etc/options.php:324
 msgid "Export JSON"
 msgstr "Eksportuj JSON"
 
-#: etc/options.php:309
+#: etc/options.php:330
 msgid "Import"
 msgstr "Import"
 
-#: etc/options.php:321 etc/options.php:457
+#: etc/options.php:342 etc/options.php:478
 msgid "We are waiting for your message"
 msgstr "Czekamy na twoją wiadomość"
 
-#: etc/options.php:327
+#: etc/options.php:348
 msgid "I love what I do!"
 msgstr "Kocham to co robię!"
 
-#: etc/options.php:341
+#: etc/options.php:362
 msgid "Integrations"
 msgstr "Integracje"
 
-#: etc/options.php:346
+#: etc/options.php:367
 msgid "Advanced Custom Fields"
 msgstr "Advanced Custom Fields"
 
-#: etc/options.php:351
+#: etc/options.php:372
 msgid "Text"
 msgstr "Tekst"
 
-#: etc/options.php:352
+#: etc/options.php:373
 msgid "Enabled the substitution of orphans in text fields."
 msgstr "Włącz obsługę sierotek w polu tekstowym (jedna linia)."
 
-#: etc/options.php:360
+#: etc/options.php:381
 msgid "Textarea"
 msgstr "Pole tekstowe"
 
-#: etc/options.php:361
+#: etc/options.php:382
 msgid ""
 "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr "Włącz obsługę sierotek w polach tekstu. (W tym edytor wizualny)."
 
-#: etc/options.php:369
+#: etc/options.php:390
 msgid "WYSIWYG"
 msgstr "Edytor wizualny"
 
-#: etc/options.php:370
+#: etc/options.php:391
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr "Włącz obsługę sierotek w polach edytora wizualnego."
 
-#: etc/options.php:434
+#: etc/options.php:455
 msgid "Below are some links to help spread this plugin to other users"
 msgstr "Poniższe odnośniki mogą pomóc innym w znalezieniu wtyczki"
 
-#: etc/options.php:436
+#: etc/options.php:457
 msgid "Give it a five stars on WordPress.org"
 msgstr "Daj wtyczce pięć gwiazdek na WordPress.org"
 
-#: etc/options.php:437
+#: etc/options.php:458
 msgid "Link to it so others can easily find it"
 msgstr "Odnośnik do wtyczki - żeby łatwo było znaleźć"
 
-#: etc/options.php:459
+#: etc/options.php:480
 msgid "WordPress Help Forum"
 msgstr "Forum Pomocy WordPressa"
 
-#: etc/options.php:472
+#: etc/options.php:493
 msgid "Import JSON"
 msgstr "Importuj JSON"
 
@@ -531,12 +531,12 @@ msgstr "Marcin Pietrzak"
 msgid "http://iworks.pl/"
 msgstr "http://iworks.pl/"
 
-#: etc/options.php:437
+#: etc/options.php:458
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr "https://pl.wordpress.org/plugins/sierotki/"
 
-#: etc/options.php:459
+#: etc/options.php:480
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr "https://wordpress.org/support/plugin/sierotki/"

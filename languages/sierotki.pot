@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.3.4\n"
+"Project-Id-Version: 3.3.5\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-24 07:26:57+00:00\n"
+"POT-Creation-Date: 2025-03-24 08:53:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -82,115 +82,115 @@ msgstr ""
 msgid "Select if you want to rely only on your terms."
 msgstr ""
 
-#: etc/options.php:71
+#: etc/options.php:78
 msgid "User Definied Orphans"
 msgstr ""
 
-#: etc/options.php:73
+#: etc/options.php:80
 msgid "Use a comma to separate orphans."
 msgstr ""
 
-#: etc/options.php:80
+#: etc/options.php:87
 msgid "Entries"
 msgstr ""
 
-#: etc/options.php:88
+#: etc/options.php:95
 msgid "Post Types"
 msgstr ""
 
-#: etc/options.php:93
+#: etc/options.php:100
 msgid "Posts"
 msgstr ""
 
-#: etc/options.php:94
+#: etc/options.php:101
 msgid "Pages"
 msgstr ""
 
-#: etc/options.php:101 etc/options.php:192
+#: etc/options.php:115 etc/options.php:213
 msgid "Title"
 msgstr ""
 
-#: etc/options.php:103
+#: etc/options.php:117
 msgid "Enabled the substitution of orphans in the post_title."
 msgstr ""
 
-#: etc/options.php:110
+#: etc/options.php:124
 msgid "Excerpt"
 msgstr ""
 
-#: etc/options.php:112
+#: etc/options.php:126
 msgid "Enabled the substitution of orphans in the excerpt."
 msgstr ""
 
-#: etc/options.php:119
+#: etc/options.php:133
 msgid "Content"
 msgstr ""
 
-#: etc/options.php:121
+#: etc/options.php:135
 msgid "Enabled the substitution of orphans in the content."
 msgstr ""
 
-#: etc/options.php:129
+#: etc/options.php:143
 msgid "Comments"
 msgstr ""
 
-#: etc/options.php:130
+#: etc/options.php:144
 msgid "Enabled the substitution of orphans in the comments."
 msgstr ""
 
-#: etc/options.php:137
+#: etc/options.php:151
 msgid "Widgets"
 msgstr ""
 
-#: etc/options.php:144
+#: etc/options.php:158
 msgid "Widget Title"
 msgstr ""
 
-#: etc/options.php:146
+#: etc/options.php:160
 msgid "Enabled the substitution of orphans in the widget title."
 msgstr ""
 
-#: etc/options.php:156
+#: etc/options.php:170
 msgid "Widget Text"
 msgstr ""
 
-#: etc/options.php:158
+#: etc/options.php:172
 msgid "Enabled the substitution of orphans in the widget text."
 msgstr ""
 
-#: etc/options.php:168
+#: etc/options.php:182
 msgid "Widget Block Content"
 msgstr ""
 
-#: etc/options.php:170
+#: etc/options.php:184
 msgid "Enabled the substitution of orphans in the widget blocks."
 msgstr ""
 
-#: etc/options.php:180 etc/options.php:185
+#: etc/options.php:194 etc/options.php:199
 msgid "Taxonomies"
 msgstr ""
 
-#: etc/options.php:194
+#: etc/options.php:215
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr ""
 
-#: etc/options.php:201
+#: etc/options.php:222
 msgid "Description"
 msgstr ""
 
-#: etc/options.php:203
+#: etc/options.php:224
 msgid "Enabled the substitution of orphans in the taxonomy description."
 msgstr ""
 
-#: etc/options.php:210
+#: etc/options.php:231
 msgid "Miscellaneous"
 msgstr ""
 
-#: etc/options.php:220
+#: etc/options.php:241
 msgid "Translation Functions"
 msgstr ""
 
-#: etc/options.php:221
+#: etc/options.php:242
 msgid ""
 "Enabled the substitution of orphans in Translations functions. <a "
 "href=\"https://developer.wordpress.org/themes/functionality/"
@@ -198,135 +198,135 @@ msgid ""
 "can slow your site!</b>"
 msgstr ""
 
-#: etc/options.php:232
+#: etc/options.php:253
 msgid "Author Description"
 msgstr ""
 
-#: etc/options.php:233
+#: etc/options.php:254
 msgid "Enabled the substitution of orphans in the author description."
 msgstr ""
 
-#: etc/options.php:240
+#: etc/options.php:261
 msgid "Ignore Language"
 msgstr ""
 
-#: etc/options.php:242
+#: etc/options.php:263
 msgid "Allow to use plugin with another languages then Polish."
 msgstr ""
 
-#: etc/options.php:249
+#: etc/options.php:270
 msgid "Menu Title"
 msgstr ""
 
-#: etc/options.php:251
+#: etc/options.php:272
 msgid "Enabled the substitution of orphans in the menu title."
 msgstr ""
 
-#: etc/options.php:258
+#: etc/options.php:279
 msgid "Keep Numbers Together"
 msgstr ""
 
-#: etc/options.php:260
+#: etc/options.php:281
 msgid "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
 
-#: etc/options.php:266
+#: etc/options.php:287
 msgid "Protect Tag Attributes"
 msgstr ""
 
-#: etc/options.php:268
+#: etc/options.php:289
 msgid "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr ""
 
-#: etc/options.php:275
+#: etc/options.php:296
 msgid "Entries Custom Fields"
 msgstr ""
 
-#: etc/options.php:277
+#: etc/options.php:298
 msgid "Use a comma to separate custom fields name (meta fields)."
 msgstr ""
 
-#: etc/options.php:284
+#: etc/options.php:305
 msgid "Export/Import"
 msgstr ""
 
-#: etc/options.php:289
+#: etc/options.php:310
 msgid "Export"
 msgstr ""
 
-#: etc/options.php:294
+#: etc/options.php:315
 msgid "Add extra information"
 msgstr ""
 
-#: etc/options.php:296
+#: etc/options.php:317
 msgid "Add site configuration data like language, url. Nothing sensitive."
 msgstr ""
 
-#: etc/options.php:303
+#: etc/options.php:324
 msgid "Export JSON"
 msgstr ""
 
-#: etc/options.php:309
+#: etc/options.php:330
 msgid "Import"
 msgstr ""
 
-#: etc/options.php:321 etc/options.php:457
+#: etc/options.php:342 etc/options.php:478
 msgid "We are waiting for your message"
 msgstr ""
 
-#: etc/options.php:327
+#: etc/options.php:348
 msgid "I love what I do!"
 msgstr ""
 
-#: etc/options.php:341
+#: etc/options.php:362
 msgid "Integrations"
 msgstr ""
 
-#: etc/options.php:346
+#: etc/options.php:367
 msgid "Advanced Custom Fields"
 msgstr ""
 
-#: etc/options.php:351
+#: etc/options.php:372
 msgid "Text"
 msgstr ""
 
-#: etc/options.php:352
+#: etc/options.php:373
 msgid "Enabled the substitution of orphans in text fields."
 msgstr ""
 
-#: etc/options.php:360
+#: etc/options.php:381
 msgid "Textarea"
 msgstr ""
 
-#: etc/options.php:361
+#: etc/options.php:382
 msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr ""
 
-#: etc/options.php:369
+#: etc/options.php:390
 msgid "WYSIWYG"
 msgstr ""
 
-#: etc/options.php:370
+#: etc/options.php:391
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
-#: etc/options.php:434
+#: etc/options.php:455
 msgid "Below are some links to help spread this plugin to other users"
 msgstr ""
 
-#: etc/options.php:436
+#: etc/options.php:457
 msgid "Give it a five stars on WordPress.org"
 msgstr ""
 
-#: etc/options.php:437
+#: etc/options.php:458
 msgid "Link to it so others can easily find it"
 msgstr ""
 
-#: etc/options.php:459
+#: etc/options.php:480
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: etc/options.php:472
+#: etc/options.php:493
 msgid "Import JSON"
 msgstr ""
 
@@ -508,12 +508,12 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr ""
 
-#: etc/options.php:437
+#: etc/options.php:458
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr ""
 
-#: etc/options.php:459
+#: etc/options.php:480
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""
