@@ -65,6 +65,13 @@ function orphans_indicator_options() {
 				'multiple' => true,
 				'default'  => 'pl_PL',
 				'since'    => '3.1.4',
+				/**
+				 * sanitize_callback for multiple (remove after it will be implemented into
+				 * iWorks_Options class.
+				 *
+				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 */
+				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
 			array(
 				'name'              => 'own_orphans',
@@ -95,6 +102,13 @@ function orphans_indicator_options() {
 					)
 				),
 				'multiple' => true,
+				/**
+				 * sanitize_callback for multiple (remove after it will be implemented into
+				 * iWorks_Options class.
+				 *
+				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 */
+				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
 			array(
 				'name'              => 'the_title',
@@ -186,6 +200,13 @@ function orphans_indicator_options() {
 				'default'  => array( 'category', 'post_tag', 'post_format' ),
 				'options'  => iworks_orphan_taxonomies(),
 				'multiple' => true,
+				/**
+				 * sanitize_callback for multiple (remove after it will be implemented into
+				 * iWorks_Options class.
+				 *
+				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 */
+				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
 			array(
 				'name'              => 'taxonomy_title',
@@ -473,3 +494,15 @@ function iworks_orphans_options_import() {
 	);
 	return $content;
 }
+
+/**
+ * sanitize_callback for multiple (remove after it will be implemented into
+ * iWorks_Options class.
+ *
+ * https://github.com/iworks/wordpress-options-class/issues/4
+ */
+function iworks_orphans_sanitize_callback_multiple( $value ) {
+	return $value;
+}
+
+

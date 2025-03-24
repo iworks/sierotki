@@ -151,8 +151,11 @@ add_filter(
 
 == Changelog ==
 
+= 3.3.5 - 2025-03-24 =
+* The issue with the saving multiple option value has been resolved.
+
 = 3.3.4 - 2025-03-24 =
-* The problem with saving options has been fixed. [#14](https://github.com/iworks/sierotki/issues/14). Props for [e-poka](https://e-poka.com/).
+* The issue with the saving options has been resolved. [#14](https://github.com/iworks/sierotki/issues/14). Props for [e-poka](https://e-poka.com/).
 
 = 3.3.3 - 2025-03-11 =
 * Added translation support to [GitHub releases](https://github.com/iworks/sierotki/releases).
