@@ -25,7 +25,6 @@ To avoid line breaks in the incorrect position, the plugin fixes orphans' positi
 
 The Orphans plugin is available also on [GitHub - Orphans](https://github.com/iworks/sierotki).
 
-
 == Installation ==
 
 There are 3 ways to install this plugin:
@@ -151,6 +150,9 @@ add_filter(
 1. Miscellaneous options.
 
 == Changelog ==
+
+= 3.3.4 - 2025-03-24 =
+* The problem with saving options has been fixed. [#14](https://github.com/iworks/sierotki/issues/14). Props for [e-poka](https://e-poka.com/).
 
 = 3.3.3 - 2025-03-11 =
 * Added translation support to [GitHub releases](https://github.com/iworks/sierotki/releases).
