@@ -24,15 +24,18 @@ class iWorks_Orphans_Integration_Bricks extends iWorks_Orphans_Integration {
 
 	public function __construct( $orphans ) {
 		$this->orphans = $orphans;
-		add_filter( 'bricks/element/settings', array( $this, 'filter_bricks_element_settings' ), PHP_INT_MAX, 2 );
+		add_filter( 'bricks/frontend/render_data', array( $this, 'filter_bricks_replace' ), PHP_INT_MAX, 3 );
 	}
 
-	public function filter_bricks_element_settings( $settings, $element ) {
-		if ( isset( $settings['text'] ) && is_string( $settings['text'] ) ) {
-			$settings['text'] = $this->orphans->replace( $settings['text'] );
+	/**
+	 * replace content for Bric Builder
+	 *
+	 * @since 3.3.6
+	 */
+	public function filter_bricks_replace( $content, $post, $area ) {
+		if ( empty( $content ) ) {
+			return $content;
 		}
-		return $settings;
+		return $this->orphans->replace( $content );
 	}
-
 }
-
