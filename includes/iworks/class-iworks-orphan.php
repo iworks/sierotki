@@ -941,6 +941,14 @@ class iworks_orphan {
 	 */
 	public function filter_gettext( $translation, $text, $domain ) {
 		/**
+		 * do not replace in admin
+		 *
+		 * @since 3.3.5
+		 */
+		if ( is_admin() ) {
+			return $translation;
+		}
+		/**
 		 * Replace in gettext?
 		 *
 		 * Fillter allow to turn off replacement depend on params.
