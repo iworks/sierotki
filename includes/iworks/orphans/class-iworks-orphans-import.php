@@ -90,7 +90,6 @@ jQuery(document).ready(function($) {
 		);
 	}
 
-
 	public function import_json() {
 		$data = json_decode( file_get_contents( $_FILES['iworks_orphan_import_file']['tmp_name'] ), true );
 		if (
