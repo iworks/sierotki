@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.3.5\n"
+"Project-Id-Version: 3.3.6\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-24 08:53:09+00:00\n"
+"POT-Creation-Date: 2025-04-16 17:12:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -340,7 +340,7 @@ msgid "An error occurred while getting the configuration."
 msgstr ""
 
 #: includes/iworks/options/options.php:842
-#: includes/iworks/options/options.php:1950
+#: includes/iworks/options/options.php:1965
 msgid "Select Image"
 msgstr ""
 
@@ -352,31 +352,31 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1844
+#: includes/iworks/options/options.php:1859
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:1845
+#: includes/iworks/options/options.php:1860
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1846
+#: includes/iworks/options/options.php:1861
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1847
+#: includes/iworks/options/options.php:1862
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:2003
+#: includes/iworks/options/options.php:2018
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:2004
+#: includes/iworks/options/options.php:2019
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/options/options.php:2069
+#: includes/iworks/options/options.php:2084
 msgid "Failed Security Check"
 msgstr ""
 

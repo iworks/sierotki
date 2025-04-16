@@ -3,7 +3,7 @@
     "title": "Orphans",
     "description": "Plugin fix orphans position and replace space after orphan to hard space, to avoid ne break incorrect position.",
     "tagline": "Supports the grammar rule for orphan words at the end of a line.",
-    "version": "3.3.5",
+    "version": "3.3.6",
     "homepage": "https://github.com/iworks/sierotki",
     "tags": [
         "czech",
@@ -28,7 +28,7 @@
         "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "6.7"
+        "WordPress": "6.8"
     },
     "devDependencies": {
         "grunt": "^1",
