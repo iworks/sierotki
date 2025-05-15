@@ -14,7 +14,7 @@
  * @package WordPress
  * @subpackage Sierotki
  * @author     Marcin Pietrzak <marcin@iworks.pl>
- * @copyright  2025-PLUGIN_TILL_YEAR Marcin Pietrzak
+ * @copyright  2011-PLUGIN_TILL_YEAR Marcin Pietrzak
  * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0 or later
  */
 
