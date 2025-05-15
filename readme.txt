@@ -151,7 +151,13 @@ add_filter(
 
 == Changelog ==
 
-= 3.3.6 - 2025-05-15 =
+= 3.3.7 - 2025-05-15 =
+* Enhanced PHPDoc documentation across the codebase for better maintainability.
+* Improved code organization and added proper escaping for output security.
+* Added constants for plugin paths and URLs to improve code reliability.
+* Fixed URL escaping in admin interface for better security.
+* Updated documentation with more detailed function descriptions and parameter information.
+* Improved code comments and inline documentation for better developer experience.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.1.
 
 = 3.3.6 - 2025-04-16 =

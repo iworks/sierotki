@@ -1,9 +1,20 @@
 <?php
+/**
+ * GitHub Updater for Orphans Plugin
+ *
+ * This class handles the update functionality for the Orphans plugin
+ * by checking for new releases on GitHub.
+ *
+ * @package    WordPress
+ * @subpackage Sierotki
+ * @author     Marcin Pietrzak <marcin@iworks.pl>
+ * @copyright  2025-PLUGIN_TILL_YEAR Marcin Pietrzak
+ * @license    GPL-2.0+ <https://www.gnu.org/licenses/gpl-2.0.html>
+ * @since      1.0.0
+ */
+
 /*
-
-Copyright 2025-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
-
-this program is free software; you can redistribute it and/or modify
+This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
@@ -15,27 +26,76 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
- */
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
+// Prevent class duplication
 if ( class_exists( 'iworks_sierotki_github' ) ) {
 	return;
 }
 
+/**
+ * Handles plugin updates from GitHub repository.
+ *
+ * This class provides functionality to check for updates from GitHub
+ * and handle the update process through the WordPress update system.
+ *
+ * @since 1.0.0
+ */
 class iworks_orphans_github {
 
-	private string $repository    = 'iworks/sierotki';
-	private string $plugin_file   = 'sierotki.php';
+	/**
+	 * GitHub repository in format 'username/repository'.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	private string $repository = 'iworks/sierotki';
+
+	/**
+	 * Plugin main file name.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	private string $plugin_file = 'sierotki.php';
+
+	/**
+	 * Plugin directory name.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
 	private string $plugin_folder = 'sierotki';
-	private string $basename      = 'sierotki';
+
+	/**
+	 * Plugin basename.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	private string $basename = 'sierotki';
+
+	/**
+	 * Cached GitHub API response.
+	 *
+	 * @since 1.0.0
+	 * @var array|null
+	 */
 	private $github_response;
 
+	/**
+	 * Class constructor.
+	 *
+	 * Initializes the GitHub updater by setting up hooks and callbacks.
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
-		$this->plugin_folder = dirname( dirname( dirname( __DIR__ ) ) );
-		/**
-		 * WordPress Hooks
-		 */
+		$this->plugin_folder = dirname( __DIR__, 3 );
+
+		// Register WordPress hooks
 		add_action( 'init', array( $this, 'action_init_load_plugin_textdomain' ), 0 );
 		add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3 );
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'modify_transient' ) );
@@ -43,9 +103,12 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * i18n
+	 * Loads the plugin's translated strings.
 	 *
 	 * @since 1.0.0
+	 * @action init
+	 *
+	 * @return void
 	 */
 	public function action_init_load_plugin_textdomain() {
 		$dir = plugin_basename( $this->plugin_folder ) . '/languages';
@@ -53,11 +116,14 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * Get the latest release from the selected repository
+	 * Fetches the latest release information from the GitHub repository.
+	 *
+	 * Makes an API request to GitHub to retrieve the most recent release
+	 * information for the configured repository.
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return array
+	 *
+	 * @return array Associative array containing release data or empty array on failure.
 	 */
 	private function get_latest_repository_release(): array {
 		// Create the request URI
@@ -82,11 +148,14 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * Private method to get repository information for a plugin
+	 * Retrieves and caches repository information from GitHub.
+	 *
+	 * Gets the latest release information from GitHub and caches it
+	 * in the object to avoid multiple API requests.
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return array $response
+	 *
+	 * @return array Associative array containing repository release information.
 	 */
 	private function get_repository_info(): array {
 		if ( ! empty( $this->github_response ) ) {
@@ -104,14 +173,15 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * Add details to the plugin popup
+	 * Filters the plugin information displayed in the plugin details popup.
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param boolean $result
-	 * @param string $action
-	 * @param object $args
-	 * @return boolean|object|array $result
+	 *
+	 * @param bool|object|array $result The result object or array. Default false.
+	 * @param string            $action The type of information being requested from the Plugin Installation API.
+	 * @param object            $args   Plugin API arguments.
+	 *
+	 * @return bool|object|array The filtered result or the original value if not our plugin.
 	 */
 	public function plugin_popup( $result, $action, $args ) {
 		if ( $action !== 'plugin_information' ) {
@@ -148,12 +218,13 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * Modify transient for module
+	 * Filters the plugin update transient to include our GitHub update data.
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param object $transient
-	 * @return object
+	 *
+	 * @param object $transient Plugin update transient data.
+	 *
+	 * @return object Modified plugin update transient data.
 	 */
 	public function modify_transient( object $transient ): object {
 		// Stop if the transient does not have a checked property
@@ -210,14 +281,15 @@ class iworks_orphans_github {
 	}
 
 	/**
-	 * Install the plugin from GitHub
+	 * Handles the post-installation process after an update.
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param boolean $response
-	 * @param array $hook_extra
-	 * @param array $result
-	 * @return boolean|array $result
+	 *
+	 * @param bool  $response      Whether the cleanup was successful.
+	 * @param array $hook_extra    Extra arguments passed to hooked filters.
+	 * @param array $install_result Installation result data.
+	 *
+	 * @return array Modified installation result data.
 	 */
 	public function install_update( $response, $hook_extra, $result ) {
 		global $wp_filesystem;
@@ -250,4 +322,3 @@ class iworks_orphans_github {
 		return $result;
 	}
 }
-

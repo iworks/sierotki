@@ -1,18 +1,25 @@
 <?php
+/**
+ * Plugin Name:       Orphans
+ * Plugin URI:        PLUGIN_URI
+ * Description:       PLUGIN_TAGLINE
+ * Version:           PLUGIN_VERSION
+ * Author:            Marcin Pietrzak
+ * Author URI:        https://iworks.pl/
+ * License:           GPL-3.0+
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:       sierotki
+ * Domain Path:       /languages
+ *
+ * @package WordPress
+ * @subpackage Sierotki
+ * @author     Marcin Pietrzak <marcin@iworks.pl>
+ * @copyright  2025-PLUGIN_TILL_YEAR Marcin Pietrzak
+ * @license    https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0 or later
+ */
+
 /*
-Plugin Name: Orphans
-Text Domain: sierotki
-Plugin URI: PLUGIN_URI
-Description: PLUGIN_TAGLINE
-Version: PLUGIN_VERSION
-Author: Marcin Pietrzak
-Author URI: http://iworks.pl/
-License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-
-Copyright 2025-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
-
-this program is free software; you can redistribute it and/or modify
+This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
@@ -24,38 +31,58 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 */
 
-include_once dirname( __FILE__ ) . '/etc/options.php';
-
-if ( ! defined( 'HDOM_TYPE_ELEMENT' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/simple_html_dom.php';
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-$includes = dirname( __FILE__ ) . '/includes';
+// Define plugin constants
+define( 'IWORKS_ORPHANS_VERSION', 'PLUGIN_VERSION' );
+define( 'IWORKS_ORPHANS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'IWORKS_ORPHANS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+// Include required files
+require_once IWORKS_ORPHANS_PLUGIN_DIR . 'etc/options.php';
+
+// Include simple_html_dom if not already loaded
+if ( ! defined( 'HDOM_TYPE_ELEMENT' ) ) {
+	require_once IWORKS_ORPHANS_PLUGIN_DIR . 'vendor/simple_html_dom.php';
+}
+
+// Set includes directory path
+$includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
+
+// Load main plugin class
 require_once $includes . '/iworks/class-iworks-orphan.php';
+
+// Include iWorks Rate class if not already loaded
 if ( ! class_exists( 'iworks_rate' ) ) {
 	include_once $includes . '/iworks/rate/rate.php';
 }
-/**
- * since 2.6.8
- */
+
+// Include iWorks Options class if not already loaded (since 2.6.8)
 if ( ! class_exists( 'iworks_options' ) ) {
 	include_once $includes . '/iworks/options/options.php';
 }
 
-new iworks_orphan();
+// Initialize the plugin
+$iworks_orphan = new iworks_orphan();
 
+// Register activation and deactivation hooks
 register_activation_hook( __FILE__, 'iworks_orphan_activate' );
 register_deactivation_hook( __FILE__, 'iworks_orphan_deactivate' );
 
 /**
- * load options
+ * Retrieves and initializes the plugin options.
  *
- * since 2.6.8
+ * Creates a new instance of the iWorks options class, configures it with
+ * the appropriate settings, and initializes the options.
  *
+ * @since 2.6.8
+ *
+ * @return iworks_options Initialized instance of the iWorks options class.
  */
 function get_orphan_options() {
 	$iworks_orphan_options = new iworks_options();
@@ -69,10 +96,13 @@ function get_orphan_options() {
 }
 
 /**
- * Activate plugin function
+ * Handles plugin activation.
+ *
+ * Initializes plugin options and sets autoload status to 'yes' for better performance.
  *
  * @since 2.6.0
  *
+ * @return void
  */
 function iworks_orphan_activate() {
 	$iworks_orphan_options = get_orphan_options();
@@ -81,23 +111,31 @@ function iworks_orphan_activate() {
 }
 
 /**
- * Deactivate plugin function
+ * Handles plugin deactivation.
+ *
+ * Updates autoload status to 'no' for plugin options to improve performance
+ * when the plugin is not active.
  *
  * @since 2.6.0
  *
+ * @return void
  */
 function iworks_orphan_deactivate() {
 	iworks_orphan_change_options_autoload_status( 'no' );
 }
 /**
- * Activate/Deactivate helper function
+ * Updates autoload status for plugin options in the database.
+ *
+ * This helper function is used during plugin activation and deactivation
+ * to manage the autoload behavior of plugin options.
  *
  * @since 2.6.0
  *
  * @global wpdb $wpdb WordPress database abstraction object.
  *
- * @param string $status status of autoload, possible values: yes or no
+ * @param string $status Autoload status. Accepts 'yes' or 'no'.
  *
+ * @return void
  */
 function iworks_orphan_change_options_autoload_status( $status ) {
 	if ( ! preg_match( '/^(yes|no)$/', $status ) ) {
@@ -127,4 +165,3 @@ function iworks_orphan_change_options_autoload_status( $status ) {
 		);
 	}
 }
-

@@ -1,5 +1,21 @@
 <?php
+/**
+ * Plugin options configuration for Orphans Indicator.
+ *
+ * @package WordPress
+ * @subpackage Sierotki
+ * @since 1.0.0
+ */
 
+/**
+ * Get the configuration options for the Orphans Indicator plugin.
+ *
+ * This function retrieves or generates the plugin's options array, which defines
+ * various settings for handling orphaned words in different contexts.
+ *
+ * @since 1.0.0
+ * @return array Associative array of plugin options and their configurations.
+ */
 function orphans_indicator_options() {
 	/**
 	 * cache
@@ -36,11 +52,11 @@ function orphans_indicator_options() {
 				'since' => '3.1.4',
 			),
 			array(
-				'name'     => 'language',
-				'type'     => 'radio',
-				'th'       => __( 'Language File', 'sierotki' ),
-				'default'  => 'function_get_locale',
-				'options'  => array(
+				'name'              => 'language',
+				'type'              => 'radio',
+				'th'                => __( 'Language File', 'sierotki' ),
+				'default'           => 'function_get_locale',
+				'options'           => array(
 					'function_get_locale' => array(
 						'label'       => __( 'Try to use the site locale to determine the file name', 'sierotki' ),
 						'description' => __( 'Select if you want the plugin to determine which file to load based on the site\'s language settings.', 'sierotki' ),
@@ -62,14 +78,14 @@ function orphans_indicator_options() {
 						'description' => __( 'Select if you want to rely only on your terms.', 'sierotki' ),
 					),
 				),
-				'multiple' => true,
-				'default'  => 'pl_PL',
-				'since'    => '3.1.4',
+				'multiple'          => true,
+				'default'           => 'pl_PL',
+				'since'             => '3.1.4',
 				/**
 				 * sanitize_callback for multiple (remove after it will be implemented into
 				 * iWorks_Options class.
 				 *
-				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 * @see https://github.com/iworks/wordpress-options-class/issues/4
 				 */
 				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
@@ -90,23 +106,23 @@ function orphans_indicator_options() {
 			 * Since 2.6.8
 			 */
 			'post_type' => array(
-				'name'     => 'post_type',
-				'type'     => 'select2',
-				'th'       => __( 'Post Types', 'sierotki' ),
-				'default'  => array( 'post', 'page' ),
-				'options'  => apply_filters(
+				'name'              => 'post_type',
+				'type'              => 'select2',
+				'th'                => __( 'Post Types', 'sierotki' ),
+				'default'           => array( 'post', 'page' ),
+				'options'           => apply_filters(
 					'orphan_get_post_types',
 					array(
 						'post' => __( 'Posts', 'sierotki' ),
 						'page' => __( 'Pages', 'sierotki' ),
 					)
 				),
-				'multiple' => true,
+				'multiple'          => true,
 				/**
 				 * sanitize_callback for multiple (remove after it will be implemented into
 				 * iWorks_Options class.
 				 *
-				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 * @see https://github.com/iworks/wordpress-options-class/issues/4
 				 */
 				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
@@ -194,17 +210,18 @@ function orphans_indicator_options() {
 				'label' => __( 'Taxonomies', 'sierotki' ),
 			),
 			array(
-				'name'     => 'taxonomies',
-				'type'     => 'select2',
-				'th'       => __( 'Taxonomies', 'sierotki' ),
-				'default'  => array( 'category', 'post_tag', 'post_format' ),
-				'options'  => iworks_orphan_taxonomies(),
-				'multiple' => true,
+				'name'              => 'taxonomies',
+				'type'              => 'select2',
+				'th'                => __( 'Taxonomies', 'sierotki' ),
+				'description'       => __( 'Select the taxonomies where orphaned word substitution should be applied. This affects terms, categories, tags, and other custom taxonomies.', 'sierotki' ),
+				'default'           => array( 'category', 'post_tag', 'post_format' ),
+				'options'           => iworks_orphan_taxonomies(),
+				'multiple'          => true,
 				/**
 				 * sanitize_callback for multiple (remove after it will be implemented into
 				 * iWorks_Options class.
 				 *
-				 * https://github.com/iworks/wordpress-options-class/issues/4
+				 * @see https://github.com/iworks/wordpress-options-class/issues/4
 				 */
 				'sanitize_callback' => 'iworks_orphans_sanitize_callback_multiple',
 			),
@@ -409,9 +426,13 @@ function orphans_indicator_options() {
 }
 
 /**
- * check available integrations
+ * Check for available plugin integrations.
+ *
+ * Scans active plugins to determine which integrations should be available
+ * for the Orphans plugin.
  *
  * @since 2.9.8
+ * @return array List of available integration plugin basenames.
  */
 function iworks_orphan_options_check_available_integrations() {
 	$integrations = array();
@@ -445,6 +466,16 @@ function iworks_orphan_options_check_available_integrations() {
 	return $integrations;
 }
 
+/**
+ * Display plugin appreciation links.
+ *
+ * Outputs HTML for the "Love this plugin" section, including links to rate the plugin
+ * and share it with others.
+ *
+ * @since 1.0.0
+ * @param object $iworks_orphan The main plugin instance.
+ * @return void
+ */
 function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
 	$content = apply_filters( 'iworks_rate_love', '', 'sierotki' );
 	if ( ! empty( $content ) ) {
@@ -454,11 +485,20 @@ function iworks_orphan_options_loved_this_plugin( $iworks_orphan ) {
 	?>
 <p><?php esc_html_e( 'Below are some links to help spread this plugin to other users', 'sierotki' ); ?></p>
 <ul>
-	<li><a href="https://wordpress.org/support/plugin/sierotki/reviews/#new-post"><?php _e( 'Give it a five stars on WordPress.org', 'sierotki' ); ?></a></li>
-	<li><a href="<?php echo esc_html( _x( 'https://wordpress.org/plugins/sierotki/', 'plugin home page on WordPress.org', 'sierotki' ) ); ?>"><?php _e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
+	<li><a href="<?php echo esc_url( _x( 'https://wordpress.org/support/plugin/sierotki/reviews/#new-post', 'link to add new review page on WordPress.org', 'sierotki' ) ); ?>"><?php esc_html_e( 'Give it a five stars on WordPress.org', 'sierotki' ); ?></a></li>
+	<li><a href="<?php echo esc_url( _x( 'https://wordpress.org/plugins/sierotki/', 'plugin home page on WordPress.org', 'sierotki' ) ); ?>"><?php esc_html_e( 'Link to it so others can easily find it', 'sierotki' ); ?></a></li>
 </ul>
 	<?php
 }
+/**
+ * Get list of public taxonomies.
+ *
+ * Retrieves all public taxonomies registered in WordPress and returns them
+ * in a format suitable for select fields.
+ *
+ * @since 1.0.0
+ * @return array Associative array of taxonomy slugs and their display names.
+ */
 function iworks_orphan_taxonomies() {
 	$data       = array();
 	$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
@@ -467,21 +507,38 @@ function iworks_orphan_taxonomies() {
 	}
 	return $data;
 }
+/**
+ * Display assistance information.
+ *
+ * Outputs HTML for the "Need Assistance" section, including support links.
+ *
+ * @since 1.0.0
+ * @param object $iworks_orphans The main plugin instance.
+ * @return void
+ */
 function iworks_orphans_options_need_assistance( $iworks_orphans ) {
 	$content = apply_filters( 'iworks_rate_assistance', '', 'sierotki' );
 	if ( ! empty( $content ) ) {
-		echo $content;
+		echo wp_kses_post( $content );
 		return;
 	}
 
 	?>
-<p><?php _e( 'We are waiting for your message', 'sierotki' ); ?></p>
+<p><?php esc_html_e( 'We are waiting for your message', 'sierotki' ); ?></p>
 <ul>
-	<li><a href="<?php _ex( 'https://wordpress.org/support/plugin/sierotki/', 'link to support forum on WordPress.org', 'sierotki' ); ?>"><?php _e( 'WordPress Help Forum', 'sierotki' ); ?></a></li>
+	<li><a href="<?php echo esc_url( _x( 'https://wordpress.org/support/plugin/sierotki/', 'link to support forum on WordPress.org', 'sierotki' ) ); ?>"><?php esc_html_e( 'WordPress Help Forum', 'sierotki' ); ?></a></li>
 </ul>
 	<?php
 }
 
+/**
+ * Generate import interface for plugin settings.
+ *
+ * Creates the HTML interface for importing plugin settings from a JSON file.
+ *
+ * @since 1.0.0
+ * @return string HTML content for the import interface.
+ */
 function iworks_orphans_options_import() {
 	$content = '';
 	$content = wp_kses_post( get_option( 'iworks_orphans_options_import_messages' ) );
@@ -496,10 +553,16 @@ function iworks_orphans_options_import() {
 }
 
 /**
- * sanitize_callback for multiple (remove after it will be implemented into
- * iWorks_Options class.
+ * Sanitization callback for multiple select fields.
  *
- * https://github.com/iworks/wordpress-options-class/issues/4
+ * Temporary implementation for handling multiple select fields until
+ * the functionality is implemented in the iWorks_Options class.
+ *
+ * @since 1.0.0
+ * @see https://github.com/iworks/wordpress-options-class/issues/4
+ *
+ * @param mixed $value The value to be sanitized.
+ * @return mixed The sanitized value.
  */
 function iworks_orphans_sanitize_callback_multiple( $value ) {
 	return $value;

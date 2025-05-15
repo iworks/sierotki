@@ -1,8 +1,17 @@
 <?php
-/*
-Copyright 2024-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
+/**
+ * Export functionality for Orphans plugin configuration.
+ *
+ * @package    WordPress
+ * @subpackage Sierotki
+ * @author     Marcin Pietrzak <marcin@iworks.pl>
+ * @license    GPL-2.0+ <https://www.gnu.org/licenses/gpl-2.0.txt>
+ * @link       https://wordpress.org/plugins/sierotki/
+ * @copyright  2024-PLUGIN_TILL_YEAR Marcin Pietrzak
+ */
 
-this program is free software; you can redistribute it and/or modify
+/*
+This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
@@ -14,28 +23,48 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
- */
+*/
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
+
 /**
- * Export Orphans Configuration.
+ * Handles the export functionality for Orphans plugin configuration.
  *
- * The class allows to export plugin configuration to JSON file.
+ * This class provides methods to export the plugin's configuration to a JSON file,
+ * including optional WordPress settings, active plugins, and theme information.
  *
  * @since 3.3.0
  */
 class iWorks_Orphans_Export {
+	/**
+	 * Plugin options handler.
+	 *
+	 * @since 3.3.0
+	 * @var iWorks_Options
+	 */
 	private $options;
 
+	/**
+	 * Class constructor.
+	 *
+	 * Initializes the export functionality by setting up necessary hooks.
+	 *
+	 * @since 3.3.0
+	 */
 	public function __construct() {
 		add_action( 'admin_print_scripts', array( $this, 'action_admin_print_scripts' ), PHP_INT_MAX );
 	}
 
 	/**
-	 * add admin scripts
+	 * Enqueues necessary admin scripts for the export functionality.
+	 *
+	 * Adds a jQuery script that handles the export form submission dynamically.
+	 * The script is printed in the admin footer with the lowest priority.
 	 *
 	 * @since 3.3.0
+	 * @action admin_print_scripts
+	 *
+	 * @return void
 	 */
 	public function action_admin_print_scripts() {
 		echo PHP_EOL;
@@ -55,9 +84,14 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
-	 * Prepare and send JSON file
+	 * Prepares and sends the configuration data as a JSON file download.
+	 *
+	 * Collects plugin settings and optionally WordPress environment data,
+	 * then sends it as a downloadable JSON file with appropriate headers.
 	 *
 	 * @since 3.3.0
+	 *
+	 * @return void Exits the script after sending the file.
 	 */
 	public function send_json() {
 		$add_wordpress_data = 'true' === filter_input( INPUT_POST, 'extra' );
@@ -66,7 +100,7 @@ jQuery(document).ready(function($) {
 		 */
 		$data = array(
 			'Meta'      => array(
-				'date'   => date( 'c' ),
+				'date'   => gmdate( 'c' ),
 				'plugin' => array(
 					'name'    => 'Orphans',
 					'version' => 'PLUGIN_VERSION',
@@ -86,7 +120,7 @@ jQuery(document).ready(function($) {
 			sprintf(
 				'%s-%s.json',
 				get_option( 'blogname' ),
-				date( 'c' )
+				gmdate( 'c' )
 			)
 		);
 		/**
@@ -104,9 +138,13 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
-	 * get plugin settings
+	 * Retrieves the plugin settings for export.
+	 *
+	 * Collects all plugin options and their values in a structured format.
 	 *
 	 * @since 3.3.0
+	 *
+	 * @return array Array of plugin settings with their names, option names, and values.
 	 */
 	private function get_settings_plugin() {
 		$this->options = get_orphan_options();
@@ -132,9 +170,15 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
-	 * get WordPress settings
+	 * Retrieves WordPress environment settings for export.
+	 *
+	 * Collects WordPress site settings, active plugins, and theme information.
+	 * The data collection can be filtered using 'iworks_orphans_export_plugins'
+	 * and 'iworks_orphans_export_theme' filters.
 	 *
 	 * @since 3.3.0
+	 *
+	 * @return array Array containing WordPress settings, plugins, and theme information.
 	 */
 	private function get_wordpress_settings() {
 		$fields = array(
@@ -153,7 +197,7 @@ jQuery(document).ready(function($) {
 		$data['Plugins'] = array();
 		if ( apply_filters( 'iworks_orphans_export_plugins', true ) ) {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
-				require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}
 			$plugins = get_option( 'active_plugins' );
 			$fields  = array(
