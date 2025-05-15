@@ -5,7 +5,7 @@
  * Description:       PLUGIN_TAGLINE
  * Version:           PLUGIN_VERSION
  * Author:            Marcin Pietrzak
- * Author URI:        https://iworks.pl/
+ * Author URI:        http://iworks.pl/
  * License:           GPL-3.0+
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       sierotki
