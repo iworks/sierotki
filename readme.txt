@@ -151,6 +151,9 @@ add_filter(
 
 == Changelog ==
 
+= 3.3.6 - 2025-05-15 =
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.1.
+
 = 3.3.6 - 2025-04-16 =
 * Enhanced integration with the Bricks Builder (Bricks Theme). [#16](https://github.com/iworks/sierotki/issues/16). Props for [Cactoo](https://profiles.wordpress.org/cactoo/).
 * Removed replacements for translation functions within the admin interface.
