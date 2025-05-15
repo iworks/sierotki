@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-05-15 15:43:36+00:00\n"
+"POT-Creation-Date: 2025-05-15 17:29:43+00:00\n"
 "PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -505,15 +505,13 @@ msgid "Marcin Pietrzak"
 msgstr "Marcin Pietrzak"
 
 #. Author URI of the plugin/theme
-#, fuzzy
 msgid "http://iworks.pl/"
 msgstr "http://iworks.pl/"
 
 #: etc/options.php:488
-#, fuzzy
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
-msgstr "https://wordpress.org/support/plugin/sierotki/"
+msgstr ""
 
 #: etc/options.php:489
 msgctxt "plugin home page on WordPress.org"
