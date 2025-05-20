@@ -99,7 +99,7 @@ class iworks_orphan {
 		/**
 		 * basic settings
 		 */
-		$file       = dirname( dirname( dirname( __FILE__ ) ) ) . '/sierotki.php';
+		$file       = dirname( __DIR__, 2 ) . '/sierotki.php';
 		$this->root = dirname( $file );
 		/**
 		 * plugin ID
@@ -656,7 +656,7 @@ class iworks_orphan {
 		 * @since 3.2.7
 		 */
 		if ( defined( 'BRICKS_VERSION' ) && BRICKS_VERSION ) {
-			include_once dirname( __FILE__ ) . '/integrations/class-iworks-orphans-integration-bricks.php';
+			include_once __DIR__ . '/integrations/class-iworks-orphans-integration-bricks.php';
 			$this->loaded_integrations['class-iworks-orphans-integration-bricks'] = new iWorks_Orphans_Integration_Bricks( $this );
 		}
 	}
@@ -929,7 +929,7 @@ class iworks_orphan {
 			$plugin = (array) $plugin;
 		}
 		if ( 'sierotki' === $plugin['slug'] ) {
-			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.png';
+			return plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/images/logo.svg';
 		}
 		return $logo;
 	}
@@ -1120,9 +1120,9 @@ class iworks_orphan {
 
 	public function load_classes() {
 		include_once __DIR__ . '/orphans/class-iworks-orphans-export.php';
-		$this->loaded_integrations['export'] = new iWorks_Orphans_Export;
+		$this->loaded_integrations['export'] = new iWorks_Orphans_Export();
 		include_once __DIR__ . '/orphans/class-iworks-orphans-import.php';
-		$this->loaded_integrations['import'] = new iWorks_Orphans_Import;
+		$this->loaded_integrations['import'] = new iWorks_Orphans_Import();
 	}
 
 	/**
@@ -1132,7 +1132,7 @@ class iworks_orphan {
 	 */
 	public function action_init_register_iworks_rate() {
 		if ( ! class_exists( 'iworks_rate' ) ) {
-			include_once dirname( __FILE__ ) . '/rate/rate.php';
+			include_once __DIR__ . '/rate/rate.php';
 		}
 		do_action(
 			'iworks-register-plugin',
@@ -1154,4 +1154,3 @@ class iworks_orphan {
 		$this->options = get_orphan_options();
 	}
 }
-
