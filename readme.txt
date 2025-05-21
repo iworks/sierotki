@@ -152,8 +152,9 @@ add_filter(
 == Changelog ==
 
 = 3.3.8 - 2025-05-xx =
-* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.0.
 * Replaced `logo.png` by `logo.svg`.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.2.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.0.
 
 = 3.3.7 - 2025-05-15 =
 * Enhanced PHPDoc documentation across the codebase for better maintainability.
