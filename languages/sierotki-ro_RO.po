@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-05-15 17:29:43+00:00\n"
+"POT-Creation-Date: 2025-05-22 05:38:58+00:00\n"
 "PO-Revision-Date: 2024-08-07 09:13:56+0000\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -334,48 +334,48 @@ msgstr ""
 msgid "Settings"
 msgstr "Setări"
 
-#: includes/iworks/options/options.php:318
+#: includes/iworks/options/options.php:320
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:897
-#: includes/iworks/options/options.php:2360
+#: includes/iworks/options/options.php:899
+#: includes/iworks/options/options.php:2362
 msgid "Select Image"
 msgstr "Selectează o imagine"
 
-#: includes/iworks/options/options.php:902
+#: includes/iworks/options/options.php:904
 msgid "Delete image"
 msgstr "Șterge imaginea"
 
-#: includes/iworks/options/options.php:1010
+#: includes/iworks/options/options.php:1012
 msgid "Save Changes"
 msgstr "Salvează modificările"
 
-#: includes/iworks/options/options.php:2233
+#: includes/iworks/options/options.php:2235
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:2234
+#: includes/iworks/options/options.php:2236
 msgid "City"
 msgstr "Localitate"
 
-#: includes/iworks/options/options.php:2235
+#: includes/iworks/options/options.php:2237
 msgid "Street"
 msgstr "Adresă"
 
-#: includes/iworks/options/options.php:2236
+#: includes/iworks/options/options.php:2238
 msgid "ZIP code"
 msgstr "Cod poștal (ZIP)"
 
-#: includes/iworks/options/options.php:2420
+#: includes/iworks/options/options.php:2422
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:2421
+#: includes/iworks/options/options.php:2423
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/options/options.php:2486
+#: includes/iworks/options/options.php:2488
 msgid "Failed Security Check"
 msgstr ""
 
@@ -393,21 +393,68 @@ msgid "Provide us a coffee"
 msgstr ""
 
 #. translators: %s: plugin id
-#: includes/iworks/rate/rate.php:446
+#: includes/iworks/rate/rate.php:590
 msgid "There is no plugin with id: %s."
 msgstr ""
 
-#: includes/iworks/rate/rate.php:563
+#: includes/iworks/rate/rate.php:764
 msgid "OpenGraph"
 msgstr "OpenGraph"
 
-#: includes/iworks/rate/rate.php:579
+#: includes/iworks/rate/rate.php:780
 msgid "OG — Better Share on Social Media"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:580
+#: includes/iworks/rate/rate.php:781
 msgid "https://wordpress.org/plugins/og/"
 msgstr "https://wordpress.org/plugins/og/"
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
+msgid "🎉 Happy Anniversary! 🎉"
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
+msgid ""
+"Wow, it’s already been a whole year since you’ve been using our plugin—thank "
+"you so much for being part of our journey! We truly appreciate your support "
+"and hope the plugin has made your work easier and more enjoyable."
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
+msgid ""
+"If you’ve found our plugin helpful and would like to support its continued "
+"development, we’d be incredibly grateful if you’d consider buying us a "
+"coffee. Every little bit helps us keep improving and adding new features for "
+"awesome users like you!"
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:26
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
+msgid "Thank you for your support and for making this community amazing!"
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:30
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
+msgid "With gratitude"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Marcin Pietrzak"
+msgstr "Marcin Pietrzak"
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:36
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
+msgid "Plugin Author"
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
+msgid ""
+"Wow, it’s already been a whole year since you started using our plugin—thank "
+"you so much for being part of our journey! We hope it’s made your work "
+"easier and more enjoyable."
+msgstr ""
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
@@ -499,10 +546,6 @@ msgstr ""
 msgid "PLUGIN_TAGLINE"
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "Marcin Pietrzak"
-msgstr "Marcin Pietrzak"
-
 #. Author URI of the plugin/theme
 msgid "http://iworks.pl/"
 msgstr "http://iworks.pl/"
@@ -523,13 +566,13 @@ msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr "https://wordpress.org/support/plugin/sierotki/"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:469
+#: includes/iworks/rate/rate.php:613
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr "https://wordpress.org/plugins/%s"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:476
+#: includes/iworks/rate/rate.php:620
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
