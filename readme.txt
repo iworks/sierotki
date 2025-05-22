@@ -13,10 +13,10 @@ PLUGIN_TAGLINE
 
 == Description ==
 
-The **Orphans** plugin automatically improves the typography of your WordPress site by preventing single-letter or very short words—known as *orphans*—from appearing alone at the end or beginning of a line. By replacing the space after these words with a non-breaking space, the plugin ensures cleaner, more professional-looking text layouts, especially for languages like Polish where such typographic rules are important.
+The **Orphans** plugin automatically improves the typography of your WordPress site by preventing single-letter or very short words—known as *orphans*—from appearing alone at the beginning of a line. By replacing the space after these words with a non-breaking space, the plugin ensures cleaner, more professional-looking text layouts, especially for languages like Polish where such typographic rules are important.
 
 = What are Orphans? =
-An *orphan* in typography is a short word (often a single character) left isolated at the end or start of a line, separated from the rest of the sentence. This is considered a composition error and can negatively affect readability and the visual appeal of your content.
+An *orphan* in typography is a short word (often a single character) left isolated at the beginning of a line, separated from the rest of the sentence. This is considered a composition error and can negatively affect readability and the visual appeal of your content.
 
 = Key Features =
 - **Automatic Orphan Fixing:** Scans your content and replaces spaces after short words (orphans) with non-breaking spaces, preventing them from being separated by line breaks.
@@ -33,7 +33,7 @@ Once activated, Orphans automatically processes your posts, pages, and other con
 - Sites in languages (like Polish or Czech) where orphan control is a common publishing requirement.
 - Anyone wanting to enhance the professional appearance and readability of their WordPress content.
 
-= Open Source \& Developer Friendly =
+= Open Source & Developer Friendly =
 Orphans is open source, actively maintained, and available on [GitHub](https://github.com/iworks/sierotki) for those interested in contributing or extending its features.
 
 = Asset image =
