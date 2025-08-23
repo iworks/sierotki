@@ -411,6 +411,39 @@ function orphans_indicator_options() {
 				'classes'           => array( 'switch-button' ),
 			);
 		}
+		if ( in_array( 'secure-custom-fields.php', $integrations ) ) {
+			$options['index']['options'][] = array(
+				'type'  => 'subheading',
+				'label' => __( 'Secure Custom Fields', 'sierotki' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'scf_text',
+				'type'              => 'checkbox',
+				'th'                => __( 'Text', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'scf_textarea',
+				'type'              => 'checkbox',
+				'th'                => __( 'Textarea', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+			$options['index']['options'][] = array(
+				'name'              => 'scf_wysiwyg',
+				'type'              => 'checkbox',
+				'th'                => __( 'WYSIWYG', 'sierotki' ),
+				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
+				'sanitize_callback' => 'absint',
+				'default'           => 0,
+				'classes'           => array( 'switch-button' ),
+			);
+		}
 	}
 	/**
 	 * cache it
@@ -460,6 +493,8 @@ function iworks_orphan_options_check_available_integrations() {
 	 */
 	foreach ( $plugins as $plugin ) {
 		if ( preg_match( '/acf\.php$/', $plugin ) ) {
+			$integrations[] = basename( $plugin );
+		} elseif ( preg_match( '/secure-custom-fields\.php$/', $plugin ) ) {
 			$integrations[] = basename( $plugin );
 		}
 	}

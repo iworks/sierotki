@@ -612,6 +612,12 @@ class iworks_orphan {
 			}
 		}
 		/**
+		 * Integrations: Secure Custom Fields
+		 *
+		 * @since 3.3.9
+		 */
+		add_filter( 'acf/format_value', array( $this, 'filter_secure_custom_fields' ), 10, 4 );
+		/**
 		 * Integrations: WP Bakery
 		 *
 		 * @since 3.0.2
@@ -1152,5 +1158,17 @@ class iworks_orphan {
 			return;
 		}
 		$this->options = get_orphan_options();
+	}
+
+	/**
+	 * Replace in Secure Custom Fields
+	 *
+	 * @since 3.3.9
+	 */
+	public function filter_secure_custom_fields( $value, $post_id, $field, $escape_html ) {
+		if ( $this->is_on( 'scf_' . $field['type'] ) ) {
+			return $this->unconditional_replacement( $value );
+		}
+		return $value;
 	}
 }
