@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-08-23 14:19:54+00:00\n"
+"POT-Creation-Date: 2025-08-23 17:21:56+00:00\n"
 "PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -309,9 +309,8 @@ msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
 #: etc/options.php:417
-#, fuzzy
 msgid "Secure Custom Fields"
-msgstr "Advanced Custom Fields"
+msgstr ""
 
 #: etc/options.php:521
 msgid "Below are some links to help spread this plugin to other users"
@@ -341,9 +340,8 @@ msgid "Settings"
 msgstr "Inställningar"
 
 #: includes/iworks/options/options.php:176
-#, fuzzy
 msgid "No Page Title"
-msgstr "Widgetrubrik"
+msgstr ""
 
 #: includes/iworks/options/options.php:341
 msgid "An error occurred while getting the configuration."

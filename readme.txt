@@ -167,7 +167,7 @@ add_filter(
 == Changelog ==
 
 = 3.3.9 - 2025-08-23 =
-* Integration with the [Secure Custom Fields plugin](https://wordpress.org/plugins/secure-custom-fields/) has been added.
+* Integration with the [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) plugin has been added.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.7.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.1.
 
