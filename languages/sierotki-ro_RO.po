@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-05-22 07:38:01+00:00\n"
+"POT-Creation-Date: 2025-08-23 14:19:54+00:00\n"
 "PO-Revision-Date: 2024-08-07 09:13:56+0000\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: etc/options.php:359 etc/options.php:527
+#: etc/options.php:359 etc/options.php:562
 msgid "We are waiting for your message"
 msgstr "Așteptăm mesajul tău"
 
@@ -284,98 +284,108 @@ msgstr "Integrări"
 msgid "Advanced Custom Fields"
 msgstr "Câmpuri personalizate avansate"
 
-#: etc/options.php:389
+#: etc/options.php:389 etc/options.php:422
 msgid "Text"
 msgstr "Text"
 
-#: etc/options.php:390
+#: etc/options.php:390 etc/options.php:423
 msgid "Enabled the substitution of orphans in text fields."
 msgstr ""
 
-#: etc/options.php:398
+#: etc/options.php:398 etc/options.php:431
 msgid "Textarea"
 msgstr "Zonă text"
 
-#: etc/options.php:399
+#: etc/options.php:399 etc/options.php:432
 msgid ""
 "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
 msgstr ""
 
-#: etc/options.php:407
+#: etc/options.php:407 etc/options.php:440
 msgid "WYSIWYG"
 msgstr "WYSIWYG"
 
-#: etc/options.php:408
+#: etc/options.php:408 etc/options.php:441
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
 msgstr ""
 
-#: etc/options.php:486
+#: etc/options.php:417
+#, fuzzy
+msgid "Secure Custom Fields"
+msgstr "Câmpuri personalizate avansate"
+
+#: etc/options.php:521
 msgid "Below are some links to help spread this plugin to other users"
 msgstr ""
 
-#: etc/options.php:488
+#: etc/options.php:523
 msgid "Give it a five stars on WordPress.org"
 msgstr "Acordă-i 5 stele pe WordPress.org"
 
-#: etc/options.php:489
+#: etc/options.php:524
 msgid "Link to it so others can easily find it"
 msgstr ""
 
-#: etc/options.php:529
+#: etc/options.php:564
 msgid "WordPress Help Forum"
 msgstr "Forum de ajutor WordPress"
 
-#: etc/options.php:550
+#: etc/options.php:585
 msgid "Import JSON"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:686
+#: includes/iworks/class-iworks-orphan.php:692
 #: includes/iworks/rate/rate.php:133
 msgid "Settings"
 msgstr "Setări"
 
-#: includes/iworks/options/options.php:320
+#: includes/iworks/options/options.php:176
+#, fuzzy
+msgid "No Page Title"
+msgstr "Titlu piesă"
+
+#: includes/iworks/options/options.php:341
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:899
-#: includes/iworks/options/options.php:2362
+#: includes/iworks/options/options.php:920
+#: includes/iworks/options/options.php:2408
 msgid "Select Image"
 msgstr "Selectează o imagine"
 
-#: includes/iworks/options/options.php:904
+#: includes/iworks/options/options.php:925
 msgid "Delete image"
 msgstr "Șterge imaginea"
 
-#: includes/iworks/options/options.php:1012
+#: includes/iworks/options/options.php:1033
 msgid "Save Changes"
 msgstr "Salvează modificările"
 
-#: includes/iworks/options/options.php:2235
+#: includes/iworks/options/options.php:2281
 msgid "Country"
 msgstr ""
 
-#: includes/iworks/options/options.php:2236
+#: includes/iworks/options/options.php:2282
 msgid "City"
 msgstr "Localitate"
 
-#: includes/iworks/options/options.php:2237
+#: includes/iworks/options/options.php:2283
 msgid "Street"
 msgstr "Adresă"
 
-#: includes/iworks/options/options.php:2238
+#: includes/iworks/options/options.php:2284
 msgid "ZIP code"
 msgstr "Cod poștal (ZIP)"
 
-#: includes/iworks/options/options.php:2422
+#: includes/iworks/options/options.php:2468
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:2423
+#: includes/iworks/options/options.php:2469
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/options/options.php:2488
+#: includes/iworks/options/options.php:2534
 msgid "Failed Security Check"
 msgstr ""
 
@@ -428,6 +438,11 @@ msgid ""
 "development, we’d be incredibly grateful if you’d consider buying us a "
 "coffee. Every little bit helps us keep improving and adding new features for "
 "awesome users like you!"
+msgstr ""
+
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:25
+#: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
+msgid "☕ Buy Me a Coffee"
 msgstr ""
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:26
@@ -550,17 +565,17 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr "http://iworks.pl/"
 
-#: etc/options.php:488
+#: etc/options.php:523
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
 msgstr ""
 
-#: etc/options.php:489
+#: etc/options.php:524
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr "https://wordpress.org/plugins/sierotki/"
 
-#: etc/options.php:529
+#: etc/options.php:564
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr "https://wordpress.org/support/plugin/sierotki/"
