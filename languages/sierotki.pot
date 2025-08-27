@@ -2,9 +2,9 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.3.9\n"
+"Project-Id-Version: 3.4.0\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-08-23 17:22:05+00:00\n"
+"POT-Creation-Date: 2025-08-27 09:23:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -276,7 +276,7 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: etc/options.php:359 etc/options.php:562
+#: etc/options.php:359 etc/options.php:454
 msgid "We are waiting for your message"
 msgstr ""
 
@@ -288,61 +288,67 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: etc/options.php:384
-msgid "Advanced Custom Fields"
-msgstr ""
-
-#: etc/options.php:389 etc/options.php:422
-msgid "Text"
-msgstr ""
-
-#: etc/options.php:390 etc/options.php:423
-msgid "Enabled the substitution of orphans in text fields."
-msgstr ""
-
-#: etc/options.php:398 etc/options.php:431
-msgid "Textarea"
-msgstr ""
-
-#: etc/options.php:399 etc/options.php:432
-msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
-msgstr ""
-
-#: etc/options.php:407 etc/options.php:440
-msgid "WYSIWYG"
-msgstr ""
-
-#: etc/options.php:408 etc/options.php:441
-msgid "Enabled the substitution of orphans in WYSIWYG fields."
-msgstr ""
-
-#: etc/options.php:417
-msgid "Secure Custom Fields"
-msgstr ""
-
-#: etc/options.php:521
+#: etc/options.php:413
 msgid "Below are some links to help spread this plugin to other users"
 msgstr ""
 
-#: etc/options.php:523
+#: etc/options.php:415
 msgid "Give it a five stars on WordPress.org"
 msgstr ""
 
-#: etc/options.php:524
+#: etc/options.php:416
 msgid "Link to it so others can easily find it"
 msgstr ""
 
-#: etc/options.php:564
+#: etc/options.php:456
 msgid "WordPress Help Forum"
 msgstr ""
 
-#: etc/options.php:585
+#: etc/options.php:477
 msgid "Import JSON"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:692
+#: includes/iworks/class-iworks-orphan.php:734
 #: includes/iworks/rate/rate.php:133
 msgid "Settings"
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:92
+msgid "Advanced Custom Fields"
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:97
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:71
+msgid "Text"
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:98
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:72
+msgid "Enabled the substitution of orphans in text fields."
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:106
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:80
+msgid "Textarea"
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:107
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:81
+msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:115
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:89
+msgid "WYSIWYG"
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:116
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:90
+msgid "Enabled the substitution of orphans in WYSIWYG fields."
+msgstr ""
+
+#: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:66
+msgid "Secure Custom Fields"
 msgstr ""
 
 #: includes/iworks/options/options.php:176
@@ -571,17 +577,17 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr ""
 
-#: etc/options.php:523
+#: etc/options.php:415
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
 msgstr ""
 
-#: etc/options.php:524
+#: etc/options.php:416
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr ""
 
-#: etc/options.php:564
+#: etc/options.php:456
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr ""
