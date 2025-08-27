@@ -27,5 +27,15 @@ abstract class iWorks_Orphans_Integration {
 	 */
 	protected $orphans;
 
-}
 
+	/**
+	 * Is key turned on?
+	 *
+	 * @param string $key Settings key.
+	 *
+	 * @return boolean Is this key setting turned on?
+	 */
+	protected function is_on( $key ) {
+		return $this->orphans->is_on( $key );
+	}
+}

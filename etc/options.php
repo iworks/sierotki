@@ -372,78 +372,13 @@ function orphans_indicator_options() {
 	/**
 	 * integrations
 	 */
-	$integrations = iworks_orphan_options_check_available_integrations();
+	$integrations = apply_filters( 'orphans/etc/config/integrations', array() );
 	if ( ! empty( $integrations ) ) {
-		$options['index']['options'][] = array(
+		$options['index']['options']['export'] = array(
 			'type'  => 'heading',
 			'label' => __( 'Integrations', 'sierotki' ),
 		);
-		if ( in_array( 'acf.php', $integrations ) ) {
-			$options['index']['options'][] = array(
-				'type'  => 'subheading',
-				'label' => __( 'Advanced Custom Fields', 'sierotki' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_text',
-				'type'              => 'checkbox',
-				'th'                => __( 'Text', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_textarea',
-				'type'              => 'checkbox',
-				'th'                => __( 'Textarea', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'acf_wysiwyg',
-				'type'              => 'checkbox',
-				'th'                => __( 'WYSIWYG', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-		}
-		if ( in_array( 'secure-custom-fields.php', $integrations ) ) {
-			$options['index']['options'][] = array(
-				'type'  => 'subheading',
-				'label' => __( 'Secure Custom Fields', 'sierotki' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'scf_text',
-				'type'              => 'checkbox',
-				'th'                => __( 'Text', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in text fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'scf_textarea',
-				'type'              => 'checkbox',
-				'th'                => __( 'Textarea', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in textarea fields. (Include WYSIWYG).', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-			$options['index']['options'][] = array(
-				'name'              => 'scf_wysiwyg',
-				'type'              => 'checkbox',
-				'th'                => __( 'WYSIWYG', 'sierotki' ),
-				'description'       => __( 'Enabled the substitution of orphans in WYSIWYG fields.', 'sierotki' ),
-				'sanitize_callback' => 'absint',
-				'default'           => 0,
-				'classes'           => array( 'switch-button' ),
-			);
-		}
+		$options['index']['options']           = array_merge( $options['index']['options'], $integrations );
 	}
 	/**
 	 * cache it
@@ -456,49 +391,6 @@ function orphans_indicator_options() {
 	 */
 	do_action( 'qm/stop', 'orphans_indicator_options' );
 	return $options;
-}
-
-/**
- * Check for available plugin integrations.
- *
- * Scans active plugins to determine which integrations should be available
- * for the Orphans plugin.
- *
- * @since 2.9.8
- * @return array List of available integration plugin basenames.
- */
-function iworks_orphan_options_check_available_integrations() {
-	$integrations = array();
-	$plugins      = get_option( 'active_plugins' );
-	/**
-	 * check multisite network wide plugins.
-	 *
-	 * @since 3.0.3
-	 */
-	if ( is_multisite() ) {
-		$network_plugins = array_flip( get_site_option( 'active_sitewide_plugins' ) );
-		$plugins         = array_merge( $plugins, $network_plugins );
-		$plugins         = array_unique( $plugins );
-	}
-	/**
-	 * no plugins
-	 */
-	if ( empty( $plugins ) ) {
-		return $integrations;
-	}
-	/**
-	 * check ACF plugin
-	 *
-	 * @since 2.9.7
-	 */
-	foreach ( $plugins as $plugin ) {
-		if ( preg_match( '/acf\.php$/', $plugin ) ) {
-			$integrations[] = basename( $plugin );
-		} elseif ( preg_match( '/secure-custom-fields\.php$/', $plugin ) ) {
-			$integrations[] = basename( $plugin );
-		}
-	}
-	return $integrations;
 }
 
 /**

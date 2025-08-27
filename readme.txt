@@ -166,6 +166,11 @@ add_filter(
 
 == Changelog ==
 
+= 3.4.0 - 2025-08-27 =
+* Resolved conflict arising from differing implementations of the acf/format_value filter in Advanced Custom Fields and Secure Custom Fields plugins.
+* Refactored codebase by separating [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) integration into its own dedicated file.
+* Refactored codebase by separating Advanced Custom Fields integration into its own dedicated file.
+
 = 3.3.9 - 2025-08-23 =
 * Integration with the [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) plugin has been added.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.7.

@@ -491,6 +491,12 @@ class iworks_orphan {
 	 */
 	public function init() {
 		/**
+		 * Load Integrations
+		 *
+		 * @since 3.2.7
+		 */
+		$this->load_integrations();
+		/**
 		 * options
 		 */
 		$this->check_option_object();
@@ -602,22 +608,6 @@ class iworks_orphan {
 		 */
 		add_filter( 'get_post_metadata', array( $this, 'filter_post_meta' ), 10, 4 );
 		/**
-		 * Integrations: Advanced Custom Fields
-		 *
-		 * @since 2.9.1
-		 */
-		foreach ( array( 'text', 'textarea', 'wysiwyg' ) as $type ) {
-			if ( $this->is_on( 'acf_' . $type ) ) {
-				add_filter( 'acf/format_value/type=' . $type, array( $this, 'filter_acf' ), 10, 3 );
-			}
-		}
-		/**
-		 * Integrations: Secure Custom Fields
-		 *
-		 * @since 3.3.9
-		 */
-		add_filter( 'acf/format_value', array( $this, 'filter_secure_custom_fields' ), 10, 4 );
-		/**
 		 * Integrations: WP Bakery
 		 *
 		 * @since 3.0.2
@@ -656,6 +646,14 @@ class iworks_orphan {
 		 * @since 3.2.1
 		 */
 		add_filter( 'et_pb_module_content', array( $this, 'integration_filter_et_pb_module_content' ), 200, 6 );
+	}
+
+	/**
+	 * Load integrations
+	 *
+	 * @since 3.2.7
+	 */
+	private function load_integrations() {
 		/**
 		 * Integrations: Bricks - Visual Site Builder for WordPress
 		 *
@@ -665,6 +663,50 @@ class iworks_orphan {
 			include_once __DIR__ . '/integrations/class-iworks-orphans-integration-bricks.php';
 			$this->loaded_integrations['class-iworks-orphans-integration-bricks'] = new iWorks_Orphans_Integration_Bricks( $this );
 		}
+		/**
+		 * Integrations: Advance Custom Fields
+		 *
+		 * @since 3.4.0
+		 */
+		if ( $this->is_plugin_active( 'acf' ) ) {
+			include_once __DIR__ . '/integrations/class-iworks-orphans-integration-advanced-custom-fields.php';
+			$this->loaded_integrations['class-iworks-orphans-integration-advanced-custom-fields'] = new iWorks_Orphans_Integration_Advanced_Custom_Fields( $this );
+		}
+		/**
+		 * Secure Custom Fields
+		 *
+		 * @since 3.4.0
+		 */
+		if ( $this->is_plugin_active( 'secure-custom-fields' ) ) {
+			include_once __DIR__ . '/integrations/class-iworks-orphans-integration-secure-custom-fields.php';
+			$this->loaded_integrations['class-iworks-orphans-integration-secure-custom-fields'] = new iWorks_Orphans_Integration_Secure_Custom_Fields( $this );
+		}
+	}
+
+	/**
+	 * Check if plugin is active
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param string $plugin Plugin basename.
+	 *
+	 * @return boolean Is this plugin active?
+	 */
+	private function is_plugin_active( $plugin ) {
+		$plugins = get_option( 'active_plugins', array() );
+		if ( empty( $plugins ) ) {
+			return false;
+		}
+		if ( ! is_array( $plugins ) ) {
+			return false;
+		}
+		$re = sprintf( '/\/' . $plugin . '\.php$/i', $plugins );
+		foreach ( $plugins as $plugin ) {
+			if ( preg_match( $re, $plugin ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -674,8 +716,8 @@ class iworks_orphan {
 	 *
 	 * @return boolean Is this key setting turned on?
 	 */
-	private function is_on( $key ) {
-		return isset( $this->settings[ $key ] ) && 1 === $this->settings[ $key ];
+	public function is_on( $key ) {
+		return isset( $this->settings[ $key ] ) && 1 === intval( $this->settings[ $key ] );
 	}
 
 	/**
@@ -1158,17 +1200,5 @@ class iworks_orphan {
 			return;
 		}
 		$this->options = get_orphan_options();
-	}
-
-	/**
-	 * Replace in Secure Custom Fields
-	 *
-	 * @since 3.3.9
-	 */
-	public function filter_secure_custom_fields( $value, $post_id, $field, $escape_html ) {
-		if ( $this->is_on( 'scf_' . $field['type'] ) ) {
-			return $this->unconditional_replacement( $value );
-		}
-		return $value;
 	}
 }
