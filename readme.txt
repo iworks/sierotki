@@ -166,6 +166,9 @@ add_filter(
 
 == Changelog ==
 
+= 3.4.1 - 2025-10-14 =
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.2.
+
 = 3.4.0 - 2025-08-27 =
 * Resolved conflict arising from differing implementations of the `acf/format_value` filter in Advanced Custom Fields and Secure Custom Fields plugins.
 * Refactored codebase by separating [Secure Custom Fields](https://wordpress.org/plugins/secure-custom-fields/) integration into its own dedicated file.
