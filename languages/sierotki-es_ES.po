@@ -1,194 +1,189 @@
-# Translation of Plugins - Orphans - Development (trunk) in Polish
+# Translation of Plugins - Orphans - Development (trunk) in Spanish (Spain)
 # This file is distributed under the same license as the Plugins - Orphans - Development (trunk) package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
 "POT-Creation-Date: 2025-10-14 10:43:24+00:00\n"
-"PO-Revision-Date: 2025-08-23 17:20:55+0000\n"
-"Language: pl\n"
+"PO-Revision-Date: 2018-05-13 17:53:38+0000\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 "
-"&& (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/4.0.1\n"
 
 #: etc/options.php:43
 msgid "Orphans Configuration"
-msgstr "Konfiguracja sierotek"
+msgstr ""
 
 #. Plugin Name of the plugin/theme
 msgid "Orphans"
-msgstr "Sierotki"
+msgstr "Huérfanas"
 
 #: etc/options.php:51
 msgid "Terms"
-msgstr "Wartości"
+msgstr ""
 
 #: etc/options.php:57
 msgid "Language File"
-msgstr "Plik językowy"
+msgstr ""
 
 #: etc/options.php:61
 msgid "Try to use the site locale to determine the file name"
-msgstr "Spróbuj użyć ustawień regionalnych witryny, aby określić nazwę pliku"
+msgstr ""
 
 #: etc/options.php:62
 msgid ""
 "Select if you want the plugin to determine which file to load based on the "
 "site's language settings."
 msgstr ""
-"Wybierz, czy chcesz aby wtyczka określała, który plik załadować na podstawie "
-"ustawień językowych witryny."
 
 #: etc/options.php:65
 msgid "Polish"
-msgstr "Polski"
+msgstr ""
 
 #: etc/options.php:66
 msgid "Select if you want to force the loading of Polish language rules."
-msgstr "Wybierz, jeżeli chcesz wymusić ładowanie reguł języka polskiego."
+msgstr ""
 
 #: etc/options.php:69
 msgid "Czech"
-msgstr "Czeski"
+msgstr ""
 
 #: etc/options.php:70
 msgid "Select if you want to force the loading of Czech language rules."
-msgstr "Wybierz, jeżeli chcesz wymusić ładowanie reguł języka czeskiego."
+msgstr ""
 
 #: etc/options.php:73
 msgid "English"
-msgstr "Angielski"
+msgstr ""
 
 #: etc/options.php:74
 msgid "Select if you want to force the loading of English short words."
-msgstr "Wybierz jeżeli chcesz wymusić ładowanie krótkich angielskich słów."
+msgstr ""
 
 #: etc/options.php:77
 msgid "Do not load any files"
-msgstr "Nie ładuj żadnych plików"
+msgstr ""
 
 #: etc/options.php:78
 msgid "Select if you want to rely only on your terms."
-msgstr "Wybierz, czy chcesz używać tylko własnych wartości."
+msgstr ""
 
 #: etc/options.php:94
 msgid "User Definied Orphans"
-msgstr "Własna definicja sierotek"
+msgstr ""
 
 #: etc/options.php:96
 msgid "Use a comma to separate orphans."
-msgstr "Użyj przecinka do oddzielenia sierot."
+msgstr ""
 
 #: etc/options.php:103
 msgid "Entries"
-msgstr "Treści"
+msgstr ""
 
 #: etc/options.php:111
 msgid "Post Types"
-msgstr "Typy treści"
+msgstr ""
 
 #: etc/options.php:116
 msgid "Posts"
-msgstr "Wpisy"
+msgstr ""
 
 #: etc/options.php:117
 msgid "Pages"
-msgstr "Strony"
+msgstr ""
 
 #: etc/options.php:131 etc/options.php:230
 msgid "Title"
-msgstr "Tytuł"
+msgstr ""
 
 #: etc/options.php:133
 msgid "Enabled the substitution of orphans in the post_title."
-msgstr "Włącz obsługę sierotek dla tytułów."
+msgstr ""
 
 #: etc/options.php:140
 msgid "Excerpt"
-msgstr "Zajawka"
+msgstr ""
 
 #: etc/options.php:142
 msgid "Enabled the substitution of orphans in the excerpt."
-msgstr "Włącz obsługę sierotek w zajawce."
+msgstr ""
 
 #: etc/options.php:149
 msgid "Content"
-msgstr "Treść"
+msgstr ""
 
 #: etc/options.php:151
 msgid "Enabled the substitution of orphans in the content."
-msgstr "Włącz obsługę sierotek w treści."
+msgstr ""
 
 #: etc/options.php:159
 msgid "Comments"
-msgstr "Komentarze"
+msgstr ""
 
 #: etc/options.php:160
 msgid "Enabled the substitution of orphans in the comments."
-msgstr "Włącz obsługę sierotek w komentarzach."
+msgstr ""
 
 #: etc/options.php:167
 msgid "Widgets"
-msgstr "Widżety"
+msgstr ""
 
 #: etc/options.php:174
 msgid "Widget Title"
-msgstr "Tytuł widżetu"
+msgstr ""
 
 #: etc/options.php:176
 msgid "Enabled the substitution of orphans in the widget title."
-msgstr "Włącz obsługę sierotek w tytule widżetu."
+msgstr ""
 
 #: etc/options.php:186
 msgid "Widget Text"
-msgstr "Tekst widżetu"
+msgstr ""
 
 #: etc/options.php:188
 msgid "Enabled the substitution of orphans in the widget text."
-msgstr "Włącz obsługę sierotek w treści widżetu tekstowego."
+msgstr ""
 
 #: etc/options.php:198
 msgid "Widget Block Content"
-msgstr "Treść bloku widżetów"
+msgstr ""
 
 #: etc/options.php:200
 msgid "Enabled the substitution of orphans in the widget blocks."
-msgstr "Włącz obsługę sierotek w blokach widżetów."
+msgstr ""
 
 #: etc/options.php:210 etc/options.php:215
 msgid "Taxonomies"
-msgstr "Taksonomie"
+msgstr ""
 
 #: etc/options.php:216
 msgid ""
 "Select the taxonomies where orphaned word substitution should be applied. "
 "This affects terms, categories, tags, and other custom taxonomies."
 msgstr ""
-"Wybierz taksonomie, w których ma zostać zastosowane zastępowanie reguł . "
-"Dotyczy to terminów, kategorii, tagów i innych własnych taksonomii."
 
 #: etc/options.php:232
 msgid "Enabled the substitution of orphans in the taxonomy title."
-msgstr "Włącz obsługę sierotek w tytułach taksonomii."
+msgstr ""
 
 #: etc/options.php:239
 msgid "Description"
-msgstr "Opis"
+msgstr ""
 
 #: etc/options.php:241
 msgid "Enabled the substitution of orphans in the taxonomy description."
-msgstr "Włącz obsługę sierotek w opisach taksonomii."
+msgstr ""
 
 #: etc/options.php:248
 msgid "Miscellaneous"
-msgstr "Różne"
+msgstr ""
 
 #: etc/options.php:258
 msgid "Translation Functions"
-msgstr "Funkcje obsługi tłumaczeń"
+msgstr ""
 
 #: etc/options.php:259
 msgid ""
@@ -197,249 +192,241 @@ msgid ""
 "internationalization/\" target=\"_blank\">Read more.</a> <b>WARNING: this "
 "can slow your site!</b>"
 msgstr ""
-"Włączono zastępowanie sierot w funkcjach obsługi tłumaczeń. <a "
-"href=\"https://developer.wordpress.org/themes/functionality/"
-"internationalization/\" target=\"_blank\">Dowiedz się więcej.</a> "
-"<b>OSTRZEŻENIE: może to spowolnić witrynę!</b>"
 
 #: etc/options.php:270
 msgid "Author Description"
-msgstr "Opis autora"
+msgstr ""
 
 #: etc/options.php:271
 msgid "Enabled the substitution of orphans in the author description."
-msgstr "Włącz obsługę sierotek w opisie autora."
+msgstr ""
 
 #: etc/options.php:278
 msgid "Ignore Language"
-msgstr "Ignoruj język"
+msgstr ""
 
 #: etc/options.php:280
 msgid "Allow to use plugin with another languages then Polish."
-msgstr "Pozwala na włączenie wtyczki dla innych języków niż język polski."
+msgstr ""
 
 #: etc/options.php:287
 msgid "Menu Title"
-msgstr "Tytuły w menu"
+msgstr ""
 
 #: etc/options.php:289
 msgid "Enabled the substitution of orphans in the menu title."
-msgstr "Włącz obsługę sierotek w tytułach elementów menu."
+msgstr ""
 
 #: etc/options.php:296
 msgid "Keep Numbers Together"
-msgstr "Trzymaj liczby razem"
+msgstr ""
 
 #: etc/options.php:298
 msgid ""
 "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
-"Pozwala na nierozdzielanie numeru telefonu oraz liczb między którymi jest "
-"spacja."
 
 #: etc/options.php:304
 msgid "Protect Tag Attributes"
-msgstr "Ochrona atrybutów tagu"
+msgstr ""
 
 #: etc/options.php:306
 msgid ""
 "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr ""
-"Dodano ignorowanie spacji w atrybutach: \"class\", \"style\" and \"data-*\"."
 
 #: etc/options.php:313
 msgid "Entries Custom Fields"
-msgstr "Własne pola we wpisach"
+msgstr ""
 
 #: etc/options.php:315
 msgid "Use a comma to separate custom fields name (meta fields)."
-msgstr "Użyj przecinka, aby oddzielić nazwy własnych pól (meta)."
+msgstr ""
 
 #: etc/options.php:322
 msgid "Export/Import"
-msgstr "Eksport/Import"
+msgstr ""
 
 #: etc/options.php:327
 msgid "Export"
-msgstr "Eksport"
+msgstr ""
 
 #: etc/options.php:332
 msgid "Add extra information"
-msgstr "Dodaj dodatkowe informacje"
+msgstr ""
 
 #: etc/options.php:334
 msgid "Add site configuration data like language, url. Nothing sensitive."
 msgstr ""
-"Dodaj dane konfiguracyjne witryny, takie jak język, adres URL. Nic "
-"wrażliwego."
 
 #: etc/options.php:341
 msgid "Export JSON"
-msgstr "Eksportuj JSON"
+msgstr ""
 
 #: etc/options.php:347
 msgid "Import"
-msgstr "Import"
+msgstr ""
 
 #: etc/options.php:359 etc/options.php:454
 msgid "We are waiting for your message"
-msgstr "Czekamy na twoją wiadomość"
+msgstr ""
 
 #: etc/options.php:365
 msgid "I love what I do!"
-msgstr "Kocham to co robię!"
+msgstr ""
 
 #: etc/options.php:379
 msgid "Integrations"
-msgstr "Integracje"
+msgstr ""
 
 #: etc/options.php:413
 msgid "Below are some links to help spread this plugin to other users"
-msgstr "Poniższe odnośniki mogą pomóc innym w znalezieniu wtyczki"
+msgstr ""
+"Debajo hay algunos enlaces para distribuir este plugin a otros usuarios"
 
 #: etc/options.php:415
 msgid "Give it a five stars on WordPress.org"
-msgstr "Daj wtyczce pięć gwiazdek na WordPress.org"
+msgstr "Dale una puntuación de cinco estrellas en WordPress.org"
 
 #: etc/options.php:416
 msgid "Link to it so others can easily find it"
-msgstr "Odnośnik do wtyczki - żeby łatwo było znaleźć"
+msgstr "Enlázalo para que otros lo puedan encontrar"
 
 #: etc/options.php:456
 msgid "WordPress Help Forum"
-msgstr "Forum Pomocy WordPressa"
+msgstr "Foro de ayuda de WordPress"
 
 #: etc/options.php:477
 msgid "Import JSON"
-msgstr "Importuj JSON"
+msgstr ""
 
 #: includes/iworks/class-iworks-orphan.php:734
 #: includes/iworks/rate/rate.php:159
 msgid "Settings"
-msgstr "Ustawienia"
+msgstr "Configurar"
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:92
 msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:97
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:71
 msgid "Text"
-msgstr "Tekst"
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:98
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:72
 msgid "Enabled the substitution of orphans in text fields."
-msgstr "Włącz obsługę sierotek w polu tekstowym (jedna linia)."
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:106
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:80
 msgid "Textarea"
-msgstr "Pole tekstowe"
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:107
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:81
 msgid ""
 "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
-msgstr "Włącz obsługę sierotek w polach tekstu. (W tym edytor wizualny)."
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:115
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:89
 msgid "WYSIWYG"
-msgstr "Edytor wizualny"
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:116
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:90
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
-msgstr "Włącz obsługę sierotek w polach edytora wizualnego."
+msgstr ""
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:66
 msgid "Secure Custom Fields"
-msgstr "Bezpieczne Własne Pola"
+msgstr ""
 
 #: includes/iworks/options/options.php:175
 msgid "No Page Title"
-msgstr "Brak tytułu strony"
+msgstr ""
 
 #: includes/iworks/options/options.php:340
 msgid "An error occurred while getting the configuration."
-msgstr "Wystąpił błąd przy pobieraniu konfiguracji."
+msgstr ""
 
 #: includes/iworks/options/options.php:919
 #: includes/iworks/options/options.php:2407
 msgid "Select Image"
-msgstr "Wybierz obrazek"
+msgstr ""
 
 #: includes/iworks/options/options.php:924
 msgid "Delete image"
-msgstr "Usuń obrazek"
+msgstr ""
 
 #: includes/iworks/options/options.php:1032
 msgid "Save Changes"
-msgstr "Zapisz zmiany"
+msgstr "Guardar las modificaciones"
 
 #: includes/iworks/options/options.php:2280
 msgid "Country"
-msgstr "Kraj"
+msgstr ""
 
 #: includes/iworks/options/options.php:2281
 msgid "City"
-msgstr "Miejscowość"
+msgstr ""
 
 #: includes/iworks/options/options.php:2282
 msgid "Street"
-msgstr "Ulica"
+msgstr ""
 
 #: includes/iworks/options/options.php:2283
 msgid "ZIP code"
-msgstr "Kod pocztowy"
+msgstr ""
 
 #: includes/iworks/options/options.php:2467
 msgid "OFF"
-msgstr "Wyłącz"
+msgstr ""
 
 #: includes/iworks/options/options.php:2468
 msgid "ON"
-msgstr "WŁĄCZ"
+msgstr ""
 
 #: includes/iworks/options/options.php:2533
 msgid "Failed Security Check"
-msgstr "Nieudana kontrola bezpieczeństwa"
+msgstr ""
 
 #: includes/iworks/orphans/class-iworks-orphans-import.php:82
 msgid "Configuration has been imported."
-msgstr "Konfiguracja została zaimportowana."
+msgstr ""
 
 #: includes/iworks/orphans/class-iworks-orphans-import.php:89
 msgid "Something went wrong!"
-msgstr "Coś poszło nie tak!"
+msgstr ""
 
 #: includes/iworks/rate/rate.php:173
 #: includes/iworks/rate/templates/thanks.php:39
 msgid "Provide us a coffee"
-msgstr "Postaw nam kawę"
+msgstr ""
 
 #. translators: %s: plugin id
 #: includes/iworks/rate/rate.php:626
 msgid "There is no plugin with id: %s."
-msgstr "Nie istnieje wtyczka o identyfikatorze: %s."
+msgstr ""
 
 #: includes/iworks/rate/rate.php:800
 msgid "OpenGraph"
-msgstr "OpenGraph"
+msgstr ""
 
 #: includes/iworks/rate/rate.php:816
 msgid "OG — Better Share on Social Media"
-msgstr "OG — Lepsze udostępnianie w mediach społecznościowych"
+msgstr ""
 
 #: includes/iworks/rate/rate.php:817
 msgid "https://wordpress.org/plugins/og/"
-msgstr "https://pl.wordpress.org/plugins/og/"
+msgstr ""
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
 msgid "🎉 Happy Anniversary! 🎉"
-msgstr "🎉 Wszystkiego najlepszego z okazji rocznicy! 🎉"
+msgstr ""
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
 msgid ""
@@ -447,9 +434,6 @@ msgid ""
 "you so much for being part of our journey! We truly appreciate your support "
 "and hope the plugin has made your work easier and more enjoyable."
 msgstr ""
-"Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za "
-"bycie częścią naszej wspólnej przygody! Naprawdę doceniam Twoje wsparcie i "
-"mam nadzieję, że wtyczka ułatwiła Ci pracę i uczyniła ją przyjemniejszą."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
@@ -459,26 +443,21 @@ msgid ""
 "coffee. Every little bit helps us keep improving and adding new features for "
 "awesome users like you!"
 msgstr ""
-"Jeśli nasza wtyczka okazała się pomocna i chcesz wesprzeć jej dalszy rozwój, "
-"byłbym niezmiernie wdzięczny, gdybyś rozważyła lub rozważył postawienie mi "
-"kawy. Każda odrobina pomaga nam w ciągłym doskonaleniu i dodawaniu nowych "
-"funkcji dla wspaniałych użytkowników, takich jak Ty!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:25
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
 msgid "☕ Buy Me a Coffee"
-msgstr "☕ Kup mi kawę"
+msgstr ""
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:26
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
 msgid "Thank you for your support and for making this community amazing!"
 msgstr ""
-"Dziękuję za Twoje wsparcie i za to, że tworzysz niesamowitą społeczność!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:30
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
 msgid "With gratitude"
-msgstr "Z wdzięcznością"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "Marcin Pietrzak"
@@ -487,7 +466,7 @@ msgstr "Marcin Pietrzak"
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:36
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
 msgid "Plugin Author"
-msgstr "Autor wtyczki"
+msgstr ""
 
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
 msgid ""
@@ -495,28 +474,25 @@ msgid ""
 "you so much for being part of our journey! We hope it’s made your work "
 "easier and more enjoyable."
 msgstr ""
-"Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za "
-"bycie częścią naszej wspólnej przygody! Mam nadzieję, że wtyczka ułatwiła "
-"Twoją pracę i uczyniła ją przyjemniejszą."
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
-msgstr "Czy chcesz zwiększyć możliwości dzielenia się witryną?"
+msgstr ""
 
 #. translators: %s is a plugin name with url
 #: includes/iworks/rate/templates/plugins/og.php:9
 msgid "Don't wait, install plugin %s!"
-msgstr "Nie czekaj, zainstaluj wtyczkę %s!"
+msgstr ""
 
 #. translators: %s is a plugin wp home name, %s plugin name
 #: includes/iworks/rate/templates/plugins/og.php:20
 msgid "Install"
-msgstr "Zainstaluj"
+msgstr ""
 
 #. translators: %s is a plugin name wrapped by strong html tag
 #: includes/iworks/rate/templates/thanks.php:23
 msgid "Thank you for using our plugin %s!"
-msgstr "Dziękujemy za używanie naszej wtyczki %s!"
+msgstr ""
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag
 #: includes/iworks/rate/templates/thanks.php:31
@@ -527,46 +503,36 @@ msgid ""
 "our FAQ%2$s or contact us if you did not find help there. We will try to "
 "help you!"
 msgstr ""
-"Powiedz nam co myślisz o naszej wtyczce. To jest bardzo ważne dla nas i "
-"pozwoli nam ją rozwijać. Dziękujemy serdecznie za wszystkie oceny, recenzje "
-"i dodatkowe wsparcie. Jeżeli masz problem techniczny, prosimy zanim dodasz "
-"recenzję %1$ssprawdź nasze FAQ%2$s lub skontaktuj się z nami, jeżeli nie "
-"znajdziesz tam pomocy. Postaramy się tobie pomóc!"
 
 #: includes/iworks/rate/templates/thanks.php:35
 #: includes/iworks/rate/templates/widgets/support.php:21
 msgid "Get help"
-msgstr "Uzyskaj pomoc"
+msgstr ""
 
 #: includes/iworks/rate/templates/thanks.php:37
 #: includes/iworks/rate/templates/widgets/support.php:31
 msgid "Add review"
-msgstr "Dodaj recenzję"
+msgstr ""
 
 #: includes/iworks/rate/templates/thanks.php:41
 msgid "I added review, do not show again"
-msgstr "Recenzja została dodana, nie pokazuj ponownie"
+msgstr ""
 
 #: includes/iworks/rate/templates/widgets/donate.php:2
 msgid ""
 "However, working on plugins and technical support requires many hours of "
 "work. If you want to appreciate it, you can provide me a coffee."
 msgstr ""
-"Praca nad wtyczkami oraz świadczenie pomocy technicznej wymaga ode mnie "
-"wielu godzin ciężkiej pracy. Jeżeli chcesz to docenić, możesz postawić mi "
-"kawę."
 
 #: includes/iworks/rate/templates/widgets/donate.php:3
 msgid ""
 "If every plugin user did it, I could devote myself fully to working on this "
 "plugin. Thanks everyone!"
 msgstr ""
-"Gdyby każdy użytkownik wtyczki to zrobił, to mógłbym poświęcić cały swój "
-"czas pracy nad wtyczką. Dziękuję każdemu!"
 
 #: includes/iworks/rate/templates/widgets/donate.php:4
 msgid "Provide me a coffee"
-msgstr "Postaw mi kawę"
+msgstr ""
 
 #: includes/iworks/rate/templates/widgets/support.php:4
 msgid ""
@@ -574,9 +540,6 @@ msgid ""
 "you. Or maybe you have an idea for a new feature? Please let us know about "
 "it by filling the support form. We will try to add it!"
 msgstr ""
-"Masz problem techniczny? Prosimy o kontakt z nami. Z przyjemnością tobie "
-"pomożemy. A może masz pomysł na nową funkcjonalność? Poinformuj nas o tym, "
-"dodając wątek na forum technicznym. Weźmiemy to pod uwagę!"
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
 #. anchor tag, %4$s: close anchor tag
@@ -586,9 +549,6 @@ msgid ""
 "If you do not find help there, %3$scheck support forum%4$s for similar "
 "problems."
 msgstr ""
-"Zobacz %1$snasze FAQ%2$s zanim dodasz wątek w dziale pomocy technicznej. "
-"Jeżeli nie znajdziesz tam pomocy, sprawdź również %3$sforum techniczne%4$s "
-"pod kątem podobnych problemów."
 
 #: includes/iworks/rate/templates/widgets/support.php:26
 msgid ""
@@ -596,9 +556,6 @@ msgid ""
 "think about our plugin. It is important that we can develop this tool. Thank "
 "you for all the ratings, reviews and donates."
 msgstr ""
-"Jak podoba się nasza wtyczka? Masz możliwość ją ocenić? Daj nam znać, co o "
-"niej myślisz. To dla nas bardzo ważne, aby móc ją rozwijać. Dziękujemy za "
-"wszystkie oceny, recenzje oraz dodatkowe wsparcie."
 
 #. Plugin URI of the plugin/theme
 msgid "PLUGIN_URI"
@@ -615,32 +572,26 @@ msgstr "http://iworks.pl/"
 #: etc/options.php:415
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
-msgstr "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
+msgstr ""
 
 #: etc/options.php:416
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
-msgstr "https://pl.wordpress.org/plugins/sierotki/"
+msgstr ""
 
 #: etc/options.php:456
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
-msgstr "https://wordpress.org/support/plugin/sierotki/"
+msgstr ""
 
 #. translators: %s: plugin slug
 #: includes/iworks/rate/rate.php:649
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
-msgstr "https://pl.wordpress.org/plugins/%s"
+msgstr ""
 
 #. translators: %s: plugin slug
 #: includes/iworks/rate/rate.php:656
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
-msgstr "https://wordpress.org/support/plugin/%s"
-
-#~ msgid "Supports the grammar rule for orphan words at the end of a line."
-#~ msgstr "Obsługuje regułę gramatyczną wyrazów osieroconych na końcu linii."
-
-#~ msgid "https://github.com/iworks/sierotki"
-#~ msgstr "https://github.com/iworks/sierotki"
+msgstr ""

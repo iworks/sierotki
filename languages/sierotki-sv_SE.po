@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-08-27 09:23:31+00:00\n"
+"POT-Creation-Date: 2025-10-14 10:43:24+00:00\n"
 "PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -302,7 +302,7 @@ msgid "Import JSON"
 msgstr ""
 
 #: includes/iworks/class-iworks-orphan.php:734
-#: includes/iworks/rate/rate.php:133
+#: includes/iworks/rate/rate.php:159
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -345,52 +345,52 @@ msgstr ""
 msgid "Secure Custom Fields"
 msgstr ""
 
-#: includes/iworks/options/options.php:176
+#: includes/iworks/options/options.php:175
 msgid "No Page Title"
 msgstr ""
 
-#: includes/iworks/options/options.php:341
+#: includes/iworks/options/options.php:340
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:920
-#: includes/iworks/options/options.php:2408
+#: includes/iworks/options/options.php:919
+#: includes/iworks/options/options.php:2407
 msgid "Select Image"
 msgstr "Välj bild"
 
-#: includes/iworks/options/options.php:925
+#: includes/iworks/options/options.php:924
 msgid "Delete image"
 msgstr "Ta bort bild"
 
-#: includes/iworks/options/options.php:1033
+#: includes/iworks/options/options.php:1032
 msgid "Save Changes"
 msgstr "Spara ändringarna"
 
-#: includes/iworks/options/options.php:2281
+#: includes/iworks/options/options.php:2280
 msgid "Country"
 msgstr "Land"
 
-#: includes/iworks/options/options.php:2282
+#: includes/iworks/options/options.php:2281
 msgid "City"
 msgstr "Ort"
 
-#: includes/iworks/options/options.php:2283
+#: includes/iworks/options/options.php:2282
 msgid "Street"
 msgstr "Gata"
 
-#: includes/iworks/options/options.php:2284
+#: includes/iworks/options/options.php:2283
 msgid "ZIP code"
 msgstr "Postnummer"
 
-#: includes/iworks/options/options.php:2468
+#: includes/iworks/options/options.php:2467
 msgid "OFF"
 msgstr "AV"
 
-#: includes/iworks/options/options.php:2469
+#: includes/iworks/options/options.php:2468
 msgid "ON"
 msgstr "PÅ"
 
-#: includes/iworks/options/options.php:2534
+#: includes/iworks/options/options.php:2533
 msgid "Failed Security Check"
 msgstr ""
 
@@ -402,25 +402,25 @@ msgstr ""
 msgid "Something went wrong!"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:147
+#: includes/iworks/rate/rate.php:173
 #: includes/iworks/rate/templates/thanks.php:39
 msgid "Provide us a coffee"
 msgstr "Köp en kopp kaffe till oss"
 
 #. translators: %s: plugin id
-#: includes/iworks/rate/rate.php:590
+#: includes/iworks/rate/rate.php:626
 msgid "There is no plugin with id: %s."
 msgstr ""
 
-#: includes/iworks/rate/rate.php:764
+#: includes/iworks/rate/rate.php:800
 msgid "OpenGraph"
 msgstr "OpenGraph"
 
-#: includes/iworks/rate/rate.php:780
+#: includes/iworks/rate/rate.php:816
 msgid "OG — Better Share on Social Media"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:781
+#: includes/iworks/rate/rate.php:817
 msgid "https://wordpress.org/plugins/og/"
 msgstr "https://wordpress.org/plugins/og/"
 
@@ -586,13 +586,13 @@ msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr "https://wordpress.org/support/plugin/sierotki/"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:613
+#: includes/iworks/rate/rate.php:649
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr "https://wordpress.org/plugins/%s"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:620
+#: includes/iworks/rate/rate.php:656
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
