@@ -166,6 +166,10 @@ add_filter(
 
 == Changelog ==
 
+= 3.4.2 - 2026-04-24 =
+* Updated & enhaced build process.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.0.
+
 = 3.4.1 - 2025-10-14 =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.8.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.2.
