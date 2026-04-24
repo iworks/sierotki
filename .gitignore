@@ -1,7 +1,23 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+# These are some examples of commonly ignored file patterns.
+# You should customize this list as applicable to your project.
+
+# Node artifact files
+node_modules/
+dist/
+
+# Compiled files
 .sass-cache
-/composer.lock
-/composer
-/release
-/node_modules
 package-lock.json
+
+# Compiled CSS files, needed to release not in repository
+assets/styles/
+assets/scripts/sierotki-*.js
+
+# release
+release/
+
+# i18n
+languages/*.mo
+
+# tests
+tests/php/.phpunit.result.cache

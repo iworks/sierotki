@@ -5,6 +5,11 @@
     "tagline": "Supports the grammar rule for orphan words at the end of a line.",
     "version": "3.4.1",
     "homepage": "https://github.com/iworks/sierotki",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:iworks/sierotki.git",
+        "website": "https://github.com/iworks/sierotki"
+    },
     "tags": [
         "czech",
         "grammar",
@@ -12,7 +17,9 @@
         "polish",
         "typography"
     ],
-    "author": [
+    "author": "iworks",
+    "keywords": [],
+    "contributors": [
         {
             "name": "Marcin Pietrzak",
             "email": "marcin@iworks.pl",
@@ -28,7 +35,7 @@
         "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "6.8"
+        "WordPress": "7.0"
     },
     "devDependencies": {
         "grunt": "^1",
@@ -50,12 +57,6 @@
         "grunt-potomo": "^3",
         "grunt-replace": "^1",
         "grunt-wp-i18n": "^1"
-    },
-    "keywords": [],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:iworks/sierotki.git",
-        "website": "https://github.com/iworks/sierotki"
     },
     "license": "GPL-3.0"
 }

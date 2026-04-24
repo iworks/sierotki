@@ -17,6 +17,7 @@ module.exports = function(grunt) {
 
 	var buildtime = new Date().toISOString();
 	var buildyear = 1900 + new Date().getYear();
+	var buildtimestamp = new Date().getTime();
 
 	/**
 	 * excludes
@@ -62,7 +63,7 @@ module.exports = function(grunt) {
 			'!assets/scripts/src/**',
 			'!assets/scss/**',
 			'!assets/styles/frontend/**',
-			'!includes/iworks/orphans/class-iworks-orphans-github.php',
+			'!includes/iworks/<%= pkg.name %>/class-iworks-<%= pkg.name %>-github.php',
 			'!includes/pro/**',
 			'!languages/*.mo',
 			'!languages/*.po',
@@ -71,6 +72,11 @@ module.exports = function(grunt) {
 
 	var conf = {
 		// Concatenate those JS files into a single file (target: [source, source, ...]).
+		js_files_concat: {},
+
+		// SASS files to process. Resulting CSS files will be minified as well.
+		css_files_compile: {},
+		css_files_concat: {},
 
 		replace_patterns: [{
 			match: /AUTHOR_NAME/g,
@@ -78,6 +84,9 @@ module.exports = function(grunt) {
 		}, {
 			match: /AUTHOR_URI/g,
 			replace: '<%= pkg.author[0].uri %>'
+		}, {
+			match: /BUILDTIMESTAMP/g,
+			replace: buildtimestamp
 		}, {
 			match: /BUILDTIME/g,
 			replace: buildtime
@@ -136,7 +145,6 @@ module.exports = function(grunt) {
 			ignore_files: [
 				'README.md',
 				'.git*',
-				'vendor/.*', // External libraries.
 				'includes/external/.*', // External libraries.
 				'node_modules/.*',
 				'(^.php)', // Ignore non-php files.
@@ -153,6 +161,161 @@ module.exports = function(grunt) {
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+
+		// JS - Concat .js source files into a single .js file.
+		concat: {
+			options: {
+				stripBanners: true,
+				banner: '/*! <%= pkg.title %> - <%= pkg.version %>\n' +
+					' * <%= pkg.homepage %>\n' +
+					' * Copyright (c) <%= grunt.template.today("yyyy") %>\n' +
+					' * Licensed <%= pkg.license %>' +
+					' */\n'
+			},
+			scripts: {
+				files: conf.js_files_concat
+			}
+		},
+
+		// JS - Validate .js source code.
+		jshint: {
+			all: [
+				'Gruntfile.js',
+				'assets/scripts/src/**/*.js',
+				'assets/scripts/test/**/*.js'
+			],
+			options: {
+				curly: true,
+				eqeqeq: true,
+				immed: true,
+				latedef: true,
+				newcap: true,
+				noarg: true,
+				sub: true,
+				undef: true,
+				boss: true,
+				eqnull: true,
+				globals: {
+					exports: true,
+					module: false
+				}
+			}
+		},
+
+		// JS - Uglyfies the source code of .js files (to make files smaller).
+		uglify: {
+			all: {
+				files: [{
+					expand: true,
+					src: ['*.js', '!**/*.min.js', '!shared*'],
+					cwd: 'assets/scripts/',
+					dest: 'assets/scripts/',
+					ext: '.min.js',
+					extDot: 'last'
+				}],
+				options: {
+					banner: '/*! <%= pkg.title %> - <%= pkg.version %>\n' +
+						' * <%= pkg.homepage %>\n' +
+						' * Copyright (c) <%= grunt.template.today("yyyy") %>;\n' +
+						' * Licensed <%= pkg.license %>' +
+						' */\n',
+					mangle: {
+						except: ['jQuery']
+					}
+				}
+			}
+		},
+
+		test: {
+			files: ['assets/scripts/test/**/*.js']
+		},
+
+		/**
+		 * TEST - Run the PHPUnit tests.
+		 * -- Not used right now...
+		 */
+		phpunit: {
+			classes: {
+				dir: ''
+			},
+			options: {
+				bin: 'phpunit',
+				bootstrap: 'tests/php/bootstrap.php',
+				testsuite: 'default',
+				configuration: 'tests/php/phpunit.xml',
+				colors: true,
+				staticBackup: false,
+				noGlobalsBackup: false
+			}
+		},
+
+		// CSS - Compile a .scss file into a normal .css file.
+		sass: {
+			all: {
+				options: {
+					'sourcemap=none': true, // 'sourcemap': 'none' does not work...
+					unixNewlines: true,
+					style: 'expanded'
+				},
+				files: conf.css_files_compile
+			}
+		},
+		concat_css: {
+			options: {},
+			frontend: {
+				src: ['assets/styles/frontend/settings.css', 'assets/styles/frontend/*.css'],
+				dest: 'assets/styles/<%= pkg.name %>-frontend.css'
+			},
+			admin: {
+				src: ['assets/styles/admin/*.css'],
+				dest: 'assets/styles/<%= pkg.name %>-admin.css'
+			}
+		},
+
+		// CSS - Minify all .css files.
+		cssmin: {
+			options: {
+				banner: '/*! <%= pkg.title %> - <%= pkg.version %>\n' +
+					' * <%= pkg.homepage %>\n' +
+					' * Copyright (c) <%= grunt.template.today("yyyy") %>;\n' +
+					' * Licensed <%= pkg.license %>' +
+					' */\n',
+				mergeIntoShorthands: false
+			},
+			minify: {
+				expand: true,
+				src: ['*.css', '!*.min.css'],
+				cwd: 'assets/styles/',
+				dest: 'assets/styles/',
+				ext: '.min.css',
+				extDot: 'last'
+			}
+		},
+
+		// WATCH - Watch filesystem for changes during development.
+		watch: {
+			sass: {
+				files: [
+					'assets/sass/*.scss',
+					'assets/sass/**/*.scss',
+					'include/modules/**/*.scss'
+				],
+				tasks: ['sass', 'concat_css', 'cssmin'],
+				options: {
+					debounceDelay: 500
+				}
+			},
+			scripts: {
+				files: [
+					'assets/scripts/src/admin/*.js',
+					'assets/scripts/src/frontend/*.js',
+				],
+				tasks: ['jshint', 'concat', 'uglify'],
+				options: {
+					debounceDelay: 500
+				}
+			}
+		},
 
 		// BUILD - Remove previous build version and temp files.
 		clean: {
@@ -193,8 +356,8 @@ module.exports = function(grunt) {
 					},
 					exclude: ['node_modules', '.git', '.sass-cache', 'release'],
 					type: 'wp-plugin',
-					updateTimestamp: true,
-					updatePoFiles: true
+					updateTimestamp: true, // Whether the POT-Creation-Date should be updated without other changes.
+					updatePoFiles: true // Whether to update PO files in the same directory as the POT file.
 				}
 			}
 		},
@@ -313,7 +476,10 @@ module.exports = function(grunt) {
 
 	// Default task.
 
+	//grunt.registerTask('default', ['clean:temp', 'concat', 'uglify', 'sass', 'concat_css', 'cssmin']);
 	grunt.registerTask('default', ['clean:temp']);
+	grunt.registerTask('js', ['concat', 'uglify']);
+	grunt.registerTask('css', ['sass', 'concat_css', 'cssmin']);
 	grunt.registerTask('i18n', ['checktextdomain', 'makepot']);
 
 	grunt.registerTask(
@@ -339,7 +505,7 @@ module.exports = function(grunt) {
 			'compress:github'
 		]
 	);
-	grunt.registerTask('release', ['build:wporg', 'build:github', 'notes' ]);
+	grunt.registerTask('release', ['build:wporg', 'build:github', 'notes']);
 	grunt.registerTask('test', ['phpunit', 'jshint', 'notes']);
 	grunt.util.linefeed = '\n';
 };
