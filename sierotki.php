@@ -33,10 +33,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 // Define plugin constants
 define( 'IWORKS_ORPHANS_VERSION', 'PLUGIN_VERSION' );

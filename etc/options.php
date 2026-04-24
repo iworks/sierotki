@@ -7,6 +7,8 @@
  * @since 1.0.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Get the configuration options for the Orphans Indicator plugin.
  *
