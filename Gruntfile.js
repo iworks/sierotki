@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 			'!assets/scripts/src/**',
 			'!assets/scss/**',
 			'!assets/styles/frontend/**',
-			'!includes/iworks/<%= pkg.name %>/class-iworks-<%= pkg.name %>-github.php',
+			'!includes/iworks/orphans/class-iworks-orphans-github.php',
 			'!includes/pro/**',
 			'!languages/*.mo',
 			'!languages/*.po',
