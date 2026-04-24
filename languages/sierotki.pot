@@ -1,14 +1,14 @@
-# Copyright (C) 2025 Marcin Pietrzak
+# Copyright (C) 2026 Marcin Pietrzak
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.4.1\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-10-14 10:43:35+00:00\n"
+"POT-Creation-Date: 2026-04-24 06:40:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: iWorks <support@iworks.pl>\n"
 "Language: en\n"

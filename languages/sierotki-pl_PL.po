@@ -1,10 +1,10 @@
-# Translation of Plugins - Orphans - Development (trunk) in Polish
-# This file is distributed under the same license as the Plugins - Orphans - Development (trunk) package.
+# Translation of Plugins - Orphans - Stable (latest release) in Polish
+# This file is distributed under the same license as the Plugins - Orphans - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
+"Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-10-14 10:43:24+00:00\n"
+"POT-Creation-Date: 2026-04-24 06:40:21+00:00\n"
 "PO-Revision-Date: 2025-08-23 17:20:55+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 "
 "&& (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.3\n"
 
 #: etc/options.php:43
 msgid "Orphans Configuration"

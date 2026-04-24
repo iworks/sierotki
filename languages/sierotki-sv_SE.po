@@ -1,17 +1,17 @@
-# Translation of Plugins - Orphans - Development (trunk) in Swedish
-# This file is distributed under the same license as the Plugins - Orphans - Development (trunk) package.
+# Translation of Plugins - Orphans - Stable (latest release) in Swedish
+# This file is distributed under the same license as the Plugins - Orphans - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
+"Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-10-14 10:43:24+00:00\n"
+"POT-Creation-Date: 2026-04-24 06:40:21+00:00\n"
 "PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.3\n"
 
 #: etc/options.php:43
 msgid "Orphans Configuration"
