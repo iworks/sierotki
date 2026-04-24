@@ -49,19 +49,19 @@ if ( ! defined( 'HDOM_TYPE_ELEMENT' ) ) {
 }
 
 // Set includes directory path
-$includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
+$orphans_includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
 
 // Load main plugin class
-require_once $includes . '/iworks/class-iworks-orphan.php';
+require_once $orphans_includes . '/iworks/class-iworks-orphan.php';
 
 // Include iWorks Rate class if not already loaded
 if ( ! class_exists( 'iworks_rate' ) ) {
-	include_once $includes . '/iworks/rate/rate.php';
+	include_once $orphans_includes . '/iworks/rate/rate.php';
 }
 
 // Include iWorks Options class if not already loaded (since 2.6.8)
 if ( ! class_exists( 'iworks_options' ) ) {
-	include_once $includes . '/iworks/options/options.php';
+	include_once $orphans_includes . '/iworks/options/options.php';
 }
 
 // Initialize the plugin
