@@ -3,7 +3,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
 }
 
-$keys = array(
+$orphan_keys = array(
 	'comment_text',
 	'initialized',
 	'numbers',
@@ -15,7 +15,7 @@ $keys = array(
 	'woocommerce_short_description',
 );
 
-foreach ( $keys as $key ) {
-	delete_option( 'iworks_orphan_'.$key );
+foreach ( $orphan_keys as $orphan_key ) {
+	delete_option( 'iworks_orphan_'.$orphan_key );
 }
 
