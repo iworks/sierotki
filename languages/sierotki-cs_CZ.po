@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2026-04-24 07:03:19+00:00\n"
+"POT-Creation-Date: 2026-04-24 08:17:27+00:00\n"
 "PO-Revision-Date: 2026-03-30 15:52:30+0000\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 "2);\n"
 "X-Generator: GlotPress/4.0.3\n"
 
-#: etc/options.php:43
+#: etc/options.php:45
 msgid "Orphans Configuration"
 msgstr "Konfigurace sirotků"
 
@@ -22,19 +22,19 @@ msgstr "Konfigurace sirotků"
 msgid "Orphans"
 msgstr "Sirotci"
 
-#: etc/options.php:51
+#: etc/options.php:53
 msgid "Terms"
 msgstr "Podmínky"
 
-#: etc/options.php:57
+#: etc/options.php:59
 msgid "Language File"
 msgstr "Jazykový soubor"
 
-#: etc/options.php:61
+#: etc/options.php:63
 msgid "Try to use the site locale to determine the file name"
 msgstr "Zkuste k určení názvu souboru použít národní prostředí webu"
 
-#: etc/options.php:62
+#: etc/options.php:64
 msgid ""
 "Select if you want the plugin to determine which file to load based on the "
 "site's language settings."
@@ -42,127 +42,127 @@ msgstr ""
 "Vyberte, zda chcete, aby plugin určil, který soubor načíst, na základě "
 "jazykového nastavení webu."
 
-#: etc/options.php:65
+#: etc/options.php:67
 msgid "Polish"
 msgstr "Polština"
 
-#: etc/options.php:66
+#: etc/options.php:68
 msgid "Select if you want to force the loading of Polish language rules."
 msgstr "Vyberte, pokud chcete vynutit načítání pravidel polského jazyka."
 
-#: etc/options.php:69
+#: etc/options.php:71
 msgid "Czech"
 msgstr "Čeština"
 
-#: etc/options.php:70
+#: etc/options.php:72
 msgid "Select if you want to force the loading of Czech language rules."
 msgstr "Vyberte, pokud chcete vynutit načítání pravidel českého jazyka."
 
-#: etc/options.php:73
+#: etc/options.php:75
 msgid "English"
 msgstr "Angličtina"
 
-#: etc/options.php:74
+#: etc/options.php:76
 msgid "Select if you want to force the loading of English short words."
 msgstr "Vyberte, pokud chcete vynutit načítání krátkých anglických slov."
 
-#: etc/options.php:77
+#: etc/options.php:79
 msgid "Do not load any files"
 msgstr "Nenačítat žádné soubory"
 
-#: etc/options.php:78
+#: etc/options.php:80
 msgid "Select if you want to rely only on your terms."
 msgstr "Vyberte, pokud se chcete spolehnout pouze na své podmínky."
 
-#: etc/options.php:94
+#: etc/options.php:96
 msgid "User Definied Orphans"
 msgstr "Uživatelem definovaní sirotci"
 
-#: etc/options.php:96
+#: etc/options.php:98
 msgid "Use a comma to separate orphans."
 msgstr "K oddělení sirotků použijte čárku."
 
-#: etc/options.php:103
+#: etc/options.php:105
 msgid "Entries"
 msgstr "Záznamy"
 
-#: etc/options.php:111
+#: etc/options.php:113
 msgid "Post Types"
 msgstr "Typy příspěvků"
 
-#: etc/options.php:116
+#: etc/options.php:118
 msgid "Posts"
 msgstr "Příspěvky"
 
-#: etc/options.php:117
+#: etc/options.php:119
 msgid "Pages"
 msgstr "Stránky"
 
-#: etc/options.php:131 etc/options.php:230
+#: etc/options.php:133 etc/options.php:232
 msgid "Title"
 msgstr "Titulek"
 
-#: etc/options.php:133
+#: etc/options.php:135
 msgid "Enabled the substitution of orphans in the post_title."
 msgstr "Povoleno nahrazování sirotků v post_title."
 
-#: etc/options.php:140
+#: etc/options.php:142
 msgid "Excerpt"
 msgstr "Shrnutí"
 
-#: etc/options.php:142
+#: etc/options.php:144
 msgid "Enabled the substitution of orphans in the excerpt."
 msgstr "Povoleno nahrazení sirotků v úryvku."
 
-#: etc/options.php:149
+#: etc/options.php:151
 msgid "Content"
 msgstr "Obsah"
 
-#: etc/options.php:151
+#: etc/options.php:153
 msgid "Enabled the substitution of orphans in the content."
 msgstr "Povoleno nahrazení sirotků v obsahu."
 
-#: etc/options.php:159
+#: etc/options.php:161
 msgid "Comments"
 msgstr "Komentáře"
 
-#: etc/options.php:160
+#: etc/options.php:162
 msgid "Enabled the substitution of orphans in the comments."
 msgstr "Povoleno nahrazování sirotků v komentářích."
 
-#: etc/options.php:167
+#: etc/options.php:169
 msgid "Widgets"
 msgstr "Widgety"
 
-#: etc/options.php:174
+#: etc/options.php:176
 msgid "Widget Title"
 msgstr "Název widgetu"
 
-#: etc/options.php:176
+#: etc/options.php:178
 msgid "Enabled the substitution of orphans in the widget title."
 msgstr "Povoleno nahrazování sirotků v názvu widgetu."
 
-#: etc/options.php:186
+#: etc/options.php:188
 msgid "Widget Text"
 msgstr "Widgetu text"
 
-#: etc/options.php:188
+#: etc/options.php:190
 msgid "Enabled the substitution of orphans in the widget text."
 msgstr "Povoleno nahrazování sirotků v textu widgetu."
 
-#: etc/options.php:198
+#: etc/options.php:200
 msgid "Widget Block Content"
 msgstr "Obsah bloku widgetů"
 
-#: etc/options.php:200
+#: etc/options.php:202
 msgid "Enabled the substitution of orphans in the widget blocks."
 msgstr "Povoleno nahrazování sirotků v blocích widgetů."
 
-#: etc/options.php:210 etc/options.php:215
+#: etc/options.php:212 etc/options.php:217
 msgid "Taxonomies"
 msgstr "Taxonomie"
 
-#: etc/options.php:216
+#: etc/options.php:218
 msgid ""
 "Select the taxonomies where orphaned word substitution should be applied. "
 "This affects terms, categories, tags, and other custom taxonomies."
@@ -170,27 +170,27 @@ msgstr ""
 "Vyberte taxonomie, u kterých se má použít nahrazování osiřelých slov. Toto "
 "ovlivní termíny, kategorie, tagy a další vlastní taxonomie."
 
-#: etc/options.php:232
+#: etc/options.php:234
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr "Povoleno nahrazování sirotků v názvu taxonomie."
 
-#: etc/options.php:239
+#: etc/options.php:241
 msgid "Description"
 msgstr "Popisek"
 
-#: etc/options.php:241
+#: etc/options.php:243
 msgid "Enabled the substitution of orphans in the taxonomy description."
 msgstr "Povoleno nahrazování sirotků v popisu taxonomie."
 
-#: etc/options.php:248
+#: etc/options.php:250
 msgid "Miscellaneous"
 msgstr "Různé"
 
-#: etc/options.php:258
+#: etc/options.php:260
 msgid "Translation Functions"
 msgstr "Funkce překladu"
 
-#: etc/options.php:259
+#: etc/options.php:261
 msgid ""
 "Enabled the substitution of orphans in Translations functions. <a "
 "href=\"https://developer.wordpress.org/themes/functionality/"
@@ -202,112 +202,112 @@ msgstr ""
 "target=\"_blank\">Více informací.</a> <b>VAROVÁNÍ: Toto může zpomalit váš "
 "web!</b>"
 
-#: etc/options.php:270
+#: etc/options.php:272
 msgid "Author Description"
 msgstr "Popis autora"
 
-#: etc/options.php:271
+#: etc/options.php:273
 msgid "Enabled the substitution of orphans in the author description."
 msgstr "Povoleno nahrazování sirotků v popisu autora."
 
-#: etc/options.php:278
+#: etc/options.php:280
 msgid "Ignore Language"
 msgstr "Ignorovat jazyk"
 
-#: etc/options.php:280
+#: etc/options.php:282
 msgid "Allow to use plugin with another languages then Polish."
 msgstr "Povolit použití pluginu s jinými jazyky než polštinou."
 
-#: etc/options.php:287
+#: etc/options.php:289
 msgid "Menu Title"
 msgstr "Název menu"
 
-#: etc/options.php:289
+#: etc/options.php:291
 msgid "Enabled the substitution of orphans in the menu title."
 msgstr "Povoleno nahrazování sirotků v názvu nabídky."
 
-#: etc/options.php:296
+#: etc/options.php:298
 msgid "Keep Numbers Together"
 msgstr "Udržovat čísla pohromadě"
 
-#: etc/options.php:298
+#: etc/options.php:300
 msgid ""
 "Allow to keep together phone number or strings with space between numbers."
 msgstr ""
 "Umožňuje uchovávat pohromadě telefonní číslo nebo řetězce s mezerami mezi "
 "čísly."
 
-#: etc/options.php:304
+#: etc/options.php:306
 msgid "Protect Tag Attributes"
 msgstr "Chránit tagy atributů"
 
-#: etc/options.php:306
+#: etc/options.php:308
 msgid ""
 "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
 msgstr "Povolit ignorování mezer v atributech „class“, „style“ a „data-*“."
 
-#: etc/options.php:313
+#: etc/options.php:315
 msgid "Entries Custom Fields"
 msgstr "Položky vlastních polí"
 
-#: etc/options.php:315
+#: etc/options.php:317
 msgid "Use a comma to separate custom fields name (meta fields)."
 msgstr "Použijte čárku pro oddělení názvů uživatelských polí (meta pole)."
 
-#: etc/options.php:322
+#: etc/options.php:324
 msgid "Export/Import"
 msgstr "Export/Import"
 
-#: etc/options.php:327
+#: etc/options.php:329
 msgid "Export"
 msgstr "Exportovat"
 
-#: etc/options.php:332
+#: etc/options.php:334
 msgid "Add extra information"
 msgstr "Přidat další informace"
 
-#: etc/options.php:334
+#: etc/options.php:336
 msgid "Add site configuration data like language, url. Nothing sensitive."
 msgstr ""
 "Přidat konfigurační data webu, jako je jazyk, adresa URL. Nic citlivého."
 
-#: etc/options.php:341
+#: etc/options.php:343
 msgid "Export JSON"
 msgstr "Exportovat JSON"
 
-#: etc/options.php:347
+#: etc/options.php:349
 msgid "Import"
 msgstr "Importovat"
 
-#: etc/options.php:359 etc/options.php:454
+#: etc/options.php:361 etc/options.php:456
 msgid "We are waiting for your message"
 msgstr "Těšíme se na vaši zprávu"
 
-#: etc/options.php:365
+#: etc/options.php:367
 msgid "I love what I do!"
 msgstr "Miluji to, co dělám!"
 
-#: etc/options.php:379
+#: etc/options.php:381
 msgid "Integrations"
 msgstr "Integrace"
 
-#: etc/options.php:413
+#: etc/options.php:415
 msgid "Below are some links to help spread this plugin to other users"
 msgstr "Níže je pár odkazů, které pomohou upozornit na plugin i ostatní."
 
-#: etc/options.php:415
+#: etc/options.php:417
 msgid "Give it a five stars on WordPress.org"
 msgstr "Dejte nám pět hvězdiček na WordPress.org"
 
-#: etc/options.php:416
+#: etc/options.php:418
 msgid "Link to it so others can easily find it"
 msgstr "Odkaž na plugin, aby ho ostatní snadno našli."
 
-#: etc/options.php:456
+#: etc/options.php:458
 msgid "WordPress Help Forum"
 msgstr "Fórum podpory WordPress"
 
-#: etc/options.php:477
+#: etc/options.php:479
 msgid "Import JSON"
 msgstr "Importovat JSON"
 
@@ -355,7 +355,7 @@ msgstr "Povoleno nahrazování sirotků v polích WYSIWYG."
 msgid "Secure Custom Fields"
 msgstr "Zabezpečená vlastní pole"
 
-#: includes/iworks/options/includes/class-iworks-options-logger.php:97
+#: includes/iworks/options/includes/class-iworks-options-logger.php:99
 msgid ""
 "Option \"{option_name}\" has been updated. From \"{old_value}\" to "
 "\"{new_value}\"."
@@ -612,17 +612,17 @@ msgstr ""
 msgid "http://iworks.pl/"
 msgstr "http://iworks.pl/"
 
-#: etc/options.php:415
+#: etc/options.php:417
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
 msgstr "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
 
-#: etc/options.php:416
+#: etc/options.php:418
 msgctxt "plugin home page on WordPress.org"
 msgid "https://wordpress.org/plugins/sierotki/"
 msgstr "https://wordpress.org/plugins/sierotki/"
 
-#: etc/options.php:456
+#: etc/options.php:458
 msgctxt "link to support forum on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/"
 msgstr "https://wordpress.org/support/plugin/sierotki/"
