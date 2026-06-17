@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Orphans - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2026-04-24 08:17:27+00:00\n"
+"POT-Creation-Date: 2026-06-17 09:08:36+00:00\n"
 "PO-Revision-Date: 2026-03-30 15:52:30+0000\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
@@ -365,48 +365,48 @@ msgstr ""
 msgid "No Page Title"
 msgstr "Bez názvu stránky"
 
-#: includes/iworks/options/options.php:423
+#: includes/iworks/options/options.php:419
 msgid "An error occurred while getting the configuration."
 msgstr "Při načítání konfigurace došlo k chybě."
 
-#: includes/iworks/options/options.php:1002
-#: includes/iworks/options/options.php:2392
+#: includes/iworks/options/options.php:998
+#: includes/iworks/options/options.php:2388
 msgid "Select Image"
 msgstr "Zvolit obrázek"
 
-#: includes/iworks/options/options.php:1007
+#: includes/iworks/options/options.php:1003
 msgid "Delete image"
 msgstr "Smazat obrázek"
 
-#: includes/iworks/options/options.php:1115
+#: includes/iworks/options/options.php:1111
 msgid "Save Changes"
 msgstr "Ulož nastavení"
 
-#: includes/iworks/options/options.php:2265
+#: includes/iworks/options/options.php:2261
 msgid "Country"
 msgstr "Stát"
 
-#: includes/iworks/options/options.php:2266
+#: includes/iworks/options/options.php:2262
 msgid "City"
 msgstr "Město"
 
-#: includes/iworks/options/options.php:2267
+#: includes/iworks/options/options.php:2263
 msgid "Street"
 msgstr "Ulice"
 
-#: includes/iworks/options/options.php:2268
+#: includes/iworks/options/options.php:2264
 msgid "ZIP code"
 msgstr "PSČ"
 
-#: includes/iworks/options/options.php:2452
+#: includes/iworks/options/options.php:2448
 msgid "OFF"
 msgstr "VYP"
 
-#: includes/iworks/options/options.php:2453
+#: includes/iworks/options/options.php:2449
 msgid "ON"
 msgstr "ZAP"
 
-#: includes/iworks/options/options.php:2518
+#: includes/iworks/options/options.php:2514
 msgid "Failed Security Check"
 msgstr "Kontrola se nezdařila"
 
@@ -440,12 +440,12 @@ msgstr "OG — Lepší sdílení na sociálních sítích"
 msgid "https://wordpress.org/plugins/og/"
 msgstr "https://wordpress.org/plugins/og/"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:19
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
 msgid "🎉 Happy Anniversary! 🎉"
 msgstr "Šťastné výročí!"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
 msgid ""
 "Wow, it’s already been a whole year since you’ve been using our plugin—thank "
 "you so much for being part of our journey! We truly appreciate your support "
@@ -455,7 +455,7 @@ msgstr ""
 "součástí naší cesty! Opravdu si vážíme vaší podpory a doufáme, že vám plugin "
 "usnadnil a zpříjemnil práci."
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:22
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
 msgid ""
 "If you’ve found our plugin helpful and would like to support its continued "
@@ -467,17 +467,17 @@ msgstr ""
 "nesmírně vděční, kdybyste nám koupili kávu. Každá maličkost nám pomáhá se "
 "neustále zlepšovat a přidávat nové funkce pro skvělé uživatele, jako jste vy!"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:25
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
 msgid "☕ Buy Me a Coffee"
 msgstr "☕ Kupte nám kávu"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:26
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
 msgid "Thank you for your support and for making this community amazing!"
 msgstr "Děkujeme za vaši podporu a za to, že děláte tuto komunitu úžasnou!"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:30
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:28
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
 msgid "With gratitude"
 msgstr "S vděčností"
@@ -486,7 +486,7 @@ msgstr "S vděčností"
 msgid "Marcin Pietrzak"
 msgstr "Marcin Pietrzak"
 
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:36
+#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:34
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
 msgid "Plugin Author"
 msgstr "Autor pluginu"
