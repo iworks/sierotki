@@ -166,6 +166,10 @@ add_filter(
 
 == Changelog ==
 
+= 3.4.4 - 2026-07-16 =
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.1.
+* Fixed issue in external `simple_html_dom` - missing `global $debug_object`. [#21](https://github.com/iworks/sierotki/issues/21) Props for Marek Szymański.
+
 = 3.4.3 - 2026-06-17 =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.0.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.2.
