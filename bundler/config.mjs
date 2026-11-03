@@ -85,9 +85,11 @@ export function replacePatterns() {
     { match: /PLUGIN_TAGS/g, replace: tags.join(", ") },
     { match: /PLUGIN_TILL_YEAR/g, replace: String(config.buildYear) },
     { match: /PLUGIN_TITLE/g, replace: title || "" },
-    { match: /PLUGIN_URI/g, replace: config.homepage },
-    { match: /PLUGIN_URL/g, replace: config.homepage },
-    { match: /PLUGIN_VERSION/g, replace: config.version },
+    // `\b` anchors keep e.g. `IWORKS_ORPHANS_PLUGIN_URL` intact —
+    // `_` is a word character, so `\bPLUGIN_URL\b` cannot match inside it.
+    { match: /\bPLUGIN_URI\b/g, replace: config.homepage },
+    { match: /\bPLUGIN_URL\b/g, replace: config.homepage },
+    { match: /\bPLUGIN_VERSION\b/g, replace: config.version },
     { match: /^Version: .*$/m, replace: `Version: ${config.version}` },
   ];
 }

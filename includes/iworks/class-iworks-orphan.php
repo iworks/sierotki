@@ -98,13 +98,21 @@ class iworks_orphan {
 	public function __construct() {
 		/**
 		 * basic settings
+		 *
+		 * The plugin root is taken from the constant defined in the plugin
+		 * bootstrap (single source of truth, per WP guidelines). The dirname
+		 * fallback keeps the class constructible if it is ever loaded
+		 * without the bootstrap.
+		 *
+		 * @since 3.4.5 - root derived from IWORKS_ORPHANS_PLUGIN_DIR.
 		 */
-		$file       = dirname( __DIR__, 2 ) . '/sierotki.php';
-		$this->root = dirname( $file );
+		$this->root = defined( 'IWORKS_ORPHANS_PLUGIN_DIR' )
+			? rtrim( IWORKS_ORPHANS_PLUGIN_DIR, '/' )
+			: dirname( __DIR__, 2 );
 		/**
 		 * plugin ID
 		 */
-		$this->plugin_file = plugin_basename( $file );
+		$this->plugin_file = plugin_basename( $this->root . '/sierotki.php' );
 		/**
 		 * actions
 		 */
@@ -991,7 +999,9 @@ class iworks_orphan {
 			$plugin = (array) $plugin;
 		}
 		if ( 'sierotki' === $plugin['slug'] ) {
-			return plugin_dir_url( dirname( __DIR__, 1 ) ) . 'assets/images/logo.svg';
+			return defined( 'IWORKS_ORPHANS_PLUGIN_URL' )
+				? IWORKS_ORPHANS_PLUGIN_URL . 'assets/images/logo.svg'
+				: $logo;
 		}
 		return $logo;
 	}
