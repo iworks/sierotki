@@ -9,8 +9,8 @@ The "Orphans" plugin (slug `sierotki`, textdomain `sierotki`) improves
 typography by replacing the space after short words with a non-breaking
 space **at display time only** — stored content is never modified.
 Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
-`BUILDTIMESTAMP`, …) replaced by Grunt at build time (see `build.md`).
-The version lives only in `package.json`.
+`BUILDTIMESTAMP`, …) replaced by the bun bundler at build time (see
+`build.md`). The version lives only in `package.json`.
 
 ## Directory structure
 
@@ -32,7 +32,7 @@ The version lives only in `package.json`.
 ├── languages/                  # sierotki.pot + .po/.mo
 ├── assets/images/              # logo.svg only
 ├── package.json                # Version + release metadata (single source of truth)
-├── Gruntfile.js                # Build system — see build.md
+├── bundler/                    # Bun build system — see build.md
 └── readme.txt                  # WordPress.org readme
 ```
 
@@ -103,7 +103,6 @@ The version lives only in `package.json`.
   plus import/export and rate metaboxes.
 - Option names get the `iworks_orphan_` prefix
   (`get_orphan_options()` in `sierotki.php`).
-
 ## Integrations (includes/iworks/integrations/)
 
 - `class-iworks-orphans-integration.php` — abstract base `iWorks_Orphans_Integration`
@@ -140,15 +139,15 @@ The version lives only in `package.json`.
 ## Translations (i18n)
 
 - Textdomain `sierotki`; `languages/sierotki.pot` + per-locale `.po`/`.mo`.
-- `grunt i18n` runs `checktextdomain` + `makepot`; `build:github` compiles
-  `.mo` via `potomo`. Optional gettext replacement (option `gettext`,
+- `bun run make-pot` runs wp-cli `i18n make-pot` (creates/updates the
+  `.pot`) and `i18n update-po` for every existing `.po` file; `make-mo`
+  compiles `.mo` only in `bun run build:github`. Optional gettext replacement (option `gettext`,
   filter `orphan_replace_gettext`).
 
 ## Tests
 
-- There is **no** `tests/` directory in this repo, despite `grunt test`
-  (phpunit + jshint) being registered — do not claim tests pass; use
-  `php -l` on changed files instead.
+- There is **no** `tests/` directory in this repo — `bun run test` has
+  nothing to run; use `php -l` on changed files instead.
 
 ## General conventions
 

@@ -11,21 +11,21 @@ time; it never modifies stored content. Structure: main file `sierotki.php`
 (`etc/options.php`, iworks_options format) + term lists (`etc/terms-*.txt`)
 + builder integrations (`includes/iworks/integrations/`) + vendored iWorks
 modules (`includes/iworks/options`, `includes/iworks/rate` — git submodules).
-Built with Grunt: sources contain build-time placeholders
-(`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) replaced at build time by
-`grunt-replace`; version lives only in `package.json`.
+Built with a bun bundler (`bundler/` → `release/` ZIPs, both wporg and
+github flavors): sources contain build-time placeholders
+(`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) replaced at build time; the
+version lives only in `package.json`.
 
 ## Docs map — read only what the task needs
 
 | Task | Read first |
 | --- | --- |
-| Plugin structure, loading flow, conventions | `../wordpress-plugin-stub/.opencode/docs/project.md` |
-| Grunt build, placeholders, ZIPs, translations (.pot/.po/.mo) | `Gruntfile.js` (this repo has no local build doc yet) |
-| Core class, integrations, options | `includes/iworks/class-iworks-orphan.php` header comments + `readme.txt` FAQ |
+| Bun bundler, build, ZIPs, placeholders, translations (.pot/.po/.mo) | `.opencode/docs/build.md` |
+| Loading flow, replacement engine, options, integrations, conventions | `.opencode/docs/project.md` |
+| Core class, integrations, options internals | `includes/iworks/class-iworks-orphan.php` header comments + `readme.txt` FAQ |
 
-- This repo has no local `.opencode/docs` yet — stub docs apply only where
-  concepts are shared (iworks_options framework, class style).
-- When a change alters documented behavior, update the corresponding doc.
+- When a change alters documented behavior, update the corresponding doc in
+  the same task.
 
 ## Evergreen rules (every task)
 
@@ -38,8 +38,8 @@ Built with Grunt: sources contain build-time placeholders
   `iworks_orphans_` prefix (`iWorks_Orphans_` style for integration classes),
   snake_case, lowercase.
 - Version lives only in `package.json` — placeholders (`PLUGIN_VERSION`,
-  `PLUGIN_TILL_YEAR`, `BUILDTIMESTAMP`) are replaced by Grunt during build;
-  never hardcode real values in sources.
+  `PLUGIN_TILL_YEAR`, `BUILDTIMESTAMP`) are replaced by the bundler during
+  build; never hardcode real values in sources.
 - Submodules (`includes/iworks/options`, `includes/iworks/rate`) are shared
   iWorks modules — never edit them in this repo; upstream changes go to
   their own repositories.
@@ -49,18 +49,19 @@ Built with Grunt: sources contain build-time placeholders
 
 - Legacy filter `iworks_orphan_therms` (typo) must stay — backward compatibility.
 - `mnf_builder_herlper()` typo in `class-iworks-orphan.php` — private, harmless.
-- `grunt release` references a `build:wporg` subtask that is not registered;
-  use `grunt build` + `grunt build:github` instead.
 - Protected tags order in `class-iworks-orphan.php` (`$protected_tags`) is
   important: `script`/`style` must come after `iframe`/`svg` or nested tags
   will break.
 - Replacement runs at display time only — never write replacements back to
   the database.
+- The build's prettier step rewrites JS sources in place (formatting-only
+  diffs after a build are expected); the i18n step updates tracked
+  `languages/*.po` files (timestamp diffs are normal).
 
 ## Commands
 
-`grunt` (default: clean temp) · `grunt js` (concat + uglify) ·
-`grunt css` (sass + cssmin) · `grunt i18n` (checktextdomain + makepot) ·
-`grunt build` (wp.org ZIP) · `grunt build:github` (GitHub ZIP + potomo) ·
-`grunt test` (phpunit + jshint). Requires PHP ≥ 8.0, WordPress ≥ 6.0.
-Planned: conversion from Grunt to the bun bundler — out of scope for now.
+`bun run dev` (watcher) · `bun run compile` (one-shot assets) ·
+`bun run build` (both ZIPs: wporg + github) · `bun run build:wporg` (wp.org
+ZIP) · `bun run build:github` (GitHub ZIP + .mo) · `bun run make-pot`
+(translations) · `bun run test` (phpunit; no tests/ dir in this repo —
+use `php -l` for PHP changes). Requires PHP ≥ 8.0, WordPress ≥ 6.0.
