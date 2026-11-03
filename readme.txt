@@ -102,6 +102,13 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 * Developer documentation moved from `readme.txt` to `README.md` - the WordPress.org readme is now end-user focused only.
 * New `bun run update-libs` task to update the vendored iWorks libraries.
 * Translation files regenerated with wp-cli (`i18n make-pot` / `update-po`).
+* Security hardening: capability check (`iworks_orphans_capability` filter, default `manage_options`) is now enforced for configuration import and export.
+* Security hardening: imported option names are whitelisted to plugin options only - arbitrary options can no longer be overwritten.
+* Security hardening: uploaded import file is fully validated before parsing.
+* Security hardening: orphan terms are escaped with `preg_quote()` before building replacement patterns.
+* Export file name is now properly quoted in the `Content-Disposition` header.
+* Import/export admin scripts are loaded only on the Orphans settings screen.
+* The `iworks_orphans_capability` filter, previously documented, is now actually applied.
 
 = 3.4.4 - 2026-07-16 =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.1.
