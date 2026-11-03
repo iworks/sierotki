@@ -40,7 +40,7 @@ class iWorks_Orphans_Integration_Advanced_Custom_Fields extends iWorks_Orphans_I
 		 *
 		 * @since 3.4.0
 		 */
-		add_filter( 'orphans/etc/config/integrations', array( $this, 'filter_etc_options_integrations' ) );
+		add_filter( 'iworks/orphans/etc/config/integrations', array( $this, 'filter_etc_options_integrations' ) );
 	}
 
 	/**

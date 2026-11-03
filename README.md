@@ -128,29 +128,43 @@ Change the capability required to manage the plugin settings (default
 `manage_options`):
 
 ```php
-add_filter( 'iworks_orphans_capability', 'my_orphans_capability' );
+add_filter( 'iworks/orphans/capability', 'my_orphans_capability' );
 function my_orphans_capability( $capability ) {
     return 'unfiltered_html';
 }
 ```
 
+The legacy `iworks_orphans_capability` filter still works as a fallback
+(deprecated since 3.6.0) — migrate to the new name.
+
 #### Filter reference
 
-| Filter | Purpose |
-| --- | --- |
-| `orphan_replace` | Apply replacement to any string / custom field |
-| `orphan_skip_replacement` | Temporarily disable replacement |
-| `orphan_get_terms` | Get the current orphan terms |
-| `iworks_orphan_terms` | Add/remove/replace orphan terms (legacy alias: `iworks_orphan_therms`) |
-| `iworks_orphan_own_terms_file` | Use a custom terms definition file |
-| `iworks_orphan_own_terms_filename` | Use a custom terms file name |
-| `iworks_orphan_terms_files_array` | Change the array of terms files to load |
-| `iworks_orphans_capability` | Change the settings-page capability |
-| `iworks_orphan_apply_to_all_languages` | Apply replacements to all languages |
-| `orphan_allowed_filters` | Change the list of content filters the plugin hooks |
-| `iworks_orphan_protected_tags` | Change HTML tags whose content is never replaced |
-| `orphan_replace_acf` | Turn off replacement for selected ACF fields |
-| `orphan_replace_gettext` | Turn off replacement in translation functions |
+Since 3.4.5 all plugin filters use the namespaced `iworks/orphans/…` schema.
+Every legacy `iworks_orphan_*` name still works as a **deprecated fallback**
+(deprecated since 3.6.0, kept as an alias); the public `orphan_*` filters
+are unchanged.
+
+| Filter | Legacy name (deprecated 3.6.0) | Purpose |
+| --- | --- | --- |
+| `orphan_replace` | — | Apply replacement to any string / custom field |
+| `orphan_skip_replacement` | — | Temporarily disable replacement |
+| `orphan_get_terms` | — | Get the current orphan terms |
+| `orphan_allowed_filters` | — | Change the list of content filters the plugin hooks |
+| `orphan_replace_acf` | — | Turn off replacement for selected ACF fields |
+| `orphan_replace_gettext` | — | Turn off replacement in translation functions |
+| `iworks/orphans/capability` | `iworks_orphans_capability` | Change the settings-page capability |
+| `iworks/orphans/terms` | `iworks_orphan_terms`, `iworks_orphan_therms` | Add/remove/replace orphan terms |
+| `iworks/orphans/own-terms-file` | `iworks_orphan_own_terms_file` | Use a custom terms definition file |
+| `iworks/orphans/own-terms-filename` | `iworks_orphan_own_terms_filename` | Use a custom terms file name |
+| `iworks/orphans/terms-files` | `iworks_orphan_terms_files_array` | Change the array of terms files to load |
+| `iworks/orphans/protected-tags` | `iworks_orphan_protected_tags` | Change HTML tags whose content is never replaced |
+| `iworks/orphans/apply-to-all-languages` | `iworks_orphan_apply_to_all_languages` | Apply replacements to all languages |
+| `iworks/orphans/get-post-types-args` | `iworks_orphan_get_post_types_args` | Arguments for the settings post-type selector |
+| `iworks/orphans/export/plugins` | `iworks_orphans_export_plugins` | Toggle plugins data in the JSON export |
+| `iworks/orphans/export/theme` | `iworks_orphans_export_theme` | Toggle theme data in the JSON export |
+| `iworks/orphans/replace` | `iworks_orphan_replace` | Replacement hook (consumed by the plugin) |
+| `iworks/orphans/etc/config/integrations` | `orphans/etc/config/integrations` | Integrations inject their settings fields |
+| `iworks/orphans/use-options-cache` | `orphans_indicator_options_use_cache` | Disable the options-config cache |
 
 For the full behavior, see the docblocks in
 `includes/iworks/class-iworks-orphan.php`.

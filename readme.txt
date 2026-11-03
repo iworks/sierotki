@@ -102,13 +102,14 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 * Developer documentation moved from `readme.txt` to `README.md` - the WordPress.org readme is now end-user focused only.
 * New `bun run update-libs` task to update the vendored iWorks libraries.
 * Translation files regenerated with wp-cli (`i18n make-pot` / `update-po`).
-* Security hardening: capability check (`iworks_orphans_capability` filter, default `manage_options`) is now enforced for configuration import and export.
+* Security hardening: capability check (new `iworks/orphans/capability` filter, default `manage_options`) is now enforced for configuration import and export.
 * Security hardening: imported option names are whitelisted to plugin options only - arbitrary options can no longer be overwritten.
 * Security hardening: uploaded import file is fully validated before parsing.
 * Security hardening: orphan terms are escaped with `preg_quote()` before building replacement patterns.
 * Export file name is now properly quoted in the `Content-Disposition` header.
 * Import/export admin scripts are loaded only on the Orphans settings screen.
-* The `iworks_orphans_capability` filter, previously documented, is now actually applied.
+* The `iworks_orphans_capability` filter, previously documented, is now actually applied - renamed to `iworks/orphans/capability` with the old name kept as a deprecated fallback.
+* All `iworks_orphan_*` (and `orphans_*`) filters renamed to the namespaced `iworks/orphans/...` schema - legacy names still work as deprecated (3.6.0) fallbacks.
 * Fixed release packaging: `.git*`, `.gitmodules`, `.github/` and `.editorconfig` files are no longer included in the ZIPs.
 * Fixed build: the `PLUGIN_URL` placeholder replacement no longer corrupts the `IWORKS_ORPHANS_PLUGIN_URL` constant (a fatal error on activation).
 * Empty banner-only `sierotki-admin`/`sierotki-frontend` JS and CSS bundles are no longer shipped.

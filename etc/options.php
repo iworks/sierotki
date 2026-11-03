@@ -10,6 +10,33 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Apply a filter with its new namespaced name and a deprecated fallback.
+ *
+ * The new filter is always applied; the legacy name is applied through
+ * `apply_filters_deprecated()` only when it is actually in use.
+ *
+ * @since 3.4.5
+ *
+ * @param string $old   Legacy filter name (deprecated since 3.6.0).
+ * @param string $new   New filter name (iworks/orphans/... schema).
+ * @param mixed  $value Filtered value.
+ * @param mixed  ...$args Additional filter arguments.
+ * @return mixed Filtered value.
+ */
+function iworks_orphans_apply_legacy_filter( $old, $new, $value, ...$args ) {
+	$value = apply_filters( $new, $value, ...$args );
+	if ( has_filter( $old ) ) {
+		$value = apply_filters_deprecated(
+			$old,
+			array_merge( array( $value ), $args ),
+			'3.6.0',
+			$new
+		);
+	}
+	return $value;
+}
+
+/**
  * Get the configuration options for the Orphans Indicator plugin.
  *
  * This function retrieves or generates the plugin's options array, which defines
@@ -22,7 +49,11 @@ function orphans_indicator_options() {
 	/**
 	 * cache
 	 */
-	if ( apply_filters( 'orphans_indicator_options_use_cache', true ) ) {
+	if ( iworks_orphans_apply_legacy_filter(
+		'orphans_indicator_options_use_cache',
+		'iworks/orphans/use-options-cache',
+		true
+	) ) {
 		$cached = wp_cache_get( 'orphans_indicator_options', 'iworks_orphans' );
 		if ( ! empty( $cached ) ) {
 			return apply_filters(
@@ -374,7 +405,11 @@ function orphans_indicator_options() {
 	/**
 	 * integrations
 	 */
-	$integrations = apply_filters( 'orphans/etc/config/integrations', array() );
+	$integrations = iworks_orphans_apply_legacy_filter(
+		'orphans/etc/config/integrations',
+		'iworks/orphans/etc/config/integrations',
+		array()
+	);
 	if ( ! empty( $integrations ) ) {
 		$options['index']['options']['export'] = array(
 			'type'  => 'heading',
@@ -385,7 +420,11 @@ function orphans_indicator_options() {
 	/**
 	 * cache it
 	 */
-	if ( apply_filters( 'orphans_indicator_options_use_cache', true ) ) {
+	if ( iworks_orphans_apply_legacy_filter(
+		'orphans_indicator_options_use_cache',
+		'iworks/orphans/use-options-cache',
+		true
+	) ) {
 		wp_cache_set( 'orphans_indicator_options', $options, 'iworks_orphans' );
 	}
 	/**

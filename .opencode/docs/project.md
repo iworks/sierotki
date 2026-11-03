@@ -158,12 +158,23 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   legacy: `class-iworks-orphan.php`); classes snake_case lowercase
   (`iworks_orphan`, `iWorks_Orphans_Integration_*` style for integrations).
 - Hooks and options: `orphan_*` (public API) or `iworks_orphan_*` (internal).
-- Public filters: `orphan_replace`, `orphan_skip_replacement`,
+- Public filters: since 3.4.5 all use the namespaced `iworks/orphans/…`
+  schema with legacy names kept as deprecated (3.6.0) fallbacks:
+  `iworks/orphans/capability` (was `iworks_orphans_capability`),
+  `iworks/orphans/terms` (was `iworks_orphan_terms` / `iworks_orphan_therms`),
+  `iworks/orphans/own-terms-file` / `-filename` (was `iworks_orphan_own_terms_file` / `_filename`),
+  `iworks/orphans/terms-files` (was `iworks_orphan_terms_files_array`),
+  `iworks/orphans/protected-tags` (was `iworks_orphan_protected_tags`),
+  `iworks/orphans/apply-to-all-languages` (was `iworks_orphan_apply_to_all_languages`),
+  `iworks/orphans/get-post-types-args` (was `iworks_orphan_get_post_types_args`),
+  `iworks/orphans/export/plugins|theme` (was `iworks_orphans_export_plugins|_theme`),
+  `iworks/orphans/replace` (was `iworks_orphan_replace`, consumed),
+  `iworks/orphans/etc/config/integrations` (was `orphans/etc/config/integrations`),
+  `iworks/orphans/use-options-cache` (was `orphans_indicator_options_use_cache`).
+  Unchanged public `orphan_*` filters: `orphan_replace`, `orphan_skip_replacement`,
   `orphan_get_terms`, `orphan_allowed_filters`, `orphan_replace_acf`,
-  `orphan_replace_gettext`, `iworks_orphan_terms` (+ legacy
-  `iworks_orphan_therms`), `iworks_orphan_own_terms_file`,
-  `iworks_orphan_protected_tags`, `iworks_orphans_capability`,
-  `iworks_orphan_apply_to_all_languages`, `iworks_orphan_terms_files_array`.
+  `orphan_replace_gettext`. The vendor-applied alias
+  `index_iworks_orphan_post_type_data` is untouched (iworks_options contract).
 
 ## Known pitfalls (do not fix without approval)
 

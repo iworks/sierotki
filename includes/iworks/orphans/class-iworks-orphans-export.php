@@ -143,6 +143,30 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
+	 * Apply a filter with its new namespaced name and a deprecated fallback.
+	 *
+	 * @since 3.4.5
+	 *
+	 * @param string $old   Legacy filter name (deprecated since 3.6.0).
+	 * @param string $new   New filter name (iworks/orphans/... schema).
+	 * @param mixed  $value Filtered value.
+	 * @param mixed  ...$args Additional filter arguments.
+	 * @return mixed Filtered value.
+	 */
+	private function apply_legacy_filter( $old, $new, $value, ...$args ) {
+		$value = apply_filters( $new, $value, ...$args );
+		if ( has_filter( $old ) ) {
+			$value = apply_filters_deprecated(
+				$old,
+				array_merge( array( $value ), $args ),
+				'3.6.0',
+				$new
+			);
+		}
+		return $value;
+	}
+
+	/**
 	 * Retrieves the plugin settings for export.
 	 *
 	 * Collects all plugin options and their values in a structured format.
@@ -200,7 +224,7 @@ jQuery(document).ready(function($) {
 		 * plugins
 		 */
 		$data['Plugins'] = array();
-		if ( apply_filters( 'iworks_orphans_export_plugins', true ) ) {
+		if ( $this->apply_legacy_filter( 'iworks_orphans_export_plugins', 'iworks/orphans/export/plugins', true ) ) {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}
@@ -223,7 +247,7 @@ jQuery(document).ready(function($) {
 		 * theme
 		 */
 		$data['Theme'] = array();
-		if ( apply_filters( 'iworks_orphans_export_theme', true ) ) {
+		if ( $this->apply_legacy_filter( 'iworks_orphans_export_theme', 'iworks/orphans/export/theme', true ) ) {
 			$theme  = wp_get_theme();
 			$fields = array(
 				'Name',

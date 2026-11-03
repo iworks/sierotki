@@ -233,7 +233,11 @@ class iworks_orphan {
 		 * @since 2.6.7
 		 */
 		$all_languages          = $this->is_on( 'ignore_language' );
-		$apply_to_all_languages = apply_filters( 'iworks_orphan_apply_to_all_languages', $all_languages );
+		$apply_to_all_languages = $this->apply_legacy_filter(
+			'iworks_orphan_apply_to_all_languages',
+			'iworks/orphans/apply-to-all-languages',
+			$all_languages
+		);
 		if ( ! $apply_to_all_languages ) {
 			/**
 			 * apply other rules only for Polish language
@@ -622,7 +626,15 @@ class iworks_orphan {
 				add_filter( 'single_tag_title', array( $this, 'replace' ) );
 			}
 		}
+		/**
+		 * Legacy name kept for backward compatibility; the new name follows
+		 * the iworks/orphans/... schema. Deprecation notice is not possible
+		 * here - this filter is consumed, not applied.
+		 *
+		 * @since 3.4.5
+		 */
 		add_filter( 'iworks_orphan_replace', array( $this, 'replace' ) );
+		add_filter( 'iworks/orphans/replace', array( $this, 'replace' ) );
 		/**
 		 * Filter post meta.
 		 *
@@ -652,8 +664,9 @@ class iworks_orphan {
 		 *
 		 *      @type string HTML tag name.
 		 */
-		$this->protected_tags = apply_filters(
+		$this->protected_tags = $this->apply_legacy_filter(
 			'iworks_orphan_protected_tags',
+			'iworks/orphans/protected-tags',
 			$this->protected_tags
 		);
 		/**
@@ -827,8 +840,11 @@ class iworks_orphan {
 		 */
 		if ( ! empty( $this->terms ) ) {
 			$terms = $this->terms;
-			$terms = apply_filters( 'iworks_orphan_therms', $terms );
-			$terms = apply_filters( 'iworks_orphan_terms', $terms );
+			$terms = $this->apply_legacy_filter(
+				array( 'iworks_orphan_therms', 'iworks_orphan_terms' ),
+				'iworks/orphans/terms',
+				$terms
+			);
 			return $terms;
 		}
 		$terms = array();
@@ -865,8 +881,9 @@ class iworks_orphan {
 			$files = array(
 				sprintf( 'terms-%s.txt', $locale ),
 				sprintf( 'terms-%s.txt', preg_replace( '/_[A-Z]+$/', '', $locale ) ),
-				apply_filters(
+				$this->apply_legacy_filter(
 					'iworks_orphan_own_terms_filename',
+					'iworks/orphans/own-terms-filename',
 					sprintf( 'terms-%s.txt', $locale )
 				),
 			);
@@ -878,8 +895,9 @@ class iworks_orphan {
 			$files           = array_unique( $files );
 			$files_with_path = array();
 			foreach ( $files as $file ) {
-				$files_with_path[] = apply_filters(
+				$files_with_path[] = $this->apply_legacy_filter(
 					'iworks_orphan_own_terms_file',
+					'iworks/orphans/own-terms-file',
 					sprintf( '%s/etc/%s', $this->root, $file ),
 					$file
 				);
@@ -889,7 +907,11 @@ class iworks_orphan {
 			 *
 			 * @since 2.9.0
 			 */
-			$files_with_path = apply_filters( 'iworks_orphan_terms_files_array', $files_with_path );
+			$files_with_path = $this->apply_legacy_filter(
+				'iworks_orphan_terms_files_array',
+				'iworks/orphans/terms-files',
+				$files_with_path
+			);
 			/**
 			 * handle multiple files
 			 */
@@ -952,8 +974,11 @@ class iworks_orphan {
 		/**
 		 * filter it
 		 */
-		$terms = apply_filters( 'iworks_orphan_therms', $terms );
-		$terms = apply_filters( 'iworks_orphan_terms', $terms );
+		$terms = $this->apply_legacy_filter(
+			array( 'iworks_orphan_therms', 'iworks_orphan_terms' ),
+			'iworks/orphans/terms',
+			$terms
+		);
 		/**
 		 * Transients
 		 *
@@ -1140,8 +1165,9 @@ class iworks_orphan {
 		 * @since 3.2.5
 		 */
 	public function filter_index_iworks_orphan_post_type_data( $options, $option_name, $option_value ) {
-		$args       = apply_filters(
+		$args       = $this->apply_legacy_filter(
 			'iworks_orphan_get_post_types_args',
+			'iworks/orphans/get-post-types-args',
 			array(
 				'public' => true,
 			)
@@ -1197,6 +1223,36 @@ class iworks_orphan {
 	}
 
 	/**
+	 * Apply a filter with its new namespaced name and a deprecated fallback.
+	 *
+	 * The new filter is always applied. The legacy name is applied through
+	 * `apply_filters_deprecated()` only when it is actually in use, to avoid
+	 * deprecation notice spam.
+	 *
+	 * @since 3.4.5
+	 *
+	 * @param string|array $old  Legacy filter name(s), deprecated since 3.6.0.
+	 * @param string       $new  New filter name (iworks/orphans/... schema).
+	 * @param mixed        $value Filtered value.
+	 * @param mixed        ...$args Additional filter arguments.
+	 * @return mixed Filtered value.
+	 */
+	private function apply_legacy_filter( $old, $new, $value, ...$args ) {
+		$value = apply_filters( $new, $value, ...$args );
+		foreach ( ( array ) $old as $legacy ) {
+			if ( has_filter( $legacy ) ) {
+				$value = apply_filters_deprecated(
+					$legacy,
+					array_merge( array( $value ), $args ),
+					'3.6.0',
+					$new
+				);
+			}
+		}
+		return $value;
+	}
+
+	/**
 	 * Is the current user allowed to import/export settings?
 	 *
 	 * Nonces protect against CSRF, not against unauthorized actions,
@@ -1207,7 +1263,21 @@ class iworks_orphan {
 	 * @return boolean True if the current user has the required capability.
 	 */
 	private function is_user_allowed() {
-		$capability = apply_filters( 'iworks_orphans_capability', 'manage_options' );
+		$capability = apply_filters( 'iworks/orphans/capability', 'manage_options' );
+		/**
+		 * Legacy filter, renamed in 3.4.5 - deprecated since 3.6.0.
+		 * Applied only when in use, to avoid deprecation notice spam.
+		 *
+		 * @since 3.4.5
+		 */
+		if ( has_filter( 'iworks_orphans_capability' ) ) {
+			$capability = apply_filters_deprecated(
+				'iworks_orphans_capability',
+				array( $capability ),
+				'3.6.0',
+				'iworks/orphans/capability'
+			);
+		}
 		return is_user_logged_in() && current_user_can( $capability );
 	}
 
