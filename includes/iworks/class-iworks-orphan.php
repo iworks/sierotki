@@ -365,14 +365,28 @@ class iworks_orphan {
 			$part_to_change = $part_source;
 			foreach ( $terms_terms as $terms ) {
 				/**
+				 * escape terms for regex usage
+				 *
+				 * @since 3.4.6
+				 */
+				$quoted = implode(
+					'|',
+					array_map(
+						function ( $term ) {
+							return preg_quote( $term, '/' );
+						},
+						$terms
+					)
+				);
+				/**
 				 * base therms replace
 				 */
-				$re             = '/^([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+				$re             = '/^([aiouwz]|' . $quoted . ') +/i';
 				$part_to_change = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $part_to_change );
 				/**
 				 * single letters
 				 */
-				$re = '/([ >\(]+|' . $this->nbsp_placeholder . '|&#8222;|&quot;)([aiouwz]|' . preg_replace( '/\./', '\.', implode( '|', $terms ) ) . ') +/i';
+				$re = '/([ >\(]+|' . $this->nbsp_placeholder . '|&#8222;|&quot;)([aiouwz]|' . $quoted . ') +/i';
 				/**
 				 * double call to handle orphan after orphan after orphan
 				 */
@@ -1137,6 +1151,9 @@ class iworks_orphan {
 	 * @since 3.3.0
 	 */
 	public function send_json() {
+		if ( ! $this->is_user_allowed() ) {
+			return;
+		}
 		$nonce_value = filter_input( INPUT_POST, 'nonce' );
 		if ( empty( $nonce_value ) ) {
 			return;
@@ -1155,6 +1172,9 @@ class iworks_orphan {
 	 * @since 3.3.0
 	 */
 	public function import_json() {
+		if ( ! $this->is_user_allowed() ) {
+			return;
+		}
 		$nonce_value = filter_input( INPUT_POST, 'nonce' );
 		if ( empty( $nonce_value ) ) {
 			return;
@@ -1164,6 +1184,21 @@ class iworks_orphan {
 		}
 		$this->load_classes();
 		$this->loaded_integrations['import']->import_json();
+	}
+
+	/**
+	 * Is the current user allowed to import/export settings?
+	 *
+	 * Nonces protect against CSRF, not against unauthorized actions,
+	 * so a capability check is required on top of the nonce check.
+	 *
+	 * @since 3.4.6
+	 *
+	 * @return boolean True if the current user has the required capability.
+	 */
+	private function is_user_allowed() {
+		$capability = apply_filters( 'iworks_orphans_capability', 'manage_options' );
+		return is_user_logged_in() && current_user_can( $capability );
 	}
 
 	public function load_classes() {

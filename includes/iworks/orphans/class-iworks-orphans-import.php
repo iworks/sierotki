@@ -36,8 +36,13 @@ class iWorks_Orphans_Import {
 	 * add admin scripts
 	 *
 	 * @since 3.3.0
+	 * @since 3.4.6 - restricted to the plugin settings screen.
 	 */
 	public function action_admin_print_scripts() {
+		$screen = get_current_screen();
+		if ( ! $screen || 'appearance_page_iworks_orphan_index' !== $screen->id ) {
+			return;
+		}
 		echo PHP_EOL;
 		?><script id="<?php echo esc_attr( __CLASS__ ); ?>">
 jQuery(document).ready(function($) {
@@ -91,7 +96,29 @@ jQuery(document).ready(function($) {
 	}
 
 	public function import_json() {
-		$data = json_decode( file_get_contents( $_FILES['iworks_orphan_import_file']['tmp_name'] ), true );
+		/**
+		 * validate upload
+		 *
+		 * @since 3.4.6
+		 */
+		if (
+			! isset( $_FILES['iworks_orphan_import_file'] )
+			|| ! is_array( $_FILES['iworks_orphan_import_file'] )
+		) {
+			$this->add_message_fail();
+			return;
+		}
+		$file = $_FILES['iworks_orphan_import_file'];
+		if (
+			! isset( $file['error'] )
+			|| UPLOAD_ERR_OK !== $file['error']
+			|| empty( $file['tmp_name'] )
+			|| ! is_uploaded_file( $file['tmp_name'] )
+		) {
+			$this->add_message_fail();
+			return;
+		}
+		$data = json_decode( file_get_contents( $file['tmp_name'] ), true );
 		if (
 			is_array( $data )
 			&& isset( $data['Meta'] )
@@ -102,7 +129,20 @@ jQuery(document).ready(function($) {
 			&& is_array( $data['Orphans'] )
 			&& ! empty( $data['Orphans'] )
 		) {
+			$allowed = $this->get_allowed_option_names();
 			foreach ( $data['Orphans'] as $one ) {
+				/**
+				 * only whitelisted plugin options can be imported
+				 *
+				 * @since 3.4.6
+				 */
+				if (
+					empty( $one['option_name'] )
+					|| ! is_string( $one['option_name'] )
+					|| ! in_array( $one['option_name'], $allowed, true )
+				) {
+					continue;
+				}
 				update_option( $one['option_name'], $one['option_value'] );
 			}
 			$this->add_message_success();
@@ -111,5 +151,28 @@ jQuery(document).ready(function($) {
 		$this->add_message_fail();
 	}
 
+	/**
+	 * Build the whitelist of option names that may be imported.
+	 *
+	 * Only options defined in the plugin configuration (all prefixed with
+	 * `iworks_orphan_`) are accepted - never an arbitrary option name.
+	 *
+	 * @since 3.4.6
+	 *
+	 * @return array Allowed option names.
+	 */
+	private function get_allowed_option_names() {
+		$allowed = array();
+		$options = get_orphan_options()->get_group();
+		if ( is_array( $options ) && isset( $options['options'] ) ) {
+			foreach ( $options['options'] as $one ) {
+				if ( empty( $one['name'] ) || ! is_string( $one['name'] ) ) {
+					continue;
+				}
+				$allowed[] = 'iworks_orphan_' . $one['name'];
+			}
+		}
+		return $allowed;
+	}
 }
 

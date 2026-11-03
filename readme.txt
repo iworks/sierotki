@@ -97,6 +97,12 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 
 == Changelog ==
 
+= 3.4.5 - 2026-11-03 =
+* Build system converted from Grunt to the Bun bundler (`bun run build`).
+* Developer documentation moved from `readme.txt` to `README.md` - the WordPress.org readme is now end-user focused only.
+* New `bun run update-libs` task to update the vendored iWorks libraries.
+* Translation files regenerated with wp-cli (`i18n make-pot` / `update-po`).
+
 = 3.4.4 - 2026-07-16 =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.1.
 * Fixed issue in external `simple_html_dom` - missing `global $debug_object`. [#21](https://github.com/iworks/sierotki/issues/21) Props for Marek Szymański.

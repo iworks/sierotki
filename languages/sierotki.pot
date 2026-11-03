@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T08:49:14+00:00\n"
+"POT-Creation-Date: 2026-11-03T08:58:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: sierotki\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: sierotki.php
 #: etc/options.php:46
-#: includes/iworks/class-iworks-orphan.php:1188
+#: includes/iworks/class-iworks-orphan.php:1223
 msgid "Orphans"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgstr ""
 msgid "Import JSON"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:734
+#: includes/iworks/class-iworks-orphan.php:748
 msgid "Settings"
 msgstr ""
 
@@ -373,10 +373,10 @@ msgstr ""
 msgid "Secure Custom Fields"
 msgstr ""
 
-#: includes/iworks/orphans/class-iworks-orphans-import.php:82
+#: includes/iworks/orphans/class-iworks-orphans-import.php:87
 msgid "Configuration has been imported."
 msgstr ""
 
-#: includes/iworks/orphans/class-iworks-orphans-import.php:89
+#: includes/iworks/orphans/class-iworks-orphans-import.php:94
 msgid "Something went wrong!"
 msgstr ""
