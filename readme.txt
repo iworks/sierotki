@@ -109,6 +109,10 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 * Export file name is now properly quoted in the `Content-Disposition` header.
 * Import/export admin scripts are loaded only on the Orphans settings screen.
 * The `iworks_orphans_capability` filter, previously documented, is now actually applied.
+* Fixed release packaging: `.git*`, `.gitmodules`, `.github/` and `.editorconfig` files are no longer included in the ZIPs.
+* Fixed build: the `PLUGIN_URL` placeholder replacement no longer corrupts the `IWORKS_ORPHANS_PLUGIN_URL` constant (a fatal error on activation).
+* Empty banner-only `sierotki-admin`/`sierotki-frontend` JS and CSS bundles are no longer shipped.
+* Plugin root, plugin basename and assets URL are now derived from the plugin constants instead of relative directory guessing.
 
 = 3.4.4 - 2026-07-16 =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.1.
