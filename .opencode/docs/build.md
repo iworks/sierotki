@@ -44,6 +44,7 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
 | `bun run build:github` | Production + `.mo` → `release/github/{name}.zip`                                              |
 | `bun run make-pot`     | Translations only (`.pot` + `.po` update)                                                     |
 | `bun run test`         | PHPUnit (no `tests/` dir in this repo — will fail gracefully)                                 |
+| `bun run update-libs`  | `git pull` inside the iWorks submodules (`includes/iworks/{options,rate}`) — manual task      |
 
 ## Build pipeline (`bun run build:wporg`, 7 steps)
 

@@ -13,7 +13,7 @@
  */
 
 import { dirname, join, resolve } from "node:path";
-import { watch } from "node:fs";
+import { existsSync, watch } from "node:fs";
 import { executionTime, log } from "./consoleHelpers.mjs";
 import { ProgressBar } from "./progressBar.mjs";
 import { spawnAsync } from "./spawnAsync.mjs";
@@ -182,6 +182,40 @@ async function test() {
   log("PHPUnit passed", "s");
 }
 
+/**
+ * Update the vendored iWorks libraries (git submodules) — parity with the
+ * ~/bin/update-iworks-libriares.sh script: git pull inside each submodule.
+ */
+async function updateLibraries() {
+  const submodules = [
+    { path: "includes/iworks/options", label: "iWorks Options" },
+    { path: "includes/iworks/rate", label: "iWorks Rate" },
+  ];
+  let failed = false;
+  for (const { path, label } of submodules) {
+    if (!existsSync(join(root, path))) {
+      log(`update-libs — ${path} not found, skipped`, "w");
+      continue;
+    }
+    log(`update-libs — updating ${label} (${path})`, "i");
+    const result = await spawnAsync("git", ["-C", path, "pull"], label, false);
+    if (result.stdout.trim()) {
+      console.log(result.stdout.trim());
+    }
+    if (result.stderr.trim()) {
+      console.log(result.stderr.trim());
+    }
+    if (result.code !== 0) {
+      failed = true;
+    }
+  }
+  if (failed) {
+    log("update-libs — one or more submodules failed to update", "e");
+    process.exit(1);
+  }
+  log("update-libs — all iWorks libraries updated", "s");
+}
+
 // ─── Mode dispatch ────────────────────────────────────────────────────────────
 
 const mode = process.argv[2] || "dev";
@@ -200,6 +234,7 @@ const modes = {
   "build:github": () => build("github"),
   "make-pot": () => executionTime("make-pot", () => makePot(false)),
   test: () => test(),
+  "update-libs": () => updateLibraries(),
 };
 
 if (!modes[mode]) {

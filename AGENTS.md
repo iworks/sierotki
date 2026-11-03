@@ -63,5 +63,6 @@ version lives only in `package.json`.
 `bun run dev` (watcher) · `bun run compile` (one-shot assets) ·
 `bun run build` (both ZIPs: wporg + github) · `bun run build:wporg` (wp.org
 ZIP) · `bun run build:github` (GitHub ZIP + .mo) · `bun run make-pot`
-(translations) · `bun run test` (phpunit; no tests/ dir in this repo —
+(translations) · `bun run update-libs` (git pull in iWorks submodules) ·
+`bun run test` (phpunit; no tests/ dir in this repo —
 use `php -l` for PHP changes). Requires PHP ≥ 8.0, WordPress ≥ 6.0.
