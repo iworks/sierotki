@@ -5,6 +5,7 @@ dist/
 # Compiled files
 .sass-cache
 package-lock.json
+bun.lockb
 
 # Compiled CSS files, needed to release not in repository
 assets/styles/
@@ -16,11 +17,17 @@ release/
 # wp-cli (downloaded by postinstall)
 wp-cli.phar
 
-#opencode
+# OS / editor junk
+.DS_Store
+*.tmp
+.afpDeleted*
+
+# opencode scratch files
+.opencode/tmp/
 o
 
 # i18n
 languages/*.mo
 
 # tests
-tests/php/.phpunit.result.cache
+.phpunit.result.cache
