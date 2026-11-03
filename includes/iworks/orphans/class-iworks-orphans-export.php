@@ -62,7 +62,7 @@ class iWorks_Orphans_Export {
 	 * The script is printed only on the plugin settings screen.
 	 *
 	 * @since 3.3.0
-	 * @since 3.4.6 - restricted to the plugin settings screen.
+	 * @since 3.4.5 - restricted to the plugin settings screen.
 	 * @action admin_print_scripts
 	 *
 	 * @return void

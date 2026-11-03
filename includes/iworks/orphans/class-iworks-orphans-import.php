@@ -36,7 +36,7 @@ class iWorks_Orphans_Import {
 	 * add admin scripts
 	 *
 	 * @since 3.3.0
-	 * @since 3.4.6 - restricted to the plugin settings screen.
+	 * @since 3.4.5 - restricted to the plugin settings screen.
 	 */
 	public function action_admin_print_scripts() {
 		$screen = get_current_screen();
@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
 		/**
 		 * validate upload
 		 *
-		 * @since 3.4.6
+		 * @since 3.4.5
 		 */
 		if (
 			! isset( $_FILES['iworks_orphan_import_file'] )
@@ -134,7 +134,7 @@ jQuery(document).ready(function($) {
 				/**
 				 * only whitelisted plugin options can be imported
 				 *
-				 * @since 3.4.6
+				 * @since 3.4.5
 				 */
 				if (
 					empty( $one['option_name'] )
@@ -157,7 +157,7 @@ jQuery(document).ready(function($) {
 	 * Only options defined in the plugin configuration (all prefixed with
 	 * `iworks_orphan_`) are accepted - never an arbitrary option name.
 	 *
-	 * @since 3.4.6
+	 * @since 3.4.5
 	 *
 	 * @return array Allowed option names.
 	 */

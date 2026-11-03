@@ -95,51 +95,68 @@ export async function buildCSS({ maps = false, strip = false } = {}) {
   // Admin: concat everything under assets/styles/admin/.
   const adminCssDir = join(root, config.stylesDir, "admin");
   const adminFiles = listFiles(adminCssDir, [".css"]);
-  let adminCss = adminFiles.length ? await concatFiles(adminFiles) : "";
-  if (strip) {
-    adminCss = stripMapComments(adminCss);
-  }
-  writeFileAtomic(
-    join(root, config.stylesDir, `${bundleName("admin")}.css`),
-    adminCss,
-  );
-
-  // Frontend: settings.css first, then the rest of assets/styles/frontend/.
-  const frontendDir = join(root, config.stylesDir, "frontend");
-  let frontendCss = "";
-  if (existsSync(frontendDir)) {
-    const all = listFiles(frontendDir, [".css"]);
-    const settings = all.filter((f) => f.endsWith("settings.css"));
-    const rest = all.filter((f) => !f.endsWith("settings.css"));
-    frontendCss = await concatFiles([...settings, ...rest]);
+  if (adminFiles.length) {
+    let adminCss = await concatFiles(adminFiles);
+    if (strip) {
+      adminCss = stripMapComments(adminCss);
+    }
+    writeFileAtomic(
+      join(root, config.stylesDir, `${bundleName("admin")}.css`),
+      adminCss,
+    );
+    const min = minifyCSS(adminCss);
+    writeFileAtomic(
+      join(root, config.stylesDir, `${bundleName("admin")}.min.css`),
+      min,
+    );
   } else {
     log(
-      "css — assets/styles/frontend/ not found, frontend bundle is empty",
+      `css — assets/styles/admin/ has no sources, ${bundleName("admin")} bundle skipped`,
       "w",
     );
   }
-  if (strip) {
-    frontendCss = stripMapComments(frontendCss);
-  }
-  writeFileAtomic(
-    join(root, config.stylesDir, `${bundleName("frontend")}.css`),
-    frontendCss,
-  );
 
-  // Minify the top-level bundles (grunt cssmin: no banner in minified CSS).
-  for (const variant of ["admin", "frontend"]) {
-    const cssFile = join(root, config.stylesDir, `${bundleName(variant)}.css`);
-    const min = minifyCSS(await Bun.file(cssFile).text());
-    writeFileAtomic(cssFile.replace(/\.css$/, ".min.css"), min);
+  // Frontend: settings.css first, then the rest of assets/styles/frontend/.
+  const frontendDir = join(root, config.stylesDir, "frontend");
+  if (existsSync(frontendDir)) {
+    const all = listFiles(frontendDir, [".css"]);
+    if (all.length) {
+      const settings = all.filter((f) => f.endsWith("settings.css"));
+      const rest = all.filter((f) => !f.endsWith("settings.css"));
+      let frontendCss = await concatFiles([...settings, ...rest]);
+      if (strip) {
+        frontendCss = stripMapComments(frontendCss);
+      }
+      writeFileAtomic(
+        join(root, config.stylesDir, `${bundleName("frontend")}.css`),
+        frontendCss,
+      );
+      const min = minifyCSS(frontendCss);
+      writeFileAtomic(
+        join(root, config.stylesDir, `${bundleName("frontend")}.min.css`),
+        min,
+      );
+    } else {
+      log(
+        `css — assets/styles/frontend/ is empty, ${bundleName("frontend")} bundle skipped`,
+        "w",
+      );
+    }
+  } else {
+    log(
+      `css — assets/styles/frontend/ not found, ${bundleName("frontend")} bundle skipped`,
+      "w",
+    );
   }
   log(
-    `css — ${compiled.length} SCSS entries → admin${existsSync(frontendDir) ? " + frontend" : " (frontend empty)"} bundles minified`,
+    `css — ${compiled.length} SCSS entries processed${adminFiles.length ? " → admin bundle" : " (admin skipped)"}${existsSync(frontendDir) ? " → frontend bundle" : " (frontend skipped)"}`,
     "s",
   );
 }
 
 /**
  * JS pipeline: concat sources per-variant → terser minify.
+ * Bundles are written only when sources exist — no banner-only empty files.
  */
 export async function buildJS() {
   for (const variant of ["admin", "frontend"]) {
@@ -147,9 +164,10 @@ export async function buildJS() {
     const files = listFiles(srcDir, [".js"]);
     if (!files.length) {
       log(
-        `js — assets/scripts/src/${variant}/ has no sources, ${variant} bundle is banner-only`,
+        `js — assets/scripts/src/${variant}/ has no sources, ${bundleName(variant)} bundle skipped`,
         "w",
       );
+      continue;
     }
     const concat = await concatFiles(files, concatBanner());
     const outFile = join(root, config.scriptsDir, `${bundleName(variant)}.js`);
@@ -157,7 +175,7 @@ export async function buildJS() {
     const min = await minifyJS(concat, minBanner());
     writeFileAtomic(outFile.replace(/\.js$/, ".min.js"), min);
   }
-  log("js — admin + frontend bundles concatenated and minified", "s");
+  log("js — bundles with sources concatenated and minified", "s");
 }
 
 /**

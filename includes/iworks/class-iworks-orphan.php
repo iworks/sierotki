@@ -367,7 +367,7 @@ class iworks_orphan {
 				/**
 				 * escape terms for regex usage
 				 *
-				 * @since 3.4.6
+				 * @since 3.4.5
 				 */
 				$quoted = implode(
 					'|',
@@ -1192,7 +1192,7 @@ class iworks_orphan {
 	 * Nonces protect against CSRF, not against unauthorized actions,
 	 * so a capability check is required on top of the nonce check.
 	 *
-	 * @since 3.4.6
+	 * @since 3.4.5
 	 *
 	 * @return boolean True if the current user has the required capability.
 	 */

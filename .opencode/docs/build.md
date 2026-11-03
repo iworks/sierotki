@@ -14,8 +14,9 @@
 - Sass, terser, clean-css and prettier run **in-process** (`bundler/tools.mjs`).
 - sierotki currently ships **no** SCSS or JS sources (`assets/` has only
   `images/logo.svg`) — the css/js pipeline stages warn "no sources" and
-  produce banner-only/empty bundles. This is expected; the pipeline is kept
-  for parity with the stub so future assets work unchanged.
+  **skip writing the bundles entirely** (no empty/banner-only files in the
+  ZIPs). This is expected; bundles reappear automatically as soon as real
+  sources are added.
 
 ## Files (`bundler/`)
 
@@ -55,9 +56,12 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
 3. **css** — sass compiles every non-`_` entry under `assets/sass/` →
    `assets/styles/{path}.css`; concat per-variant (`admin/*.css` →
    `{name}-admin.css`, `frontend/settings.css` first + rest →
-   `{name}-frontend.css`); clean-css → `.min.css`;
+   `{name}-frontend.css`); clean-css → `.min.css`. **Bundles are written
+   only when sources exist** — with no sources the variant is skipped with
+   a warning (no empty/banner-only files, no empty staging dirs);
 4. **js** — concat `assets/scripts/src/{admin,frontend}/*.js` with the concat
-   banner → `{name}-{variant}.js`; terser (`jQuery` reserved) → `.min.js`;
+   banner → `{name}-{variant}.js`; terser (`jQuery` reserved) → `.min.js`.
+   **Same rule: variants without sources are skipped entirely.**
 5. **i18n** — wp-cli `i18n make-pot` → `languages/{name}.pot`, then
    `i18n update-po` per existing `.po`; `make-mo` only in `build:github`;
 6. **zip** — staging copy → placeholder replacement → `release/{flavor}/{version}/{name}/`
@@ -92,9 +96,11 @@ The version lives **only** in `package.json`.
 - **GitHub** (`bun run build:github`) → `release/github/{version}/{name}/`.
   Base excludes plus `readme.txt`; `.po` **are** included and `.mo` compiled
   by `make-mo`. Pairs with the GitHub self-updater class.
-- Base excludes (both flavors): `.git*`, `.env*`, `.editorconfig`,
-  `.opencode/**`, `AGENTS.md`, `bundler/**`, `Gruntfile.js`, lock files,
-  `wp-cli.phar`, `node_modules`, `package.json`, `postcss.config.js`,
+- Base excludes (both flavors): `.git*` (directories, submodule `.git`
+  pointer files, `.gitignore`, `.gitmodules`), `.github/**`, `.editorconfig`
+  (root and submodules), `.env*`,
+  `.opencode/**`, `AGENTS.md`, `bundler/**`, `Gruntfile.js`,
+  lock files, `wp-cli.phar`, `node_modules`, `package.json`, `postcss.config.js`,
   `webpack.config.js`, `release/`, `.sass-cache`, `**/tests/**`, `LICENSE`,
   `**/*.map`, `README.md`, `contributing.md`, `**/bitbucket-pipelines.yml`.
 - Copy rules are ordered and evaluated **first match wins** (grunt semantics) —
