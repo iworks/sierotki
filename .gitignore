@@ -16,6 +16,9 @@ assets/scripts/sierotki-*.js
 # release
 release/
 
+#opencode
+o
+
 # i18n
 languages/*.mo
 

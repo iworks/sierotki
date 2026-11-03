@@ -24,6 +24,7 @@ module.exports = function(grunt) {
 	 */
 	var excludeCopyFiles = [
 		'**',
+		'o',
 		'!**/bitbucket-pipelines.yml',
 		'!contributing.md',
 		'!**/css/less/**',
@@ -32,6 +33,9 @@ module.exports = function(grunt) {
 		'!.editorconfig',
 		'!.git*',
 		'!.git/**',
+		'!**/.opencode/**',
+		'!AGENTS.md',
+		'!**/AGENTS.md',
 		'!**/Gruntfile.js',
 		'!**/img/src/**',
 		'!**/js/src/**',
