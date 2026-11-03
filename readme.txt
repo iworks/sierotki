@@ -80,82 +80,13 @@ There are 3 ways to install this plugin:
 
 Plugin works when viewing the content and does not modify your content.
 
+= How to use this plugin on the custom field? =
+
+Apply the `orphan_replace` filter to the field value — see the developer documentation ([README.md](https://github.com/iworks/sierotki#using-the-plugin-in-code)) for examples.
+
 = I have a problem with the plugin, or I want to suggest a feature. Where can I do this? =
 
 You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki/#new-topic-0), but please add your ticket to [Github Issues](https://github.com/iworks/sierotki/issues).
-
-= How to use this plugin on the custom field? =
-
-Use `orphan_replace` filter. Example code:
-
-`
-$value = apply_filters(
-    'orphan_replace',
-    get_post_meta($post_id, 'meta_key', true )
-);
-`
-
-= How to use this plugin on any string? =
-
-Use `orphan_replace` filter. Example code:
-
-`
-$value = apply_filters( 'orphan_replace', 'any string' );
-`
-
-= How to change plugin capability? =
-
-By default to using this plugin you must have `manage_options` capability, which usually means site administrator. If you want to allow manage Orphans by "Editors" then you need to use other capabilities, e.g.  `unfiltered_html`. You can use `iworks_orphans_capability` filter:
-
-`
-add_filter('iworks_orphans_capability', 'my_orphans_capability');
-function my_orphans_capability($capability) {
-    return 'unfiltered_html';
-}
-`
-
-= How to turn of replacement in my piece of code? =
-
-At the beginning of your block just add:
-`
-add_filter( 'orphan_skip_replacement', '__return_true' );
-`
-and at the end, to again turn on replacements:
-`
-remove_filter( 'orphan_skip_replacement', '__return_true' );
-`
-
-= How can I change default orphans? =
-
-Please use `iworks_orphan_terms` filter. It is array of default orphans. You can remove, add or even replace whole array. For example, to remove words "oraz", "na" and ""nie", use code bellow:
-
-`
-add_filter( 'iworks_orphan_terms', 'remove_iworks_orphan_terms' );
-function remove_iworks_orphan_terms( $terms ) {
-    $default_orphans_to_remove = array( 'oraz', 'na', 'nie', );
-    foreach( $default_orphans_to_remove as $value ) {
-        if ( $key = array_search( $value, $terms ) ) {
-            unset( $terms[ $key ] );
-        }
-    }
-    return $terms;
-}
-`
-
-= How can I change the default orphan file? =
-
-The default file with definitions is located in the `etc/` directory.
-
-You can change it using the filter `iworks_orphan_own_terms_file`:
-
-`
-add_filter(
-    'iworks_orphan_own_terms_file',
-    function( $file ) {
-        return '<own path to file';
-    }
-);
-'
 
 == Screenshots ==
 
