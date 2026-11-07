@@ -479,9 +479,25 @@ class iworks_orphan {
 		 * remove protected tags
 		 */
 		$protected = array();
+		/**
+		 * Salt the protected-tags placeholder digest: a plain
+		 * md5( outertext ) is computable from content alone, which allowed
+		 * an unauthenticated attacker to plant the digest inside an HTML
+		 * attribute and have the restore step splice raw markup there
+		 * (Stored XSS, CVE-2026-124216).
+		 *
+		 * Props for Santh (Wordfence).
+		 *
+		 * @link https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2
+		 * @since 3.4.6
+		 */
+		$salt = wp_salt( 'nonce' );
+		if ( empty( $salt ) ) {
+			$salt = wp_generate_password( 64, true, true );
+		}
 		foreach ( $this->protected_tags as $tag ) {
 			foreach ( $doc->find( $tag ) as $item ) {
-				$key               = md5( $item->outertext );
+				$key               = md5( $salt . $item->outertext );
 				$protected[ $key ] = $item->outertext;
 				$item->outertext   = $key;
 			}

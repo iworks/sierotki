@@ -80,6 +80,10 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   `string_replacement()`; HTML is parsed with `str_get_html()`, protected
   tags (`pre`, `code`, `iframe`, `svg`, `script`, `style` — order matters!)
   are swapped for md5 placeholders, text nodes are replaced, tags restored.
+  Since 3.4.6 the placeholder digest is salted with `wp_salt( 'nonce' )`
+  (CVE-2026-124216: a plain `md5( outertext )` is predictable, letting an
+  attacker plant the digest inside an HTML attribute so the restore step
+  splices raw markup there) — never revert to an unsalted md5.
 - `string_replacement()` — number-joining (independent of language, option
   `numbers`), then term replacement in chunks of 10 (avoids "regex too
   large"), with double passes for orphan-after-orphan chains and a final

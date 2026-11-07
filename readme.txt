@@ -97,6 +97,9 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 
 == Changelog ==
 
+= 3.4.6 - 2026-11-07 =
+* Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the protected-tags placeholder digest was predictable, which allowed an unauthenticated attacker to restore raw markup inside an HTML attribute. The digest is now salted with a site-specific key. (CVE-2026-124216). Props for [Santh](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2).
+
 = 3.4.5 - 2026-11-03 =
 * Build system converted from Grunt to the Bun bundler (`bun run build`).
 * Developer documentation moved from `readme.txt` to `README.md` - the WordPress.org readme is now end-user focused only.
