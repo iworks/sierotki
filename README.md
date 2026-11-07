@@ -49,7 +49,7 @@ The plugin uses two git submodules (`includes/iworks/options`,
 | --- | --- |
 | `bun run dev` | Watcher — recompile assets on change (no ZIP, no i18n) |
 | `bun run compile` | One-shot asset compile |
-| `bun run build` | Build **both** release ZIPs (wporg + github) |
+| `bun run build` | Build **both** release ZIPs (github first, then wporg) + Plugin Check (PCP) on the wporg release |
 | `bun run build:wporg` | WordPress.org ZIP → `release/wporg/sierotki.zip` |
 | `bun run build:github` | GitHub ZIP (with `.po`/`.mo`) → `release/github/sierotki.zip` |
 | `bun run make-pot` | Regenerate `languages/sierotki.pot` and update all `.po` files |

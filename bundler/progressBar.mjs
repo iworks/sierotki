@@ -23,10 +23,7 @@ export class ProgressBar {
     const filled = Math.round(ratio * WIDTH);
     const bar = "█".repeat(filled) + "░".repeat(WIDTH - filled);
     process.stdout.write(
-      `\r\x1b[K${bar} ${this.current}/${this.total} ${this.label}`,
+      `\r\x1b[K${bar} ${this.current}/${this.total} ${this.label}\n`,
     );
-    if (this.current >= this.total) {
-      process.stdout.write("\n");
-    }
   }
 }

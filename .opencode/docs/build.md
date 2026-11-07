@@ -40,14 +40,14 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
 | ---------------------- | -------------------------------------------------------------------------------------------- |
 | `bun run dev`          | Watcher: `.scss` → CSS pipeline, `assets/scripts/src/**` → prettier + JS pipeline (200 ms debounce); no ZIP, no i18n |
 | `bun run compile`      | One-shot asset compile with source maps (old `grunt` default task)                            |
-| `bun run build`        | Both flavors back-to-back: wporg + github (grunt `release` parity, minus the notes checklist) |
+| `bun run build`        | Both flavors back-to-back: github + wporg, then Plugin Check on the wporg release (grunt `release` parity, minus the notes checklist) |
 | `bun run build:wporg`  | Production → `release/wporg/{name}.zip`                                                       |
 | `bun run build:github` | Production + `.mo` → `release/github/{name}.zip`                                              |
 | `bun run make-pot`     | Translations only (`.pot` + `.po` update)                                                     |
 | `bun run test`         | PHPUnit (no `tests/` dir in this repo — will fail gracefully)                                 |
 | `bun run update-libs`  | `git pull` inside the iWorks submodules (`includes/iworks/{options,rate}`) — manual task      |
 
-## Build pipeline (`bun run build:wporg`, 7 steps)
+## Build pipeline (`bun run build:wporg`, 8 steps)
 
 1. **clean** — remove built JS (`assets/scripts/*.js`), built CSS
    (`assets/styles/*.css`, `*.map`), `languages/*.mo`;
@@ -66,7 +66,16 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
    `i18n update-po` per existing `.po`; `make-mo` only in `build:github`;
 6. **zip** — staging copy → placeholder replacement → `release/{flavor}/{version}/{name}/`
    → `release/{flavor}/{name}.zip`;
-7. done — progress bar + total time; any failure prints `BUILD FAILED`, exit 1.
+7. **plugin-check** (wporg only) — copies the staged release into the local
+   WordPress plugins dir under the real slug and runs `wp plugin check`
+   (PCP) against it; the build **fails on any ERROR**. The vendored iWorks
+   submodules (`includes/iworks/{options,rate}`) are excluded — they live in
+   upstream repos. `bun run build` builds the **github flavor first**, then
+   wporg, so the final PCP/symlink state reflects the wporg release.
+   Env vars: `PLUGIN_CHECK_SKIP=1` (skip), `PLUGIN_CHECK_PLUGINS_DIR`
+   (plugins dir, defaults to the repo's parent), `PLUGIN_SYMLINK_SKIP=1`
+   (no release symlink).
+8. done — progress bar + total time; any failure prints `BUILD FAILED`, exit 1.
 
 Banners (grunt parity): concat = `/*! {title} - {version}\n * {website}\n *
 Copyright (c) {year}\n * Licensed {license} */`; minified JS uses the same

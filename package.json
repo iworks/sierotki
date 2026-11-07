@@ -35,7 +35,7 @@
         "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "7.0"
+        "WordPress": "7.1"
     },
     "scripts": {
         "dev": "bun bundler/index.js",

@@ -5,7 +5,7 @@
  * Modes:
  *   dev (default) — watcher, compile on change (no ZIP, no i18n)
  *   compile       — one-shot asset compile (old `grunt` default task)
- *   build         — both flavors: build:wporg + build:github
+ *   build         — both flavors: build:github + build:wporg (+ Plugin Check)
  *   build:wporg   — production build → release/wporg/{name}.zip
  *   build:github  — production build + .mo → release/github/{name}.zip
  *   make-pot      — translations only (.pot + .po update)
@@ -27,6 +27,7 @@ import {
 import { prettierFile } from "./tools.mjs";
 import { makeZip } from "./makeZip.mjs";
 import { makePot } from "./makePot.mjs";
+import { pluginCheck } from "./pluginCheck.mjs";
 
 const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
 
@@ -70,7 +71,7 @@ async function compileAssets({
 async function build(flavor) {
   const start = Date.now();
   try {
-    const steps = 7;
+    const steps = flavor === "wporg" ? 8 : 7;
     const bar = new ProgressBar(steps);
     bar.tick("clean");
     await cleanCompiled();
@@ -84,6 +85,10 @@ async function build(flavor) {
     await makePot(flavor === "github");
     bar.tick("zip");
     await makeZip(flavor);
+    if (flavor === "wporg") {
+      bar.tick("plugin-check");
+      await pluginCheck(config.name, config.version);
+    }
     bar.tick("done");
     log(
       `BUILD OK (${flavor}) in ${((Date.now() - start) / 1000).toFixed(2)}s`,
@@ -227,8 +232,8 @@ const modes = {
       compileAssets({ maps: true, strip: false, format: false }),
     ),
   build: async () => {
-    await build("wporg");
     await build("github");
+    await build("wporg");
   },
   "build:wporg": () => build("wporg"),
   "build:github": () => build("github"),
