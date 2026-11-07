@@ -1,15 +1,17 @@
-# Translation of Plugins - Orphans - Development (trunk) in Polish
-# This file is distributed under the same license as the Plugins - Orphans - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-07-22 07:22:19+0000\n"
+"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-07T20:36:41+00:00\n"
+"PO-Revision-Date: 2026-07-22 07:22:19+0000\n"
+"Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
 "X-Generator: GlotPress/4.1.0\n"
-"Language: pl\n"
-"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
 
 #: includes/iworks/options/includes/class-iworks-options-logger.php:99
 msgid "Option \"{option_name}\" has been updated. From \"{old_value}\" to \"{new_value}\"."
@@ -368,7 +370,8 @@ msgstr "Kraj"
 msgid "I love what I do!"
 msgstr "Kocham to co robię!"
 
-#: etc/options.php:392 etc/options.php:495
+#: etc/options.php:392
+#: etc/options.php:495
 msgid "We are waiting for your message"
 msgstr "Czekamy na twoją wiadomość"
 
@@ -434,11 +437,13 @@ msgstr "Opis"
 msgid "Enabled the substitution of orphans in the taxonomy title."
 msgstr "Włącz obsługę sierotek w tytułach taksonomii."
 
-#: etc/options.php:164 etc/options.php:263
+#: etc/options.php:164
+#: etc/options.php:263
 msgid "Title"
 msgstr "Tytuł"
 
-#: etc/options.php:243 etc/options.php:248
+#: etc/options.php:243
+#: etc/options.php:248
 msgid "Taxonomies"
 msgstr "Taksonomie"
 
@@ -536,7 +541,9 @@ msgid "Save Changes"
 msgstr "Zapisz zmiany"
 
 #. Plugin Name of the plugin
-#: sierotki.php etc/options.php:77 includes/iworks/class-iworks-orphan.php:1303
+#: sierotki.php
+#: etc/options.php:77
+#: includes/iworks/class-iworks-orphan.php:1303
 msgid "Orphans"
 msgstr "Sierotki"
 

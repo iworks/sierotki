@@ -1,153 +1,155 @@
-# Translation of Plugins - Orphans - Development (trunk) in Swedish
-# This file is distributed under the same license as the Plugins - Orphans - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
+"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-07T20:36:41+00:00\n"
+"PO-Revision-Date: 2023-07-05 10:45:43+0000\n"
+"Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/4.1.0\n"
-"Language: sv_SE\n"
-"Project-Id-Version: Plugins - Orphans - Development (trunk)\n"
 
 #: includes/iworks/options/includes/class-iworks-options-logger.php:99
 msgid "Option \"{option_name}\" has been updated. From \"{old_value}\" to \"{new_value}\"."
-msgstr ""
+msgstr "Opcja „{option_name}” została zmieniona z „{old_value}” na „{new_value}”."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
 msgid "☕ Buy Me a Coffee"
-msgstr ""
+msgstr "☕ Kupte nám kávu"
 
 #: includes/iworks/options/options.php:247
 msgid "No Page Title"
-msgstr ""
+msgstr "Bez názvu stránky"
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:66
 msgid "Secure Custom Fields"
-msgstr ""
+msgstr "Zabezpečená vlastní pole"
 
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
 msgid "Wow, it’s already been a whole year since you started using our plugin—thank you so much for being part of our journey! We hope it’s made your work easier and more enjoyable."
-msgstr ""
+msgstr "Páni, už je to celý rok, co jste začali používat náš plugin – moc vám děkujeme, že jste součástí naší cesty! Doufáme, že vám to usnadnilo a zpříjemnilo práci."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:34
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
 msgid "Plugin Author"
-msgstr ""
+msgstr "Autor pluginu"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:28
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
 msgid "With gratitude"
-msgstr ""
+msgstr "S vděčností"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
 msgid "Thank you for your support and for making this community amazing!"
-msgstr ""
+msgstr "Děkujeme za vaši podporu a za to, že děláte tuto komunitu úžasnou!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:22
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
 msgid "If you’ve found our plugin helpful and would like to support its continued development, we’d be incredibly grateful if you’d consider buying us a coffee. Every little bit helps us keep improving and adding new features for awesome users like you!"
-msgstr ""
+msgstr "Pokud vám náš plugin pomohl a chcete podpořit jeho další vývoj, byli bychom nesmírně vděční, kdybyste nám koupili kávu. Každá maličkost nám pomáhá se neustále zlepšovat a přidávat nové funkce pro skvělé uživatele, jako jste vy!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
 msgid "Wow, it’s already been a whole year since you’ve been using our plugin—thank you so much for being part of our journey! We truly appreciate your support and hope the plugin has made your work easier and more enjoyable."
-msgstr ""
+msgstr "Páni, už je to celý rok, co používáte náš plugin – moc vám děkujeme, že jste součástí naší cesty! Opravdu si vážíme vaší podpory a doufáme, že vám plugin usnadnil a zpříjemnil práci."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:19
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
 msgid "🎉 Happy Anniversary! 🎉"
-msgstr ""
+msgstr "Šťastné výročí!"
 
 #: etc/options.php:456
 msgctxt "link to add new review page on WordPress.org"
 msgid "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
-msgstr ""
+msgstr "https://wordpress.org/support/plugin/sierotki/reviews/#new-post"
 
 #: etc/options.php:249
 msgid "Select the taxonomies where orphaned word substitution should be applied. This affects terms, categories, tags, and other custom taxonomies."
-msgstr ""
+msgstr "Vyberte taxonomie, u kterých se má použít nahrazování osiřelých slov. Toto ovlivní termíny, kategorie, tagy a další vlastní taxonomie."
 
 #. Description of the plugin
 #: sierotki.php
 msgid "Supports the grammar rule for orphan words at the end of a line."
-msgstr ""
+msgstr "Podporuje gramatické pravidlo pro osiřelá slova na konci řádku."
 
 #. translators: %s: plugin id
 #: includes/iworks/rate/rate.php:626
 msgid "There is no plugin with id: %s."
-msgstr ""
+msgstr "Neexistuje žádný plugin s id: %s."
 
 #: includes/iworks/orphans/class-iworks-orphans-import.php:94
 msgid "Something went wrong!"
-msgstr ""
+msgstr "Něco se pokazilo!"
 
 #: includes/iworks/orphans/class-iworks-orphans-import.php:87
 msgid "Configuration has been imported."
-msgstr ""
+msgstr "Konfigurace byla importována."
 
 #: etc/options.php:518
 msgid "Import JSON"
-msgstr ""
+msgstr "Importovat JSON"
 
 #: etc/options.php:380
 msgid "Import"
-msgstr ""
+msgstr "Importovat"
 
 #: etc/options.php:374
 msgid "Export JSON"
-msgstr ""
+msgstr "Exportovat JSON"
 
 #: etc/options.php:367
 msgid "Add site configuration data like language, url. Nothing sensitive."
-msgstr ""
+msgstr "Přidat konfigurační data webu, jako je jazyk, adresa URL. Nic citlivého."
 
 #: etc/options.php:365
 msgid "Add extra information"
-msgstr ""
+msgstr "Přidat další informace"
 
 #: etc/options.php:360
 msgid "Export"
-msgstr ""
+msgstr "Exportovat"
 
 #: etc/options.php:355
 msgid "Export/Import"
-msgstr ""
+msgstr "Export/Import"
 
 #. Plugin URI of the plugin
 #: sierotki.php
 msgid "https://github.com/iworks/sierotki"
-msgstr ""
+msgstr "https://github.com/iworks/sierotki"
 
 #: etc/options.php:150
 msgid "Pages"
-msgstr ""
+msgstr "Stránky"
 
 #: etc/options.php:149
 msgid "Posts"
-msgstr ""
+msgstr "Příspěvky"
 
 #: includes/iworks/options/options.php:2514
 msgid "Failed Security Check"
-msgstr ""
+msgstr "Kontrola se nezdařila"
 
 #: etc/options.php:107
 msgid "Select if you want to force the loading of English short words."
-msgstr ""
+msgstr "Vyberte, pokud chcete vynutit načítání krátkých anglických slov."
 
 #: etc/options.php:106
 msgid "English"
-msgstr ""
+msgstr "Angličtina"
 
 #: etc/options.php:348
 msgid "Use a comma to separate custom fields name (meta fields)."
-msgstr ""
+msgstr "Použijte čárku pro oddělení názvů uživatelských polí (meta pole)."
 
 #: etc/options.php:111
 msgid "Select if you want to rely only on your terms."
-msgstr ""
+msgstr "Vyberte, pokud se chcete spolehnout pouze na své podmínky."
 
 #: etc/options.php:110
 msgid "Do not load any files"
@@ -155,27 +157,27 @@ msgstr "Ladda inte några filer"
 
 #: etc/options.php:103
 msgid "Select if you want to force the loading of Czech language rules."
-msgstr ""
+msgstr "Vyberte, pokud chcete vynutit načítání pravidel českého jazyka."
 
 #: etc/options.php:102
 msgid "Czech"
-msgstr ""
+msgstr "Čeština"
 
 #: etc/options.php:99
 msgid "Select if you want to force the loading of Polish language rules."
-msgstr ""
+msgstr "Vyberte, pokud chcete vynutit načítání pravidel polského jazyka."
 
 #: etc/options.php:98
 msgid "Polish"
-msgstr ""
+msgstr "Polština"
 
 #: etc/options.php:95
 msgid "Select if you want the plugin to determine which file to load based on the site's language settings."
-msgstr ""
+msgstr "Vyberte, zda chcete, aby plugin určil, který soubor načíst, na základě jazykového nastavení webu."
 
 #: etc/options.php:94
 msgid "Try to use the site locale to determine the file name"
-msgstr ""
+msgstr "Zkuste k určení názvu souboru použít národní prostředí webu"
 
 #: etc/options.php:90
 msgid "Language File"
@@ -183,23 +185,23 @@ msgstr "Språkfil"
 
 #: etc/options.php:84
 msgid "Terms"
-msgstr ""
+msgstr "Podmínky"
 
 #: etc/options.php:292
 msgid "Enabled the substitution of orphans in Translations functions. <a href=\"https://developer.wordpress.org/themes/functionality/internationalization/\" target=\"_blank\">Read more.</a> <b>WARNING: this can slow your site!</b>"
-msgstr ""
+msgstr "Povoleno nahrazování sirotků ve funkcích překladů. <a href=\"https://developer.wordpress.org/themes/functionality/internationalization/\" target=\"_blank\">Více informací.</a> <b>VAROVÁNÍ: Toto může zpomalit váš web!</b>"
 
 #: etc/options.php:291
 msgid "Translation Functions"
-msgstr ""
+msgstr "Funkce překladu"
 
 #: etc/options.php:339
 msgid "Allow to ignore spaces in \"class\", \"style\" and \"data-*\" attributes."
-msgstr ""
+msgstr "Povolit ignorování mezer v atributech „class“, „style“ a „data-*“."
 
 #: etc/options.php:337
 msgid "Protect Tag Attributes"
-msgstr ""
+msgstr "Chránit tagy atributů"
 
 #: includes/iworks/rate/templates/plugins/og.php:20
 msgid "Install"
@@ -212,11 +214,11 @@ msgstr "Vänta inte, installera tillägget %s!"
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
-msgstr ""
+msgstr "Chtěli byste posílit sdílení svých webových stránek?"
 
 #: includes/iworks/rate/rate.php:816
 msgid "OG — Better Share on Social Media"
-msgstr ""
+msgstr "OG — Lepší sdílení na sociálních sítích"
 
 #: includes/iworks/rate/rate.php:800
 msgid "OpenGraph"
@@ -224,7 +226,7 @@ msgstr "OpenGraph"
 
 #: etc/options.php:322
 msgid "Enabled the substitution of orphans in the menu title."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v názvu nabídky."
 
 #: etc/options.php:320
 msgid "Menu Title"
@@ -238,7 +240,7 @@ msgstr "Välj bild"
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:116
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:90
 msgid "Enabled the substitution of orphans in WYSIWYG fields."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v polích WYSIWYG."
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:115
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:89
@@ -248,7 +250,7 @@ msgstr "WYSIWYG"
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:107
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:81
 msgid "Enabled the substitution of orphans in textarea fields. (Include WYSIWYG)."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v polích textarea. (Včetně WYSIWYG)."
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:106
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:80
@@ -258,7 +260,7 @@ msgstr "Textområde"
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:98
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:72
 msgid "Enabled the substitution of orphans in text fields."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v textových polích."
 
 #: includes/iworks/integrations/class-iworks-orphans-integration-advanced-custom-fields.php:97
 #: includes/iworks/integrations/class-iworks-orphans-integration-secure-custom-fields.php:71
@@ -275,25 +277,25 @@ msgstr "Integrationer"
 
 #: etc/options.php:233
 msgid "Enabled the substitution of orphans in the widget blocks."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v blocích widgetů."
 
 #: etc/options.php:231
 msgid "Widget Block Content"
-msgstr ""
+msgstr "Obsah bloku widgetů"
 
 #: includes/iworks/rate/templates/widgets/support.php:26
 msgid "Do you like our plugin? Could you rate him? Please let us know what you think about our plugin. It is important that we can develop this tool. Thank you for all the ratings, reviews and donates."
-msgstr ""
+msgstr "Líbí se vám náš plugin? Můžete ho ohodnotit? Prosím, dejte nám vědět, jak se vám líbí. Je to důležité pro jeho další vylepšování. Děkujeme za všechna hodnocení, recenze a finanční podpory."
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
 #. anchor tag, %4$s: close anchor tag
 #: includes/iworks/rate/templates/widgets/support.php:11
 msgid "Please %1$scheck our FAQ%2$s before adding a thread with technical problem. If you do not find help there, %3$scheck support forum%4$s for similar problems."
-msgstr ""
+msgstr "Prosím,  %1$snahlédněte do naší FAQ%2$s sekce před přidáním dalšího vlákna s technickým problémem. Pokud ani tam nenajdete pomoc, %3$smrkněte na forum podpory%4$s pro podobný problém."
 
 #: includes/iworks/rate/templates/widgets/support.php:4
 msgid "Do you have a technical problem? Please contact us. We will be happy to help you. Or maybe you have an idea for a new feature? Please let us know about it by filling the support form. We will try to add it!"
-msgstr ""
+msgstr "Máte technický problém? Napište nám prosím. Rádi vám poradíme. Nebo máte tip na další vylepšení? Napište nám o něm ve formuláři pro podporu. Pokusíme se tu funkci přidat."
 
 #: includes/iworks/rate/templates/widgets/donate.php:4
 msgid "Provide me a coffee"
@@ -301,15 +303,15 @@ msgstr "Köp en kopp kaffe till mig"
 
 #: includes/iworks/rate/templates/widgets/donate.php:3
 msgid "If every plugin user did it, I could devote myself fully to working on this plugin. Thanks everyone!"
-msgstr ""
+msgstr "Kdyby to dělal každý uživatel pluginu, mohl bych se plně věnovat práci na tomto pluginu. Díky všem!"
 
 #: includes/iworks/rate/templates/widgets/donate.php:2
 msgid "However, working on plugins and technical support requires many hours of work. If you want to appreciate it, you can provide me a coffee."
-msgstr ""
+msgstr "Práce na pluginech a technické podpoře však vyžaduje mnoho hodin práce. Pokud to chcete ocenit, můžete mi koupit kávu."
 
 #: includes/iworks/rate/templates/thanks.php:41
 msgid "I added review, do not show again"
-msgstr ""
+msgstr "Přidal jsem hodnocení, znovu nezobrazovat"
 
 #: includes/iworks/rate/rate.php:173
 #: includes/iworks/rate/templates/thanks.php:39
@@ -329,7 +331,7 @@ msgstr "Få hjälp"
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag
 #: includes/iworks/rate/templates/thanks.php:31
 msgid "Please let us know what you think about our plugin. It is important that we can develop this tool. Thank you for all the ratings, reviews and donates. If you have a technical problem, please before you add a review %1$scheck our FAQ%2$s or contact us if you did not find help there. We will try to help you!"
-msgstr ""
+msgstr "Napište nám, co si o našem pluginu myslíte. Pro další vývoj je to důležité. Děkujeme za hodnocení, recenze a finanční podporu. Pokud máte technický problém, než přidáte recenzi %1$spodívejte se do FAQ%2$s nebo kontaktujte nás, pokud nenajdete pomoc tam. Pokusíme se vám pomoci."
 
 #. translators: %s is a plugin name wrapped by strong html tag
 #: includes/iworks/rate/templates/thanks.php:23
@@ -368,13 +370,14 @@ msgstr "Land"
 msgid "I love what I do!"
 msgstr "Jag älskar det jag gör!"
 
-#: etc/options.php:392 etc/options.php:495
+#: etc/options.php:392
+#: etc/options.php:495
 msgid "We are waiting for your message"
 msgstr "Vi ser fram emot ditt meddelande"
 
 #: etc/options.php:346
 msgid "Entries Custom Fields"
-msgstr ""
+msgstr "Položky vlastních polí"
 
 #: includes/iworks/options/options.php:2449
 msgid "ON"
@@ -390,7 +393,7 @@ msgstr "Ta bort bild"
 
 #: includes/iworks/options/options.php:419
 msgid "An error occurred while getting the configuration."
-msgstr ""
+msgstr "Při načítání konfigurace došlo k chybě."
 
 #: etc/options.php:497
 msgctxt "link to support forum on WordPress.org"
@@ -404,7 +407,7 @@ msgstr "https://wordpress.org/plugins/sierotki/"
 
 #: etc/options.php:313
 msgid "Allow to use plugin with another languages then Polish."
-msgstr ""
+msgstr "Povolit použití pluginu s jinými jazyky než polštinou."
 
 #: etc/options.php:311
 msgid "Ignore Language"
@@ -412,7 +415,7 @@ msgstr "Ignorera språk"
 
 #: etc/options.php:304
 msgid "Enabled the substitution of orphans in the author description."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v popisu autora."
 
 #: etc/options.php:303
 msgid "Author Description"
@@ -424,7 +427,7 @@ msgstr "Övrigt"
 
 #: etc/options.php:274
 msgid "Enabled the substitution of orphans in the taxonomy description."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v popisu taxonomie."
 
 #: etc/options.php:272
 msgid "Description"
@@ -432,13 +435,15 @@ msgstr "Beskrivning"
 
 #: etc/options.php:265
 msgid "Enabled the substitution of orphans in the taxonomy title."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v názvu taxonomie."
 
-#: etc/options.php:164 etc/options.php:263
+#: etc/options.php:164
+#: etc/options.php:263
 msgid "Title"
 msgstr "Rubrik"
 
-#: etc/options.php:243 etc/options.php:248
+#: etc/options.php:243
+#: etc/options.php:248
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
@@ -476,15 +481,15 @@ msgstr "Inlägg"
 
 #: etc/options.php:76
 msgid "Orphans Configuration"
-msgstr ""
+msgstr "Konfigurace sirotků"
 
 #: etc/options.php:221
 msgid "Enabled the substitution of orphans in the widget text."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v textu widgetu."
 
 #: etc/options.php:209
 msgid "Enabled the substitution of orphans in the widget title."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v názvu widgetu."
 
 #: includes/iworks/rate/rate.php:817
 msgid "https://wordpress.org/plugins/og/"
@@ -492,11 +497,11 @@ msgstr "https://wordpress.org/plugins/og/"
 
 #: etc/options.php:331
 msgid "Allow to keep together phone number or strings with space between numbers."
-msgstr ""
+msgstr "Umožňuje uchovávat pohromadě telefonní číslo nebo řetězce s mezerami mezi čísly."
 
 #: etc/options.php:329
 msgid "Keep Numbers Together"
-msgstr ""
+msgstr "Udržovat čísla pohromadě"
 
 #. Author URI of the plugin
 #: sierotki.php
@@ -536,30 +541,32 @@ msgid "Save Changes"
 msgstr "Spara ändringarna"
 
 #. Plugin Name of the plugin
-#: sierotki.php etc/options.php:77 includes/iworks/class-iworks-orphan.php:1303
+#: sierotki.php
+#: etc/options.php:77
+#: includes/iworks/class-iworks-orphan.php:1303
 msgid "Orphans"
 msgstr "Orphans"
 
 #: etc/options.php:129
 msgid "Use a comma to separate orphans."
-msgstr ""
+msgstr "K oddělení sirotků použijte čárku."
 
 #: etc/options.php:127
 msgid "User Definied Orphans"
-msgstr ""
+msgstr "Uživatelem definovaní sirotci"
 
 #: etc/options.php:184
 msgid "Enabled the substitution of orphans in the content."
-msgstr ""
+msgstr "Povoleno nahrazení sirotků v obsahu."
 
 #: etc/options.php:175
 msgid "Enabled the substitution of orphans in the excerpt."
-msgstr ""
+msgstr "Povoleno nahrazení sirotků v úryvku."
 
 #: etc/options.php:166
 msgid "Enabled the substitution of orphans in the post_title."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v post_title."
 
 #: etc/options.php:193
 msgid "Enabled the substitution of orphans in the comments."
-msgstr ""
+msgstr "Povoleno nahrazování sirotků v komentářích."
