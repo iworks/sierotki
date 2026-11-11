@@ -292,36 +292,6 @@ class iworks_orphan {
 	}
 
 	/**
-	 * Parse DOMElement Object
-	 *
-	 * @since 3.1.0
-	 */
-	private function parse_item( $item ) {
-		/**
-		 * no tags, replace
-		 */
-		if ( ! preg_match( '/</', $item->innertext ) ) {
-			$item->innertext = $this->string_replacement( $item->innertext );
-			return;
-		}
-		/**
-		 * split to slices & replace!
-		 */
-		preg_match_all( '/<[^>]+>/', $item->innertext, $matches );
-		$text_array = preg_split( '/<[^>]+>/', $item->innertext );
-		$text       = '';
-		$max        = sizeof( $text_array );
-		for ( $i = 0;$i < $max;$i++ ) {
-			$text .= $this->string_replacement( $text_array[ $i ] );
-			if ( isset( $matches[0][ $i ] ) ) {
-				$text .= $matches[0][ $i ];
-			}
-		}
-		$item->innertext = $text;
-		return;
-	}
-
-	/**
 	 * String replacement with super-base check is replacement even
 	 * possible.
 	 *
@@ -447,9 +417,21 @@ class iworks_orphan {
 	 * Unconditional replacement with super-base check is replacement even
 	 * possible.
 	 *
+	 * HTML is parsed with the WordPress HTML API
+	 * (WP_HTML_Tag_Processor) and only text nodes are rewritten -
+	 * attributes and markup are passed through byte-for-byte, so no
+	 * re-serialization can mutate already-sanitized markup (Stored XSS via
+	 * simple_html_dom noise placeholders, reported by Patchstack; and
+	 * CVE-2026-124216).
+	 *
+	 * Props for Santh (Wordfence).
+	 * Props for peppa (Patchstack).
+	 *
+	 * @link https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2
 	 * @since 2.7.8
 	 * @since 3.1.0 - changed into DOM parsing
-	 *
+	 * @since 3.4.7 - rewritten with WP_HTML_Tag_Processor; protected tags are
+	 *                skipped natively instead of using placeholders
 	 *
 	 * @param string $content String to replace
 	 *
@@ -466,59 +448,45 @@ class iworks_orphan {
 			return $this->string_replacement( $content );
 		}
 		/**
-		 * parse
+		 * parse; rewrite text nodes only, skipping anything inside the
+		 * protected tags
 		 */
-		$doc = str_get_html( $content, false, false, DEFAULT_TARGET_CHARSET, false );
-		/**
-		 * check
-		 */
-		if ( false === $doc ) {
-			return $content;
-		}
-		/**
-		 * remove protected tags
-		 */
-		$protected = array();
-		/**
-		 * Salt the protected-tags placeholder digest: a plain
-		 * md5( outertext ) is computable from content alone, which allowed
-		 * an unauthenticated attacker to plant the digest inside an HTML
-		 * attribute and have the restore step splice raw markup there
-		 * (Stored XSS, CVE-2026-124216).
-		 *
-		 * Props for Santh (Wordfence).
-		 *
-		 * @link https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2
-		 * @since 3.4.6
-		 */
-		$salt = wp_salt( 'nonce' );
-		if ( empty( $salt ) ) {
-			$salt = wp_generate_password( 64, true, true );
-		}
-		foreach ( $this->protected_tags as $tag ) {
-			foreach ( $doc->find( $tag ) as $item ) {
-				$key               = md5( $salt . $item->outertext );
-				$protected[ $key ] = $item->outertext;
-				$item->outertext   = $key;
+		$processor = new WP_HTML_Tag_Processor( $content );
+		$depth     = 0;
+		while ( $processor->next_token() ) {
+			$tag = $processor->get_tag();
+			if ( null !== $tag ) {
+				$tag = strtolower( $tag );
+				if ( in_array( $tag, $this->protected_tags, true ) ) {
+					if ( in_array( $tag, array( 'script', 'style', 'iframe' ), true ) ) {
+						/**
+						 * Rawtext elements arrive as a single atomic token
+						 * (contents included, no closer) - nothing to do,
+						 * their contents are never replaced.
+						 */
+						continue;
+					}
+					if ( $processor->is_tag_closer() ) {
+						$depth = max( 0, $depth - 1 );
+					} else {
+						$depth++;
+					}
+				}
+				continue;
+			}
+			if ( $depth > 0 ) {
+				continue;
+			}
+			if ( '#text' !== $processor->get_token_name() ) {
+				continue;
+			}
+			$original = $processor->get_modifiable_text();
+			$text     = $this->string_replacement( $original );
+			if ( $text !== $original ) {
+				$processor->set_modifiable_text( $text );
 			}
 		}
-		/**
-		 * replace
-		 */
-		$this->parse_item( $doc->root );
-		/**
-		 * save replaced doc
-		 */
-		$out = $doc->save();
-		/**
-		 * revert protected tags
-		 */
-		if ( ! empty( $protected ) ) {
-			foreach ( $protected as $key => $outertext ) {
-				$out = str_replace( $key, $outertext, $out );
-			}
-		}
-		return $out;
+		return $processor->get_updated_html();
 	}
 
 	/**

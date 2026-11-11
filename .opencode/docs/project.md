@@ -28,7 +28,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 │       ├── options/                       # Git SUBMODULE — iworks options framework
 │       └── rate/                          # Git SUBMODULE — iworks rate framework
 ├── vendor/
-│   └── simple_html_dom.php     # Bundled HTML parser (guarded by HDOM_TYPE_ELEMENT)
+│   └── index.php                # (simple_html_dom removed in 3.4.7 — HTML API now)
 ├── languages/                  # sierotki.pot + .po/.mo
 ├── assets/images/              # logo.svg only
 ├── package.json                # Version + release metadata (single source of truth)
@@ -41,7 +41,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 1. WordPress loads `sierotki.php` (textdomain `sierotki`):
    - defines `IWORKS_ORPHANS_VERSION` (`'PLUGIN_VERSION'`),
      `IWORKS_ORPHANS_PLUGIN_DIR`, `IWORKS_ORPHANS_PLUGIN_URL`;
-   - requires `etc/options.php`, `vendor/simple_html_dom.php`
+   - requires `etc/options.php`
      (only if `HDOM_TYPE_ELEMENT` is not defined), the core class,
      and the vendored `iworks_rate` / `iworks_options` (class_exists guarded);
    - instantiates `iworks_orphan`, registers activation/deactivation hooks
@@ -77,13 +77,17 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 - `replace_two( $content, $object_id )` — wrapper for 2-arg filters
   (`the_title`); handles the menu-title option.
 - `unconditional_replacement()` — plain strings go straight to
-  `string_replacement()`; HTML is parsed with `str_get_html()`, protected
-  tags (`pre`, `code`, `iframe`, `svg`, `script`, `style` — order matters!)
-  are swapped for md5 placeholders, text nodes are replaced, tags restored.
-  Since 3.4.6 the placeholder digest is salted with `wp_salt( 'nonce' )`
-  (CVE-2026-124216: a plain `md5( outertext )` is predictable, letting an
-  attacker plant the digest inside an HTML attribute so the restore step
-  splices raw markup there) — never revert to an unsalted md5.
+  `string_replacement()`; HTML is parsed with the core
+  `WP_HTML_Tag_Processor` and **only text nodes are rewritten** — markup and
+  attributes pass through byte-for-byte, so no re-serialization can mutate
+  already-sanitized content. Protected tags (`pre`, `code`, `svg` and the
+  rawtext `script`/`style`/`iframe` — which arrive as single atomic tokens)
+  are **skipped**, not placeholder-swapped. Since 3.4.7 the bundled
+  `simple_html_dom` library is removed entirely: its deterministic
+  `___noise___` placeholders and raw attribute re-emission allowed stored XSS
+  via comments (Patchstack report, Nov 2026) and drove CVE-2026-124216
+  (unsalted md5 placeholder restore). Do not reintroduce any
+  placeholder/restore scheme over user-supplied HTML.
 - `string_replacement()` — number-joining (independent of language, option
   `numbers`), then term replacement in chunks of 10 (avoids "regex too
   large"), with double passes for orphan-after-orphan chains and a final
@@ -131,8 +135,8 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   metaboxes, wired via the `iworks-register-plugin` action and
   `iworks_rate_notice_logo_style` filter. Separate git repo
   (`iworks/iworks-rate`) — vendor, never edit here.
-- `vendor/simple_html_dom.php` — bundled HTML parser (not a submodule, but
-  also vendor code; loaded only when `HDOM_TYPE_ELEMENT` is not defined).
+- `vendor/` — since 3.4.7 empty (`simple_html_dom.php` removed; HTML is parsed
+  with the core `WP_HTML_Tag_Processor`, see the replacement engine below).
 
 ## Constants & globals
 
@@ -188,8 +192,9 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 - `mnf_builder_herlper()` typo in the core class — private, harmless.
 - `is_plugin_active()` builds its regex with a stray `sprintf` arg — works
   by accident, do not refactor without approval.
-- `$protected_tags` order is load-bearing: `script`/`style` must stay after
-  `iframe`/`svg` or nested tags break.
+- `$protected_tags` order: since 3.4.7 (HTML API rewrite) order no longer
+  matters (each protected tag is skipped by name/depth, rawtext tags
+  atomically) — the AGENTS.md "order matters" note is historical.
 - `filter_post_meta()` checks `$unique` (4th param named `$unique` but the
   hook passes `$single`) — behavior depends on the single flag; subtle.
 - The `exceptions`/`attributes` revert blocks in `string_replacement()`

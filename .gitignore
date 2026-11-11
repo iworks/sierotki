@@ -24,6 +24,7 @@ wp-cli.phar
 
 # opencode scratch files
 .opencode/tmp/
+.playwright-mcp/
 o
 
 # i18n

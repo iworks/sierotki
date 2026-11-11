@@ -43,11 +43,6 @@ define( 'IWORKS_ORPHANS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 // Include required files
 require_once IWORKS_ORPHANS_PLUGIN_DIR . 'etc/options.php';
 
-// Include simple_html_dom if not already loaded
-if ( ! defined( 'HDOM_TYPE_ELEMENT' ) ) {
-	require_once IWORKS_ORPHANS_PLUGIN_DIR . 'vendor/simple_html_dom.php';
-}
-
 // Set includes directory path
 $orphans_includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
 
