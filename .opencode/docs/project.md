@@ -38,8 +38,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 
 ## Loading flow
 
-1. WordPress loads `sierotki.php` (textdomain `sierotki`):
-   - defines `IWORKS_ORPHANS_VERSION` (`'PLUGIN_VERSION'`),
+1. WordPress loads `sierotki.php` (textdomain `sierotki`):   - defines `IWORKS_ORPHANS_VERSION` (`'PLUGIN_VERSION'`),
      `IWORKS_ORPHANS_PLUGIN_DIR`, `IWORKS_ORPHANS_PLUGIN_URL`;
    - requires `etc/options.php`
      (only if `HDOM_TYPE_ELEMENT` is not defined), the core class,

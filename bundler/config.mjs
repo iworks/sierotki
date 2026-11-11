@@ -91,6 +91,17 @@ export function replacePatterns() {
     { match: /\bPLUGIN_URL\b/g, replace: config.homepage },
     { match: /\bPLUGIN_VERSION\b/g, replace: config.version },
     { match: /^Version: .*$/m, replace: `Version: ${config.version}` },
+    /**
+     * CHANGELOG.md: rewrite repository-relative markdown links (e.g.
+     * `](issues/21)`) to full URLs against the plugin homepage, so the
+     * changelog shipped in the ZIPs links correctly from anywhere. All
+     * current links are already absolute; this is a safety net for the
+     * moved history.
+     */
+    {
+      match: /\]\((?!https?:\/\/|#|\/|mailto:)([^)]+)\)/g,
+      replace: `](${config.homepage}/$1)`,
+    },
   ];
 }
 
@@ -138,6 +149,8 @@ export function copyRules(flavor) {
     { glob: ".opencode/**", include: false },
     { glob: "AGENTS.md", include: false },
     { glob: "**/AGENTS.md", include: false },
+    { glob: "CHANGELOG.md", include: false },
+    { glob: "**/CHANGELOG.md", include: false },
     { glob: "bundler/**", include: false },
     { glob: "**/Gruntfile.js", include: false },
     { glob: "bun.lock", include: false },

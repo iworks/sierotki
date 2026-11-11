@@ -23,7 +23,7 @@
 | File                | Role                                                                                          |
 | ------------------- | --------------------------------------------------------------------------------------------- |
 | `index.js`          | Modes: `dev` (default) / `compile` / `build` / `build:wporg` / `build:github` / `make-pot` / `test` |
-| `config.mjs`        | Paths, names (from `package.json`), placeholder patterns, release copy rules per flavor        |
+| `config.mjs`        | Paths, names (from `package.json`), placeholder patterns (incl. CHANGELOG.md relative-link → full-URL rewriting), release copy rules per flavor. `CHANGELOG.md` (and other dev files) are excluded from both ZIPs |
 | `pipelines.mjs`     | CSS (sass → concat → clean-css) and JS (concat → terser) pipelines, prettier pass, clean       |
 | `tools.mjs`         | In-process APIs (prettier, sass, terser, clean-css), atomic writes, glob helpers               |
 | `makeZip.mjs`       | Staging copy → placeholder replacement → ZIP (archiver, level 9)                               |
