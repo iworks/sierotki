@@ -82,7 +82,9 @@ function replacePlaceholders(file) {
   if (BINARY_EXTENSIONS.has(ext)) {
     return;
   }
-  const patterns = replacePatterns();
+  const patterns = replacePatterns().filter(
+    ({ files }) => !files || files.some((f) => file.endsWith(f)),
+  );
   let content = readFileSync(file, "utf8");
   for (const { match, replace } of patterns) {
     content = content.replace(match, replace);

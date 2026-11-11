@@ -97,6 +97,9 @@ export function replacePatterns() {
     {
       match: /\]\((?!https?:\/\/|#|\/|mailto:)([^)]+)\)/g,
       replace: `](${config.homepage}/$1)`,
+      // Restrict to CHANGELOG.md — the regex matches plain `](` sequences
+      // in PHP/JS code too (e.g. `$array['key'](`) and corrupts them.
+      files: ["CHANGELOG.md"],
     },
   ];
 }
