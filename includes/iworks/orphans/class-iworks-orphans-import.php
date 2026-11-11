@@ -129,7 +129,7 @@ jQuery(document).ready(function($) {
 			&& is_array( $data['Orphans'] )
 			&& ! empty( $data['Orphans'] )
 		) {
-			$allowed = $this->get_allowed_option_names();
+			$allowed = $this->get_allowed_options();
 			foreach ( $data['Orphans'] as $one ) {
 				/**
 				 * only whitelisted plugin options can be imported
@@ -137,18 +137,108 @@ jQuery(document).ready(function($) {
 				 * @since 3.4.5
 				 */
 				if (
-					empty( $one['option_name'] )
+					! is_array( $one )
+					|| empty( $one['option_name'] )
 					|| ! is_string( $one['option_name'] )
-					|| ! in_array( $one['option_name'], $allowed, true )
+					|| ! isset( $allowed[ $one['option_name'] ] )
+					|| ! array_key_exists( 'option_value', $one )
 				) {
 					continue;
 				}
-				update_option( $one['option_name'], $one['option_value'] );
+				$sanitized_value = $this->sanitize_option_value(
+					$one['option_value'],
+					$allowed[ $one['option_name'] ]
+				);
+				update_option( $one['option_name'], $sanitized_value );
 			}
 			$this->add_message_success();
 			return;
 		}
 		$this->add_message_fail();
+	}
+
+	/**
+	 * Sanitize imported option value according to its definition.
+	 *
+	 * @since 3.4.7
+	 *
+	 * @param mixed $value Option value from imported JSON.
+	 * @param array $definition Option configuration definition.
+	 * @return mixed Sanitized option value.
+	 */
+	private function sanitize_option_value( $value, $definition ) {
+		/**
+		 * Checkbox or options with absint sanitization.
+		 */
+		if (
+			( isset( $definition['type'] ) && 'checkbox' === $definition['type'] )
+			|| ( isset( $definition['sanitize_callback'] ) && 'absint' === $definition['sanitize_callback'] )
+		) {
+			return is_scalar( $value ) ? absint( $value ) : 0;
+		}
+
+		/**
+		 * Multiple / array values (e.g. post_type, taxonomies, language).
+		 */
+		if ( ! empty( $definition['multiple'] ) ) {
+			if ( ! is_array( $value ) ) {
+				$value = is_scalar( $value ) ? array( $value ) : array();
+			}
+			$sanitized = array();
+			foreach ( $value as $item ) {
+				if ( is_scalar( $item ) ) {
+					$sanitized[] = sanitize_text_field( (string) $item );
+				}
+			}
+			return $sanitized;
+		}
+
+		/**
+		 * Non-multiple options must be scalar.
+		 */
+		if ( ! is_scalar( $value ) ) {
+			$value = '';
+		}
+
+		/**
+		 * Custom callable sanitize callback.
+		 */
+		if (
+			isset( $definition['sanitize_callback'] )
+			&& 'iworks_orphans_sanitize_callback_multiple' !== $definition['sanitize_callback']
+			&& is_callable( $definition['sanitize_callback'] )
+		) {
+			return call_user_func( $definition['sanitize_callback'], (string) $value );
+		}
+
+		/**
+		 * Fallback for scalar values.
+		 */
+		return sanitize_text_field( (string) $value );
+	}
+
+	/**
+	 * Build the map of allowed options with their definitions.
+	 *
+	 * Only options defined in the plugin configuration (all prefixed with
+	 * `iworks_orphan_`) are accepted - never an arbitrary option name.
+	 *
+	 * @since 3.4.7
+	 *
+	 * @return array Allowed options mapped by option name.
+	 */
+	private function get_allowed_options() {
+		$allowed = array();
+		$options = get_orphan_options()->get_group();
+		if ( is_array( $options ) && isset( $options['options'] ) && is_array( $options['options'] ) ) {
+			foreach ( $options['options'] as $one ) {
+				if ( empty( $one['name'] ) || ! is_string( $one['name'] ) ) {
+					continue;
+				}
+				$allowed[ 'iworks_orphan_' . $one['name'] ] = $one;
+			}
+		}
+		return $allowed;
 	}
 
 	/**
@@ -162,17 +252,7 @@ jQuery(document).ready(function($) {
 	 * @return array Allowed option names.
 	 */
 	private function get_allowed_option_names() {
-		$allowed = array();
-		$options = get_orphan_options()->get_group();
-		if ( is_array( $options ) && isset( $options['options'] ) ) {
-			foreach ( $options['options'] as $one ) {
-				if ( empty( $one['name'] ) || ! is_string( $one['name'] ) ) {
-					continue;
-				}
-				$allowed[] = 'iworks_orphan_' . $one['name'];
-			}
-		}
-		return $allowed;
+		return array_keys( $this->get_allowed_options() );
 	}
 }
 
