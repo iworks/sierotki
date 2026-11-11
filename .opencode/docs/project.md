@@ -27,8 +27,6 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 │       ├── orphans/                       # export/import/github helper classes
 │       ├── options/                       # Git SUBMODULE — iworks options framework
 │       └── rate/                          # Git SUBMODULE — iworks rate framework
-├── vendor/
-│   └── index.php                # (simple_html_dom removed in 3.5.0 — HTML API now)
 ├── languages/                  # sierotki.pot + .po/.mo
 ├── assets/images/              # logo.svg only
 ├── package.json                # Version + release metadata (single source of truth)
@@ -134,8 +132,6 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   metaboxes, wired via the `iworks-register-plugin` action and
   `iworks_rate_notice_logo_style` filter. Separate git repo
   (`iworks/iworks-rate`) — vendor, never edit here.
-- `vendor/` — since 3.5.0 empty (`simple_html_dom.php` removed; HTML is parsed
-  with the core `WP_HTML_Tag_Processor`, see the replacement engine below).
 
 ## Constants & globals
 
