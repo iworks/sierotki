@@ -3,13 +3,14 @@
  * Bundler entry point — replaces the old Grunt pipeline.
  *
  * Modes:
- *   dev (default) — watcher, compile on change (no ZIP, no i18n)
- *   compile       — one-shot asset compile (old `grunt` default task)
+ *   dev (default) — watcher, prettier on JS source change (no ZIP, no i18n)
  *   build         — both flavors: build:github + build:wporg (+ Plugin Check)
  *   build:wporg   — production build → release/wporg/{name}.zip
  *   build:github  — production build + .mo → release/github/{name}.zip
  *   make-pot      — translations only (.pot + .po update)
  *   test          — PHPUnit (tests/php/phpunit.xml)
+ *
+ * This plugin ships no CSS/JS of its own, so there are no asset pipelines.
  */
 
 import { dirname, join, resolve } from "node:path";
@@ -18,12 +19,7 @@ import { executionTime, log } from "./consoleHelpers.mjs";
 import { ProgressBar } from "./progressBar.mjs";
 import { spawnAsync } from "./spawnAsync.mjs";
 import { config } from "./config.mjs";
-import {
-  buildCSS,
-  buildJS,
-  formatSources,
-  cleanCompiled,
-} from "./pipelines.mjs";
+import { formatSources, cleanCompiled } from "./pipelines.mjs";
 import { prettierFile } from "./tools.mjs";
 import { makeZip } from "./makeZip.mjs";
 import { makePot } from "./makePot.mjs";
@@ -44,26 +40,6 @@ function printError(error) {
 }
 
 /**
- * One-shot asset compile (CSS + JS).
- *
- * @param {object} options
- * @param {boolean} options.maps Write source maps.
- * @param {boolean} options.strip Strip sourceMappingURL comments.
- * @param {boolean} options.format Run the prettier pass first.
- */
-async function compileAssets({
-  maps = false,
-  strip = true,
-  format = false,
-} = {}) {
-  if (format) {
-    await formatSources();
-  }
-  await buildCSS({ maps, strip });
-  await buildJS();
-}
-
-/**
  * Production build for one flavor.
  *
  * @param {string} flavor "wporg" or "github".
@@ -71,16 +47,12 @@ async function compileAssets({
 async function build(flavor) {
   const start = Date.now();
   try {
-    const steps = flavor === "wporg" ? 8 : 7;
+    const steps = flavor === "wporg" ? 6 : 5;
     const bar = new ProgressBar(steps);
     bar.tick("clean");
     await cleanCompiled();
     bar.tick("prettier");
     await formatSources();
-    bar.tick("css");
-    await buildCSS({ maps: false, strip: true });
-    bar.tick("js");
-    await buildJS();
     bar.tick("i18n");
     await makePot(flavor === "github");
     bar.tick("zip");
@@ -102,7 +74,7 @@ async function build(flavor) {
 }
 
 /**
- * Dev watcher — compile changed assets, no ZIP, no i18n.
+ * Dev watcher — prettier on JS source change, no ZIP, no i18n.
  */
 function dev() {
   const exitAfterMs = Bun.env.DEV_EXIT_AFTER_MS || "";
@@ -124,23 +96,19 @@ function dev() {
     timer = null;
     const changed = [...queue];
     queue.clear();
-    const scss = changed.some((f) => f.endsWith(".scss"));
     const js = changed.some(
       (f) => f.startsWith("assets/scripts/src/") && f.endsWith(".js"),
     );
-    if (!scss && !js) {
+    if (!js) {
       return;
     }
     try {
-      if (js) {
-        for (const file of changed.filter(
-          (f) => f.startsWith("assets/scripts/src/") && f.endsWith(".js"),
-        )) {
-          await prettierFile(join(root, file));
-        }
+      for (const file of changed.filter(
+        (f) => f.startsWith("assets/scripts/src/") && f.endsWith(".js"),
+      )) {
+        await prettierFile(join(root, file));
       }
-      await compileAssets({ maps: true, strip: false });
-      log(`dev — rebuilt (${changed.length} changed)`, "s");
+      log(`dev — formatted (${changed.length} changed)`, "s");
     } catch (error) {
       printError(error);
     }
@@ -152,8 +120,7 @@ function dev() {
     }
     const rel = filename.replace(/\\/g, "/");
     const relevant =
-      (rel.startsWith("assets/sass/") && rel.endsWith(".scss")) ||
-      (rel.startsWith("assets/scripts/src/") && rel.endsWith(".js"));
+      rel.startsWith("assets/scripts/src/") && rel.endsWith(".js");
     if (!relevant) {
       return;
     }
@@ -227,10 +194,6 @@ const mode = process.argv[2] || "dev";
 
 const modes = {
   dev: () => dev(),
-  compile: () =>
-    executionTime("compile", () =>
-      compileAssets({ maps: true, strip: false, format: false }),
-    ),
   build: async () => {
     await build("github");
     await build("wporg");

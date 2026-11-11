@@ -39,7 +39,6 @@
     },
     "scripts": {
         "dev": "bun bundler/index.js",
-        "compile": "bun bundler/index.js compile",
         "build": "bun bundler/index.js build",
         "build:wporg": "bun bundler/index.js build:wporg",
         "build:github": "bun bundler/index.js build:github",
@@ -50,10 +49,7 @@
     },
     "devDependencies": {
         "archiver": "^7",
-        "clean-css": "^5",
-        "prettier": "^3",
-        "sass": "^1",
-        "terser": "^5"
+        "prettier": "^3"
     },
     "license": "GPL-3.0"
 }

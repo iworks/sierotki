@@ -60,7 +60,7 @@ version lives only in `package.json`.
 
 ## Commands
 
-`bun run dev` (watcher) · `bun run compile` (one-shot assets) ·
+`bun run dev` (watcher) ·
 `bun run build` (both ZIPs: github + wporg, then Plugin Check on the wporg
 release) · `bun run build:wporg` (wp.org ZIP) · `bun run build:github`
 (GitHub ZIP + .mo) · `bun run make-pot`

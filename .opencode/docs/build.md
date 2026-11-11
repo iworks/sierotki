@@ -11,21 +11,21 @@
 - PHP ≥ 8.0; `wp-cli.phar` (downloaded by `postinstall`, gitignored) for
   translations. There is **no** `tests/` directory — `bun run test` runs
   PHPUnit but there is nothing to test; use `php -l` on changed files.
-- Sass, terser, clean-css and prettier run **in-process** (`bundler/tools.mjs`).
-- sierotki currently ships **no** SCSS or JS sources (`assets/` has only
-  `images/logo.svg`) — the css/js pipeline stages warn "no sources" and
-  **skip writing the bundles entirely** (no empty/banner-only files in the
-  ZIPs). This is expected; bundles reappear automatically as soon as real
-  sources are added.
+- Prettier runs **in-process** (`bundler/tools.mjs`).
+- sierotki ships **no** SCSS or JS of its own (`assets/` has only
+  `images/logo.svg`) — since 3.5.0 the CSS/JS pipelines are **removed**
+  from the bundler entirely (sass/terser/clean-css are no longer
+  dependencies). If asset pipelines are ever needed again, see the
+  `wordpress-plugin-stub` bundler.
 
 ## Files (`bundler/`)
 
 | File                | Role                                                                                          |
 | ------------------- | --------------------------------------------------------------------------------------------- |
-| `index.js`          | Modes: `dev` (default) / `compile` / `build` / `build:wporg` / `build:github` / `make-pot` / `test` |
+| `index.js`          | Modes: `dev` (default) / `build` / `build:wporg` / `build:github` / `make-pot` / `test` |
 | `config.mjs`        | Paths, names (from `package.json`), placeholder patterns (incl. CHANGELOG.md relative-link → full-URL rewriting), release copy rules per flavor. `CHANGELOG.md` (and other dev files) are excluded from both ZIPs |
-| `pipelines.mjs`     | CSS (sass → concat → clean-css) and JS (concat → terser) pipelines, prettier pass, clean       |
-| `tools.mjs`         | In-process APIs (prettier, sass, terser, clean-css), atomic writes, glob helpers               |
+| `pipelines.mjs`     | Prettier pass + clean (no asset pipelines — no CSS/JS in this plugin)                          |
+| `tools.mjs`         | In-process APIs (prettier, atomic writes, glob helpers)                                        |
 | `makeZip.mjs`       | Staging copy → placeholder replacement → ZIP (archiver, level 9)                               |
 | `makePot.mjs`       | wp-cli i18n: `make-pot` → `update-po` (→ `make-mo` for github)                                 |
 | `spawnAsync.mjs`    | `child_process.spawn` wrapper with captured output                                             |
@@ -38,35 +38,24 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
 
 | Command                | Description                                                                                  |
 | ---------------------- | -------------------------------------------------------------------------------------------- |
-| `bun run dev`          | Watcher: `.scss` → CSS pipeline, `assets/scripts/src/**` → prettier + JS pipeline (200 ms debounce); no ZIP, no i18n |
-| `bun run compile`      | One-shot asset compile with source maps (old `grunt` default task)                            |
-| `bun run build`        | Both flavors back-to-back: github + wporg, then Plugin Check on the wporg release (grunt `release` parity, minus the notes checklist) |
+| `bun run dev`          | Watcher: `assets/scripts/src/**` → prettier (200 ms debounce); no ZIP, no i18n               |
+| `bun run build`        | Both flavors back-to-back: github + wporg, then Plugin Check on the wporg release            |
 | `bun run build:wporg`  | Production → `release/wporg/{name}.zip`                                                       |
 | `bun run build:github` | Production + `.mo` → `release/github/{name}.zip`                                              |
 | `bun run make-pot`     | Translations only (`.pot` + `.po` update)                                                     |
 | `bun run test`         | PHPUnit (no `tests/` dir in this repo — will fail gracefully)                                 |
 | `bun run update-libs`  | `git pull` inside the iWorks submodules (`includes/iworks/{options,rate}`) — manual task      |
 
-## Build pipeline (`bun run build:wporg`, 8 steps)
+## Build pipeline (`bun run build:wporg`, 6 steps)
 
-1. **clean** — remove built JS (`assets/scripts/*.js`), built CSS
-   (`assets/styles/*.css`, `*.map`), `languages/*.mo`;
+1. **clean** — remove `languages/*.mo`;
 2. **prettier** — format sources in place (`assets/scripts/src/**/*.js`,
    `bundler/**/*.{js,mjs}`, root `*.js`) — the build rewrites sources by design;
-3. **css** — sass compiles every non-`_` entry under `assets/sass/` →
-   `assets/styles/{path}.css`; concat per-variant (`admin/*.css` →
-   `{name}-admin.css`, `frontend/settings.css` first + rest →
-   `{name}-frontend.css`); clean-css → `.min.css`. **Bundles are written
-   only when sources exist** — with no sources the variant is skipped with
-   a warning (no empty/banner-only files, no empty staging dirs);
-4. **js** — concat `assets/scripts/src/{admin,frontend}/*.js` with the concat
-   banner → `{name}-{variant}.js`; terser (`jQuery` reserved) → `.min.js`.
-   **Same rule: variants without sources are skipped entirely.**
-5. **i18n** — wp-cli `i18n make-pot` → `languages/{name}.pot`, then
+3. **i18n** — wp-cli `i18n make-pot` → `languages/{name}.pot`, then
    `i18n update-po` per existing `.po`; `make-mo` only in `build:github`;
-6. **zip** — staging copy → placeholder replacement → `release/{flavor}/{version}/{name}/`
+4. **zip** — staging copy → placeholder replacement → `release/{flavor}/{version}/{name}/`
    → `release/{flavor}/{name}.zip`;
-7. **plugin-check** (wporg only) — copies the staged release into the local
+5. **plugin-check** (wporg only) — copies the staged release into the local
    WordPress plugins dir under the real slug and runs `wp plugin check`
    (PCP) against it; the build **fails on any ERROR**. The vendored iWorks
    submodules (`includes/iworks/{options,rate}`) are excluded — they live in
@@ -75,11 +64,7 @@ All names derive from `package.json` (`name`, `title`, `version`, `homepage`,
    Env vars: `PLUGIN_CHECK_SKIP=1` (skip), `PLUGIN_CHECK_PLUGINS_DIR`
    (plugins dir, defaults to the repo's parent), `PLUGIN_SYMLINK_SKIP=1`
    (no release symlink).
-8. done — progress bar + total time; any failure prints `BUILD FAILED`, exit 1.
-
-Banners (grunt parity): concat = `/*! {title} - {version}\n * {website}\n *
-Copyright (c) {year}\n * Licensed {license} */`; minified JS uses the same
-with `Copyright (c) {year};`. Minified CSS has no banner.
+6. done — progress bar + total time; any failure prints `BUILD FAILED`, exit 1.
 
 ## Placeholders (release copies only)
 

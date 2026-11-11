@@ -18,13 +18,9 @@ export const config = {
   website: pkg.repository?.website || "",
   author: pkg.contributors?.[0] || {},
 
-  // Sources.
+  // Sources. (This plugin ships no CSS/JS of its own — kept for reference.)
   sassDir: "assets/sass",
   jsSrcDir: "assets/scripts/src",
-
-  // Outputs (paths the PHP code enqueues — never change them).
-  stylesDir: "assets/styles",
-  scriptsDir: "assets/scripts",
 
   // i18n.
   languagesDir: "languages",
@@ -147,6 +143,7 @@ export function copyRules(flavor) {
     { glob: "**/.editorconfig", include: false },
     { glob: ".env*", include: false },
     { glob: ".opencode/**", include: false },
+    { glob: ".playwright-mcp/**", include: false },
     { glob: "AGENTS.md", include: false },
     { glob: "**/AGENTS.md", include: false },
     { glob: "CHANGELOG.md", include: false },

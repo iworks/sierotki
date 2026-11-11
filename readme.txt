@@ -100,11 +100,12 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 Older changelog entries (3.1.x and below) live in [CHANGELOG.md](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md).
 
 = 3.5.0 - 2026-11-11 =
-* Older changelog entries (3.1.x and below) have been moved to [`CHANGELOG.md`](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md) in the plugin repository to keep the WordPress.org readme lightweight.
-* Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the bundled `simple_html_dom` library re-serialized comment markup at render time, which allowed an unauthenticated attacker to mutate safe stored markup and inject event-handler attributes. The plugin now parses HTML with the WordPress HTML API (`WP_HTML_Tag_Processor`) and rewrites text nodes only - markup and attributes are passed through untouched, and the vulnerable library has been removed entirely. Props for [peppa (Patchstack)](https://patchstack.com/).
-* The non-breaking space is now inserted as a real U+00A0 character instead of the `&nbsp;` HTML entity, so it is no longer displayed as literal text.
-* Removed the bundled `simple_html_dom` library - HTML is now handled by the core WordPress HTML API (`WP_HTML_Tag_Processor`), which also reduces the plugin size by about 100 kB.
+* Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the bundled `simple_html_dom` library re-serialized comment markup at render time, which allowed an unauthenticated attacker to mutate safe stored markup and inject event-handler attributes. The plugin now parses HTML with the WordPress HTML API (`WP_HTML_Tag_Processor`) and rewrites text nodes only - markup and attributes are passed through untouched. Props for [peppa (Patchstack)](https://patchstack.com/).
+* Removed the bundled `simple_html_dom` library - HTML is now handled by the core WordPress HTML API, which also reduces the plugin size by about 100 kB.
 * Content inside protected tags (`pre`, `code`, `script`, `style`, `iframe`, `svg`) is now skipped natively during parsing instead of being swapped with placeholders - the previous salted-placeholder mechanism from 3.4.6 is no longer needed and has been removed.
+* The non-breaking space is now inserted as a real U+00A0 character instead of the `&nbsp;` HTML entity, so it is no longer displayed as literal text.
+* The build system no longer compiles CSS/JS assets - the plugin ships none - and the `sass`, `terser` and `clean-css` build dependencies have been removed.
+* Older changelog entries (3.1.x and below) have been moved to [`CHANGELOG.md`](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md) in the plugin repository to keep the WordPress.org readme lightweight.
 
 = 3.4.6 - 2026-11-07 =
 * Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the protected-tags placeholder digest was predictable, which allowed an unauthenticated attacker to restore raw markup inside an HTML attribute. The digest is now salted with a site-specific key. (CVE-2026-124216). Props for [Santh](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2).
