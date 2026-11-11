@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-11T17:07:07+00:00\n"
+"POT-Creation-Date: 2026-11-11T17:14:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: sierotki\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: sierotki.php
 #: etc/options.php:77
-#: includes/iworks/class-iworks-orphan.php:1287
+#: includes/iworks/class-iworks-orphan.php:1296
 msgid "Orphans"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgstr ""
 msgid "Import JSON"
 msgstr ""
 
-#: includes/iworks/class-iworks-orphan.php:753
+#: includes/iworks/class-iworks-orphan.php:762
 msgid "Settings"
 msgstr ""
 

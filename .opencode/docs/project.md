@@ -28,7 +28,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 │       ├── options/                       # Git SUBMODULE — iworks options framework
 │       └── rate/                          # Git SUBMODULE — iworks rate framework
 ├── vendor/
-│   └── index.php                # (simple_html_dom removed in 3.4.7 — HTML API now)
+│   └── index.php                # (simple_html_dom removed in 3.5.0 — HTML API now)
 ├── languages/                  # sierotki.pot + .po/.mo
 ├── assets/images/              # logo.svg only
 ├── package.json                # Version + release metadata (single source of truth)
@@ -81,7 +81,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   attributes pass through byte-for-byte, so no re-serialization can mutate
   already-sanitized content. Protected tags (`pre`, `code`, `svg` and the
   rawtext `script`/`style`/`iframe` — which arrive as single atomic tokens)
-  are **skipped**, not placeholder-swapped. Since 3.4.7 the bundled
+  are **skipped**, not placeholder-swapped. Since 3.5.0 the bundled
   `simple_html_dom` library is removed entirely: its deterministic
   `___noise___` placeholders and raw attribute re-emission allowed stored XSS
   via comments (Patchstack report, Nov 2026) and drove CVE-2026-124216
@@ -134,7 +134,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
   metaboxes, wired via the `iworks-register-plugin` action and
   `iworks_rate_notice_logo_style` filter. Separate git repo
   (`iworks/iworks-rate`) — vendor, never edit here.
-- `vendor/` — since 3.4.7 empty (`simple_html_dom.php` removed; HTML is parsed
+- `vendor/` — since 3.5.0 empty (`simple_html_dom.php` removed; HTML is parsed
   with the core `WP_HTML_Tag_Processor`, see the replacement engine below).
 
 ## Constants & globals
@@ -191,7 +191,7 @@ Sources contain literal placeholders (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`,
 - `mnf_builder_herlper()` typo in the core class — private, harmless.
 - `is_plugin_active()` builds its regex with a stray `sprintf` arg — works
   by accident, do not refactor without approval.
-- `$protected_tags` order: since 3.4.7 (HTML API rewrite) order no longer
+- `$protected_tags` order: since 3.5.0 (HTML API rewrite) order no longer
   matters (each protected tag is skipped by name/depth, rawtext tags
   atomically) — the AGENTS.md "order matters" note is historical.
 - `filter_post_meta()` checks `$unique` (4th param named `$unique` but the

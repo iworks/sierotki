@@ -75,11 +75,16 @@ class iworks_orphan {
 	);
 
 	/**
-	 * nbsp placehlder
+	 * nbsp placeholder - a real U+00A0 character. Since 3.5.0 the text is
+	 * rewritten with WP_HTML_Tag_Processor::set_modifiable_text(), which
+	 * HTML-encodes the content; a literal "&nbsp;" entity would therefore
+	 * be double-encoded and rendered as visible text. U+00A0 is encoded
+	 * back correctly by the HTML API.
 	 *
 	 * @since 3.1.0
+	 * @since 3.5.0 - changed from the "&nbsp;" entity to a real U+00A0 char
 	 */
-	private $nbsp_placeholder = '&nbsp;';
+	private $nbsp_placeholder = "\u{00A0}";
 
 	/**
 	 * semaphore - already attempt to create orphans table
@@ -367,8 +372,12 @@ class iworks_orphan {
 				$part_to_change = preg_replace( $re, '$1$2' . $this->nbsp_placeholder, $part_to_change );
 				/**
 				 * single letters
+				 *
+				 * Since 3.5.0 the text nodes are decoded, so quote
+				 * characters are matched literally (a decoded „ or "
+				 * character) and the real U+00A0 placeholder.
 				 */
-				$re = '/([ >\(]+|' . $this->nbsp_placeholder . '|&#8222;|&quot;)([aiouwz]|' . $quoted . ') +/i';
+				$re = '/([ >\(]+|' . $this->nbsp_placeholder . '|„|")([' . $this->nbsp_placeholder . 'aiouwz]|' . $quoted . ') +/i';
 				/**
 				 * double call to handle orphan after orphan after orphan
 				 */
@@ -430,7 +439,7 @@ class iworks_orphan {
 	 * @link https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2
 	 * @since 2.7.8
 	 * @since 3.1.0 - changed into DOM parsing
-	 * @since 3.4.7 - rewritten with WP_HTML_Tag_Processor; protected tags are
+	 * @since 3.5.0 - rewritten with WP_HTML_Tag_Processor; protected tags are
 	 *                skipped natively instead of using placeholders
 	 *
 	 * @param string $content String to replace
