@@ -4,7 +4,7 @@
  */
 
 import { dirname, join, resolve } from "node:path";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { log } from "./consoleHelpers.mjs";
 import { config } from "./config.mjs";
 import { spawnAsync } from "./spawnAsync.mjs";
@@ -70,6 +70,11 @@ export async function makePot(makeMo = false) {
   const potFile = join(config.languagesDir, `${config.textdomain}.pot`);
   const excludes =
     "release,node_modules,.git,.opencode,bundler,tests,.sass-cache";
+  const stripDate = (s) => s.replace(/^"POT-Creation-Date:.*$/m, "");
+  const potRawBefore = existsSync(potFile)
+    ? readFileSync(potFile, "utf8")
+    : null;
+  const potBefore = potRawBefore === null ? null : stripDate(potRawBefore);
   await wpCliI18n(
     [
       "make-pot",
@@ -80,6 +85,15 @@ export async function makePot(makeMo = false) {
     ],
     "make-pot",
   );
+  if (
+    potBefore !== null &&
+    potBefore === stripDate(readFileSync(potFile, "utf8"))
+  ) {
+    // No content change — restore the previous file so the build doesn't
+    // produce a timestamp-only diff.
+    writeFileSync(potFile, potRawBefore);
+    log("make-pot — no changes (timestamp only), .pot untouched", "i");
+  }
   const poFiles = existsSync(join(root, config.languagesDir))
     ? readdirSync(join(root, config.languagesDir)).filter((f) =>
         f.endsWith(".po"),
