@@ -1,7 +1,67 @@
 # Changelog - Orphans (sierotki)
 
-Notable changes from version 3.1.3 and older. For recent releases, see the
+Notable changes from version 3.2.x and older. For recent releases, see the
 [WordPress.org changelog](https://plugins.trac.wordpress.org/browser/sierotki/trunk/readme.txt).
+
+## 3.2.9 - 2024-11-17
+
+* [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
+
+## 3.2.8 - 2024-08-21
+
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.2.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.0.
+
+## 3.2.7 - 2024-02-21
+
+* Integration with the Bricks builder (part of the Bricks Theme) has been added.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.1.
+* Update the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.7.
+
+## 3.2.6 - 2023-12-27
+
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.0.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.6.
+
+## 3.2.5 - 2023-11-30
+
+* [The post types selector has been refactored.](https://github.com/iworks/sierotki/issues/5) Props for [gierand](https://wordpress.org/support/users/gierand/).
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.9.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.4.
+* The `strip_tags()` function has been replaced by the `wp_strip_all_tags()` function.
+* The `wp_remote_get()` function has been replaced by the `WP_Filesystem_Direct` class object.
+
+## 3.2.4 - 2023-10-26
+
+* Handling of multiple term files has been added.
+* Handling short language codes has been added.
+* The EN terms file has been added—only one-letter and some two-letter words from Wiktionary.
+* Checking whether a data file has already been loaded to avoid multiple attempts to load it has been added.
+* The term cache will be cleared after updating the WPLANG option.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.7.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.3.
+* The file `terms-cs_CZ.txt` has been renamed to `terms-cs.txt`.
+* The file `terms-pl_PL.txt` has been renamed to `terms-pl.txt`.
+
+## 3.2.3 - 2023-09-04
+
+* The cache for `orphans_indicator_options` has been added. Props for [Krystian Marcisz](https://github.com/simivar).
+* The filter `orphans_indicator_options_use_cache` has been added to allow cache turn-off.
+
+## 3.2.2 - 2023-07-12
+
+* Data type check has been added. Props for [LeoBullero](https://wordpress.org/support/users/leobullero/).
+
+## 3.2.1 - 2023-07-07
+
+* Integration with the Divi builder (part of the Divi Theme) has been added.
+
+## 3.2.0 - 2023-07-05
+
+* Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
+* The ability to choose a preset language file has been added.
+* The ability to use only your own defined terms has been added.
+* The Czech rules have been added.
 
 ## 3.1.3 - 2023-06-27
 

@@ -97,7 +97,7 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 
 == Changelog ==
 
-Older changelog entries (3.1.x and below) live in [CHANGELOG.md](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md).
+Older changelog entries (3.2.x and below) live in [CHANGELOG.md](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md).
 
 = 3.5.0 - 2026-11-11 =
 * Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the bundled `simple_html_dom` library re-serialized comment markup at render time, which allowed an unauthenticated attacker to mutate safe stored markup and inject event-handler attributes. The plugin now parses HTML with the WordPress HTML API (`WP_HTML_Tag_Processor`) and rewrites text nodes only - markup and attributes are passed through untouched. Props for [peppa (Patchstack)](https://patchstack.com/database/researchers/cc9ab6a7-e6d0-4f31-81f1-e77bf44609c8).
@@ -105,7 +105,7 @@ Older changelog entries (3.1.x and below) live in [CHANGELOG.md](https://github.
 * Content inside protected tags (`pre`, `code`, `script`, `style`, `iframe`, `svg`) is now skipped natively during parsing instead of being swapped with placeholders - the previous salted-placeholder mechanism from 3.4.6 is no longer needed and has been removed.
 * The non-breaking space is now inserted as a real U+00A0 character instead of the `&nbsp;` HTML entity, so it is no longer displayed as literal text.
 * The build system no longer compiles CSS/JS assets - the plugin ships none - and the `sass`, `terser` and `clean-css` build dependencies have been removed.
-* Older changelog entries (3.1.x and below) have been moved to [`CHANGELOG.md`](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md) in the plugin repository to keep the WordPress.org readme lightweight.
+* Older changelog entries (3.2.x and below) have been moved to [`CHANGELOG.md`](https://github.com/iworks/sierotki/blob/main/CHANGELOG.md) in the plugin repository to keep the WordPress.org readme lightweight.
 
 = 3.4.6 - 2026-11-07 =
 * Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the protected-tags placeholder digest was predictable, which allowed an unauthenticated attacker to restore raw markup inside an HTML attribute. The digest is now salted with a site-specific key. (CVE-2026-124216). Props for [Santh](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/santh-2).
@@ -196,60 +196,6 @@ Older changelog entries (3.1.x and below) live in [CHANGELOG.md](https://github.
 * The configuration import ability has been added. [#10](https://github.com/iworks/sierotki/issues/10)
 * The configuration export ability has been added. [#9](https://github.com/iworks/sierotki/issues/9)
 * [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
-
-= 3.2.9 - 2024-11-17 =
-* [Translation loading time has been fixed.](https://github.com/iworks/sierotki/issues/7)
-
-= 3.2.8 - 2024-08-21 =
-* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.2.
-* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.0.
-
-= 3.2.7 - 2024-02-21 =
-* Integration with the Bricks builder (part of the Bricks Theme) has been added.
-* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.1.
-* Update the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.7.
-
-= 3.2.6 - 2023-12-27 =
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.9.0.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.6.
-
-= 3.2.5 - 2023-11-30 =
-* [The post types selector has been refactored.](https://github.com/iworks/sierotki/issues/5) Props for [gierand](https://wordpress.org/support/users/gierand/).
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.9.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.4.
-* The `strip_tags()` function has been replaced by the `wp_strip_all_tags()` function.
-* The `wp_remote_get()` function has been replaced by the `WP_Filesystem_Direct` class object.
-
-= 3.2.4 - 2023-10-26 =
-* Handling of multiple term files has been added.
-* Handling short language codes has been added.
-* The EN terms file has been added—only one-letter and some two-letter words from Wiktionary.
-* Checking whether a data file has already been loaded to avoid multiple attempts to load it has been added.
-* The term cache will be cleared after updating the WPLANG option.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to version 2.8.7.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to version 2.1.3.
-* The file `terms-cs_CZ.txt` has been renamed to `terms-cs.txt`.
-* The file `terms-pl_PL.txt` has been renamed to `terms-pl.txt`.
-
-= 3.2.3 - 2023-09-04 =
-
-* The cache for `orphans_indicator_options` has been added. Props for [Krystian Marcisz](https://github.com/simivar).
-* The filter `orphans_indicator_options_use_cache` has been added to allow cache turn-off.
-
-= 3.2.2 - 2023-07-12 =
-
-* Data type check has been added. Props for [LeoBullero](https://wordpress.org/support/users/leobullero/).
-
-= 3.2.1 - 2023-07-07 =
-
-* Integration with the Divi builder (part of the Divi Theme) has been added.
-
-= 3.2.0 - 2023-07-05 =
-
-* Fixed missing replacements before and after any tag. Props for [gierand](https://wordpress.org/support/users/gierand/).
-* The ability to choose a preset language file has been added.
-* The ability to use only your own defined terms has been added.
-* The Czech rules have been added.
 
 == Upgrade Notice ==
 
