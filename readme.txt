@@ -101,6 +101,7 @@ Older changelog entries (3.2.x and below) live in [CHANGELOG.md](https://github.
 
 = 3.5.1 - 2026-11-12 =
 * Fixed broken Divi parent modules with child shortcodes - content containing raw shortcode syntax is now skipped entirely, because the HTML parser re-encoded its quotes into `&quot;` entities, which broke attributes downstream (titles cut to the first word, image URLs wrapped in quotes, "An error occurred" in the Visual Builder). Child modules are still processed when their rendered content passes through later filters.
+* Reduced the plugin activation/deactivation database updates from nine separate queries to a single one, and fixed non-prefixed global variable names flagged by Plugin Check.
 
 = 3.5.0 - 2026-11-11 =
 * Fixed Stored Cross-Site Scripting (XSS) via the comment parameter - the bundled `simple_html_dom` library re-serialized comment markup at render time, which allowed an unauthenticated attacker to mutate safe stored markup and inject event-handler attributes. The plugin now parses HTML with the WordPress HTML API (`WP_HTML_Tag_Processor`) and rewrites text nodes only - markup and attributes are passed through untouched. Props for [peppa (Patchstack)](https://patchstack.com/database/researchers/cc9ab6a7-e6d0-4f31-81f1-e77bf44609c8).

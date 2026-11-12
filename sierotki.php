@@ -44,19 +44,19 @@ define( 'IWORKS_ORPHANS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require_once IWORKS_ORPHANS_PLUGIN_DIR . 'etc/options.php';
 
 // Set includes directory path
-$orphans_includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
+$iworks_orphans_includes = IWORKS_ORPHANS_PLUGIN_DIR . 'includes';
 
 // Load main plugin class
-require_once $orphans_includes . '/iworks/class-iworks-orphan.php';
+require_once $iworks_orphans_includes . '/iworks/class-iworks-orphan.php';
 
 // Include iWorks Rate class if not already loaded
 if ( ! class_exists( 'iworks_rate' ) ) {
-	include_once $orphans_includes . '/iworks/rate/rate.php';
+	include_once $iworks_orphans_includes . '/iworks/rate/rate.php';
 }
 
 // Include iWorks Options class if not already loaded (since 2.6.8)
 if ( ! class_exists( 'iworks_options' ) ) {
-	include_once $orphans_includes . '/iworks/options/options.php';
+	include_once $iworks_orphans_includes . '/iworks/options/options.php';
 }
 
 // Initialize the plugin
@@ -145,15 +145,20 @@ function iworks_orphan_change_options_autoload_status( $status ) {
 		'woocommerce_short_description',
 	);
 	global $wpdb;
-	foreach ( $iworks_orphan_options_keys as $key ) {
-		$wpdb->update(
-			$wpdb->options,
-			array(
-				'autoload' => $status,
-			),
-			array(
-				'option_name' => sprintf( 'iworks_orphan_%s', $key ),
-			)
-		);
-	}
+	$option_names = array_map(
+		function ( $key ) {
+			return 'iworks_orphan_' . $key;
+		},
+		$iworks_orphan_options_keys
+	);
+	$placeholders = implode( ', ', array_fill( 0, count( $option_names ), '%s' ) );
+	// Runs only on activation/deactivation - uncached direct query is fine here.
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+	$wpdb->query(
+		$wpdb->prepare(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $placeholders contains only %s placeholders.
+			"UPDATE {$wpdb->options} SET autoload = %s WHERE option_name IN ( {$placeholders} )",
+			array_merge( array( $status ), $option_names )
+		)
+	);
 }
