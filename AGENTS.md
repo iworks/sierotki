@@ -16,6 +16,8 @@ github flavors): sources contain build-time placeholders
 (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) replaced at build time; the
 version lives only in `package.json`.
 
+Git: the default branch is `master` (not `main`).
+
 ## Docs map — read only what the task needs
 
 | Task | Read first |
