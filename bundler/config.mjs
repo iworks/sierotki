@@ -157,6 +157,8 @@ export function copyRules(flavor) {
     { glob: "bun.lockb", include: false },
     { glob: "wp-cli.phar", include: false },
     { glob: "plugin-check.log", include: false },
+    // opencode session-marker scratch file that keeps reappearing in the repo root.
+    { glob: "o", include: false },
     { glob: "**/node_modules/**", include: false },
     { glob: "**/package.json", include: false },
     { glob: "package-lock.json", include: false },
