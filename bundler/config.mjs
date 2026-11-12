@@ -156,6 +156,7 @@ export function copyRules(flavor) {
     { glob: "bun.lock", include: false },
     { glob: "bun.lockb", include: false },
     { glob: "wp-cli.phar", include: false },
+    { glob: "plugin-check.log", include: false },
     { glob: "**/node_modules/**", include: false },
     { glob: "**/package.json", include: false },
     { glob: "package-lock.json", include: false },

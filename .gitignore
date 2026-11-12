@@ -27,6 +27,9 @@ wp-cli.phar
 .playwright-mcp/
 o
 
+# build logs
+plugin-check.log
+
 # i18n
 languages/*.mo
 

@@ -8,7 +8,13 @@
  */
 
 import { basename, dirname, join, resolve } from "node:path";
-import { cpSync, existsSync, rmSync, symlinkSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
 import { relative } from "node:path";
 import { log } from "./consoleHelpers.mjs";
 import { spawnAsync } from "./spawnAsync.mjs";
@@ -101,6 +107,14 @@ export async function pluginCheck(slug, version) {
     if (warnings) {
       log(`plugin-check — ${warnings} warning(s)`, "w");
     }
+    // Full results to a log file (gitignored).
+    const logFile = join(root, "plugin-check.log");
+    const header = `# plugin-check — ${new Date().toISOString()} — ${slug} ${version}\n`;
+    writeFileSync(
+      logFile,
+      header + (result.stdout.trim() || "(no output)") + "\n",
+    );
+    log(`plugin-check — full output written to plugin-check.log`, "i");
   } finally {
     rmSync(target, { recursive: true, force: true });
   }
