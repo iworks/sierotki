@@ -1,7 +1,7 @@
 # Changelog - Orphans (sierotki)
 
 Notable changes from version 3.2.x and older. For recent releases, see the
-[WordPress.org changelog](https://plugins.trac.wordpress.org/browser/sierotki/trunk/readme.txt).
+[WordPress.org changelog](https://wordpress.org/plugins/sierotki/#developers).
 
 ## 3.2.9 - 2024-11-17
 
