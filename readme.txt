@@ -99,6 +99,9 @@ You can do it on [Support Threads](https://wordpress.org/support/plugin/sierotki
 
 Older changelog entries (3.2.x and below) live in [CHANGELOG.md](https://github.com/iworks/sierotki/blob/master/CHANGELOG.md).
 
+= 3.5.2 - PLUGIN_RELEASE_DATE =
+* Fixed the protected-tags depth tracker for rawtext elements - adding a rawtext tag (`textarea`, `title`, `xmp`, `noembed`, `noframes`, `plaintext`) to the `iworks/orphans/protected-tags` filter left the tag depth stuck, silently disabling orphan replacement for the rest of the document. Rawtext elements are now excluded from depth tracking, as the HTML API parses them as a single atomic token.
+
 = 3.5.1 - 2026-11-12 =
 * Fixed broken Divi parent modules with child shortcodes - content containing raw shortcode syntax is now skipped entirely, because the HTML parser re-encoded its quotes into `&quot;` entities, which broke attributes downstream (titles cut to the first word, image URLs wrapped in quotes, "An error occurred" in the Visual Builder). Child modules are still processed when their rendered content passes through later filters.
 * Reduced the plugin activation/deactivation database updates from nine separate queries to a single one, and fixed non-prefixed global variable names flagged by Plugin Check.

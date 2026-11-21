@@ -1,11 +1,13 @@
 # Orphans
 
-The **Orphans** plugin automatically improves the typography of your WordPress site by preventing single-letter or very short words—known as *orphans*—from appearing alone at the end or beginning of a line. By replacing the space after these words with a non-breaking space, the plugin ensures cleaner, more professional-looking text layouts, especially for languages like Polish where such typographic rules are important.
+The **Orphans** plugin automatically improves the typography of your WordPress site by preventing single-letter or very short words—known as _orphans_—from appearing alone at the end or beginning of a line. By replacing the space after these words with a non-breaking space, the plugin ensures cleaner, more professional-looking text layouts, especially for languages like Polish where such typographic rules are important.
 
 ## What are Orphans?
-An *orphan* in typography is a short word (often a single character) left isolated at the end or start of a line, separated from the rest of the sentence. This is considered a composition error and can negatively affect readability and the visual appeal of your content.
+
+An _orphan_ in typography is a short word (often a single character) left isolated at the end or start of a line, separated from the rest of the sentence. This is considered a composition error and can negatively affect readability and the visual appeal of your content.
 
 ## Key Features
+
 - **Automatic Orphan Fixing:** Scans your content and replaces spaces after short words (orphans) with non-breaking spaces, preventing them from being separated by line breaks.
 - **Customizable:** Easily modify which words are treated as orphans using filters, or provide your own list of orphan terms.
 - **Non-Destructive:** The plugin does not alter your original content in the database; changes are applied only when content is displayed.
@@ -13,9 +15,11 @@ An *orphan* in typography is a short word (often a single character) left isolat
 - **Flexible Usage:** Apply orphan fixes to custom fields or any string using provided filters.
 
 ## How It Works
+
 Once activated, Orphans automatically processes your posts, pages, and other custom post types, fixing orphaned words on the fly. You can customize its behavior through the settings panel found under Appearance > Orphans, or extend functionality with WordPress filters for advanced use cases.
 
 ## Ideal For
+
 - Bloggers, publishers, and editors seeking to maintain high typographic standards.
 - Sites in languages (like Polish or Czech) where orphan control is a common publishing requirement.
 - Anyone wanting to enhance the professional appearance and readability of their WordPress content.
@@ -45,15 +49,16 @@ The plugin uses two git submodules (`includes/iworks/options`,
 
 ### Build
 
-| Command | Description |
-| --- | --- |
-| `bun run dev` | Watcher — prettier on JS source change (no ZIP, no i18n) |
-| `bun run build` | Build **both** release ZIPs (github first, then wporg) + Plugin Check (PCP) on the wporg release |
-| `bun run build:wporg` | WordPress.org ZIP → `release/wporg/sierotki.zip` |
-| `bun run build:github` | GitHub ZIP (with `.po`/`.mo`) → `release/github/sierotki.zip` |
-| `bun run make-pot` | Regenerate `languages/sierotki.pot` and update all `.po` files |
-| `bun run update-libs` | Update the vendored iWorks libraries (git pull in the submodules) |
-| `bun run test` | PHPUnit (no test suite is bundled yet) |
+| Command                | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| `bun run dev`          | Watcher — prettier on JS source change (no ZIP, no i18n)                                         |
+| `bun run build`        | Build **both** release ZIPs (github first, then wporg) + Plugin Check (PCP) on the wporg release |
+| `bun run build:wporg`  | WordPress.org ZIP → `release/wporg/sierotki.zip`                                                 |
+| `bun run build:github` | GitHub ZIP (with `.po`/`.mo`) → `release/github/sierotki.zip`                                    |
+| `bun run make-pot`     | Regenerate `languages/sierotki.pot` and update all `.po` files                                   |
+| `bun run update-libs`  | Update the vendored iWorks libraries (git pull in the submodules)                                |
+| `bun run test`         | Run the PHPUnit test suite (`--testdox` output)                                                  |
+| `bun run plugin-check` | PHPUnit + Plugin Check (PCP) on the wporg release                                                |
 
 The release ZIPs are built from a staging copy: build-time placeholders
 (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) are replaced there — never in the
@@ -61,11 +66,11 @@ sources. The version lives **only** in `package.json`.
 
 Flavor differences:
 
-| | `build:wporg` | `build:github` |
-| --- | --- | --- |
-| `readme.txt` | included | excluded |
-| `languages/*.po` / `*.mo` | excluded | included / compiled |
-| GitHub self-updater class | excluded | included |
+|                           | `build:wporg` | `build:github`      |
+| ------------------------- | ------------- | ------------------- |
+| `readme.txt`              | included      | excluded            |
+| `languages/*.po` / `*.mo` | excluded      | included / compiled |
+| GitHub self-updater class | excluded      | included            |
 
 ### Using the plugin in code
 
@@ -143,27 +148,69 @@ Every legacy `iworks_orphan_*` name still works as a **deprecated fallback**
 (deprecated since 3.6.0, kept as an alias); the public `orphan_*` filters
 are unchanged.
 
-| Filter | Legacy name (deprecated 3.6.0) | Purpose |
-| --- | --- | --- |
-| `orphan_replace` | — | Apply replacement to any string / custom field |
-| `orphan_skip_replacement` | — | Temporarily disable replacement |
-| `orphan_get_terms` | — | Get the current orphan terms |
-| `orphan_allowed_filters` | — | Change the list of content filters the plugin hooks |
-| `orphan_replace_acf` | — | Turn off replacement for selected ACF fields |
-| `orphan_replace_gettext` | — | Turn off replacement in translation functions |
-| `iworks/orphans/capability` | `iworks_orphans_capability` | Change the settings-page capability |
-| `iworks/orphans/terms` | `iworks_orphan_terms`, `iworks_orphan_therms` | Add/remove/replace orphan terms |
-| `iworks/orphans/own-terms-file` | `iworks_orphan_own_terms_file` | Use a custom terms definition file |
-| `iworks/orphans/own-terms-filename` | `iworks_orphan_own_terms_filename` | Use a custom terms file name |
-| `iworks/orphans/terms-files` | `iworks_orphan_terms_files_array` | Change the array of terms files to load |
-| `iworks/orphans/protected-tags` | `iworks_orphan_protected_tags` | Change HTML tags whose content is never replaced |
-| `iworks/orphans/apply-to-all-languages` | `iworks_orphan_apply_to_all_languages` | Apply replacements to all languages |
-| `iworks/orphans/get-post-types-args` | `iworks_orphan_get_post_types_args` | Arguments for the settings post-type selector |
-| `iworks/orphans/export/plugins` | `iworks_orphans_export_plugins` | Toggle plugins data in the JSON export |
-| `iworks/orphans/export/theme` | `iworks_orphans_export_theme` | Toggle theme data in the JSON export |
-| `iworks/orphans/replace` | `iworks_orphan_replace` | Replacement hook (consumed by the plugin) |
-| `iworks/orphans/etc/config/integrations` | `orphans/etc/config/integrations` | Integrations inject their settings fields |
-| `iworks/orphans/use-options-cache` | `orphans_indicator_options_use_cache` | Disable the options-config cache |
+| Filter                                   | Legacy name (deprecated 3.6.0)                | Purpose                                             |
+| ---------------------------------------- | --------------------------------------------- | --------------------------------------------------- |
+| `orphan_replace`                         | —                                             | Apply replacement to any string / custom field      |
+| `orphan_skip_replacement`                | —                                             | Temporarily disable replacement                     |
+| `orphan_get_terms`                       | —                                             | Get the current orphan terms                        |
+| `orphan_allowed_filters`                 | —                                             | Change the list of content filters the plugin hooks |
+| `orphan_replace_acf`                     | —                                             | Turn off replacement for selected ACF fields        |
+| `orphan_replace_gettext`                 | —                                             | Turn off replacement in translation functions       |
+| `iworks/orphans/capability`              | `iworks_orphans_capability`                   | Change the settings-page capability                 |
+| `iworks/orphans/terms`                   | `iworks_orphan_terms`, `iworks_orphan_therms` | Add/remove/replace orphan terms                     |
+| `iworks/orphans/own-terms-file`          | `iworks_orphan_own_terms_file`                | Use a custom terms definition file                  |
+| `iworks/orphans/own-terms-filename`      | `iworks_orphan_own_terms_filename`            | Use a custom terms file name                        |
+| `iworks/orphans/terms-files`             | `iworks_orphan_terms_files_array`             | Change the array of terms files to load             |
+| `iworks/orphans/protected-tags`          | `iworks_orphan_protected_tags`                | Change HTML tags whose content is never replaced    |
+| `iworks/orphans/apply-to-all-languages`  | `iworks_orphan_apply_to_all_languages`        | Apply replacements to all languages                 |
+| `iworks/orphans/get-post-types-args`     | `iworks_orphan_get_post_types_args`           | Arguments for the settings post-type selector       |
+| `iworks/orphans/export/plugins`          | `iworks_orphans_export_plugins`               | Toggle plugins data in the JSON export              |
+| `iworks/orphans/export/theme`            | `iworks_orphans_export_theme`                 | Toggle theme data in the JSON export                |
+| `iworks/orphans/replace`                 | `iworks_orphan_replace`                       | Replacement hook (consumed by the plugin)           |
+| `iworks/orphans/etc/config/integrations` | `orphans/etc/config/integrations`             | Integrations inject their settings fields           |
+| `iworks/orphans/use-options-cache`       | `orphans_indicator_options_use_cache`         | Disable the options-config cache                    |
 
 For the full behavior, see the docblocks in
 `includes/iworks/class-iworks-orphan.php`.
+
+### Tests
+
+The plugin ships a self-contained PHPUnit test suite (no WordPress test
+case, no external test scaffold — only `phpunit/phpunit` from Composer).
+Tests run against lightweight WordPress function stubs plus the **real**
+`WP_HTML_Tag_Processor` from a local WordPress core checkout, so the
+HTML parsing behavior under test matches production.
+
+```bash
+composer install    # once — installs phpunit into vendor/
+bun run test        # full suite, --testdox output
+```
+
+To run a single group:
+
+```bash
+vendor/bin/phpunit --configuration tests/php/phpunit.xml --group protected-tags
+```
+
+The suite is organized as one class per group in `tests/php/tests/`,
+sharing helpers from `tests/php/OrphanTestCase.php`:
+
+| Group                                                          | Covers                                                                                |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `PlainStringReplacement`                                       | Core nbsp insertion in plain strings                                                  |
+| `HtmlContent`                                                  | Mixed HTML content handling                                                           |
+| `ProtectedTags` / `ProtectedTagsAreSkipped`                    | Protected tags: default list, custom configs, rawtext semantics                       |
+| `NumbersStayTogether`                                          | Number–unit grouping                                                                  |
+| `NbspCharacterIntegrity`                                       | U+00A0 is never double-encoded or mangled                                             |
+| `PostPageTitleAndContent` / `UpdateDeletePostPage`             | Post/page filters and lifecycle hooks                                                 |
+| `CreateModifyTagCategory` / `UpdateDeleteTagCategory`          | Term filters and lifecycle hooks                                                      |
+| `ShortcodeGuard` / `AdminFeedContextGuards`                    | Divi shortcode guard, feed/admin context skipping                                     |
+| `LocaleGate` / `LanguageOptionSecurity` / `LanguageFileOption` | Language gating and the language-file option surface                                  |
+| `OwnOrphansOptionSecurity`                                     | Custom terms option: escaping, ReDoS safety, entity round-trip                        |
+| `ConfigFieldsSecurity`                                         | All config fields against hostile values                                              |
+| `XssPayloads`                                                  | 21-payload OWASP matrix (stored XSS, handler/URI injection, CSTI, dangling markup, …) |
+| `PassThroughMethods`                                           | Non-replacing public methods stay pass-through                                        |
+
+A key invariant asserted throughout: the plugin only ever inserts U+00A0
+into text nodes — it never decodes entities, never rewrites attributes,
+and never modifies content inside protected tags.

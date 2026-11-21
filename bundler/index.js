@@ -136,12 +136,18 @@ function dev() {
  * PHPUnit (grunt `test` parity, jshint dropped).
  */
 async function test() {
-  const phpunitBin = existsSync("vendor/bin/phpunit")
-    ? "vendor/bin/phpunit"
-    : "phpunit";
+  if (!existsSync("vendor/bin/phpunit")) {
+    log("PHPUnit not found — run `composer install` first.", "w");
+    process.exit(1);
+  }
   const result = await spawnAsync(
-    phpunitBin,
-    ["--configuration", "tests/php/phpunit.xml", "--colors=always"],
+    "vendor/bin/phpunit",
+    [
+      "--configuration",
+      "tests/php/phpunit.xml",
+      "--testdox",
+      "--colors=always",
+    ],
     "PHPUnit",
     false,
   );
@@ -149,13 +155,8 @@ async function test() {
     console.log(result.stdout.trim());
   }
   if (result.code !== 0) {
-    log(
-      "If phpunit is not installed, run `composer install` (or set up a WordPress test environment, see tests/php/bootstrap.php).",
-      "w",
-    );
     process.exit(result.code);
   }
-  log("PHPUnit passed", "s");
 }
 
 /**

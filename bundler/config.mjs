@@ -26,6 +26,13 @@ export const config = {
   languagesDir: "languages",
   textdomain: pkg.name,
 
+  /**
+   * Release date for changelog entries of not-yet-dated releases: the
+   * source files carry `PLUGIN_RELEASE_DATE`, which is baked to the
+   * build day only when the ZIPs are generated.
+   */
+  releaseDate: new Date().toISOString().slice(0, 10),
+
   // Release.
   releaseDir: "release",
   buildTimestamp: Date.now(),
@@ -83,6 +90,10 @@ export function replacePatterns() {
     { match: /PLUGIN_TAGLINE/g, replace: tagline || "" },
     { match: /PLUGIN_TAGS/g, replace: tags.join(", ") },
     { match: /PLUGIN_TILL_YEAR/g, replace: String(config.buildYear) },
+    {
+      match: /PLUGIN_RELEASE_DATE/g,
+      replace: config.releaseDate,
+    },
     { match: /PLUGIN_TITLE/g, replace: title || "" },
     // `\b` anchors keep e.g. `IWORKS_ORPHANS_PLUGIN_URL` intact —
     // `_` is a word character, so `\bPLUGIN_URL\b` cannot match inside it.

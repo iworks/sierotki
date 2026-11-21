@@ -30,11 +30,31 @@ function add_action( $hook, $cb, $priority = 10, $args = 1 ) {
 function add_filter( $hook, $cb, $priority = 10, $args = 1 ) {
 	return true;
 }
-function apply_filters( $hook, $value ) {
+function apply_filters( $hook, $value, ...$args ) {
+	global $test_filters;
+	foreach ( ( $test_filters[ $hook ] ?? array() ) as $callback ) {
+		$value = call_user_func( $callback, $value, ...$args );
+	}
 	return $value;
 }
+function add_test_filter( $hook, $callback ) {
+	global $test_filters;
+	$test_filters[ $hook ][] = $callback;
+}
+function clear_test_filters() {
+	global $test_filters;
+	$test_filters = array();
+}
 function has_filter( $hook, $callback = false ) {
-	return false;
+	global $test_filters;
+	return ! empty( $test_filters[ $hook ] );
+}
+function remove_filter( $hook, $callback, $priority = 10 ) {
+	return true;
+}
+function get_post_meta( $object_id, $meta_key, $single = false ) {
+	global $test_post_meta;
+	return $test_post_meta[ $object_id ][ $meta_key ] ?? '';
 }
 function apply_filters_deprecated( $hook, $args, $version, $replacement = null ) {
 	return $args[0];
@@ -200,6 +220,24 @@ if ( ! class_exists( 'WP_HTML_Tag_Processor' ) && is_dir( $wp_includes ) ) {
 		'class-wp-html-tag-processor.php',
 	) as $html_api_file ) {
 		require $wp_includes . '/html-api/' . $html_api_file;
+	}
+}
+
+// The language-file loader uses WP_Filesystem_Direct; load the real one
+// from the local WordPress checkout (WP_Error is a tiny stub here).
+if ( ! class_exists( 'WP_Filesystem_Direct' ) && is_dir( $wp_includes ) ) {
+	require $wp_includes . '/../wp-admin/includes/class-wp-filesystem-base.php';
+	require $wp_includes . '/../wp-admin/includes/class-wp-filesystem-direct.php';
+}
+if ( ! class_exists( 'WP_Error' ) ) {
+	class WP_Error {
+		public $errors = array();
+		public function __construct( $code = '', $message = '' ) {
+			$this->errors[ $code ] = $message;
+		}
+		public function get_error_message( $code = '' ) {
+			return reset( $this->errors ) ?: '';
+		}
 	}
 }
 

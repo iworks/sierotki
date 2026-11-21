@@ -68,7 +68,9 @@ Git: the default branch is `master` (not `main`).
 `bun run build:wporg` (wp.org ZIP) · `bun run build:github`
 (GitHub ZIP + .mo) · `bun run make-pot`
 (translations) · `bun run update-libs` (git pull in iWorks submodules) ·
-`bun run test` (PHPUnit, `tests/php/`, binary from `vendor/bin` —
-run `composer install` first) ·
+`bun run test` (PHPUnit `--testdox`, `tests/php/`, tests grouped into
+one class per group in `tests/php/tests/`, shared base
+`OrphanTestCase.php`, binary from `vendor/bin` — run
+`composer install` first) ·
 `bun run plugin-check` (PHPUnit + Plugin Check on the wporg release).
 Requires PHP ≥ 8.0, WordPress ≥ 6.0.
