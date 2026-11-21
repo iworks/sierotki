@@ -75,6 +75,27 @@ class iworks_orphan {
 	);
 
 	/**
+	 * HTML rawtext/escapable-rawtext elements: the HTML API parses them
+	 * as a single atomic token (contents included, no closer token), so
+	 * they must never take part in depth tracking. Keeps working when a
+	 * rawtext element is added to $protected_tags via the
+	 * `iworks/orphans/protected-tags` filter.
+	 *
+	 * @since 3.5.2
+	 */
+	private $rawtext_tags = array(
+		'script',
+		'style',
+		'iframe',
+		'textarea',
+		'title',
+		'xmp',
+		'noembed',
+		'noframes',
+		'plaintext',
+	);
+
+	/**
 	 * nbsp placeholder - a real U+00A0 character. Since 3.5.0 the text is
 	 * rewritten with WP_HTML_Tag_Processor::set_modifiable_text(), which
 	 * HTML-encodes the content; a literal "&nbsp;" entity would therefore
@@ -483,11 +504,16 @@ class iworks_orphan {
 			if ( null !== $tag ) {
 				$tag = strtolower( $tag );
 				if ( in_array( $tag, $this->protected_tags, true ) ) {
-					if ( in_array( $tag, array( 'script', 'style', 'iframe' ), true ) ) {
+					if ( in_array( $tag, $this->rawtext_tags, true ) ) {
 						/**
-						 * Rawtext elements arrive as a single atomic token
-						 * (contents included, no closer) - nothing to do,
-						 * their contents are never replaced.
+						 * Rawtext elements (script, style, iframe, textarea,
+						 * title, xmp) arrive as a single atomic token
+						 * (contents included, no closer token) - nothing to
+						 * do, their contents are never replaced. Tracking
+						 * depth for them would leave it stuck and disable
+						 * replacement for the rest of the document.
+						 *
+						 * @since 3.5.2
 						 */
 						continue;
 					}
