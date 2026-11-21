@@ -44,6 +44,7 @@
         "build:github": "bun bundler/index.js build:github",
         "make-pot": "bun bundler/index.js make-pot",
         "test": "bun bundler/index.js test",
+        "plugin-check": "bun bundler/index.js plugin-check",
         "update-libs": "bun bundler/index.js update-libs",
         "postinstall": "test -f wp-cli.phar || curl -sSfL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o wp-cli.phar"
     },

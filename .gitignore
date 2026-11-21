@@ -35,3 +35,4 @@ languages/*.mo
 
 # tests
 .phpunit.result.cache
+/vendor/

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	bootstrap="bootstrap.php"
+	colors="true"
+	failOnWarning="false"
+	cacheDirectory=".phpunit.result.cache"
+>
+	<testsuites>
+		<testsuite name="unit">
+			<directory>.</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

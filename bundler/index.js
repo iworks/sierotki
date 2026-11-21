@@ -43,11 +43,16 @@ function printError(error) {
  * Production build for one flavor.
  *
  * @param {string} flavor "wporg" or "github".
+ * @param {boolean} runTests Run PHPUnit before building (default true);
+ *   the combined `build` mode runs it once for both flavors.
  */
-async function build(flavor) {
+async function build(flavor, runTests = true) {
   const start = Date.now();
   try {
-    const steps = flavor === "wporg" ? 6 : 5;
+    if (runTests) {
+      await test();
+    }
+    const steps = flavor === "wporg" ? 5 : 4;
     const bar = new ProgressBar(steps);
     bar.tick("clean");
     await cleanCompiled();
@@ -57,10 +62,6 @@ async function build(flavor) {
     await makePot(flavor === "github");
     bar.tick("zip");
     await makeZip(flavor);
-    if (flavor === "wporg") {
-      bar.tick("plugin-check");
-      await pluginCheck(config.name, config.version);
-    }
     bar.tick("done");
     log(
       `BUILD OK (${flavor}) in ${((Date.now() - start) / 1000).toFixed(2)}s`,
@@ -135,8 +136,11 @@ function dev() {
  * PHPUnit (grunt `test` parity, jshint dropped).
  */
 async function test() {
+  const phpunitBin = existsSync("vendor/bin/phpunit")
+    ? "vendor/bin/phpunit"
+    : "phpunit";
   const result = await spawnAsync(
-    "phpunit",
+    phpunitBin,
     ["--configuration", "tests/php/phpunit.xml", "--colors=always"],
     "PHPUnit",
     false,
@@ -146,7 +150,7 @@ async function test() {
   }
   if (result.code !== 0) {
     log(
-      "If phpunit is not installed, set up a WordPress test environment (see tests/php/bootstrap.php).",
+      "If phpunit is not installed, run `composer install` (or set up a WordPress test environment, see tests/php/bootstrap.php).",
       "w",
     );
     process.exit(result.code);
@@ -195,13 +199,18 @@ const mode = process.argv[2] || "dev";
 const modes = {
   dev: () => dev(),
   build: async () => {
-    await build("github");
-    await build("wporg");
+    await test();
+    await build("github", false);
+    await build("wporg", false);
   },
   "build:wporg": () => build("wporg"),
   "build:github": () => build("github"),
   "make-pot": () => executionTime("make-pot", () => makePot(false)),
   test: () => test(),
+  "plugin-check": async () => {
+    await test();
+    await pluginCheck(config.name, config.version);
+  },
   "update-libs": () => updateLibraries(),
 };
 

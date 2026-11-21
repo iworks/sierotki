@@ -75,7 +75,10 @@ export function replacePatterns() {
     { match: /PLUGIN_GITHUB_WEBSITE/g, replace: config.website },
     { match: /PLUGIN_NAME/g, replace: name },
     { match: /PLUGIN_REQUIRES_PHP/g, replace: requires.PHP || "" },
-    { match: /PLUGIN_REQUIRES_WORDPRESS/g, replace: requires.WordPress || "" },
+    {
+      match: /PLUGIN_REQUIRES_WORDPRESS/g,
+      replace: requires.WordPress || "",
+    },
     { match: /PLUGIN_TESTED_WORDPRESS/g, replace: tested.WordPress || "" },
     { match: /PLUGIN_TAGLINE/g, replace: tagline || "" },
     { match: /PLUGIN_TAGS/g, replace: tags.join(", ") },
@@ -156,6 +159,9 @@ export function copyRules(flavor) {
     { glob: "bun.lock", include: false },
     { glob: "bun.lockb", include: false },
     { glob: "wp-cli.phar", include: false },
+    { glob: "vendor/**", include: false },
+    { glob: "composer.json", include: false },
+    { glob: "composer.lock", include: false },
     { glob: "plugin-check.log", include: false },
     // opencode session-marker scratch file that keeps reappearing in the repo root.
     { glob: "o", include: false },

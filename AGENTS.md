@@ -7,24 +7,25 @@
 The "Orphans" (sierotki) WordPress plugin — a typography plugin that replaces
 the space after short words ("orphans") with a non-breaking space at display
 time; it never modifies stored content. Structure: main file `sierotki.php`
-+ core class (`includes/iworks/class-iworks-orphan.php`) + options config
-(`etc/options.php`, iworks_options format) + term lists (`etc/terms-*.txt`)
-+ builder integrations (`includes/iworks/integrations/`) + vendored iWorks
-modules (`includes/iworks/options`, `includes/iworks/rate` — git submodules).
-Built with a bun bundler (`bundler/` → `release/` ZIPs, both wporg and
-github flavors): sources contain build-time placeholders
-(`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) replaced at build time; the
-version lives only in `package.json`.
+
+- core class (`includes/iworks/class-iworks-orphan.php`) + options config
+  (`etc/options.php`, iworks_options format) + term lists (`etc/terms-*.txt`)
+- builder integrations (`includes/iworks/integrations/`) + vendored iWorks
+  modules (`includes/iworks/options`, `includes/iworks/rate` — git submodules).
+  Built with a bun bundler (`bundler/` → `release/` ZIPs, both wporg and
+  github flavors): sources contain build-time placeholders
+  (`PLUGIN_VERSION`, `PLUGIN_TILL_YEAR`, …) replaced at build time; the
+  version lives only in `package.json`.
 
 Git: the default branch is `master` (not `main`).
 
 ## Docs map — read only what the task needs
 
-| Task | Read first |
-| --- | --- |
-| Bun bundler, build, ZIPs, placeholders, translations (.pot/.po/.mo) | `.opencode/docs/build.md` |
-| Loading flow, replacement engine, options, integrations, conventions | `.opencode/docs/project.md` |
-| Core class, integrations, options internals | `includes/iworks/class-iworks-orphan.php` header comments + `readme.txt` FAQ |
+| Task                                                                 | Read first                                                                   |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Bun bundler, build, ZIPs, placeholders, translations (.pot/.po/.mo)  | `.opencode/docs/build.md`                                                    |
+| Loading flow, replacement engine, options, integrations, conventions | `.opencode/docs/project.md`                                                  |
+| Core class, integrations, options internals                          | `includes/iworks/class-iworks-orphan.php` header comments + `readme.txt` FAQ |
 
 - When a change alters documented behavior, update the corresponding doc in
   the same task.
@@ -63,9 +64,11 @@ Git: the default branch is `master` (not `main`).
 ## Commands
 
 `bun run dev` (watcher) ·
-`bun run build` (both ZIPs: github + wporg, then Plugin Check on the wporg
-release) · `bun run build:wporg` (wp.org ZIP) · `bun run build:github`
+`bun run build` (both ZIPs: github + wporg; runs PHPUnit first) ·
+`bun run build:wporg` (wp.org ZIP) · `bun run build:github`
 (GitHub ZIP + .mo) · `bun run make-pot`
 (translations) · `bun run update-libs` (git pull in iWorks submodules) ·
-`bun run test` (phpunit; no tests/ dir in this repo —
-use `php -l` for PHP changes). Requires PHP ≥ 8.0, WordPress ≥ 6.0.
+`bun run test` (PHPUnit, `tests/php/`, binary from `vendor/bin` —
+run `composer install` first) ·
+`bun run plugin-check` (PHPUnit + Plugin Check on the wporg release).
+Requires PHP ≥ 8.0, WordPress ≥ 6.0.
