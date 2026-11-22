@@ -316,6 +316,11 @@ class OrphanFakeOptions {
 $wp_includes = dirname( IWORKS_ORPHANS_PLUGIN_DIR, 3 ) . '/wp-includes';
 if ( ! class_exists( 'WP_HTML_Tag_Processor' ) && is_dir( $wp_includes ) ) {
 	require $wp_includes . '/class-wp-token-map.php';
+	// The HTML API decoder reads the named character reference map from
+	// this global; without it any text containing an entity would crash
+	// the decoder.
+	global $html5_named_character_references;
+	require $wp_includes . '/html-api/html5-named-character-references.php';
 	foreach ( array(
 		'class-wp-html-decoder.php',
 		'class-wp-html-span.php',

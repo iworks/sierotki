@@ -83,7 +83,9 @@ abstract class OrphanTestCase extends TestCase {
 	protected string $nbsp = "\u{00A0}";
 
 	protected function setUp(): void {
-		$this->orphan = new OrphanTestDouble();
+		clear_test_filters();
+		$GLOBALS['test_orphan_options'] = array();
+		$this->orphan                   = new OrphanTestDouble();
 	}
 
 
