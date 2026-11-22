@@ -27,6 +27,92 @@ $GLOBALS['test_terms']      = array();
 function add_action( $hook, $cb, $priority = 10, $args = 1 ) {
 	return true;
 }
+function do_action( $hook, ...$args ) {
+	return true;
+}
+function do_action_ref_array( $hook, $args ) {
+	return true;
+}
+function get_taxonomies( $args = array(), $output = 'names' ) {
+	if ( 'objects' === $output ) {
+		$make = static function ( $name ) {
+			return (object) array(
+				'name'   => $name,
+				'labels' => (object) array( 'name' => $name ),
+			);
+		};
+		return array(
+			'category' => $make( 'category' ),
+			'post_tag' => $make( 'post_tag' ),
+		);
+	}
+	return array( 'category', 'post_tag' );
+}
+function get_post_types( $args = array(), $output = 'names' ) {
+	return array( 'post', 'page' );
+}
+function sanitize_text_field( $str ) {
+	$str = (string) $str;
+	$str = preg_replace( '/<[^>]*>/', '', $str );
+	$str = preg_replace( '/[\r\n\t ]+/', ' ', $str );
+	return trim( $str );
+}
+function absint( $maybeint ) {
+	return abs( (int) $maybeint );
+}
+/**
+ * Capture update_option() calls for import tests: values land in
+ * $GLOBALS['test_update_option_log'] (call order preserved) and are
+ * also written to $GLOBALS['test_orphan_options'].
+ */
+function update_option( $name, $value, $autoload = null ) {
+	$GLOBALS['test_update_option_log'][] = array( $name, $value );
+	$GLOBALS['test_orphan_options'][ $name ] = $value;
+	return true;
+}
+function wpautop( $text, $br = true ) {
+	return '<p>' . str_replace( "\n", "</p>\n<p>", $text ) . '</p>';
+}
+if ( ! function_exists( 'is_uploaded_file' ) ) {
+	function is_uploaded_file( $filename ) {
+		return is_string( $filename )
+			&& is_file( $filename )
+			&& ! empty( $GLOBALS['test_uploaded_files'] )
+			&& in_array( $filename, $GLOBALS['test_uploaded_files'], true );
+	}
+}
+if ( ! function_exists( 'move_uploaded_file' ) ) {
+	function move_uploaded_file( $from, $to ) {
+		return copy( $from, $to );
+	}
+}
+function is_user_logged_in() {
+	return true;
+}
+function current_user_can( $capability ) {
+	return true;
+}
+function wp_verify_nonce( $nonce, $action = -1 ) {
+	return 1;
+}
+function wp_send_json_error( $data = null ) {
+	return array( 'success' => false, 'data' => $data );
+}
+if ( ! function_exists( 'get_current_screen' ) ) {
+	function get_current_screen() {
+		global $test_current_screen;
+		return $test_current_screen ?? null;
+	}
+}
+if ( ! defined( 'INPUT_POST' ) ) {
+	define( 'INPUT_POST', 0 );
+}
+if ( ! function_exists( 'filter_input' ) ) {
+	function filter_input( $type, $variable_name, $filter = null, $options = array() ) {
+		global $test_filter_input;
+		return $test_filter_input[ $variable_name ] ?? null;
+	}
+}
 function add_filter( $hook, $cb, $priority = 10, $args = 1 ) {
 	return true;
 }
@@ -191,7 +277,14 @@ function get_option( $name, $default = false ) {
 class OrphanFakeOptions {
 	public function get_option( $name, $default = false ) {
 		global $test_orphan_options;
-		return $test_orphan_options[ $name ] ?? $default;
+		if ( array_key_exists( $name, $test_orphan_options ) ) {
+			return $test_orphan_options[ $name ];
+		}
+		$prefixed = 'iworks_orphan_' . $name;
+		if ( array_key_exists( $prefixed, $test_orphan_options ) ) {
+			return $test_orphan_options[ $prefixed ];
+		}
+		return $default;
 	}
 	public function get_all_options() {
 		global $test_orphan_options;
@@ -199,6 +292,18 @@ class OrphanFakeOptions {
 	}
 	public function get_pagehook() {
 		return '';
+	}
+	/**
+	 * Group config for import/export whitelist tests: the real field
+	 * definitions from etc/options.php (name/type/multiple/sanitize_callback),
+	 * mirrored here so the import pipeline runs against production rules.
+	 */
+	public function get_group( $option_group = null ) {
+		$config = orphans_indicator_options();
+		return $config['index'] ?? array();
+	}
+	public function get_option_name( $name, $hidden = false ) {
+		return 'iworks_orphan_' . $name;
 	}
 }
 
