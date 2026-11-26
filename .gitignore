@@ -25,7 +25,6 @@ wp-cli.phar
 # opencode scratch files
 .opencode/tmp/
 .playwright-mcp/
-o
 
 # build logs
 plugin-check.log
